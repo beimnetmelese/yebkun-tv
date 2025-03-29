@@ -29,11 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${genos.className} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${genos.className} antialiased`}>{children}</body>
     </html>
   );
 }
