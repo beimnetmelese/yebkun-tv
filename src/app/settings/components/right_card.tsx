@@ -1,9 +1,6 @@
 import { UserInfo } from "@/utils/dummy_data";
 import Image from "next/image";
-const imageStyle = {
-  borderRadius: "0%",
-  border: "1px solid #fff",
-};
+
 export const RightCard = ({
   settingImage,
   userInfo,
@@ -31,29 +28,29 @@ export const RightCard = ({
           alt="User Profile"
           width={75}
           height={75}
-          className="mb-1"
+          className="mb-[1px]"
         />
-        <p className="text-[24px] font-genos text-[#1C274C] font-medium m-[0px] p-[0px]">
+        <p className="text-[24px] font-[genos] text-[#1C274C] font-[500] m-[0px] p-[0px]">
           {userInfo.name}
         </p>
         <div className="flex items-center justify-center mt-1">
           <div className="flex flex-row items-center gap-1">
-            <span className="w-[5px] h-[5px] bg-[#1C274C] rounded-full"></span>
-            <Image src={userInfo.flag1} alt="Flag" width={15} height={15} />
-            <span className="w-[5px] h-[5px] bg-[#1C274C] rounded-full"></span>
-            <span className="text-[16px] font-genos text-[#1C274C]">
+            <span className="w-[3px] h-[3px] bg-[#1C274C] rounded-full mr-[4px]"></span>
+            <Image src={userInfo.flag1} alt="Flag" width={15} height={15} className="rounded-full mr-[4px]" />
+            <span className="w-[3px] h-[3px] bg-[#1C274C] rounded-full mr-[4px]"></span>
+            <span className="text-[18px] font-[genos] text-[#1C274C] font-[500] mr-[4px]">
               {userInfo.country}
             </span>
-            <span className="w-[5px] h-[5px] bg-[#1C274C] rounded-full"></span>
-            <span className="text-[16px] font-genos text-[#1C274C]">
+            <span className="w-[3px] h-[3px] bg-[#1C274C] rounded-full mr-[4px]" ></span>
+            <span className="text-[18px] font-[genos] text-[#1C274C] mr-[4px]">
               {userInfo.city1}
             </span>
-            <span className="w-[5px] h-[5px] bg-[#1C274C] rounded-full"></span>
-            <Image src={userInfo.flag2} alt="Flag" width={15} height={15} />
-            <span className="text-[16px] font-genos text-[#1C274C]">
+            <span className="w-[3px] h-[3px] bg-[#1C274C] rounded-full mr-[4px]"></span>
+            <Image src={userInfo.flag2} alt="Flag" width={15} height={15} className="rounded-full mr-[4px]" />
+            <span className="text-[18px] font-[genos] text-[#1C274C] mr-[4px]">
               {userInfo.city2}
             </span>
-            <span className="w-[5px] h-[5px] bg-[#1C274C] rounded-full"></span>
+            <span className="w-[3px] h-[3px] bg-[#1C274C] rounded-full mr-[4px]"></span>
           </div>
         </div>
       </div>
@@ -85,14 +82,14 @@ export const RightCard = ({
         {/* User Info */}
         <div className="flex items-center w-[310px] h-[48px] rounded-[15px] border-[1px] border-[#F2F2F2] overflow-hidden mt-[10px]">
           {/* User Image */}
-          <div className="h-full object-cover h-full">
+          <div className="h-full">
             <Image
               src={userInfo.userImage}
               alt="User Profile"
-              width={70}
-              height={40}
-              className="rounded-l-[14px] object-cover"
-             
+              width={80}
+              height={48}
+              className="rounded-l-[20px] object-cover"
+
             />
           </div>
 
