@@ -1,23 +1,29 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
-import "tailwindcss";
+import { Dispatch, SetStateAction } from "react";
 
 interface NavItemProps {
   icon: string;
   label: string;
-  href: string;
+  active?: boolean;
+  onClick: () => void;
 }
 
-const NavItem = ({ icon, label, href }: NavItemProps) => (
-  <Link
-    href={href}
-    className="flex items-center gap-[10px] px-[10px] py-[10px] rounded-lg hover:bg-white/5 transition-colors no-underline"
+const NavItem = ({ icon, label, active = false, onClick }: NavItemProps) => (
+  <button
+    className={`flex items-center gap-[10px] px-[4px] py-[2px] border-none rounded-[10px] transition-colors w-full h-[38px] text-left ${
+      active ? "bg-[#FFFFFF]" : "hover:bg-[#F2F2F2]"
+    }`}
+    onClick={onClick}
   >
-    <Image src={icon} alt={label} width={24} height={24} />
-    <span className="text-[16px] ml-[10px]  text-[#000000]/90 font-genos font-[500px]">
+    <div className="w-[24px] h-[24px] flex items-center justify-center">
+      <Image src={icon} alt={label} width={24} height={24} />
+    </div>
+    <span className="text-[16px] text-[#1C274C] font-[genos] font-[500]">
       {label}
     </span>
-  </Link>
+  </button>
 );
 
 const NavSection = ({
@@ -27,32 +33,43 @@ const NavSection = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <div className="mb-6 rounded-15 flex flex-col gap-[2px]">
-    <h2 className="text-white/70 text-[18px] font-genos font-[500] ">
+  <div className="mb-[6px] px-[10px]">
+    <h2 className="text-[18px] font-[genos] font-[500] text-[#1C274C] mb-2">
       {title}
     </h2>
-    {children}
+    <div className="space-y-1 flex flex-col gap-[10px]">{children}</div>
   </div>
 );
 
-export const AppSettingsNav = () => {
+interface AppSettingsNavProps {
+  activeSection: string;
+  onSectionChange: Dispatch<SetStateAction<string>>;
+}
+
+export const AppSettingsNav = ({
+  activeSection,
+  onSectionChange,
+}: AppSettingsNavProps) => {
   return (
-    <nav className=" w-[218px] h-[605px]  bg-[#F2F2F2] rounded-[15px] backdrop-blur-sm py-[4px] px-[14px]">
-      <NavSection title="App Settings ">
-        <NavItem
-          icon="/app_settings/upgrade_account.png"
-          label="Video Options"
-          href="/settings/video-options"
-        />
+    <nav className="w-[218px] h-[605px] bg-[#F2F2F2] rounded-[15px] p-[10px] flex flex-col">
+      <NavSection title="App Settings">
         <NavItem
           icon="/app_settings/video.png"
+          label="Video Options"
+          active={activeSection === "video-options"}
+          onClick={() => onSectionChange("video-options")}
+        />
+        <NavItem
+          icon="/app_settings/clean_search.png"
           label="Clean Search"
-          href="/settings/clean-search"
+          active={activeSection === "clean-search"}
+          onClick={() => onSectionChange("clean-search")}
         />
         <NavItem
           icon="/app_settings/notifications.png"
           label="Notifications"
-          href="/settings/notifications"
+          active={activeSection === "notifications"}
+          onClick={() => onSectionChange("notifications")}
         />
       </NavSection>
 
@@ -60,12 +77,14 @@ export const AppSettingsNav = () => {
         <NavItem
           icon="/app_settings/parent_code.png"
           label="Parent Code"
-          href="/settings/parent-code"
+          active={activeSection === "parent-code"}
+          onClick={() => onSectionChange("parent-code")}
         />
         <NavItem
           icon="/app_settings/kids_permissions.png"
           label="Kids Permission"
-          href="/settings/kids-permission"
+          active={activeSection === "kids-permission"}
+          onClick={() => onSectionChange("kids-permission")}
         />
       </NavSection>
 
@@ -73,25 +92,29 @@ export const AppSettingsNav = () => {
         <NavItem
           icon="/app_settings/app_policy.png"
           label="App Policy"
-          href="/settings/app-policy"
+          active={activeSection === "app-policy"}
+          onClick={() => onSectionChange("app-policy")}
         />
         <NavItem
           icon="/app_settings/about_the_app.png"
           label="About the App"
-          href="/settings/about"
+          active={activeSection === "about"}
+          onClick={() => onSectionChange("about")}
         />
       </NavSection>
 
       {/* Logo and Copyright */}
-      <div className="absolute left-0 right-0 flex flex-col items-center w-[180px] h-[70px] bg-[#FFFFFF] m-[10px] p-[10px] rounded-[15px]">
+      <div className="mt-auto flex flex-col items-center pt-[4px] px-[0px] bg-[#FFFFFF] rounded-b-[15px]">
         <Image
           src="/app_settings/logo.png"
-          alt="Logiconn"
-          width={120}
-          height={40}
-          className="mb-2"
+          alt="Logo"
+          width={90}
+          height={30}
+          className="mb-[2px]"
         />
-        <p className="text-xs text-white/50">Copyright Connect ltd</p>
+        <p className="text-[10px] text-[#64748B] font-[genos]">
+          Copyright Connect ltd
+        </p>
       </div>
     </nav>
   );

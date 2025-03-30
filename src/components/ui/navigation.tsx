@@ -37,14 +37,15 @@ const NavigationItem = ({
 
 export default function Navigation() {
   return (
-    <header className="fixed top-[0px] left-[0px] right-0 w-full h-[155px]">
+    <header className="fixed top-[0px] left-[0px] right-[0px] w-full h-[150px] z-50">
       <div
-        className="w-full h-[150px] bg-[#000000]"
+        className="w-full h-full bg-[#000000]"
         style={{
-          background: "linear-gradient(to bottom, #000000, rgba(59, 59, 59, 0))",
+          background:
+            "linear-gradient(to bottom, #000000, rgba(59, 59, 59, 0))",
         }}
       >
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between w-full h-full px-4">
           <div className="flex items-center space-x-6">
             <NavigationItem
               href="/dashpak"
@@ -84,7 +85,7 @@ export default function Navigation() {
             <input
               type="text"
               placeholder="Search"
-              className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-[genos] font-[400] text-[36px] focus:outline-none text-[#000000]/90 p-[10px]"
+              className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-genos font-normal text-[36px] focus:outline-none text-[#000000]/90 p-[10px]"
             />
             <Image
               src="/images/navigation/mic.png"
