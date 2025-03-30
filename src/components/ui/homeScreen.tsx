@@ -5,7 +5,7 @@ import Image from 'next/image';
 const images: string[][] = [
   ["/images/1.png", "/images/2.png", "/images/3.png"],
   ["/images/9.jpg", "/images/10.jpg", "/images/11.jpg", "/images/12.jpg"],
-  ["/images/8.png", "/images/9.png", "/images/10.png"],
+  ["/images/1.png", "/images/2.png", "/images/3.png"],
 ];
 
 export default function HomePage(): ReactElement {
