@@ -121,3 +121,33 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-90%);
+  }
+}
+
+@keyframes scroll-reverse {
+  0% {
+    transform: translateX(-90%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@layer utilities {
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
+    display: flex;
+  }
+
+  .animate-scroll-reverse {
+    animation: scroll-reverse 20s linear infinite;
+    display: flex;
+  }
+}

@@ -26,58 +26,82 @@ const DaySetting = ({
   onEndHourChange,
 }: DaySettingProps) => {
   return (
-    <div className="w-full h-[60px] bg-white rounded-[15px] flex items-center justify-between px-6">
-      <div className="flex items-center gap-4">
+    <div className="w-[600px] h-[60px] bg-[#FFFFFF] rounded-[15px] flex items-center justify-between px-[24px] mt-[15px]">
+      <div className="flex items-center gap-[16px]">
         <button
-          className={`w-6 h-6 rounded-full ${
-            active ? "bg-[#1BC469]" : "bg-[#E2E8F0]"
+          className={`w-[24px] h-[24px] rounded-full border-none ${
+            active ? "bg-[#22C55E]" : "bg-[#E2E8F0]"
           }`}
           onClick={onToggle}
         />
-        <span className="text-[22px] font-genos font-medium text-[#1C274C]">
+        <span className="text-[22px] font-[genos] font-[500] text-[#1C274C]">
           {day}
         </span>
       </div>
 
-      <div className="flex items-center gap-4">
-        <button
-          className={`px-4 py-1 rounded-[20px] text-[18px] font-genos ${
-            hasLimit
-              ? "bg-[#1BC469] text-white"
-              : "bg-white text-[#64748B] border border-[#64748B]"
-          }`}
-          onClick={onLimitToggle}
-        >
-          {hasLimit ? "Limit" : "No Limit"}
-        </button>
+      <div className="flex items-center gap-[16px]">
+        <div className="flex gap-[8px]">
+          <button
+            className={`px-[16px] py-[4px] rounded-[20px] text-[16px] font-[genos] border-none ${
+              hasLimit
+                ? "bg-[#E2E8F0] text-[#64748B]"
+                : "bg-[#22C55E] text-[#FFFFFF]"
+            }`}
+            onClick={onLimitToggle}
+          >
+            Limit
+          </button>
+          <button
+            className={`px-[16px] py-[4px] rounded-[20px] text-[16px] font-[genos] border-none ${
+              !hasLimit
+                ? "bg-[#E2E8F0] text-[#64748B]"
+                : "bg-[#22C55E] text-[#FFFFFF]"
+            }`}
+            onClick={onLimitToggle}
+          >
+            No Limit
+          </button>
+        </div>
 
         {active && (
-          <>
-            <span className="text-[18px] font-genos text-[#1C274C]">-</span>
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
-                value={startHour}
-                onChange={(e) => onStartHourChange(e.target.value)}
-                className="w-[40px] h-[30px] bg-white border border-[#64748B] rounded-[8px] text-center text-[18px] font-genos"
-              />
-              <button className="w-[24px] h-[24px] bg-[#E2E8F0] rounded-full flex items-center justify-center text-[14px]">
+          <div className="flex items-center gap-[8px]">
+            <span className="flex items-center gap-[8px] bg-[#F1F5F9] rounded-[15px] px-[10px]">
+              <button className="w-[24px] h-[24px] bg-[#FFFFFF] rounded-full flex items-center justify-center text-[16px] text-[#64748B] border-none">
+                -
+              </button>
+              <div className="w-[40px] h-[30px] bg-[#F1F5F9] rounded-[8px] flex items-center justify-center border-none">
+                <input
+                  type="text"
+                  value={startHour}
+                  onChange={(e) => onStartHourChange(e.target.value)}
+                  className="w-full h-full bg-transparent text-center text-[16px] font-[genos] text-[#1C274C] border-none"
+                />
+              </div>
+              <button className="w-[24px] h-[24px] bg-[#FFFFFF] rounded-full flex items-center justify-center text-[16px] text-[#64748B] border-none">
                 +
               </button>
-            </div>
-            <span className="text-[18px] font-genos text-[#1C274C]">-</span>
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
-                value={endHour}
-                onChange={(e) => onEndHourChange(e.target.value)}
-                className="w-[40px] h-[30px] bg-white border border-[#64748B] rounded-[8px] text-center text-[18px] font-genos"
-              />
-              <button className="w-[24px] h-[24px] bg-[#E2E8F0] rounded-full flex items-center justify-center text-[14px]">
+            </span>
+
+            <span className="text-[25px] font-[600] font-[genos] text-[#00000099]">
+              :
+            </span>
+            <span className="flex items-center gap-[8px] bg-[#F1F5F9] rounded-[15px] px-[10px]">
+              <button className="w-[24px] h-[24px] bg-[#FFFFFF] rounded-full flex items-center justify-center text-[16px] text-[#64748B] border-none">
+                -
+              </button>
+              <div className="w-[40px] h-[30px] bg-[#F1F5F9] rounded-[8px] flex items-center justify-center">
+                <input
+                  type="text"
+                  value={endHour}
+                  onChange={(e) => onEndHourChange(e.target.value)}
+                  className="w-full h-full bg-transparent text-center text-[16px] font-[genos] text-[#1C274C] border-none"
+                />
+              </div>
+              <button className="w-[24px] h-[24px] bg-[#FFFFFF] rounded-full flex items-center justify-center text-[16px] text-[#64748B] border-none">
                 +
               </button>
-            </div>
-          </>
+            </span>
+          </div>
         )}
       </div>
     </div>
@@ -99,9 +123,39 @@ export default function KidsPermissionContent() {
     days.map((day) => ({
       day,
       active: day === "Sunday" || day === "Thursday" || day === "Friday",
-      hasLimit: day === "Sunday" || day === "Friday",
-      startHour: day === "Thursday" ? "05" : "01",
-      endHour: day === "Thursday" ? "30" : "15",
+      hasLimit:
+        day === "Sunday" ||
+        day === "Friday" ||
+        day === "Thursday" ||
+        day === "Tuesday" ||
+        day === "Wednesday" ||
+        day === "Monday",
+      startHour:
+        day === "Thursday"
+          ? "05"
+          : day === "Monday"
+          ? "01"
+          : day === "Sunday"
+          ? "00"
+          : day === "Tuesday"
+          ? "00"
+          : day === "Wednesday"
+          ? "00"
+          : "00",
+      endHour:
+        day === "Thursday"
+          ? "30"
+          : day === "Monday"
+          ? "15"
+          : day === "Tuesday"
+          ? "10"
+          : day === "Wednesday"
+          ? "12"
+          : day === "Sunday"
+          ? "00"
+          : day === "Friday"
+          ? "00"
+          : "00",
     }))
   );
 
@@ -131,7 +185,7 @@ export default function KidsPermissionContent() {
 
   return (
     <div className="w-[684px] h-[605px] bg-[#F2F2F2] rounded-[15px] py-[15px] px-[20px] overflow-y-auto">
-      <h1 className="text-[32px] font-genos font-medium text-[#1C274C] mb-6">
+      <h1 className="text-[30px] font-[genos] font-[500] text-[#1C274C] mb-6">
         Kids Permission
       </h1>
 

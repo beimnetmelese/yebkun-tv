@@ -19,7 +19,7 @@ const cards = [
 
 function RightSection() {
   return (
-    <div className="w-full h-full rounded-[15px] flex flex-col items-center gap-2">
+    <div className="w-full h-full rounded-[15px] p-[10px] flex flex-col items-center gap-[15px] bg-[#F2F2F2]">
       <Card image={cards[0].image} title={cards[0].title} />
       <Card image={cards[1].image} title={cards[1].title} />
       <Image
@@ -34,32 +34,32 @@ function RightSection() {
 }
 
 function Card({ image, title }: { image: string; title: string }) {
-  return (
-    <div className="w-full bg-white rounded-[15px] px-[7px] py-[10px]">
+  return ( 
+    <div className="w-full bg-[#FFFFFF] rounded-[15px] gap-[5px]">
       <Image
         src={image}
         alt={title}
         width={1920}
         height={1080}
-        className="w-full h-[91.65px] object-contain"
+        className="w-[90%] h-[91.65px] object-contain mx-auto items-center justify-center flex"
       />
-      <div className="w-full py-2 bg-[#F2F2F2] flex flex-col items-center gap-2 rounded-[10px]">
+      <div className="w-[90%] py-[2px] bg-[#F2F2F2] flex flex-col items-center justify-center mx-auto gap-[2px] rounded-[10px]">
         <Image
           src={"/images/start_screen/app-logo-2.png"}
           alt={title}
           width={1920}
           height={1080}
-          className="w-[95px] h-[95px] object-cover"
+          className="w-[95px] h-[85px] object-cover py-[5px]"
         />
         <div className="flex flex-col items-center ">
           <h1 className="font-semibold text-[36px] text-[#1C274C]">YekBûn</h1>
-          <p className="font-semibold text-[20px] text-[#101010]">
+          <p className="font-semibold text-[20px] text-[#101010]  m-[0px]">
             Sosialmedia Kurdî
           </p>
         </div>
       </div>
 
-      <div className="w-full flex flex-col items-center gap-2">
+      <div className="w-full flex flex-col items-center gap-[2px]">
         <h1 className="font-semibold text-[24px] text-[#101010]">
           Download App Now!
         </h1>
@@ -68,7 +68,7 @@ function Card({ image, title }: { image: string; title: string }) {
           alt={title}
           width={1920}
           height={1080}
-          className="w-[104.42px] h-[104.42px] object-contain"
+          className="w-[104.42px] h-[91.42px] object-contain"
         />
       </div>
     </div>

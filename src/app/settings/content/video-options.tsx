@@ -5,7 +5,7 @@ import { Options } from "../components/options";
 export default function VideoOptionsContent() {
   return (
     <div className="w-[684px] h-[605px] bg-[#F2F2F2] rounded-[15px] py-[15px] px-[20px] overflow-y-auto">
-      <h1 className="text-[32px] font-genos font-medium text-[#1C274C] mb-6">
+      <h1 className="text-[30px] font-[genos] font-[500] text-[#1C274C] mb-6">
         Video Options
       </h1>
 

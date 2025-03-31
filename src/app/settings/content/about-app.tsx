@@ -4,73 +4,95 @@ import Image from "next/image";
 
 export default function AboutAppContent() {
   return (
-    <div className="w-[684px] h-[605px] bg-[#F2F2F2] rounded-[15px] py-[15px] px-[20px] overflow-y-auto">
-      <h1 className="text-[32px] font-genos font-medium text-[#1C274C] mb-6">
-        About the App
-      </h1>
-
-      <div className="space-y-4">
-        <div className="w-full bg-white rounded-[15px] p-6 flex flex-col items-center">
+    <div className="w-[704px] left-[90px] flex flex-row h-[605px]  bg-[#FFFFFF] rounded-[15px] gap-[15px] px-[20px]">
+      {/* App Info Section */}
+      <div className="relative left-[-20px] flex flex-col w-[337px] h-full bg-[#F2F2F2] rounded-[15px] pb-[20px]">
+        <p className="text-[#000000] text-[26px] font-[500] m-[0px] pl-[10px] pt-[10px]">
+          App Info
+        </p>
+        <div className="absolute flex flex-col items-center w-[315px] h-[543px] bg-[#FFFFFF] rounded-[15px] bottom-[15px] left-[10px]">
           <Image
-            src="/settings_right_section_images/connect.png"
-            alt="App Logo"
-            width={200}
-            height={120}
-            className="mb-4"
+            src={"/settings_right_section_images/app_info.png"}
+            alt="about-app-image"
+            width={215}
+            height={215}
+            className="mt-[10px]"
           />
+          <div className="flex flex-col items-center justify-center mt-[60px] gap-[10px]">
+            <span className="flex flex-col gap-[3px] items-center justify-center">
+              <p className="text-[#000000] text-[20px] font-[500] m-[0px]">
+                App Name
+              </p>
+              <p className="text-[#000000] text-[16px] font-[400] m-[0px]">
+                Avatar Tasks
+              </p>
+            </span>
+            <span className="flex flex-col gap-[3px] items-center justify-center">
+              <p className="text-[#000000] text-[20px] font-[500] m-[0px]">
+                Registred by
+              </p>
+              <p className="text-[#000000] text-[16px] font-[400] m-[0px]">
+                Avatar Tasks
+              </p>
+            </span>
+            <span className="flex flex-col gap-[3px] items-center justify-center">
+              <p className="text-[#000000] text-[20px] font-[500] m-[0px]">
+                Company Name
+              </p>
+              <p className="text-[#000000] text-[16px] font-[400] m-[0px]">
+                Avatar Tasks
+              </p>
+            </span>
+          </div>
+        </div>
+      </div>
 
-          <h2 className="text-[24px] font-genos font-medium text-[#1C274C] mb-2">
-            App Name
-          </h2>
-          <p className="text-[18px] font-genos text-[#64748B] italic">
-            Version 1.0.0
-          </p>
-
-          <div className="w-full mt-6 space-y-4">
-            <div className="flex justify-between items-center border-b border-[#E2E8F0] pb-2">
-              <span className="text-[18px] font-genos text-[#1C274C]">
-                Registered by
-              </span>
-              <span className="text-[18px] font-genos text-[#64748B]">
-                Yebkun TV
-              </span>
-            </div>
-
-            <div className="flex justify-between items-center border-b border-[#E2E8F0] pb-2">
-              <span className="text-[18px] font-genos text-[#1C274C]">
-                Company name
-              </span>
-              <span className="text-[18px] font-genos text-[#64748B]">
-                Connect Ltd
-              </span>
-            </div>
-
-            <div className="flex justify-between items-center border-b border-[#E2E8F0] pb-2">
-              <span className="text-[18px] font-genos text-[#1C274C]">
-                Owner Name
-              </span>
-              <span className="text-[18px] font-genos text-[#64748B]">
-                Miran Sulaiman
-              </span>
-            </div>
-
-            <div className="flex justify-between items-center border-b border-[#E2E8F0] pb-2">
-              <span className="text-[18px] font-genos text-[#1C274C]">
+      {/* App Version Section */}
+      <div className="relative flex left-[-20px] flex-col w-[337px] h-[604px] bg-[#F2F2F2] rounded-[15px] pb-[20px]">
+        <p className="text-[#000000] text-[26px] font-[500] m-[0px] pl-[10px] pt-[10px]">
+          App Version
+        </p>
+        <div className="absolute flex flex-col items-center w-[315px] h-[543px] bg-[#FFFFFF] rounded-[15px] bottom-[15px] left-[10px]">
+          <Image
+            src={"/images/settings/app_version.png"}
+            alt="about-app-image"
+            width={215}
+            height={215}
+            className="mt-[10px]"
+          />
+          <div className="flex flex-col items-center justify-center mt-[60px] gap-[10px]">
+            <span className="flex flex-col gap-[3px] items-center justify-center">
+              <p className="text-[#000000] text-[20px] font-[500] m-[0px]">
+                App Version
+              </p>
+              <p className="text-[#000000] text-[16px] font-[400] m-[0px]">
+                Avatar Tasks
+              </p>
+            </span>
+            <span className="flex flex-col gap-[3px] items-center justify-center">
+              <p className="text-[#000000] text-[20px] font-[500] m-[0px]">
+                Device Name
+              </p>
+              <p className="text-[#000000] text-[16px] font-[400] m-[0px]">
+                Avatar Tasks
+              </p>
+            </span>
+            <span className="flex flex-col gap-[3px] items-center justify-center">
+              <p className="text-[#000000] text-[20px] font-[500] m-[0px]">
                 Language
-              </span>
-              <span className="text-[18px] font-genos text-[#64748B]">
-                Kurdish
-              </span>
-            </div>
-
-            <div className="flex justify-between items-center">
-              <span className="text-[18px] font-genos text-[#1C274C]">
+              </p>
+              <p className="text-[#000000] text-[16px] font-[400] m-[0px]">
+                Avatar Tasks
+              </p>
+            </span>
+            <span className="flex flex-col gap-[3px] items-center justify-center">
+              <p className="text-[#000000] text-[20px] font-[500] m-[0px]">
                 Latest Update
-              </span>
-              <span className="text-[18px] font-genos text-[#64748B]">
-                May 12, 2024
-              </span>
-            </div>
+              </p>
+              <p className="text-[#000000] text-[16px] font-[400] m-[0px]">
+                Avatar Tasks
+              </p>
+            </span>
           </div>
         </div>
       </div>

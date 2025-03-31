@@ -12,7 +12,7 @@ interface NavItemProps {
 
 const NavItem = ({ icon, label, active = false, onClick }: NavItemProps) => (
   <button
-    className={`flex items-center gap-[10px] px-[4px] py-[2px] border-none rounded-[10px] transition-colors w-full h-[38px] text-left ${
+    className={`flex items-center gap-[10px] px-[4px] py-[2px] border-none rounded-[10px] transition-colors w-full h-[38px] text-left cursor-pointer ${
       active ? "bg-[#FFFFFF]" : "hover:bg-[#F2F2F2]"
     }`}
     onClick={onClick}
@@ -104,7 +104,7 @@ export const AppSettingsNav = ({
       </NavSection>
 
       {/* Logo and Copyright */}
-      <div className="mt-auto flex flex-col items-center pt-[4px] px-[0px] bg-[#FFFFFF] rounded-b-[15px]">
+      <div className="mt-auto flex flex-col items-center pt-[4px] bg-[#FFFFFF] rounded-b-[15px]">
         <Image
           src="/app_settings/logo.png"
           alt="Logo"
