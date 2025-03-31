@@ -63,14 +63,14 @@ const Settings = () => {
       case "app-policy":
         return "/settings_right_section_images/app_policy.png";
       case "about":
-        return "/settings_right_section_images/app_info.png";
+        return "/images/settings/connect.png";
       default:
         return "/settings_right_section_images/video_options.png";
     }
   };
 
   return (
-    <div className="flex flex-col h-[605px] bg-[#FFFFFF] t-[0px]">
+    <div className="flex flex-col h-[605px] bg-[#FFFFFF] mt-[50px] mx-auto">
       <Navigation />
 
       <div className="flex flex-row justify-start items-start gap-[6px] pt-[155px] px-[8px] pb-[8px] w-full h-[605px]">

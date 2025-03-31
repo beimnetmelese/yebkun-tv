@@ -24,7 +24,7 @@ const NavigationItem = ({
           active ? "ring-2 ring-white" : ""
         }`}
         style={{
-          background: "black",
+          background: "white",
           boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
         }}
       >
@@ -85,7 +85,7 @@ export default function Navigation() {
             <input
               type="text"
               placeholder="Search"
-              className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-genos font-normal text-[36px] focus:outline-none text-[#000000]/90 p-[10px]"
+              className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-[genos] font-normal text-[36px] focus:outline-none text-[#000000]/90 p-[10px]"
             />
             <Image
               src="/images/navigation/mic.png"
@@ -109,7 +109,7 @@ export default function Navigation() {
               icon="/images/navigation/zarok_tv.png"
             />
             <NavigationItem
-              href="/evin"
+              href="/settings"
               label="Evin"
               icon="/images/navigation/eyar.png"
             />

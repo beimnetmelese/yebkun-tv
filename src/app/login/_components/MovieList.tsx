@@ -1,122 +1,108 @@
-import React from "react";
+"use client";
 import Image from "next/image";
 
 function MovieList() {
-  // Design Description
-  /*
-  This section has 3 rows of movie posters. 
-  first and last row have 3 columns of 515px each. and the image height is 293px.
-  second row has 4 columns of 380px each. and the image height is 433px.
-  */
+  // First row images (3 images)
+  const firstRowImages = [
+    "/images/home_screen/1.png",
+    "/images/home_screen/2.png",
+    "/images/home_screen/3.png",
+    "/images/home_screen/19.jpg",
+    "/images/home_screen/24.jpg",
+  ];
 
-  // movie list bento grid
-  const movieList = [
-    {
-      id: 1,
-      title: "Movie 1",
-      image: "https://picsum.photos/515/293?random=1",
-    },
-    {
-      id: 2,
-      title: "Movie 2",
-      image: "https://picsum.photos/515/293?random=2",
-    },
-    {
-      id: 3,
-      title: "Movie 3",
-      image: "https://picsum.photos/515/293?random=3",
-    },
-    {
-      id: 4,
-      title: "Movie 4",
-      image: "https://picsum.photos/380/433?random=4",
-    },
-    {
-      id: 5,
-      title: "Movie 5",
-      image: "https://picsum.photos/380/433?random=5",
-    },
-    {
-      id: 6,
-      title: "Movie 6",
-      image: "https://picsum.photos/380/433?random=6",
-    },
-    {
-      id: 7,
-      title: "Movie 7",
-      image: "https://picsum.photos/380/433?random=7",
-    },
-    {
-      id: 8,
-      title: "Movie 8",
-      image: "https://picsum.photos/515/293?random=8",
-    },
-    {
-      id: 9,
-      title: "Movie 9",
-      image: "https://picsum.photos/515/293?random=9",
-    },
-    {
-      id: 10,
-      title: "Movie 10",
-      image: "https://picsum.photos/515/293?random=10",
-    },
+  // Second row images (4 images)
+  const secondRowImages = [
+    "/images/home_screen/19.jpg",
+    "/images/home_screen/20.jpg",
+    "/images/home_screen/21.jpg",
+    "/images/home_screen/22.jpg",
+  ];
+
+  // Third row images (3 images)
+  const thirdRowImages = [
+    "/images/home_screen/23.jpg",
+    "/images/home_screen/24.jpg",
+    "/images/home_screen/18.jpg",
+    "/images/home_screen/19.jpg",
+    "/images/home_screen/20.jpg",
   ];
 
   return (
-    <div className="w-full h-full grid grid-rows-[1fr_1.5fr_1fr] gap-5">
-      {/* First row - 3 columns */}
-      <div className="grid grid-cols-3 gap-5">
-        {movieList.slice(0, 3).map((movie) => (
-          <div
-            key={movie.id}
-            className="relative  rounded-[15px] overflow-hidden"
-          >
-            <Image
-              src={movie.image}
-              alt={movie.title}
-              fill
-              className="object-cover"
-              sizes="(min-width: 3840px) 33vw, 515px"
-            />
-          </div>
-        ))}
+    <div className="w-full h-full grid grid-rows-[1fr_1fr_1fr] gap-[5px]">
+      {/* First row - Infinite scroll left */}
+      <div className="relative overflow-hidden rounded-[15px]">
+        <div className="flex animate-scroll">
+          {[...firstRowImages, ...firstRowImages, ...firstRowImages].map(
+            (image, index) => (
+              <div
+                key={`first-${index}`}
+                className="h-[380px] min-w-[515px] flex-shrink-0 px-[2.5px]"
+              >
+                <div className="relative w-full h-full rounded-[15px] overflow-hidden shadow-lg">
+                  <Image
+                    src={image}
+                    alt={`Movie ${index + 1}`}
+                    fill
+                    className="object-fill"
+                    sizes="515px"
+                    priority={index < 3}
+                  />
+                </div>
+              </div>
+            )
+          )}
+        </div>
       </div>
 
-      {/* Second row - 4 columns */}
-      <div className="grid grid-cols-4 gap-5">
-        {movieList.slice(3, 7).map((movie) => (
-          <div
-            key={movie.id}
-            className="relative aspect-[380/433] rounded-[15px] overflow-hidden"
-          >
-            <Image
-              src={movie.image}
-              alt={movie.title}
-              fill
-              className="object-cover"
-              sizes="(min-width: 3840px) 25vw, 380px"
-            />
-          </div>
-        ))}
+      {/* Second row - Infinite scroll right */}
+      <div className="relative overflow-hidden rounded-[15px]">
+        <div className="flex animate-scroll-reverse">
+          {[...secondRowImages, ...secondRowImages, ...secondRowImages].map(
+            (image, index) => (
+              <div
+                key={`second-${index}`}
+                className="h-[390px] min-w-[380px] flex-shrink-0 px-[2.5px]"
+              >
+                <div className="relative w-full h-full rounded-[15px] overflow-hidden shadow-lg">
+                  <Image
+                    src={image}
+                    alt={`Movie ${index + 1}`}
+                    fill
+                    className="object-fill"
+                    sizes="380px"
+                    priority={index < 4}
+                  />
+                </div>
+              </div>
+            )
+          )}
+        </div>
       </div>
 
-      {/* Third row - 3 columns */}
-      <div className="grid grid-cols-3 gap-5">
-        {movieList.slice(7, 10).map((movie) => (
-          <div
-            key={movie.id}
-            className="relative rounded-[15px] overflow-hidden"
-          >
-            <Image
-              src={movie.image}
-              alt={movie.title}
-              fill
-              className="object-cover"
-              sizes="(min-width: 3840px) 33vw, 515px"
-            />
-          </div>
-        ))}
+      {/* Third row - Infinite scroll left */}
+      <div className="relative overflow-hidden rounded-[15px]">
+        <div className="flex animate-scroll">
+          {[...thirdRowImages, ...thirdRowImages, ...thirdRowImages].map(
+            (image, index) => (
+              <div
+                key={`third-${index}`}
+                className="h-[325px] min-w-[515px] flex-shrink-0 px-[2.5px]"
+              >
+                <div className="relative w-full h-full rounded-[15px] overflow-hidden shadow-lg">
+                  <Image
+                    src={image}
+                    alt={`Movie ${index + 1}`}
+                    fill
+                    className="object-fill"
+                    sizes="325"
+                    priority={index < 3}
+                  />
+                </div>
+              </div>
+            )
+          )}
+        </div>
       </div>
     </div>
   );
