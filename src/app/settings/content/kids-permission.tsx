@@ -39,8 +39,8 @@ const DaySetting = ({
         </span>
       </div>
 
-      <div className="flex items-center gap-[16px]">
-        <div className="flex gap-[8px]">
+      <div className="flex items-center gap-[16px] ">
+        <div className="flex gap-[8px] bg-[#F2F2F2] rounded-[15px]">
           <button
             className={`px-[16px] py-[4px] rounded-[20px] text-[16px] font-[genos] border-none ${
               hasLimit
