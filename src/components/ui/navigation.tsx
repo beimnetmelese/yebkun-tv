@@ -85,7 +85,7 @@ export default function Navigation() {
             <input
               type="text"
               placeholder="Search"
-              className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-[genos] font-normal text-[36px] focus:outline-none text-[#000000]/90 p-[10px]"
+              className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-[genos] font-normal text-[36px] focus:outline-none text-[#000000]/90 px-[25px] py-[10px] border-none"
             />
             <Image
               src="/images/navigation/mic.png"
