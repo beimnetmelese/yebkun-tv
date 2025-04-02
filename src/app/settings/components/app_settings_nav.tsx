@@ -33,7 +33,7 @@ const NavSection = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <div className="mb-[6px] px-[10px]">
+  <div className="mb-[6px] px-[10px] h-full">
     <h2 className="text-[18px] font-[genos] font-[500] text-[#1C274C] mb-2">
       {title}
     </h2>
@@ -51,7 +51,7 @@ export const AppSettingsNav = ({
   onSectionChange,
 }: AppSettingsNavProps) => {
   return (
-    <nav className="w-[218px] h-[605px] bg-[#F2F2F2] rounded-[15px] p-[10px] flex flex-col">
+    <nav className="w-full h-full bg-[#F2F2F2] rounded-[15px] py-[15px] px-[10px] flex flex-col">
       <NavSection title="App Settings">
         <NavItem
           icon="/app_settings/video.png"

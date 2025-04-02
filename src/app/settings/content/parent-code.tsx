@@ -30,18 +30,18 @@ export default function ParentCodeContent() {
   };
 
   return (
-    <div className="w-[684px] h-[605px] bg-[#F2F2F2] rounded-[15px] py-[15px] px-[20px] relative">
-      <h1 className="text-[30px] font-[genos] font-[500] text-[#1C274C] mb-6">
+    <div className="w-full h-full bg-[#F2F2F2] rounded-[1.5vh] py-[1vh] px-[2vw] flex items-start justify-start relative">
+      <h1 className="text-[3vh] font-[genos] font-[500] text-[#1C274C] mb-6 m-[0px]">
         Parent Code
       </h1>
-      <div className="absolute flex flex-col items-center justify-center w-[645px] h-[525px] bg-[#FFFFFF] bottom-[15px] rounded-[15px]">
+      <div className="absolute flex flex-col items-center justify-center w-[84%] h-[88%] bg-[#FFFFFF] bottom-[15px] right-[0px] left-[0px]  mx-auto px-[2vw] rounded-[15px]">
         <div className="flex flex-col items-center justify-center">
           {/* PIN Display */}
-          <div className="flex gap-[10px] mb-[25px]">
+          <div className="flex gap-[0.5vw] mb-[25px] items-center justify-center">
             {pin.map((digit, index) => (
               <div
                 key={index}
-                className="w-[100px] h-[100px] bg-[#F2F2F2] rounded-[5px] flex items-center justify-center text-[32px] font-genos font-medium"
+                className="w-[6vw] h-[8vh] bg-[#F2F2F2] rounded-[5px] flex items-center justify-center text-[32px] font-[genos] font-medium"
               >
                 {digit ? "●" : ""}
               </div>
@@ -49,18 +49,18 @@ export default function ParentCodeContent() {
           </div>
 
           {/* Keypad */}
-          <div className="grid grid-cols-3 gap-[10px]">
+          <div className="grid grid-cols-3 gap-[0.5vw]">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
               <button
                 key={number}
-                className="w-[62px] h-[62px] bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-[57px] rounded-[15px] flex items-center justify-center  "
+                className="w-[4vw] h-[4vw] bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-[3vw] rounded-[15px] flex items-center justify-center  "
                 onClick={() => handleNumberClick(number.toString())}
               >
                 {number}
               </button>
             ))}
             <button
-              className="w-[62px] h-[62px] bg-[#FFFFFF] font-[genos] font-[500] text-[#5DC90A] border-dashed border-[#5DC90A]  text-[57px] rounded-[15px] flex items-center justify-center  "
+              className="w-[4vw] h-[4vw]  bg-[#FFFFFF] font-[genos] font-[500] text-[#5DC90A] border-dashed border-[#5DC90A]  text-[3vw] rounded-[15px] flex items-center justify-center  "
               onClick={() => {
                 /* Submit functionality */
               }}
@@ -68,13 +68,13 @@ export default function ParentCodeContent() {
               ✓
             </button>
             <button
-              className="w-[62px] h-[62px] bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-[57px] rounded-[15px] flex items-center justify-center  "
+              className="w-[4vw] h-[4vw]  bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-[3vw]  rounded-[15px] flex items-center justify-center  "
               onClick={() => handleNumberClick("0")}
             >
               0
             </button>
             <button
-              className=" w-[62px] h-[62px] bg-[#FFFFFF  ] font-[genos] font-[500] text-[#FF270E] border-[#FF270E] border-dashed text-[57px] rounded-[15px] flex items-center justify-center  "
+              className="w-[4vw] h-[4vw]  bg-[#FFFFFF  ] font-[genos] font-[500] text-[#FF270E] border-[#FF270E] border-dashed text-[3vw]  rounded-[15px] flex items-center justify-center  "
               onClick={handleBackspaceClick}
             >
               ✕

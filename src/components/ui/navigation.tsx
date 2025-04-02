@@ -1,5 +1,8 @@
+'use client'
 import Image from "next/image";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface NavigationItemProps {
   href: string;
@@ -20,15 +23,15 @@ const NavigationItem = ({
       className="flex flex-col items-center gap-[1px] px-[10px] py-[10px] transition-colors no-underline text-[#FFFFFF]/90"
     >
       <div
-        className={`w-20 h-20 rounded-full flex items-center justify-center text-black ${
-          active ? "ring-2 ring-white" : ""
+        className={`w-55 h-55 rounded-full flex items-center justify-center text-black p-[10px] ${
+          active ? "ring-2 ring-[#1BC469]" : ""
         }`}
         style={{
-          background: "white",
+          background: active ? "#1BC469" : "white",
           boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
         }}
       >
-        <Image src={icon} alt={label} width={55} height={55} />
+        <Image src={icon} alt={label} width={33} height={33} color={`${active ? '#FFFFFF' : ""}`} />
       </div>
       <span className="text-[22px] text-white font-bold-500">{label}</span>
     </Link>
@@ -36,6 +39,8 @@ const NavigationItem = ({
 };
 
 export default function Navigation() {
+  const pathname = usePathname();
+
   return (
     <header className="fixed top-[0px] left-[0px] right-[0px] w-full h-[150px] z-50">
       <div
@@ -50,50 +55,63 @@ export default function Navigation() {
             <NavigationItem
               href="/dashpak"
               label="Dashpak"
-              icon="/images/navigation/destpek.png"
+              icon="/images/navigation/destpek.svg"
+              active={pathname === "/adult"}
             />
             <NavigationItem
               href="/cinema"
               label="Cinema"
-              icon="/images/navigation/muzik.png"
+              icon="/images/navigation/muzik.svg"
+              active={pathname === "/cinema"}
             />
             <NavigationItem
               href="/videos"
               label="Videos"
-              icon="/images/navigation/sinema.png"
-              active={true}
+              icon="/images/navigation/sinema.svg"
+              active={pathname === "/videos"}
             />
             <NavigationItem
               href="/shwazi"
               label="Shwazi"
-              icon="/images/navigation/videos.png"
-            />
-            <NavigationItem
-              href="/gerandin"
-              label="Gerandin"
-              icon="/images/navigation/stream.png"
+              icon="/images/navigation/videos.svg"
+              active={pathname === "/shwazi"}
             />
             <NavigationItem
               href="/stream"
               label="Stream"
-              icon="/images/navigation/gerandin.png"
+              icon="/images/navigation/stream.svg"
+              active={pathname === "/stream"}
+            />
+            <NavigationItem
+              href="/gerandin"
+              label="Gerandin"
+              icon="images/navigation/gerandin.svg"
+              active={pathname === "/gerandin"}
             />
           </div>
 
           {/* Search Bar with Mic Icon */}
-          <div className="flex items-center space-x-3 bg-white bg-opacity-95 rounded-full px-[10px] py-[10px] w-[423px] gap-[20px]">
+          <div className="flex items-center space-x-3 bg-white bg-opacity-95 rounded-full px-[10px] py-[10px] w-[30vw] gap-[20px]">
             <input
               type="text"
               placeholder="Search"
               className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-[genos] font-normal text-[36px] focus:outline-none text-[#000000]/90 px-[25px] py-[10px] border-none"
             />
-            <Image
-              src="/images/navigation/mic.png"
-              alt="Mic"
-              width={55}
-              height={55}
-              className="cursor-pointer"
-            />
+            <div
+              className={`w-55 h-55 rounded-full flex items-center justify-center text-black p-[7px] `}
+              style={{
+                background: "white",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+              }}
+            >
+              <Image
+                src="/images/navigation/mic.svg"
+                alt="Mic"
+                width={33}
+                height={33}
+                className="cursor-pointer"
+              />
+            </div>
           </div>
 
           {/* Right side navigation */}
@@ -101,27 +119,32 @@ export default function Navigation() {
             <NavigationItem
               href="/kulturtv"
               label="KulturTV"
-              icon="/images/navigation/malbat_tv.png"
+              icon="/images/navigation/malbat.svg"
+              active={pathname === "/kulturtv"}
             />
             <NavigationItem
               href="/zaroktv"
               label="ZarokTV"
-              icon="/images/navigation/zarok_tv.png"
+              icon="/images/navigation/zarok_tv.svg"
+              active={pathname === "/zaroktv"}
             />
             <NavigationItem
               href="/settings"
               label="Evin"
-              icon="/images/navigation/eyar.png"
+              icon="/images/navigation/eyar.svg"
+              active={pathname === "/settings"}
             />
             <NavigationItem
               href="/archive"
               label="Archive"
-              icon="/images/navigation/archive.png"
+              icon="/images/navigation/archive.svg"
+              active={pathname === "/archive"}
             />
             <NavigationItem
               href="/user"
               label="User"
               icon="/images/navigation/user.png"
+              active={pathname === "/user"}
             />
           </div>
         </div>

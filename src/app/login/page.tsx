@@ -12,23 +12,26 @@ export default function Login() {
     },5000)
   })
   return (
-    <section className="w-full h-[95vh] flex gap-[5px] bg-[#F2F2F2] py-[18px] top-[0px] left-[0px] right-[0px] mx-auto">
+    <section className="w-[100%] h-[100%] flex bg-[#F2F2F2] overflow-hidden relative">
       {/* movie list bento grid */}
-      <div className="w-full h-full">
+      <div className="w-screen h-[screen]">
         <MovieList />
       </div>
       {/* add space */}
       <div
-        className="w-[15vw] h-full rounded-[15px] bg-[#F2F2F2] flex items-center justify-center right-[0px]"
+        className="w-[15vw] h-screen rounded-[15px] bg-[#F2F2F2] flex items-center justify-center right-[0px]"
         onClick={() => setIsLoginModalOpen(true)}
       >
         <RightSection />
       </div>
-      
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-      />
+      {isLoginModalOpen && (
+        <div className="w-full h-full bg-[#00000099] flex items-center justify-center fixed inset-0 top-[0px] left-[0px] right-[0px] bottom-[0px]">
+          <LoginModal
+            isOpen={isLoginModalOpen}
+            onClose={() => setIsLoginModalOpen(false)}
+          />
+        </div>
+      )}
     </section>
   );
 }

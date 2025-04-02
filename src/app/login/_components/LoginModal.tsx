@@ -19,7 +19,7 @@ function LoginModal({
   const router = useRouter();
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={onClose} >
       <DialogContent className="border-none button-none flex items-center justify-center p-[0px] m-[0px] bg-transparent border-[none] [&>button]:hidden">
         <DialogTitle className="sr-only">YekBûn App Download</DialogTitle>
         {firstPopup && (
