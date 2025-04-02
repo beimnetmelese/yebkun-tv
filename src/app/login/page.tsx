@@ -14,7 +14,7 @@ export default function Login() {
   return (
     <section className="w-[100%] h-[100%] flex bg-[#F2F2F2] overflow-hidden relative">
       {/* movie list bento grid */}
-      <div className="w-screen h-[screen]">
+      <div className="w-screen h-screen">
         <MovieList />
       </div>
       {/* add space */}
