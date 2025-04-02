@@ -17,7 +17,6 @@ const KidsPermissionContent = dynamic(
 const AppPolicyContent = dynamic(() => import("./content/app-policy"));
 const AboutAppContent = dynamic(() => import("./content/about-app"));
 
-
 import { RightCard } from "./components/right_card";
 
 const Settings = () => {
@@ -70,20 +69,23 @@ const Settings = () => {
   };
 
   return (
-    <div className="flex flex-col h-[605px] bg-[#FFFFFF] mt-[50px] mx-auto">
+    <div className="flex flex-col h-[83vh] bg-[#FFFFFF]">
       <Navigation />
 
-      <div className="flex flex-row justify-start items-start gap-[6px] pt-[155px] px-[8px] pb-[8px] w-full h-[605px]">
-        <div className="flex-shrink-0">
+      <div className="flex flex-row lg:flex-nowrap justify-start items-start gap-[6px] mt-[20vh] px-[8px] pb-[8px] w-full h-full">
+        {/* Sidebar Navigation */}
+        <div className="w-[20%] mr-[16%] h-full ml-[3%]">
           <AppSettingsNav
             onSectionChange={setActiveSection}
             activeSection={activeSection}
           />
         </div>
 
-        <div className="flex w-[684px] h-[603px] ml-[160px]">{renderContent()}</div>
+        {/* Main Content - Responsive width */}
+        <div className="flex flex-grow w-[50%] h-full">{renderContent()}</div>
 
-        <div className="flex w-[360px] h-[603px] ml-[15px]">
+        {/* Right Card - Adjusts for large screens */}
+        <div className="flex w-[30%] h-full ml-[3%] mr-[5%]">
           <RightCard settingImage={getRightCardImage()} userInfo={userInfo} />
         </div>
       </div>

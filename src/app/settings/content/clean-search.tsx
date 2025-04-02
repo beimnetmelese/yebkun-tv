@@ -4,8 +4,8 @@ import { Options } from "../components/options";
 
 export default function CleanSearchContent() {
   return (
-    <div className="w-[684px] h-[605px] bg-[#F2F2F2] rounded-[15px] py-[15px] px-[20px] overflow-y-auto">
-      <h1 className="text-[30px] font-[genos] font-[500] text-[#1C274C] mb-6">
+    <div className="w-full h-full bg-[#F2F2F2] rounded-[1.5vh] py-[1vh] px-[2vh]">
+      <h1 className="text-[3vh] font-[genos] font-[500] text-[#1C274C] mb-6">
         Clean Search
       </h1>
 

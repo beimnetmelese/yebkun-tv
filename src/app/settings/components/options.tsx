@@ -8,12 +8,12 @@ export const Options = ({
   description: string;
 }) => {
   return (
-    <div className="w-[640px] h-[70px] bg-[#FFFFFF] rounded-[50px] flex items-center justify-between mt-[30px]">
+    <div className="w-full h-[7vh] bg-[#FFFFFF] rounded-[10vh] flex items-center justify-between mt-[30px]">
       <div className="flex flex-col ml-[40px] ">
-        <p className="text-[26px] m-[0px] font-[genos] font-[500] text-[#1C274C]">
+        <p className="text-[2.3vh] m-[0px] font-[genos] font-[500] text-[#1C274C]">
           {title}
         </p>
-        <p className="text-[22px] m-[0px] font-[genos] font-[500] text-[#64748B] ">
+        <p className="text-[1.8vh] m-[0px] font-[genos] font-[500] text-[#64748B] ">
           {description}
         </p>
       </div>

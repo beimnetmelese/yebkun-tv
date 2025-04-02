@@ -26,7 +26,7 @@ const DaySetting = ({
   onEndHourChange,
 }: DaySettingProps) => {
   return (
-    <div className="w-[600px] h-[60px] bg-[#FFFFFF] rounded-[15px] flex items-center justify-between px-[24px] mt-[15px]">
+    <div className="w-[96%] h-[6vh] bg-[#FFFFFF] rounded-[10vh] flex items-center justify-between px-[24px] mt-[15px]">
       <div className="flex items-center gap-[16px]">
         <button
           className={`w-[24px] h-[24px] rounded-full border-none ${
@@ -34,7 +34,7 @@ const DaySetting = ({
           }`}
           onClick={onToggle}
         />
-        <span className="text-[22px] font-[genos] font-[500] text-[#1C274C]">
+        <span className="text-[2vh] font-[genos] font-[500] text-[#1C274C]">
           {day}
         </span>
       </div>
@@ -42,7 +42,7 @@ const DaySetting = ({
       <div className="flex items-center gap-[16px] ">
         <div className="flex gap-[8px] bg-[#F2F2F2] rounded-[15px]">
           <button
-            className={`px-[16px] py-[4px] rounded-[20px] text-[16px] font-[genos] border-none ${
+            className={`px-[16px] py-[4px]  text-[1vh] font-[genos] border-none w-[5vw] h-[2vh] rounded-[5vh] ${
               hasLimit
                 ? "bg-[#E2E8F0] text-[#64748B]"
                 : "bg-[#22C55E] text-[#FFFFFF]"
@@ -52,7 +52,7 @@ const DaySetting = ({
             Limit
           </button>
           <button
-            className={`px-[16px] py-[4px] rounded-[20px] text-[16px] font-[genos] border-none ${
+            className={`px-[16px] py-[4px] w-[5vw] h-[2vh] rounded-[5vh] text-[1vh] font-[genos] border-none ${
               !hasLimit
                 ? "bg-[#E2E8F0] text-[#64748B]"
                 : "bg-[#22C55E] text-[#FFFFFF]"
@@ -184,7 +184,7 @@ export default function KidsPermissionContent() {
   };
 
   return (
-    <div className="w-[684px] h-[605px] bg-[#F2F2F2] rounded-[15px] py-[15px] px-[20px] overflow-y-auto">
+    <div className="w-full h-full bg-[#F2F2F2] rounded-[15px] py-[15px] px-[20px] ">
       <h1 className="text-[30px] font-[genos] font-[500] text-[#1C274C] mb-6">
         Kids Permission
       </h1>

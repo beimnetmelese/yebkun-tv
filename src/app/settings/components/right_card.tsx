@@ -9,9 +9,9 @@ export const RightCard = ({
   userInfo: UserInfo;
 }) => {
   return (
-    <div className="w-[360px] h-[605px] bg-[#F2F2F2] rounded-[15px] py-[10px] px-[12px] flex flex-col items-center gap-[15px]">
+    <div className="w-full h-full bg-[#F2F2F2] rounded-[15px] py-[2%] px-[2%] flex flex-col items-center gap-[15px]">
       {/* Top Image Section */}
-      <div className="w-[335px] h-[277px] bg-[#FFFFFF] rounded-[15px] flex items-center justify-center">
+      <div className="w-full h-[30%] bg-[#FFFFFF] rounded-[15px] flex items-center justify-center">
         <Image
           src={settingImage}
           alt="Settings Illustration"
@@ -22,7 +22,7 @@ export const RightCard = ({
       </div>
 
       {/* User Profile Section */}
-      <div className="w-[335px] h-[151px] bg-[#FFFFFF] rounded-[15px] flex flex-col items-center justify-center">
+      <div className="w-full h-[40%] bg-[#FFFFFF] rounded-[15px] flex flex-col items-center justify-center">
         <Image
           src={userInfo.userImage}
           alt="User Profile"
@@ -68,10 +68,10 @@ export const RightCard = ({
       </div>
 
       {/* Status Section */}
-      <div className="w-[335px] h-[127px] bg-[#FFFFFF] rounded-[15px] flex flex-col items-center justify-center gap-3">
+      <div className="w-full h-[30%] bg-[#FFFFFF] rounded-[15px] flex flex-col items-center justify-center gap-3">
         {/* Medal & Status */}
         <div className="flex items-center justify-center border-[1px] border-[#F2F2F2] w-[130px] h-[52px] rounded-[15px]">
-          <div className="flex relative px-[4px">
+          <div className="flex relative px-[4px]">
             <Image
               src="/userinfo/medal.png"
               alt="Medal"
