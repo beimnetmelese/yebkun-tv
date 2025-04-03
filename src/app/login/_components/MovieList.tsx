@@ -29,7 +29,7 @@ function MovieList() {
   ];
 
   return (
-    <div className="w-full h-full grid grid-rows-[1fr_1fr_1fr]">
+    <div className="w-full h-full grid grid-rows-[1fr_1fr_1fr] gap-[10px]">
       {/* First row - Infinite scroll left */}
       <div className="relative overflow-hidden rounded-[15px]">
         <div className="flex animate-scroll">
