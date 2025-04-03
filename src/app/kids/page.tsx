@@ -1,6 +1,7 @@
 "use client";
 
 import CircularTimer from "@/app/components/CircularTimer";
+import ResponsiveHelper from "@/app/components/ResponsiveHelper";
 import Image from "next/image";
 import { FC } from "react";
 
@@ -22,63 +23,72 @@ const KidsPage: FC = () => {
 
 
       {/* Navbar */}
-      <nav className="absolute top-[0px] left-[0px] w-full p-[4px] flex items-center justify-between bg-transparent z-10">
+      <nav className="absolute top-0 left-0 w-full p-tv-4 flex items-center justify-between bg-transparent z-10">
         {/* Logo */}
-        <div className="flex items-center p-[10px] m-[10px] ">
+        <div className="flex items-center">
           <Image
             src="/images/kids/littleLogo.png"
             alt="Logo"
             width={130}
             height={130}
-            className="object-cover"
+            className="h-[clamp(60px,10vh,130px)] w-auto object-contain"
+            priority
           />
         </div>
 
-        {/* Navbar Icons */}
-        <div className="flex space-x-8 gap-[100px]">
+        {/* Navbar Icons - using responsive gap */}
+        <div className="flex items-center gap-tv-6 tv-sm:gap-tv-8 tv-md:gap-tv-10">
           <a
             href="#home"
-            className="text-white text-2xl hover:text-gray-300 p-[4px]"
+            className="tv-focus-animation flex flex-col items-center p-tv-2 hover:scale-110 transition-transform"
           >
             <Image
               src="/images/kids/home.png"
               alt="Home"
               width={150}
               height={100}
+              className="h-[clamp(40px,8vh,100px)] w-auto object-contain"
             />
+            <span className="text-tv-base text-white mt-tv-2">Home</span>
           </a>
           <a
-            href="#about"
-            className="text-white text-2xl hover:text-gray-300 p-[4px]"
+            href="#stories"
+            className="tv-focus-animation flex flex-col items-center p-tv-2 hover:scale-110 transition-transform"
           >
             <Image
               src="/images/kids/stories.png"
-              alt="stories"
+              alt="Stories"
               width={150}
               height={100}
+              className="h-[clamp(40px,8vh,100px)] w-auto object-contain"
             />
+            <span className="text-tv-base text-white mt-tv-2">Stories</span>
           </a>
           <a
-            href="#contact"
-            className="text-white text-2xl hover:text-gray-300 p-[4px]"
+            href="#videos"
+            className="tv-focus-animation flex flex-col items-center p-tv-2 hover:scale-110 transition-transform"
           >
             <Image
               src="/images/kids/videos.png"
-              alt="videos"
+              alt="Videos"
               width={150}
               height={100}
+              className="h-[clamp(40px,8vh,100px)] w-auto object-contain"
             />
+            <span className="text-tv-base text-white mt-tv-2">Videos</span>
           </a>
           <a
-            href="#friends"
-            className="text-white text-2xl hover:text-gray-300 p-[4px]"
+            href="#movies"
+            className="tv-focus-animation flex flex-col items-center p-tv-2 hover:scale-110 transition-transform"
           >
             <Image
               src="/images/kids/movies.png"
-              alt="movies"
+              alt="Movies"
               width={150}
               height={100}
+              className="h-[clamp(40px,8vh,100px)] w-auto object-contain"
             />
+            <span className="text-tv-base text-white mt-tv-2">Movies</span>
           </a>
         </div>
 
@@ -87,6 +97,14 @@ const KidsPage: FC = () => {
           <CircularTimer totalMinutes={60} currentMinutes={35} />
         </div>
       </nav>
+
+      {/* Main Content Area */}
+      <main className="mt-[15vh] max-w-[90vw] mx-auto p-tv-4">
+        {/* Add your main content here */}
+      </main>
+
+      {/* Responsive helper during development */}
+      <ResponsiveHelper />
     </div>
   );
 };

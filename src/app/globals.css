@@ -77,6 +77,17 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --vh: 1vh;
+  --vw: 1vw;
+  --tv-font-size-small: clamp(16px, 1.5vw, 24px);
+  --tv-font-size-medium: clamp(20px, 2vw, 32px);
+  --tv-font-size-large: clamp(24px, 2.5vw, 40px);
+  --tv-font-size-xlarge: clamp(32px, 3vw, 48px);
+  --tv-spacing-small: clamp(8px, 1vw, 16px);
+  --tv-spacing-medium: clamp(16px, 2vw, 32px);
+  --tv-spacing-large: clamp(24px, 3vw, 48px);
+  --tv-border-radius: clamp(8px, 1vw, 16px);
+  --tv-focus-outline: 4px solid #ffffff;
 }
 
 .dark {
@@ -114,13 +125,11 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+  html, body {
+    @apply overflow-hidden h-screen w-screen;
   }
 }
+
 
 @keyframes scroll {
   0% {
@@ -150,4 +159,106 @@
     animation: scroll-reverse 20s linear infinite;
     display: flex;
   }
+}
+
+/* TV-optimized styles */
+.tv-optimized {
+  font-size: var(--tv-font-size-medium);
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* TV-specific focus styles */
+.tv-focus:focus {
+  outline: var(--tv-focus-outline);
+  outline-offset: 4px;
+}
+
+/* TV-specific container */
+.tv-container {
+  width: 90vw;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: var(--tv-spacing-medium);
+}
+
+/* TV-specific grid */
+.tv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: var(--tv-spacing-medium);
+}
+
+/* TV-specific aspect ratios */
+.tv-aspect-16-9 {
+  aspect-ratio: 16/9;
+  width: 100%;
+  height: auto;
+}
+
+/* TV-specific navigation */
+.tv-nav {
+  padding: var(--tv-spacing-medium);
+  font-size: var(--tv-font-size-large);
+}
+
+/* TV-specific buttons */
+.tv-button {
+  padding: var(--tv-spacing-small) var(--tv-spacing-medium);
+  border-radius: var(--tv-border-radius);
+  font-size: var(--tv-font-size-medium);
+  transition: transform 0.2s ease;
+}
+
+.tv-button:focus {
+  transform: scale(1.1);
+}
+
+/* TV-specific text */
+.tv-text-small {
+  font-size: var(--tv-font-size-small);
+}
+.tv-text-medium {
+  font-size: var(--tv-font-size-medium);
+}
+.tv-text-large {
+  font-size: var(--tv-font-size-large);
+}
+.tv-text-xlarge {
+  font-size: var(--tv-font-size-xlarge);
+}
+
+/* TV-specific margins and paddings */
+.tv-m {
+  margin: var(--tv-spacing-medium);
+}
+.tv-p {
+  padding: var(--tv-spacing-medium);
+}
+.tv-gap {
+  gap: var(--tv-spacing-medium);
+}
+
+/* TV-specific animations */
+@keyframes tv-focus-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.tv-focus-animation:focus {
+  animation: tv-focus-animation 0.3s ease;
+}
+
+/* Safe area for TV displays */
+.tv-safe-area {
+  padding: 5vh 5vw;
 }
