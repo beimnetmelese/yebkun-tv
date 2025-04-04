@@ -125,11 +125,11 @@
 }
 
 @layer base {
-  html, body {
+  html,
+  body {
     @apply overflow-hidden h-screen w-screen;
   }
 }
-
 
 @keyframes scroll {
   0% {
@@ -261,4 +261,69 @@
 /* Safe area for TV displays */
 .tv-safe-area {
   padding: 5vh 5vw;
+}
+
+/* Animated background elements for kids page */
+@keyframes float-horizontal {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(20px) translateY(10px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes butterfly-fly {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(50px) translateY(-20px) rotate(5deg);
+  }
+  50% {
+    transform: translateX(100px) translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateX(50px) translateY(20px) rotate(-5deg);
+  }
+  100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes sway {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.butterfly-wing {
+  animation: wing-flap 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes wing-flap {
+  0% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0.8);
+  }
 }
