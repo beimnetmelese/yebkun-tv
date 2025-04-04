@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { useRouter } from "next/navigation";
+import ParentCode from "@/app/kids/components/parent_code";
 
 function LoginModal({
   isOpen,
@@ -13,18 +14,29 @@ function LoginModal({
   onClose: () => void;
 }) {
   const [firstPopup, setFirstPopup] = useState(true);
- 
-  const [thirPopup, setThirdPopup] = useState(false);
 
+  const [thirPopup, setThirdPopup] = useState(false);
+  const [isParentCodeOpen, setIsParentCodeOpen] = useState(false);
+  const handleParentCodeClose = () => {
+    setIsParentCodeOpen(false);
+  };
   const router = useRouter();
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose} >
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="border-none button-none flex items-center justify-center p-[0px] m-[0px] bg-transparent border-[none] [&>button]:hidden">
         <DialogTitle className="sr-only">YekBûn App Download</DialogTitle>
+        {/* Parent Code before kids section */}
+        {isParentCodeOpen && (
+          <div className="h-screen bg-[#00000099] top-[0px] left-[0px] inset-0 flex items-center justify-center">
+            <ParentCode
+              isOpen={isParentCodeOpen}
+              onClose={handleParentCodeClose}
+            />
+          </div>
+        )}
         {firstPopup && (
           <div className="flex flex-row items-center justify-center gap-[70px] h-[672px]">
-            
             <div className="flex bg-[#FFFFFF] p-[44px] rounded-[25px] shadow-lg gap-[58px] h-[full] relative">
               {/* Background Pattern */}
               <Image
@@ -137,7 +149,7 @@ function LoginModal({
                   <button
                     onClick={() => {
                       setFirstPopup(false);
-                   
+
                       setThirdPopup(true);
                     }}
                     className="w-[295px] h-[50px] border-none mt-[32px] px-[24px] py-[12px] bg-[#22C55E] font-[genos] text-[#FFFFFF] text-[28px] font-[500] rounded-[30px] hover:bg-[#16A34A] transition-colors flex items-center justify-center cursor-pointer"
@@ -230,7 +242,7 @@ function LoginModal({
               <div
                 onClick={() => {
                   setFirstPopup(false);
-                 
+
                   setThirdPopup(true);
                 }}
                 className="flex flex-row items-center justify-start w-full h-[53px] bg-[#F2F2F2] px-[10px] rounded-[15px] cursor-[pointer]"
@@ -276,7 +288,11 @@ function LoginModal({
                 />
               </span>
               <button
-                onClick={() => router.push("/kids ")}
+                onClick={() => {
+                  setFirstPopup(false);
+                  setThirdPopup(false);
+                  setIsParentCodeOpen(true);
+                }}
                 className="w-[295px] h-[50px] border-none px-[24px] py-[12px] bg-[#22C55E] font-[genos] text-[#FFFFFF] text-[28px] font-[500] rounded-[30px] hover:bg-[#16A34A] transition-colors flex items-center justify-center cursor-pointer"
               >
                 Start Now

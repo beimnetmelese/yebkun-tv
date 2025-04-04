@@ -2,6 +2,7 @@ import { Dialog } from "@/components/ui/dialog";
 import { DialogContent, DialogTitle } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function ParentCode({
   isOpen,
@@ -12,7 +13,7 @@ function ParentCode({
 }) {
   const [pin, setPin] = useState<string[]>(["", "", "", ""]);
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const router = useRouter();
   const handleNumberClick = (number: string) => {
     if (currentIndex < 4) {
       const newPin = [...pin];
@@ -24,6 +25,7 @@ function ParentCode({
 
   const confirmPin = () => {
     if (pin.join("") === "1234") {
+      router.push("/kids");
       onClose();
     } else {
       alert("Invalid Parent Code");
