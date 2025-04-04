@@ -3,13 +3,36 @@
 import CircularTimer from "@/app/components/CircularTimer";
 import Image from "next/image";
 import { FC } from "react";
+import { useState } from 'react';
+import ParentCode from "./components/parent_code";
 
 const KidsPage: FC = () => {
+  const [isParentCodeOpen, setIsParentCodeOpen] = useState(true);
+  const handleParentCodeClose = () => {
+    setIsParentCodeOpen(false);
+  }
   return (
     <div
-      className="relative w-full h-screen bg-cover bg-center"
-      style={{ backgroundImage: "url('/images/kids/kidsbg.png')" }}
+      className="relative w-full h-screen bg-cover bg-center overflow-hidden top-[0px] left-[0px] right-[0px] bottom-[0px]"
+      style={{
+        backgroundImage: "url('/images/kids/kidsbg.png')" ,
+        
+        marginTop: "0px",
+        marginLeft: "0px",
+        marginRight: "0px",
+        marginBottom: "0px",
+      }}
     >
+      {/* Parent Code before kids section */}
+      {isParentCodeOpen && (
+        <div className="h-screen bg-[#00000099] top-[0px] left-[0px] inset-0 flex items-center justify-center">
+          <ParentCode
+            isOpen={isParentCodeOpen}
+            onClose={handleParentCodeClose}
+          />
+        </div>
+      )}
+
       {/* Navbar */}
       <nav className="absolute top-[0px] left-[0px] w-full p-[4px] flex items-center justify-between bg-transparent z-10">
         {/* Logo */}
@@ -72,7 +95,7 @@ const KidsPage: FC = () => {
         </div>
 
         {/* Circular Timer */}
-        <div className="flex items-center pr-[8px]">
+        <div className="flex items-center mr-[2.5vw]">
           <CircularTimer totalMinutes={60} currentMinutes={35} />
         </div>
       </nav>
