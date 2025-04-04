@@ -1,19 +1,29 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 interface CircularTimerProps {
   totalMinutes: number;
   currentMinutes: number;
 }
 
-const CircularTimer = ({
-  totalMinutes,
-  currentMinutes,
-}: CircularTimerProps) => {
-  const segments = 60; // Number of segments in the circle
+const CircularTimer = ({ totalMinutes }: CircularTimerProps) => {
+  const [currentMinutes, setCurrentMinutes] = useState(totalMinutes);
+  const segments = 60;
   const radius = 50;
-  const strokeWidth = 4;
+  const strokeWidth = 1;
   const size = (radius + strokeWidth) * 2;
   const center = size / 2;
+
+  useEffect(() => {
+    if (currentMinutes <= 0) return;
+
+    const interval = setInterval(() => {
+      setCurrentMinutes((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 60000); // Update every minute
+
+    return () => clearInterval(interval);
+  }, [currentMinutes]);
 
   // Calculate which segments should be colored
   const activeSegments = Math.floor((currentMinutes / totalMinutes) * segments);
@@ -25,12 +35,12 @@ const CircularTimer = ({
       const angle = (i * 360) / segments;
       const isActive = i < activeSegments;
 
-      // Calculate segment position
+      // Calculate segment position with fixed precision
       const radians = (angle - 90) * (Math.PI / 180);
-      const x1 = center + (radius - 8) * Math.cos(radians);
-      const y1 = center + (radius - 8) * Math.sin(radians);
-      const x2 = center + radius * Math.cos(radians);
-      const y2 = center + radius * Math.sin(radians);
+      const x1 = Number((center + (radius - 8) * Math.cos(radians)).toFixed(2));
+      const y1 = Number((center + (radius - 8) * Math.sin(radians)).toFixed(2));
+      const x2 = Number((center + radius * Math.cos(radians)).toFixed(2));
+      const y2 = Number((center + radius * Math.sin(radians)).toFixed(2));
 
       segmentArray.push(
         <line
@@ -49,8 +59,14 @@ const CircularTimer = ({
   };
 
   return (
-    <div className="relative w-[120px] h-[120px] flex items-center justify-center">
-      <svg width={size} height={size} className="transform -rotate-90">
+    <div className="relative w-[clamp(80px,10vw,120px)] h-[clamp(80px,10vw,120px)] flex items-center justify-center">
+      <svg
+        width={size}
+        height={size}
+        className="transform -rotate-90 w-full h-full"
+        viewBox={`0 0 ${size} ${size}`}
+        preserveAspectRatio="xMidYMid meet"
+      >
         {/* Outer circle */}
         <circle
           cx={center}
@@ -68,12 +84,15 @@ const CircularTimer = ({
           y={center}
           textAnchor="middle"
           dominantBaseline="middle"
-          className="text-[50px] font-[400] text-[#000000] p-[10px] leading-[10px] font-[genos]"
+          className="tv-text-large font-[400] text-[#000000] p-[10px] leading-[10px] font-[genos]"
           transform={`rotate(90 ${center} ${center})`}
-          
         >
           {currentMinutes}
-          <tspan x={center} y={center + 20} className="text-[30px]  font-[400] text-[#000000] leading-[10px] font-[genos] pt-[10px]">
+          <tspan
+            x={center}
+            y={center + 20}
+            className="tv-text-medium font-[400] text-[#000000] leading-[10px] font-[genos] pt-[10px]"
+          >
             min
           </tspan>
         </text>
