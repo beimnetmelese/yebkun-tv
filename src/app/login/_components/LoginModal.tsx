@@ -3,8 +3,8 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import Image from "next/image";
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
 import ParentCode from "@/app/kids/components/parent_code";
+import { useRouter } from "next/navigation";
 
 function LoginModal({
   isOpen,
@@ -14,7 +14,6 @@ function LoginModal({
   onClose: () => void;
 }) {
   const [firstPopup, setFirstPopup] = useState(true);
-
   const [thirPopup, setThirdPopup] = useState(false);
   const [isParentCodeOpen, setIsParentCodeOpen] = useState(false);
   const handleParentCodeClose = () => {
@@ -24,32 +23,36 @@ function LoginModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="border-none button-none flex items-center justify-center p-[0px] m-[0px] bg-transparent border-[none] [&>button]:hidden">
+      <DialogContent className="border-none button-none flex items-center justify-center p-0 m-0 bg-transparent border-0 [&>button]:hidden max-w-[95vw] sm:max-w-[95vw] md:max-w-[95vw] lg:max-w-[95vw] xl:max-w-[95vw] w-screen h-screen">
         <DialogTitle className="sr-only">YekBûn App Download</DialogTitle>
+
         {/* Parent Code before kids section */}
         {isParentCodeOpen && (
-          <div className="h-screen bg-[#00000099] top-[0px] left-[0px] inset-0 flex items-center justify-center">
-            <ParentCode
-              isOpen={isParentCodeOpen}
-              onClose={handleParentCodeClose}
-            />
+          <div className="fixed inset-0 z-50 bg-[#00000099] flex items-center justify-center">
+            <div className="relative w-full h-full flex items-center justify-center">
+              <ParentCode
+                isOpen={isParentCodeOpen}
+                onClose={handleParentCodeClose}
+              />
+            </div>
           </div>
         )}
+
         {firstPopup && (
-          <div className="flex flex-row items-center justify-center gap-[70px] h-[672px]">
-            <div className="flex bg-[#FFFFFF] p-[44px] rounded-[25px] shadow-lg gap-[58px] h-[full] relative">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-[30px] md:gap-[50px] w-full max-w-[95vw] xl:max-w-[1500px] p-4">
+            <div className="flex bg-[#FFFFFF] p-[20px] md:p-[44px] rounded-[25px] shadow-lg gap-[20px] md:gap-[40px] min-h-[620px] w-full md:min-w-[880px] lg:min-w-[900px] relative overflow-hidden">
               {/* Background Pattern */}
               <Image
                 src="/images/start_screen/pattern.png"
                 alt="Background Pattern"
                 fill
                 priority
-                className="object-cover absolute top-0 left-0 rounded-[25px]"
+                className="object-cover absolute top-0 left-0 rounded-[25px] z-0"
               />
 
-              <div className="flex flex-row">
+              <div className="flex flex-col md:flex-row z-10 relative w-full">
                 {/* Left Side - Phone Mockup */}
-                <div className="relative z-[1]">
+                <div className="relative z-[1] shrink-0 flex-none">
                   <Image
                     src="/images/start_screen/mobile-mockup.png"
                     alt="Phone Mockup"
@@ -60,17 +63,17 @@ function LoginModal({
                 </div>
 
                 {/* Right Side - Download Content */}
-                <div className="flex flex-col items-center justify-center relative z-[1] mx-[40px]">
-                  <h1 className="text-[90px] font-[600] font-[genos] text-[#1C274C] leading-none p[0px] m-[0px] item-center justify-center">
+                <div className="flex flex-col items-center justify-center relative z-[1] mx-[20px] md:mx-[40px] flex-grow">
+                  <h1 className="text-[60px] md:text-[90px] font-[600] font-[genos] text-[#1C274C] leading-none p[0px] m-[0px] item-center justify-center">
                     DOWNLOAD
                   </h1>
-                  <h2 className="text-[64px] font-[500] font-[genos] text-[#1C274C] mb-[32px] m-[0px]">
+                  <h2 className="text-[40px] md:text-[64px] font-[500] font-[genos] text-[#1C274C] mb-[20px] md:mb-[32px] m-[0px]">
                     YEKBÛN APP
                   </h2>
 
-                  <div className="flex flex-row gap-[24px] items-center justify-center">
+                  <div className="flex flex-col md:flex-row gap-[24px] items-center justify-center">
                     {/* App Store */}
-                    <div className="flex flex-col items-center justify-start gap-[8px] bg-[#F2F2F2] h-[395px] w-[253px]">
+                    <div className="flex flex-col items-center justify-start gap-[8px] bg-[#F2F2F2] h-[395px] w-[253px] shrink-0 flex-none">
                       <button className="bg-[#000000] w-full h-[70px] text-[#FFFFFF] px-[4px] py-[4px] rounded-[10px] flex items-center justify-center gap-[12px]">
                         <Image
                           src="/images/home_screen/apple.png"
@@ -108,7 +111,7 @@ function LoginModal({
                     </div>
 
                     {/* Google Play */}
-                    <div className="flex flex-col items-center gap-[8px] bg-[#F2F2F2] h-[395px] w-[253px]">
+                    <div className="flex flex-col items-center gap-[8px] bg-[#F2F2F2] h-[395px] w-[253px] shrink-0 flex-none">
                       <button className="bg-[#000000] text-[#FFFFFF] w-full h-[70px] px-[4px] py-[4px] rounded-[10px] flex items-center justify-center gap-[12px]">
                         <Image
                           src="/images/home_screen/googleplay.png"
@@ -149,7 +152,6 @@ function LoginModal({
                   <button
                     onClick={() => {
                       setFirstPopup(false);
-
                       setThirdPopup(true);
                     }}
                     className="w-[295px] h-[50px] border-none mt-[32px] px-[24px] py-[12px] bg-[#22C55E] font-[genos] text-[#FFFFFF] text-[28px] font-[500] rounded-[30px] hover:bg-[#16A34A] transition-colors flex items-center justify-center cursor-pointer"
@@ -160,7 +162,7 @@ function LoginModal({
               </div>
             </div>
             {/* Second Popup - Activate TV */}
-            <div className="bg-[#FFFFFF] p-[42px] rounded-[25px] shadow-lg flex flex-col items-center w-[375px] h-[full]">
+            <div className="bg-[#FFFFFF] p-[20px] md:p-[42px] rounded-[25px] shadow-lg flex flex-col items-center w-full md:min-w-[480px] md:w-[400px] min-h-[700px]">
               <div className="flex flex-col items-center gap-[24px] mb-[32px]">
                 <Image
                   src="/images/start_screen/activate.png"
@@ -242,7 +244,6 @@ function LoginModal({
               <div
                 onClick={() => {
                   setFirstPopup(false);
-
                   setThirdPopup(true);
                 }}
                 className="flex flex-row items-center justify-start w-full h-[53px] bg-[#F2F2F2] px-[10px] rounded-[15px] cursor-[pointer]"
@@ -255,11 +256,11 @@ function LoginModal({
                     height={40}
                   />
                 </span>
-                <span className="flex flex-col items-center justify-center px-[10px] ml-[15px]">
+                <span className="flex flex-col items-center justify-center px-[10px] ml-[15px] py-[30px]">
                   <p className="font-[genos] font-[500] m-[0px] text-[20px]">
                     ACTIVATE YOUR TV APP
                   </p>
-                  <p className="font-[genos] font-[500] m-[0px] text-[14px]">
+                  <p className="font-[genos] font-[500] text-[14px]">
                     To get started, simply add this to your YekBûn App
                   </p>
                 </span>
@@ -269,58 +270,67 @@ function LoginModal({
         )}
 
         {thirPopup && (
-          <div className="flex flex-row gap-[100px] items-center justify-center">
-            <div className="bg-[#FFFFFF] rounded-[25px] shadow-lg flex flex-col items-center w-[375px] h-[560px]">
-              <span>
-                <Image
-                  src={"/images/start_screen/zarok_card.png"}
-                  alt="Zarok image"
-                  width={375}
-                  height={375}
-                />
-              </span>
-              <span>
-                <Image
-                  src={"/images/start_screen/zarok_text.png"}
-                  alt="Zarok"
-                  width={340}
-                  height={101}
-                />
-              </span>
-              <button
-                onClick={() => {
-                  setFirstPopup(false);
-                  setThirdPopup(false);
-                  setIsParentCodeOpen(true);
-                }}
-                className="w-[295px] h-[50px] border-none px-[24px] py-[12px] bg-[#22C55E] font-[genos] text-[#FFFFFF] text-[28px] font-[500] rounded-[30px] hover:bg-[#16A34A] transition-colors flex items-center justify-center cursor-pointer"
-              >
-                Start Now
-              </button>
-            </div>
-            <div className="bg-[#FFFFFF] rounded-[25px] shadow-lg flex flex-col items-center w-[375px] h-[560px]">
-              <span>
-                <Image
-                  src={"/images/start_screen/malbat.png"}
-                  alt="Zarok image"
-                  width={375}
-                  height={375}
-                />
-              </span>
-              <span>
-                <Image
-                  src={"/images/start_screen/malbat_text.png"}
-                  alt="Malbat image"
-                  width={340}
-                  height={101}
-                />
-              </span>
-              <button
-                onClick={() => router.push("/adult")}
-                className="w-[295px] h-[50px] border-none  px-[24px] py-[12px] bg-[#22C55E] font-[genos] text-[#FFFFFF] text-[28px] font-[500] rounded-[30px] hover:bg-[#16A34A] transition-colors flex items-center justify-center cursor-pointer"
-              >
-                Start Now
-              </button>
+          <div className="fixed inset-0 flex items-center justify-center">
+            <div className="w-auto h-auto">
+              <div className="flex flex-row gap-6">
+                <div className="bg-white rounded-[15px] shadow-lg p-4 flex flex-col items-center w-[400px]">
+                  <div className="w-full">
+                    <Image
+                      src={"/images/start_screen/zarok_card.png"}
+                      alt="Zarok image"
+                      width={400}
+                      height={400}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="mt-2 mb-4">
+                    <Image
+                      src={"/images/start_screen/zarok_text.png"}
+                      alt="Zarok"
+                      width={340}
+                      height={101}
+                      className="h-auto w-auto"
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      setFirstPopup(false);
+                      setThirdPopup(false);
+                      setIsParentCodeOpen(true);
+                    }}
+                    className="w-[295px] h-[50px] border-none px-[24px] py-[12px] bg-[#22C55E] font-[genos] text-[#FFFFFF] text-[28px] font-[500] rounded-[30px] hover:bg-[#16A34A] transition-colors flex items-center justify-center cursor-pointer"
+                  >
+                    Start Now
+                  </button>
+                </div>
+
+                <div className="bg-white rounded-[15px] shadow-lg p-4 flex flex-col items-center w-[400px]">
+                  <div className="w-full">
+                    <Image
+                      src={"/images/start_screen/malbat.png"}
+                      alt="Malbat image"
+                      width={400}
+                      height={400}
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="mt-2 mb-4">
+                    <Image
+                      src={"/images/start_screen/malbat_text.png"}
+                      alt="Malbat image"
+                      width={340}
+                      height={101}
+                      className="h-auto w-auto"
+                    />
+                  </div>
+                  <button
+                    onClick={() => router.push("/adult")}
+                    className="w-[295px] h-[50px] border-none px-[24px] py-[12px] bg-[#22C55E] font-[genos] text-[#FFFFFF] text-[28px] font-[500] rounded-[30px] hover:bg-[#16A34A] transition-colors flex items-center justify-center cursor-pointer"
+                  >
+                    Start Now
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}

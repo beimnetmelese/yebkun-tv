@@ -1,0 +1,194 @@
+/* Additional styles for scan viewer and editable parameters */
+.scan-viewer {
+    min-height: 200px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.scan-viewer:not(.scan-viewer-active) {
+    background-color: #f8f9fa;
+}
+
+.scan-viewer:not(.scan-viewer-active)::before {
+    content: "Scan preview will appear here";
+    color: #6c757d;
+    font-style: italic;
+}
+
+.scan-viewer-active {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.scan-preview {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.scan-image {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.foot-scan-svg {
+    width: 100%;
+    height: 150px;
+    transition: transform 0.3s ease;
+}
+
+.foot-outline {
+    fill: #e9ecef;
+    stroke: #6c757d;
+    stroke-width: 2;
+}
+
+.arch-area {
+    fill: #cfe2ff;
+    stroke: #0d6efd;
+    stroke-width: 1;
+}
+
+.pressure-point {
+    fill: rgba(220, 53, 69, 0.7);
+    stroke: #dc3545;
+    stroke-width: 1;
+}
+
+.scan-filename {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.scan-controls {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.control-group {
+    flex: 1;
+    min-width: 120px;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+/* View mode styles */
+.foot-scan-svg.mode-pressure .pressure-point {
+    animation: pulse 2s infinite;
+}
+
+.foot-scan-svg.mode-contour .foot-outline,
+.foot-scan-svg.mode-contour .arch-area {
+    fill: none;
+    stroke-dasharray: 5,5;
+}
+
+.foot-scan-svg.mode-wireframe {
+    fill: none;
+    stroke: #212529;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* Editable parameter styles */
+.parameter-visual {
+    position: relative;
+}
+
+.parameter-value {
+    transition: all 0.3s ease;
+}
+
+.parameter-slider:focus + .parameter-value {
+    color: #0a58ca;
+    font-size: 1.1em;
+}
+
+.parameter-preset-applied {
+    background-color: rgba(13, 110, 253, 0.1);
+    border-left: 3px solid #0d6efd;
+    animation: highlight-fade 2s forwards;
+}
+
+@keyframes highlight-fade {
+    0% { background-color: rgba(13, 110, 253, 0.2); }
+    100% { background-color: rgba(13, 110, 253, 0); }
+}
+
+/* Template selection highlight */
+.foot-condition-card.selected {
+    border: 2px solid #0d6efd;
+    box-shadow: 0 0 15px rgba(13, 110, 253, 0.3);
+}
+
+/* Make all form controls more visibly interactive */
+.form-control, .form-select, .form-range {
+    transition: all 0.2s ease;
+}
+
+.form-control:hover, .form-select:hover, .form-range:hover {
+    border-color: #0d6efd;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Tooltip for parameters */
+.parameter-tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #212529;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.parameter-visual:hover .parameter-tooltip {
+    opacity: 1;
+}
+
+.parameter-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #212529 transparent transparent transparent;
+}

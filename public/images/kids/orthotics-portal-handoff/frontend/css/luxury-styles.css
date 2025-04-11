@@ -1,0 +1,1006 @@
+/* Luxury Styles for Orthotics Prescription Portal */
+
+:root {
+    --primary-color: #3a6b6d; /* Medairum teal/turquoise */
+    --accent-color: #c13b3b; /* Medairum red cross */
+    --secondary-color: #f5f5f7;
+    --text-color: #1d1d1f;
+    --light-gray: #e8e8e8;
+    --medium-gray: #86868b;
+    --dark-gray: #515154;
+    --success-color: #34c759;
+    --warning-color: #ff9500;
+    --error-color: #ff3b30;
+    --border-radius: 12px;
+    --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    --transition: all 0.3s ease;
+}
+
+/* Global Styles */
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: var(--text-color);
+    background-color: #fff;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.015em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: #0051a2;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: #ffffff;
+    box-shadow: var(--box-shadow);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin-left: 20px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+nav a:hover {
+    background-color: rgba(58, 107, 109, 0.1);
+    color: var(--primary-color);
+}
+
+nav a.active {
+    color: var(--primary-color);
+    background-color: rgba(58, 107, 109, 0.1);
+}
+
+.basket-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.basket-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 0.7rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Form Styles */
+.prescription-container {
+    display: flex;
+    margin-top: 30px;
+    position: relative;
+}
+
+.toc-container {
+    width: 250px;
+    position: sticky;
+    top: 100px;
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+    padding-right: 20px;
+}
+
+.toc {
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+}
+
+.prescription-content {
+    flex: 1;
+    padding-left: 30px;
+    border-left: 1px solid var(--light-gray);
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-link {
+    display: block;
+    padding: 8px 15px;
+    margin-bottom: 5px;
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+.toc-link:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.toc-link.active {
+    background-color: rgba(58, 107, 109, 0.1);
+    color: var(--primary-color);
+    font-weight: 500;
+    border-left: 3px solid var(--primary-color);
+}
+
+.form-section {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--light-gray);
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.section-header {
+    margin-bottom: 25px;
+}
+
+.section-header h3 {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.section-line {
+    height: 3px;
+    width: 50px;
+    background-color: var(--primary-color);
+    margin-top: 5px;
+}
+
+.parameter-label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--dark-gray);
+}
+
+.form-select {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--light-gray);
+    padding: 12px 16px;
+    transition: var(--transition);
+    background-color: #f9f9f9;
+    font-size: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233a6b6d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(58, 107, 109, 0.15);
+    background-color: #ffffff;
+    outline: none;
+}
+
+.input-group {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.input-group-text {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--light-gray);
+    color: var(--dark-gray);
+}
+
+.btn {
+    border-radius: var(--border-radius);
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: 12px 24px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.btn-primary:hover {
+    background-color: #2a5b5d;
+    border-color: #2a5b5d;
+}
+
+.btn-outline-secondary {
+    color: var(--dark-gray);
+    border-color: var(--light-gray);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-color: var(--medium-gray);
+}
+
+/* Template Dropdown */
+.template-dropdown {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+}
+
+.template-description {
+    color: var(--dark-gray);
+}
+
+/* Scan Upload */
+.scan-preview {
+    height: 150px;
+    border: 2px dashed var(--light-gray);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secondary-color);
+}
+
+.scan-placeholder {
+    text-align: center;
+    color: var(--medium-gray);
+}
+
+.scan-placeholder i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Device Options Tabs */
+.device-options-tabs .nav-tabs {
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.device-options-tabs .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    padding: 10px 20px;
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+.device-options-tabs .nav-link:hover {
+    border-bottom-color: var(--light-gray);
+}
+
+.device-options-tabs .nav-link.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    background-color: transparent;
+}
+
+.device-option-image {
+    margin-bottom: 20px;
+}
+
+.more-info-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Posting Details */
+.posting-details {
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-top: 10px;
+}
+
+/* Form Actions */
+.form-actions {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--light-gray);
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--secondary-color);
+    padding: 30px 0;
+    color: var(--dark-gray);
+    border-top: 1px solid var(--light-gray);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .prescription-container {
+        flex-direction: column;
+    }
+    
+    .toc-container {
+        width: 100%;
+        position: relative;
+        top: 0;
+        height: auto;
+        margin-bottom: 30px;
+        padding-right: 0;
+    }
+    
+    .prescription-content {
+        padding-left: 0;
+        border-left: none;
+    }
+    
+    .toc-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .toc-link {
+        margin-right: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Aperture Options */
+.aperture-options {
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: var(--border-radius);
+}
+
+/* Extension Options */
+.extension-options {
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-top: 10px;
+}
+
+/* Form Check */
+.form-check {
+    margin-bottom: 10px;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Specific Dimensions Tab */
+#specific-dimensions p {
+    margin-bottom: 20px;
+}
+
+/* Number Input Styling */
+.number-input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    width: fit-content;
+}
+
+.number-input-container button {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: var(--transition);
+}
+
+.number-input-container button:hover {
+    background-color: #2a5b5d;
+}
+
+.number-input-container input {
+    width: 70px;
+    text-align: center;
+    border: none;
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+    padding: 8px 5px;
+    margin: 0;
+    font-size: 15px;
+    background-color: #f9f9f9;
+}
+
+.number-input-container input:focus {
+    outline: none;
+    background-color: #ffffff;
+}
+
+.unit {
+    background-color: #f0f0f0;
+    padding: 8px 10px;
+    color: var(--dark-gray);
+    font-size: 14px;
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+    border-right: 1px solid var(--light-gray);
+}
+
+/* Form Row Styling */
+.form-row {
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.form-label {
+    flex: 0 0 200px;
+    padding-right: 20px;
+    padding-top: 8px;
+}
+
+.form-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0 10px;
+}
+
+.form-input.full-width {
+    flex: 1 0 100%;
+    margin-top: 10px;
+}
+
+/* Two Column Layout */
+.two-column-layout {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.column-header {
+    flex: 1;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(58, 107, 109, 0.1);
+    border-radius: var(--border-radius);
+    margin: 0 5px;
+}
+
+/* Info Icon */
+.info-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    font-size: 12px;
+    margin-left: 5px;
+    cursor: help;
+}
+
+/* Angle Labels */
+.angle-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--medium-gray);
+    margin-top: 5px;
+    position: relative;
+}
+
+.angle-labels span:first-child {
+    position: absolute;
+    left: 0;
+}
+
+.angle-labels span:last-child {
+    position: absolute;
+    right: 0;
+}
+
+/* Medial Lateral Select */
+.medial-lateral-select {
+    display: flex;
+    margin: 10px 0;
+}
+
+.medial-lateral-select .option {
+    margin-right: 15px;
+}
+
+/* Checkbox Group */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.checkbox-option {
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+/* Additional form control styling */
+.form-control {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--light-gray);
+    padding: 12px 16px;
+    transition: var(--transition);
+    background-color: #f9f9f9;
+    font-size: 15px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(58, 107, 109, 0.15);
+    background-color: #ffffff;
+    outline: none;
+}
+
+/* Two Column Layout Improvements */
+.two-column-layout {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.column-header {
+    flex: 1;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(58, 107, 109, 0.1);
+    border-radius: var(--border-radius);
+    margin: 0 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+/* Improved alignment for angle controls */
+.angle-control {
+    margin-top: 15px;
+    position: relative;
+}
+
+.angle-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: var(--dark-gray);
+    width: 100%;
+    padding: 0 5px;
+    position: relative;
+}
+
+.angle-labels span:first-child {
+    position: absolute;
+    left: 0;
+}
+
+.angle-labels span:last-child {
+    position: absolute;
+    right: 0;
+}
+
+.angle-control label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dark-gray);
+}
+
+.number-input-container {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.number-input-container input {
+    flex: 1;
+    border: none;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+.number-input-container input:focus {
+    outline: none;
+}
+
+.number-input-container button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border: none;
+    color: var(--dark-gray);
+    font-size: 18px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.number-input-container button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.number-input-container .unit {
+    padding-right: 10px;
+    color: var(--dark-gray);
+}
+
+/* Improved layout for two-column sections */
+.two-column-layout {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.column-header {
+    flex: 1;
+    text-align: center;
+    font-weight: 500;
+    color: var(--primary-color);
+    background-color: rgba(58, 107, 109, 0.1);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin: 0 10px;
+}
+
+.form-row {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.form-label {
+    width: 200px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+
+.form-input {
+    flex: 1;
+    padding: 0 10px;
+}
+
+/* Improved styling for heel post section */
+.heel-post-type {
+    width: 100%;
+}
+
+.half-width-options {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.half-width-options select {
+    flex: 1;
+}
+
+.pitch-control, .raise-control, .taper-control {
+    margin-top: 15px;
+}
+
+/* Clean alignment for clinical measures section */
+#clinicalMeasures .form-row {
+    align-items: center;
+}
+
+#clinicalMeasures .angle-control {
+    width: 100%;
+}
+
+#clinicalMeasures .angle-labels {
+    width: 100%;
+}
+
+/* Consistent spacing and alignment throughout the form */
+.form-section {
+    margin-bottom: 40px;
+}
+
+.form-section h2 {
+    margin-bottom: 25px;
+    color: var(--primary-color);
+}
+
+/* Improved clinical measures section */
+#clinicalMeasures .number-input-container {
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+#clinicalMeasures .angle-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Consistent form inputs */
+select, input[type="text"], input[type="number"], input[type="email"] {
+    height: 40px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--light-gray);
+    padding: 0 15px;
+    width: 100%;
+    font-size: 15px;
+    transition: var(--transition);
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+select:focus, input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(58, 107, 109, 0.15);
+    background-color: #ffffff;
+    outline: none;
+}
+
+/* Improved radio and checkbox styling */
+.pad-options, .style-options, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.pad-option, .style-option, .checkbox-option {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.pad-option label, .style-option label, .checkbox-option label {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/* Consistent button styling */
+button {
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+/* Improved patient information section */
+#patientInformation .form-row {
+    margin-bottom: 15px;
+}
+
+/* Template dropdown enhancement */
+.template-selector {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: rgba(58, 107, 109, 0.05);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(58, 107, 109, 0.2);
+}
+
+.template-selector select {
+    font-weight: 500;
+    font-size: 16px;
+    width: 100%;
+    min-width: 300px;
+}
+
+/* 3D scan section improvements */
+.scan-section {
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.scan-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.scan-button {
+    background-color: #2d3748;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+
+.import-button {
+    background-color: transparent;
+    border: 1px solid #2d3748;
+    color: #2d3748;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+}
+
+.scan-viewer {
+    height: 300px;
+    background-color: #ffffff;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Notes and attachments section */
+.notes-section {
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.notes-textarea {
+    width: 100%;
+    min-height: 100px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--light-gray);
+    padding: 15px;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+}
+
+.add-file-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 1px solid var(--light-gray);
+    color: var(--dark-gray);
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.add-file-button svg {
+    margin-right: 8px;
+}
+
+/* Form action buttons */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    padding: 20px 0;
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 18px 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(58, 107, 109, 0.3);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.primary-button:hover {
+    background-color: #2a5b5d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(58, 107, 109, 0.4);
+}
+
+.secondary-button {
+    background-color: #f0f0f0;
+    color: var(--dark-gray);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-left: 15px;
+}
+
+.secondary-button:hover {
+    background-color: #e0e0e0;
+}

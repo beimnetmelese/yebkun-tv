@@ -1,0 +1,228 @@
+/* Additional styles for actual scan display and parameter feedback */
+.scan-viewer {
+    min-height: 200px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.scan-viewer:not(.scan-viewer-active) {
+    background-color: #f8f9fa;
+}
+
+.scan-viewer:not(.scan-viewer-active)::before {
+    content: "Scan preview will appear here";
+    color: #6c757d;
+    font-style: italic;
+}
+
+.scan-viewer-active {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.scan-preview {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.actual-scan-image {
+    max-width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.scan-3d-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    width: 100%;
+    height: 100%;
+}
+
+.scan-3d-placeholder i {
+    margin-bottom: 10px;
+    color: #0d6efd;
+}
+
+.scan-filename {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.scan-controls {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.control-group {
+    flex: 1;
+    min-width: 120px;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+/* View mode styles */
+.actual-scan-image.mode-pressure,
+.scan-3d-placeholder.mode-pressure {
+    filter: hue-rotate(240deg) saturate(1.5);
+}
+
+.actual-scan-image.mode-contour,
+.scan-3d-placeholder.mode-contour {
+    filter: contrast(1.5) brightness(0.8);
+}
+
+.actual-scan-image.mode-wireframe,
+.scan-3d-placeholder.mode-wireframe {
+    filter: grayscale(1) contrast(1.2);
+}
+
+/* Enhanced parameter visual feedback */
+.parameter-visual {
+    position: relative;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.parameter-visual:hover {
+    border-color: #0d6efd;
+    box-shadow: 0 0 5px rgba(13, 110, 253, 0.25);
+}
+
+.parameter-visual.parameter-preset-applied {
+    background-color: rgba(13, 110, 253, 0.1);
+    border-left: 3px solid #0d6efd;
+    animation: highlight-fade 2s forwards;
+}
+
+.parameter-icon {
+    font-size: 1.5rem;
+    color: #0d6efd;
+    margin-right: 10px;
+}
+
+.parameter-slider {
+    width: 100%;
+    cursor: pointer;
+}
+
+.parameter-value {
+    font-weight: bold;
+    color: #0d6efd;
+    transition: all 0.3s ease;
+    min-width: 40px;
+    text-align: right;
+}
+
+.parameter-slider:focus + .parameter-value {
+    color: #0a58ca;
+    font-size: 1.1em;
+}
+
+@keyframes highlight-fade {
+    0% { background-color: rgba(13, 110, 253, 0.2); }
+    100% { background-color: rgba(13, 110, 253, 0); }
+}
+
+/* Enhanced tooltip for parameters */
+.parameter-tooltip {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #212529;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 1000;
+    width: max-content;
+    max-width: 250px;
+}
+
+.parameter-visual:hover .parameter-tooltip {
+    opacity: 1;
+}
+
+.parameter-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #212529 transparent transparent transparent;
+}
+
+/* Make form controls more visibly interactive */
+.form-control, .form-select, .form-range, .form-check-input {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.form-control:hover, .form-select:hover, .form-range:hover, .form-check-input:hover {
+    border-color: #0d6efd;
+}
+
+.form-control:focus, .form-select:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Active state for form elements */
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.form-check-input:checked + .form-check-label {
+    color: #0d6efd;
+    font-weight: 500;
+}
+
+/* Toast notifications */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1100;
+}
+
+.toast {
+    min-width: 250px;
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    border-left: 4px solid #0d6efd;
+    margin-bottom: 10px;
+}

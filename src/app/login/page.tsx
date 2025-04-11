@@ -1,18 +1,19 @@
 "use client";
+import { useEffect, useState } from "react";
 import LoginModal from "./_components/LoginModal";
 import MovieList from "./_components/MovieList";
 import RightSection from "./_components/RightSection";
-import { useEffect, useState } from "react";
 
 export default function Login() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   useEffect(() => {
     setTimeout(() => {
-      setIsLoginModalOpen(true)
-    },5000)
-  })
+      setIsLoginModalOpen(true);
+    }, 5000);
+  }, []); // Add empty dependency array to run effect only once
+
   return (
-    <section className="w-[100%] h-[100%] flex bg-[#F2F2F2] overflow-hidden relative">
+    <section className="w-full h-screen flex bg-[#F2F2F2] overflow-hidden relative">
       {/* movie list bento grid */}
       <div className="w-screen h-screen">
         <MovieList />
@@ -25,7 +26,7 @@ export default function Login() {
         <RightSection />
       </div>
       {isLoginModalOpen && (
-        <div className="w-full h-full bg-[#00000099] flex items-center justify-center fixed inset-0 top-[0px] left-[0px] right-[0px] bottom-[0px]">
+        <div className="fixed inset-0 w-full h-full bg-[#00000099] flex items-center justify-center z-50">
           <LoginModal
             isOpen={isLoginModalOpen}
             onClose={() => setIsLoginModalOpen(false)}
