@@ -32,7 +32,7 @@ const CircularTimer = ({ totalMinutes, cMinutes }: CircularTimerProps) => {
         }
         return prev - 1;
       });
-    }, 3600); // Update every minute
+    }, 60000); // Update every minute
 
     return () => clearInterval(interval);
   }, [currentMinutes]);
