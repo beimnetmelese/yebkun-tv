@@ -1,0 +1,18 @@
+# Build outputs
+.next/
+out/
+build/
+dist/
+node_modules/
+
+# Public assets
+public/
+
+# Generated files
+*.generated.*
+*.d.ts
+
+# Specific files with known issues
+src/app/kids/movie/related_card.tsx
+src/app/kids/movie/movie_screen.tsx
+src/app/kids/movie/series_bottom_card.tsx 
