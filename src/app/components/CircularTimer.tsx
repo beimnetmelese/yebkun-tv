@@ -1,14 +1,16 @@
 "use client";
 
+import TimeUp from "@/app/kids/movie/time_up";
 import { useEffect, useState } from "react";
 
 interface CircularTimerProps {
   totalMinutes: number;
-  currentMinutes: number;
+  cMinutes: number;
 }
 
-const CircularTimer = ({ totalMinutes }: CircularTimerProps) => {
-  const [currentMinutes, setCurrentMinutes] = useState(totalMinutes);
+const CircularTimer = ({ totalMinutes, cMinutes }: CircularTimerProps) => {
+  const [currentMinutes, setCurrentMinutes] = useState(cMinutes);
+  const [showTimeUp, setShowTimeUp] = useState(false);
   const segments = 60;
   const radius = 50;
   const strokeWidth = 1;
@@ -16,11 +18,20 @@ const CircularTimer = ({ totalMinutes }: CircularTimerProps) => {
   const center = size / 2;
 
   useEffect(() => {
-    if (currentMinutes <= 0) return;
+    if (currentMinutes <= 0) {
+      setShowTimeUp(true);
+      return;
+    }
 
     const interval = setInterval(() => {
-      setCurrentMinutes((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 60000); // Update every minute
+      setCurrentMinutes((prev) => {
+        if (prev <= 1) {
+          setShowTimeUp(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 3600); // Update every minute
 
     return () => clearInterval(interval);
   }, [currentMinutes]);
@@ -58,46 +69,55 @@ const CircularTimer = ({ totalMinutes }: CircularTimerProps) => {
     return segmentArray;
   };
 
+  // Handler for when time is set in the TimeUp component
+  const handleTimeSet = (minutes: number) => {
+    setCurrentMinutes(minutes);
+    setShowTimeUp(false);
+  };
+
   return (
-    <div className="relative w-[clamp(80px,10vw,120px)] h-[clamp(80px,10vw,120px)] flex items-center justify-center">
-      <svg
-        width={size}
-        height={size}
-        className="transform -rotate-90 w-full h-full"
-        viewBox={`0 0 ${size} ${size}`}
-        preserveAspectRatio="xMidYMid meet"
-      >
-        {/* Outer circle */}
-        <circle
-          cx={center}
-          cy={center}
-          r={radius}
-          fill="none"
-          stroke="#FFFFFF"
-          strokeWidth={strokeWidth}
-        />
-        {/* Render all segments */}
-        {renderSegments()}
-        {/* Minutes display */}
-        <text
-          x={center}
-          y={center}
-          textAnchor="middle"
-          dominantBaseline="middle"
-          className="tv-text-large font-[400] text-[#000000] p-[10px] leading-[10px] font-[genos]"
-          transform={`rotate(90 ${center} ${center})`}
+    <>
+      <div className="relative w-[clamp(80px,10vw,120px)] h-[clamp(80px,10vw,120px)] flex items-center justify-center">
+        <svg
+          width={size}
+          height={size}
+          className="transform -rotate-90 w-full h-full"
+          viewBox={`0 0 ${size} ${size}`}
+          preserveAspectRatio="xMidYMid meet"
         >
-          {currentMinutes}
-          <tspan
+          {/* Outer circle */}
+          <circle
+            cx={center}
+            cy={center}
+            r={radius}
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth={strokeWidth}
+          />
+          {/* Render all segments */}
+          {renderSegments()}
+          {/* Minutes display */}
+          <text
             x={center}
-            y={center + 20}
-            className="tv-text-medium font-[400] text-[#000000] leading-[10px] font-[genos] pt-[10px]"
+            y={center}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            className="tv-text-large font-[400] text-[#000000] p-[10px] leading-[10px] font-[genos]"
+            transform={`rotate(90 ${center} ${center})`}
           >
-            min
-          </tspan>
-        </text>
-      </svg>
-    </div>
+            {currentMinutes}
+            <tspan
+              x={center}
+              y={center + 20}
+              className="tv-text-medium font-[400] text-[#000000] leading-[10px] font-[genos] pt-[10px]"
+            >
+              min
+            </tspan>
+          </text>
+        </svg>
+      </div>
+      <TimeUp open={showTimeUp} onTimeSet={handleTimeSet} />
+    </>
   );
 };
 

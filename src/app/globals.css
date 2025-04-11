@@ -88,6 +88,54 @@
   --tv-spacing-large: clamp(24px, 3vw, 48px);
   --tv-border-radius: clamp(8px, 1vw, 16px);
   --tv-focus-outline: 4px solid #ffffff;
+
+  /* TV and responsive sizing */
+  --vh: 1vh;
+  --vw: 1vw;
+
+  /* Base scale: 1920x1080 (Full HD) */
+  --scale-factor: 1;
+
+  /* Responsive scaling variables */
+  --responsive-xs: min(0.5vw, 0.5vh); /* Extra small size unit */
+  --responsive-sm: min(1vw, 1vh); /* Small size unit */
+  --responsive-md: min(2vw, 2vh); /* Medium size unit */
+  --responsive-lg: min(3vw, 3vh); /* Large size unit */
+  --responsive-xl: min(4vw, 4vh); /* Extra large size unit */
+
+  /* Responsive scaling for cards and components */
+  --card-width-sm: 150px;
+  --card-height-sm: 115px;
+
+  --card-width-md: 200px;
+  --card-height-md: 300px;
+
+  --card-width-lg: 250px;
+  --card-height-lg: 375px;
+
+  /* Responsive typography that scales better on small displays */
+  --font-size-xs: clamp(10px, calc(14px * var(--scale-factor)), 1.4vh);
+  --font-size-sm: clamp(12px, calc(16px * var(--scale-factor)), 1.8vh);
+  --font-size-md: clamp(14px, calc(20px * var(--scale-factor)), 2.2vh);
+  --font-size-lg: clamp(18px, calc(24px * var(--scale-factor)), 2.6vh);
+  --font-size-xl: clamp(20px, calc(32px * var(--scale-factor)), 3.2vh);
+  --font-size-2xl: clamp(24px, calc(35px * var(--scale-factor)), 3.8vh);
+
+  /* Spacing and gaps */
+  --space-xs: clamp(4px, calc(5px * var(--scale-factor)), 0.8vh);
+  --space-sm: clamp(8px, calc(10px * var(--scale-factor)), 1.2vh);
+  --space-md: clamp(12px, calc(15px * var(--scale-factor)), 2vh);
+  --space-lg: clamp(20px, calc(25px * var(--scale-factor)), 3vh);
+  --space-xl: clamp(30px, calc(40px * var(--scale-factor)), 5vh);
+
+  /* Responsive scaling */
+  --scale-small: 0.8;
+  --scale-medium: 1;
+  --scale-large: 1.1;
+  --scale-xlarge: 1.2;
+  --scale-2xlarge: 1.4;
+  --scale-4k: 1.8;
+  --scale-8k: 2.5;
 }
 
 .dark {
@@ -266,31 +314,13 @@
 /* Animated background elements for kids page */
 @keyframes float-horizontal {
   0% {
-    transform: translateX(0) translateY(0);
+    transform: translateX(0);
   }
   50% {
-    transform: translateX(20px) translateY(10px);
+    transform: translateX(40px);
   }
   100% {
-    transform: translateX(0) translateY(0);
-  }
-}
-
-@keyframes butterfly-fly {
-  0% {
-    transform: translateX(0) translateY(0) rotate(0deg);
-  }
-  25% {
-    transform: translateX(50px) translateY(-20px) rotate(5deg);
-  }
-  50% {
-    transform: translateX(100px) translateY(0) rotate(0deg);
-  }
-  75% {
-    transform: translateX(50px) translateY(20px) rotate(-5deg);
-  }
-  100% {
-    transform: translateX(0) translateY(0) rotate(0deg);
+    transform: translateX(0);
   }
 }
 
@@ -298,11 +328,35 @@
   0% {
     transform: rotate(0deg);
   }
+  25% {
+    transform: rotate(2deg);
+  }
   50% {
-    transform: rotate(5deg);
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-2deg);
   }
   100% {
     transform: rotate(0deg);
+  }
+}
+
+@keyframes butterfly-fly {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(30px, -20px) rotate(5deg);
+  }
+  50% {
+    transform: translate(60px, 0px) rotate(0deg);
+  }
+  75% {
+    transform: translate(30px, 20px) rotate(-5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
   }
 }
 
@@ -312,6 +366,49 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* New animations */
+@keyframes cloud-pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+}
+
+@keyframes shine {
+  0% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.3);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
   }
 }
 
@@ -325,5 +422,472 @@
   }
   100% {
     transform: scaleX(0.8);
+  }
+}
+
+/* Add flexible container classes for responsive grid layout */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-width-md), 1fr));
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.responsive-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.responsive-flex > * {
+  flex: 1 0 auto;
+}
+
+/* Media queries to adjust scale factor for different screen sizes */
+@media screen and (max-width: 1280px) {
+  :root {
+    --scale-factor: 0.5;
+    --card-width-sm: clamp(140px, 20vw, 220px);
+    --card-width-md: clamp(180px, 24vw, 280px);
+    --card-width-lg: clamp(220px, 28vw, 320px);
+
+    --card-height-sm: clamp(80px, 14vh, 140px);
+    --card-height-md: clamp(120px, 18vh, 200px);
+    --card-height-lg: clamp(180px, 28vh, 320px);
+  }
+}
+
+/* Adjustments for small to medium displays (up to Full HD) */
+@media screen and (min-width: 1281px) and (max-width: 1920px) {
+  :root {
+    --scale-factor: 0.8;
+  }
+}
+
+/* Default scale for HD and Full HD displays (1280-1920px) */
+@media screen and (min-width: 1921px) and (max-width: 2560px) {
+  :root {
+    --scale-factor: 1;
+  }
+
+  /* Adjust card width to fill more space on larger screens */
+  .responsive-card-container {
+    --card-gap: var(--space-md);
+    --visible-cards: 5;
+    --total-width: calc(100% - (var(--card-gap) * (var(--visible-cards) - 1)));
+    --card-width: calc(var(--total-width) / var(--visible-cards));
+  }
+}
+
+/* Adjustments for 4K displays */
+@media screen and (min-width: 2561px) and (max-width: 3840px) {
+  :root {
+    --scale-factor: 1.4;
+  }
+
+  .responsive-card-container {
+    --card-gap: var(--space-md);
+    --visible-cards: 6;
+    --total-width: calc(100% - (var(--card-gap) * (var(--visible-cards) - 1)));
+    --card-width: calc(var(--total-width) / var(--visible-cards));
+  }
+}
+
+/* Adjustments for 8K displays */
+@media screen and (min-width: 3841px) {
+  :root {
+    --scale-factor: 2.2;
+  }
+
+  .responsive-card-container {
+    --card-gap: var(--space-md);
+    --visible-cards: 8;
+    --total-width: calc(100% - (var(--card-gap) * (var(--visible-cards) - 1)));
+    --card-width: calc(var(--total-width) / var(--visible-cards));
+  }
+}
+
+/* Responsive component classes */
+.r-card-sm {
+  width: calc(var(--card-width-sm) * var(--scale-medium));
+  height: calc(var(--card-height-sm) * var(--scale-medium));
+}
+
+.r-card-md {
+  width: calc(var(--card-width-md) * var(--scale-medium));
+  height: calc(var(--card-height-md) * var(--scale-medium));
+}
+
+.r-card-lg {
+  width: calc(var(--card-width-lg) * var(--scale-medium));
+  height: calc(var(--card-height-lg) * var(--scale-medium));
+}
+
+/* Responsive font sizing */
+.r-text-xs {
+  font-size: var(--font-size-xs);
+}
+
+.r-text-sm {
+  font-size: var(--font-size-sm);
+}
+
+.r-text-md {
+  font-size: var(--font-size-md);
+}
+
+.r-text-lg {
+  font-size: var(--font-size-lg);
+}
+
+.r-text-xl {
+  font-size: var(--font-size-xl);
+}
+
+.r-text-2xl {
+  font-size: var(--font-size-2xl);
+}
+
+/* Responsive spacing */
+.r-p-xs {
+  padding: var(--space-xs);
+}
+
+.r-p-sm {
+  padding: var(--space-sm);
+}
+
+.r-p-md {
+  padding: var(--space-md);
+}
+
+.r-p-lg {
+  padding: var(--space-lg);
+}
+
+.r-m-xs {
+  margin: var(--space-xs);
+}
+
+.r-m-sm {
+  margin: var(--space-sm);
+}
+
+.r-m-md {
+  margin: var(--space-md);
+}
+
+.r-m-lg {
+  margin: var(--space-lg);
+}
+
+.r-gap-xs {
+  gap: var(--space-xs);
+}
+
+.r-gap-sm {
+  gap: var(--space-sm);
+}
+
+.r-gap-md {
+  gap: var(--space-md);
+}
+
+.r-gap-lg {
+  gap: var(--space-lg);
+}
+
+/* Responsive image sizing */
+.r-img-xs {
+  width: auto;
+  height: clamp(18px, calc(5vh * var(--scale-factor)), 32px);
+}
+
+.r-img-sm {
+  width: auto;
+  height: clamp(24px, calc(8vh * var(--scale-factor)), 48px);
+}
+
+.r-img-md {
+  width: auto;
+  height: clamp(36px, calc(10vh * var(--scale-factor)), 70px);
+}
+
+.r-img-lg {
+  width: auto;
+  height: clamp(48px, calc(12vh * var(--scale-factor)), 100px);
+}
+
+.r-img-xl {
+  width: auto;
+  height: clamp(60px, calc(15vh * var(--scale-factor)), 140px);
+}
+
+/* Responsive width and height utilities */
+.r-w-full {
+  width: 100%;
+}
+
+.r-h-full {
+  height: 100%;
+}
+
+.r-w-screen {
+  width: 100vw;
+}
+
+.r-h-screen {
+  height: 100vh;
+}
+
+/* Media Queries for Responsive Design */
+/* Mobile first - small screens */
+@media (max-width: 640px) {
+  :root {
+    --current-scale: var(--scale-small);
+  }
+
+  .r-card-sm,
+  .r-card-md,
+  .r-card-lg {
+    transform: scale(var(--scale-small));
+  }
+
+  /* ... existing code ... */
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    --current-scale: var(--scale-medium);
+  }
+
+  /* ... existing code ... */
+}
+
+/* Large screens (desktops) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  :root {
+    --current-scale: var(--scale-large);
+  }
+
+  .r-card-sm {
+    width: calc(var(--card-width-sm) * var(--scale-large));
+    height: calc(var(--card-height-sm) * var(--scale-large));
+  }
+
+  .r-card-md {
+    width: calc(var(--card-width-md) * var(--scale-large));
+    height: calc(var(--card-height-md) * var(--scale-large));
+  }
+
+  .r-card-lg {
+    width: calc(var(--card-width-lg) * var(--scale-large));
+    height: calc(var(--card-height-lg) * var(--scale-large));
+  }
+
+  /* ... existing code ... */
+}
+
+/* XL screens (large desktops) */
+@media (min-width: 1441px) and (max-width: 1920px) {
+  :root {
+    --current-scale: var(--scale-xlarge);
+  }
+
+  .r-card-sm {
+    width: calc(var(--card-width-sm) * var(--scale-xlarge));
+    height: calc(var(--card-height-sm) * var(--scale-xlarge));
+  }
+
+  .r-card-md {
+    width: calc(var(--card-width-md) * var(--scale-xlarge));
+    height: calc(var(--card-height-md) * var(--scale-xlarge));
+  }
+
+  .r-card-lg {
+    width: calc(var(--card-width-lg) * var(--scale-xlarge));
+    height: calc(var(--card-height-lg) * var(--scale-xlarge));
+  }
+
+  /* ... existing code ... */
+}
+
+/* 2XL screens */
+@media (min-width: 1921px) and (max-width: 2560px) {
+  :root {
+    --current-scale: var(--scale-2xlarge);
+  }
+
+  .r-card-sm {
+    width: calc(var(--card-width-sm) * var(--scale-2xlarge));
+    height: calc(var(--card-height-sm) * var(--scale-2xlarge));
+  }
+
+  .r-card-md {
+    width: calc(var(--card-width-md) * var(--scale-2xlarge));
+    height: calc(var(--card-height-md) * var(--scale-2xlarge));
+  }
+
+  .r-card-lg {
+    width: calc(var(--card-width-lg) * var(--scale-2xlarge));
+    height: calc(var(--card-height-lg) * var(--scale-2xlarge));
+  }
+
+  /* ... existing code ... */
+}
+
+/* 4K screens */
+@media (min-width: 2561px) and (max-width: 3840px) {
+  :root {
+    --current-scale: var(--scale-4k);
+  }
+
+  .r-card-sm {
+    width: calc(var(--card-width-sm) * var(--scale-4k));
+    height: calc(var(--card-height-sm) * var(--scale-4k));
+  }
+
+  .r-card-md {
+    width: calc(var(--card-width-md) * var(--scale-4k));
+    height: calc(var(--card-height-md) * var(--scale-4k));
+  }
+
+  .r-card-lg {
+    width: calc(var(--card-width-lg) * var(--scale-4k));
+    height: calc(var(--card-height-lg) * var(--scale-4k));
+  }
+
+  /* ... existing code ... */
+}
+
+/* 8K screens */
+@media (min-width: 3841px) {
+  :root {
+    --current-scale: var(--scale-8k);
+  }
+
+  .r-card-sm {
+    width: calc(var(--card-width-sm) * var(--scale-8k));
+    height: calc(var(--card-height-sm) * var(--scale-8k));
+  }
+
+  .r-card-md {
+    width: calc(var(--card-width-md) * var(--scale-8k));
+    height: calc(var(--card-height-md) * var(--scale-8k));
+  }
+
+  .r-card-lg {
+    width: calc(var(--card-width-lg) * var(--scale-8k));
+    height: calc(var(--card-height-lg) * var(--scale-8k));
+  }
+
+  /* ... existing code ... */
+}
+
+/* TV-specific responsive styles */
+/* Base sizes for HD (1280x720) */
+.tv-card {
+  width: 270px;
+  height: 120px;
+  border-radius: 8px;
+}
+
+.tv-card-ms {
+  width: 160px;
+  height: 200px;
+  border-radius: 8px;
+}
+
+.tv-text-badge {
+  font-size: 10px;
+}
+
+.tv-text-title {
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.tv-text-subtitle {
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+/* FHD (1920x1080) */
+@media screen and (min-width: 1920px) {
+  .tv-card {
+    width: 360px;
+    height: 160px;
+  }
+
+  .tv-card-ms {
+    width: 200px;
+    height: 300px;
+
+  }
+
+  .tv-text-badge {
+    font-size: 12px;
+  }
+
+  .tv-text-title {
+    font-size: 16px;
+  }
+
+  .tv-text-subtitle {
+    font-size: 12px;
+  }
+}
+
+/* 3K (2560x1440) and 4K (3840x2160) */
+@media screen and (min-width: 2560px) {
+  .tv-card {
+    width: 390px;
+    height: 220px;
+  }
+
+  .tv-card-ms {
+    width: 220px;
+    height: 350px;
+  }
+
+  .tv-text-badge {
+    font-size: 14px;
+  }
+
+  .tv-text-title {
+    font-size: 18px;
+  }
+
+  .tv-text-subtitle {
+    font-size: 14px;
+  }
+}
+
+/* 8K (7680x4320) */
+@media screen and (min-width: 7680px) {
+  .tv-card {
+    width: 490px;
+    height: 280px;
+  }
+
+  .tv-card-ms {
+    width: 300px;
+    height: 450px;
+  }
+
+  .tv-text-badge {
+    font-size: 18px;
+  }
+
+  .tv-text-title {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  .tv-text-subtitle {
+    font-size: 18px;
+    line-height: 1.3;
   }
 }

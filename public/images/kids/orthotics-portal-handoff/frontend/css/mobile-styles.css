@@ -1,0 +1,364 @@
+/* Mobile-friendly styles for Orthotics Prescription Portal */
+
+/* Base responsive framework */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .prescription-container {
+    flex-direction: column;
+  }
+  
+  .toc-container {
+    width: 100%;
+    position: relative;
+    top: 0;
+    height: auto;
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+  
+  .prescription-content {
+    padding-left: 0;
+    border-left: none;
+  }
+  
+  .form-section {
+    padding: 20px;
+  }
+  
+  .template-selector {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .template-selector label {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+  
+  .template-selector select {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .template-selector button {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .patient-info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .measure-row {
+    flex-direction: column;
+  }
+  
+  .measure-label {
+    flex: none;
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 8px;
+  }
+  
+  .measure-input {
+    width: 100%;
+    padding: 0;
+  }
+  
+  .scan-container {
+    flex-direction: column;
+  }
+  
+  .notes-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile-specific styles (smaller screens) */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 10px 15px;
+  }
+  
+  .logo {
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+  
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+  
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  nav li {
+    margin: 5px;
+  }
+  
+  nav a {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .form-section {
+    padding: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .form-label {
+    flex: none;
+    width: 100%;
+    padding-right: 0;
+    margin-bottom: 8px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 0;
+  }
+  
+  .form-input.full-width {
+    margin-top: 5px;
+  }
+  
+  /* Enhance touch targets */
+  button, 
+  select,
+  input[type="checkbox"],
+  input[type="radio"],
+  .number-input-container button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve spacing for touch */
+  .number-input-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .number-input-container button {
+    padding: 10px 15px;
+    font-size: 18px;
+  }
+  
+  .number-input-container input {
+    height: 44px;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+/* Mobile navigation menu */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 5px;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+  
+  nav ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  nav ul.show {
+    display: flex;
+  }
+  
+  nav li {
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  nav a {
+    display: block;
+    padding: 12px;
+    width: 100%;
+  }
+  
+  .basket-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .basket-count {
+    top: -5px;
+    right: -5px;
+  }
+}
+
+/* Mobile-friendly TOC */
+.mobile-toc-toggle {
+  display: none;
+  width: 100%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px;
+  text-align: left;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.mobile-toc-toggle:after {
+  content: "▼";
+  float: right;
+}
+
+@media (max-width: 768px) {
+  .mobile-toc-toggle {
+    display: block;
+  }
+  
+  .toc {
+    display: none;
+  }
+  
+  .toc.show {
+    display: block;
+  }
+}
+
+/* Enhanced form controls for touch */
+@media (max-width: 768px) {
+  select, 
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 12px 16px;
+  }
+  
+  /* Improve dropdown appearance */
+  select {
+    background-size: 14px;
+    background-position: right 15px center;
+    padding-right: 40px;
+  }
+  
+  /* Enhance radio and checkbox controls */
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+  }
+  
+  label {
+    font-size: 16px;
+  }
+  
+  /* Fix for descriptor text */
+  .descriptor {
+    display: inline;
+  }
+}
+
+/* Fixed bottom navigation for mobile */
+.mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+  
+  .mobile-bottom-nav a {
+    flex: 1;
+    text-align: center;
+    padding: 12px 5px;
+    color: var(--dark-gray);
+    font-size: 12px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mobile-bottom-nav a.active {
+    color: var(--primary-color);
+  }
+  
+  .mobile-bottom-nav .icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  
+  /* Add padding to main content to prevent overlap with fixed nav */
+  body {
+    padding-bottom: 60px;
+  }
+}
+
+/* Floating action button for mobile */
+.floating-action-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .floating-action-button {
+    display: block;
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    z-index: 100;
+    cursor: pointer;
+  }
+}
