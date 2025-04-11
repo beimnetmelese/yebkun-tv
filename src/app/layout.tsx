@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Genos } from "next/font/google";
 import "./globals.css";
 
@@ -20,13 +20,15 @@ const genos = Genos({
 export const metadata: Metadata = {
   title: "YebKûn TV",
   description: "YebKûn TV Application",
-  viewport: {
-    width: "device-width",
-    initialScale: 1.0,
-    minimumScale: 1.0,
-    maximumScale: 1.0,
-    userScalable: false,
-  },
+};
+
+// Move viewport configuration to its own export
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+  minimumScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
 };
 
 export default function RootLayout({
