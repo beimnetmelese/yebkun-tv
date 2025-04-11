@@ -30,8 +30,6 @@ const NewStoriesCard = ({
   title,
   views,
   video,
-  type,
-  videoType = "story",
 }: NewStoriesCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -287,16 +285,6 @@ const NewStoriesCard = ({
           </div>
         )}
 
-        {/* Type badge */}
-        <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
-          {type}
-        </div>
-
-        {/* VideoType badge */}
-        <div className="absolute top-3 left-[80px] bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
-          {videoType}
-        </div>
-
         {/* Views badge */}
         <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge flex flex-row items-center justify-center gap-1">
           <Eye className="w-4 h-4 mr-2" />
@@ -304,14 +292,16 @@ const NewStoriesCard = ({
         </div>
 
         {/* Progress Bar */}
-        <div className="absolute bottom-8 left-0 w-full px-3">
-          <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
-            <div
-              className="bg-primary h-full rounded-full"
-              style={{ width: `${videoProgress}%` }}
-            />
+        {isHovered && (
+          <div className="absolute bottom-8 left-0 w-full px-3">
+            <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
+              <div
+                className="bg-primary h-full rounded-full"
+                style={{ width: `${videoProgress}%` }}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Title */}
         <div className="absolute bottom-0 left-0 w-full p-3 justify-between flex items-center">

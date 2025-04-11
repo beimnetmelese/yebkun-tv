@@ -188,7 +188,7 @@ const LatestMoviesCard = ({
   return (
     <div
       ref={containerRef}
-      className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
+      className="tv-card-small relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -270,18 +270,20 @@ const LatestMoviesCard = ({
         </div>
 
         {/* Progress Bar */}
-        <div
-          className={`absolute bottom-6 left-0 w-full px-2 ${
-            videoProgress === 0 ? "hidden" : ""
-          }`}
-        >
-          <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
-            <div
-              className="bg-primary h-full rounded-full"
-              style={{ width: `${videoProgress}%` }}
-            />
+        {isHovered && (
+          <div
+            className={`absolute bottom-6 left-0 w-full px-2 ${
+              videoProgress === 0 ? "hidden" : ""
+            }`}
+          >
+            <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
+              <div
+                className="bg-primary h-full rounded-full"
+                style={{ width: `${videoProgress}%` }}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Title */}
         <div className="absolute bottom-0 left-0 w-full p-2 flex flex-row items-center justify-between">
@@ -292,9 +294,6 @@ const LatestMoviesCard = ({
             {formatDuration(duration)}
           </p>
         </div>
-
-
-
       </Link>
     </div>
   );

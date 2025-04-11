@@ -1,4 +1,4 @@
-import { Eye } from "lucide-react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -13,9 +13,6 @@ interface MostViewedCardProps {
   videoType?: "series" | "movie" | "story";
 }
 
-function formatViews(views: number): string {
-  return views >= 1000 ? `${(views / 1000).toFixed(1)}K` : views.toString();
-}
 
 const MoviesAndSeriesCard = ({
   id,
@@ -23,8 +20,6 @@ const MoviesAndSeriesCard = ({
   title,
   thumbnail,
   type,
-  views,
-  videoType = "movie",
 }: MostViewedCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -248,17 +243,6 @@ const MoviesAndSeriesCard = ({
         <span className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
           {type}
         </span>
-
-        {videoType && (
-          <span className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
-            {videoType}
-          </span>
-        )}
-
-        <div className="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded flex items-center gap-1 tv-text-badge">
-          <Eye className="w-3 h-3" />
-          {formatViews(views)}
-        </div>
       </Link>
     </div>
   );
