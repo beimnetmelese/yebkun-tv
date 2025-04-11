@@ -175,24 +175,24 @@ export default function LatestMovies() {
 
   return (
     <div
-      className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-4"
+      className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-2"
       style={{
         borderRadius: "var(--radius)",
       }}
     >
-      <h5 className="text-black tv-text-title font-[500] font-genos mb-2">
+      <h5 className="text-black tv-text-title font-[500] font-genos mb-1">
         Latest Videos
       </h5>
       <div className="relative w-full">
         <div
           ref={scrollContainerRef}
-          className="flex overflow-x-auto py-2 snap-x scrollbar-hide"
+          className="flex overflow-x-auto py-1 snap-x scrollbar-hide"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
             gap: "var(--space-md)",
-            paddingLeft: "4px",
-            paddingRight: "4px",
+            paddingLeft: "2px",
+            paddingRight: "2px",
           }}
         >
           {displayedMovies.map((movie) => (

@@ -72,7 +72,7 @@ const mediaCategories: MediaCategory[] = [
         videoType: "movie",
       },
       {
-        id: "kung_fu_panda_3",
+        id: "kung_fu_panda_3_2",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Kung Fu Panda 3",
         thumbnail: "/images/kids/thumb_nails/inside_out.png",
@@ -122,7 +122,7 @@ const mediaCategories: MediaCategory[] = [
         videoType: "story",
       },
       {
-        id: "oscars_oasis1",
+        id: "oscars_oasis1_1",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Oscar's Oasis",
         thumbnail: "/images/kids/thumb_nails/strange_world.png",
@@ -131,7 +131,7 @@ const mediaCategories: MediaCategory[] = [
         videoType: "story",
       },
       {
-        id: "oggy_and_the_cockroaches1",
+        id: "oggy_and_the_cockroaches1_1",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Oggy and the Cockroaches",
         thumbnail: "/images/kids/thumb_nails/inside_out.png",
@@ -140,7 +140,7 @@ const mediaCategories: MediaCategory[] = [
         videoType: "story",
       },
       {
-        id: "shaun_the_sheep1",
+        id: "shaun_the_sheep1_1",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Shaun the Sheep",
         thumbnail: "/images/kids/thumb_nails/ice_age.png",
@@ -149,7 +149,7 @@ const mediaCategories: MediaCategory[] = [
         videoType: "story",
       },
       {
-        id: "zig_and_sharko1",
+        id: "zig_and_sharko1_1",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Zig & Sharko",
         thumbnail: "/images/kids/thumb_nails/cartoon.png",
@@ -158,7 +158,7 @@ const mediaCategories: MediaCategory[] = [
         videoType: "story",
       },
       {
-        id: "oscars_oasis1",
+        id: "oscars_oasis1_2",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Oscar's Oasis",
         thumbnail: "/images/kids/thumb_nails/strange_world.png",
@@ -167,7 +167,7 @@ const mediaCategories: MediaCategory[] = [
         videoType: "story",
       },
       {
-        id: "oggy_and_the_cockroaches1",
+        id: "oggy_and_the_cockroaches1_2",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Oggy and the Cockroaches",
         thumbnail: "/images/kids/thumb_nails/inside_out.png",
@@ -176,7 +176,7 @@ const mediaCategories: MediaCategory[] = [
         videoType: "story",
       },
       {
-        id: "shaun_the_sheep1",
+        id: "shaun_the_sheep1_2",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Shaun the Sheep",
         thumbnail: "/images/kids/thumb_nails/ice_age.png",
@@ -185,7 +185,7 @@ const mediaCategories: MediaCategory[] = [
         videoType: "story",
       },
       {
-        id: "zig_and_sharko1",
+        id: "zig_and_sharko1_2",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Zig & Sharko",
         thumbnail: "/images/kids/thumb_nails/cartoon.png",

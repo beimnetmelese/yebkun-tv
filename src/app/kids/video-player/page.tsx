@@ -127,6 +127,7 @@ function VideoPlayer() {
             alt="back"
             width={10}
             height={10}
+            unoptimized
           />
         </button>
         <h1 className="text-white text-3xl font-bold font-[oswald] truncate">
@@ -148,6 +149,7 @@ function VideoPlayer() {
                 alt="back15"
                 width={75}
                 height={75}
+                unoptimized
               />
             </button>
 
@@ -171,6 +173,7 @@ function VideoPlayer() {
                 alt="forward15"
                 width={75}
                 height={75}
+                unoptimized
               />
             </button>
           </div>

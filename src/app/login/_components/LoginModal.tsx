@@ -46,6 +46,7 @@ function LoginModal({
                 src="/images/start_screen/pattern.png"
                 alt="Background Pattern"
                 fill
+          
                 priority
                 className="object-cover absolute top-0 left-0 rounded-[25px] z-0"
               />
@@ -59,6 +60,7 @@ function LoginModal({
                     width={261}
                     height={620}
                     className="object-contain"
+     
                   />
                 </div>
 
@@ -272,8 +274,8 @@ function LoginModal({
         {thirPopup && (
           <div className="fixed inset-0 flex items-center justify-center">
             <div className="w-auto h-auto">
-              <div className="flex flex-row gap-6">
-                <div className="bg-white rounded-[15px] shadow-lg p-4 flex flex-col items-center w-[400px]">
+              <div className="flex flex-row gap-14">
+                <div className="bg-white rounded-[15px] shadow-lg pb-4 flex flex-col items-center w-[400px]">
                   <div className="w-full">
                     <Image
                       src={"/images/start_screen/zarok_card.png"}
@@ -304,7 +306,7 @@ function LoginModal({
                   </button>
                 </div>
 
-                <div className="bg-white rounded-[15px] shadow-lg p-4 flex flex-col items-center w-[400px]">
+                <div className="bg-white rounded-[15px] shadow-lg pb-4 flex flex-col items-center w-[400px]">
                   <div className="w-full">
                     <Image
                       src={"/images/start_screen/malbat.png"}

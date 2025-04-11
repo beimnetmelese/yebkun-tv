@@ -22,7 +22,13 @@ export function RelatedCard({
     <div className="flex-shrink-0 w-[250px]">
       <div className="w-full rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity">
         <div className="relative h-[140px] w-full">
-          <Image src={thumbnail} alt={title} fill className="object-cover" />
+          <Image
+            src={thumbnail}
+            alt={title}
+            fill
+            sizes="250px"
+            className="object-cover"
+          />
         </div>
         <div className="p-2">
           <h3 className="text-white text-sm font-bold truncate">{title}</h3>
@@ -179,7 +185,7 @@ function VideoScreen({
         muted
       />
       <div className="absolute inset-0 z-10 flex items-center justify-center">
-        <Image src={videoThumbnail} alt={videoTitle} fill />
+        <Image src={videoThumbnail} alt={videoTitle} fill sizes="100vw" />
       </div>
 
       <div

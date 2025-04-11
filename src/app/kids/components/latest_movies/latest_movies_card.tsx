@@ -30,8 +30,7 @@ const LatestMoviesCard = ({
   title,
   views,
   video,
-  type,
-  videoType = "movie",
+
 }: LatestMoviesCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -210,7 +209,7 @@ const LatestMoviesCard = ({
             onTimeUpdate={handleVideoTimeUpdate}
             onLoadedData={handleVideoLoaded}
             onError={handleVideoError}
-            preload="metadata"
+            preload="none"
           >
             <source src={video} type="video/mp4" />
             Your browser does not support the video tag.
@@ -229,9 +228,11 @@ const LatestMoviesCard = ({
             src={thumbnail}
             alt={title}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 270px"
             className="object-cover"
-            priority
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
           />
           <div
             className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 ${
@@ -269,7 +270,11 @@ const LatestMoviesCard = ({
         </div>
 
         {/* Progress Bar */}
-        <div className="absolute bottom-8 left-0 w-full px-3">
+        <div
+          className={`absolute bottom-6 left-0 w-full px-2 ${
+            videoProgress === 0 ? "hidden" : ""
+          }`}
+        >
           <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
             <div
               className="bg-primary h-full rounded-full"
@@ -279,7 +284,7 @@ const LatestMoviesCard = ({
         </div>
 
         {/* Title */}
-        <div className="absolute bottom-0 left-0 w-full p-3 flex flex-row items-center justify-between">
+        <div className="absolute bottom-0 left-0 w-full p-2 flex flex-row items-center justify-between">
           <h3 className="text-white font-[400] tv-text-title line-clamp-1">
             {title}
           </h3>
@@ -288,15 +293,8 @@ const LatestMoviesCard = ({
           </p>
         </div>
 
-        <span className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
-          {type}
-        </span>
 
-        {videoType && (
-          <span className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
-            {videoType}
-          </span>
-        )}
+
       </Link>
     </div>
   );

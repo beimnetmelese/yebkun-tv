@@ -146,6 +146,11 @@ const MoviesAndSeriesCard = ({
       className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{
+        aspectRatio: "2/3",
+        width: "170px",
+        height: "auto",
+      }}
     >
       <Link
         href={`/kids/movie/${encodeURIComponent(id)}`}
@@ -163,7 +168,7 @@ const MoviesAndSeriesCard = ({
             poster={thumbnail}
             onLoadedData={() => setIsVideoLoaded(true)}
             onError={handleVideoError}
-            preload="metadata"
+            preload="none"
           >
             <source src={video} type="video/mp4" />
             Your browser does not support the video tag.
@@ -182,9 +187,11 @@ const MoviesAndSeriesCard = ({
             src={thumbnail}
             alt={title}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="170px"
             className="object-cover"
-            priority
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
           />
           <div
             className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 ${

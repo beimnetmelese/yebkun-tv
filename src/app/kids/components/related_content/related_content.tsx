@@ -33,6 +33,7 @@ export function EpisodeCard({ episode }: { episode: Episode }) {
           src={episode.thumbnail}
           alt={episode.title}
           fill
+          sizes="(max-width: 768px) 150px, (max-width: 1200px) 200px, 250px"
           className="object-cover transition-transform duration-300 group-hover:scale-110"
         />
         <div className="absolute top-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
@@ -61,6 +62,7 @@ export function RelatedVideoCard({ item }: { item: RelatedItem }) {
           src={item.thumbnail}
           alt={item.title}
           fill
+          sizes="(max-width: 768px) 150px, (max-width: 1200px) 200px, 250px"
           className="object-cover transition-transform duration-300 group-hover:scale-110"
         />
       </div>
