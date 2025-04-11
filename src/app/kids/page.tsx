@@ -22,21 +22,106 @@ const useClientSideRendering = () => {
 const KidsPage: FC = () => {
   const [activeNav, setActiveNav] = useState<string>("home");
   const audioRef = useRef<HTMLAudioElement>(null);
+  const clickSoundRef = useRef<HTMLAudioElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
+  const [navImages, setNavImages] = useState({
+    home: "/images/kids/nav/home.svg",
+    stories: "/images/kids/nav/stories.svg",
+    videos: "/images/kids/nav/videos.svg",
+    movies: "/images/kids/nav/movies.svg",
+  });
+
+  // Preload nav images on component mount
+  useEffect(() => {
+    // Preload all nav icons (active and inactive states)
+    const iconsToPreload = [
+      "/images/kids/nav/home.svg",
+      "/images/kids/nav/home_active.svg",
+      "/images/kids/nav/stories.svg",
+      "/images/kids/nav/stories_active.svg",
+      "/images/kids/nav/videos.svg",
+      "/images/kids/nav/videos_active.svg",
+      "/images/kids/nav/movies.svg",
+      "/images/kids/nav/movies_active.svg",
+    ];
+
+    iconsToPreload.forEach((src) => {
+      const img = document.createElement("img");
+      img.src = src;
+    });
+  }, []);
 
   // Function to handle navigation clicks and set active state
   const handleNavClick = (navId: string) => {
+    // Play click sound
+    if (clickSoundRef.current) {
+      clickSoundRef.current.currentTime = 0;
+      clickSoundRef.current
+        .play()
+        .catch((err) => console.error("Error playing click sound:", err));
+    }
+
+    // Update active nav state
     setActiveNav(navId);
+
+    // Immediately update active image sources for instant feedback
+    setNavImages((prev) => ({
+      ...prev,
+      home:
+        navId === "home"
+          ? "/images/kids/nav/home_active.svg"
+          : "/images/kids/nav/home.svg",
+      stories:
+        navId === "stories"
+          ? "/images/kids/nav/stories_active.svg"
+          : "/images/kids/nav/stories.svg",
+      videos:
+        navId === "videos"
+          ? "/images/kids/nav/videos_active.svg"
+          : "/images/kids/nav/videos.svg",
+      movies:
+        navId === "movies"
+          ? "/images/kids/nav/movies_active.svg"
+          : "/images/kids/nav/movies.svg",
+    }));
   };
 
-  // Initialize audio when component mounts
+  // Initialize audio when component mounts and ensure it continues playing across navigation
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = 0.99;
-      audioRef.current.play().catch((error) => {
-        console.log("Audio autoplay was prevented:", error);
-        // Many browsers require user interaction before playing audio
-      });
+
+      // Try to play audio
+      const playAudio = () => {
+        audioRef.current?.play().catch((error) => {
+          console.log("Audio autoplay was prevented:", error);
+          // Will try again on user interaction
+        });
+      };
+
+      playAudio();
+
+      // Add event listeners to handle audio persistence
+      document.addEventListener("click", playAudio, { once: true });
+
+      // Ensure audio continues playing after navigation changes
+      const handleVisibilityChange = () => {
+        if (!document.hidden && audioRef.current?.paused) {
+          audioRef.current
+            .play()
+            .catch((err) => console.log("Could not resume audio:", err));
+        }
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+
+      return () => {
+        document.removeEventListener("click", playAudio);
+        document.removeEventListener(
+          "visibilitychange",
+          handleVisibilityChange
+        );
+      };
     }
   }, []);
 
@@ -54,14 +139,18 @@ const KidsPage: FC = () => {
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
-      {/* Background Audio 
-         Note: Place your audio file at public/audio/kids-background.mp3
-         or update the src path below to point to your audio file
-      */}
+      {/* Background Audio - set to loop and persist */}
       <audio
         ref={audioRef}
         src="/images/kids/animation/birds.mp3"
         loop
+        preload="auto"  
+        className="hidden"
+      />
+
+      <audio
+        ref={clickSoundRef}
+        src="/audio/click.mp3"
         preload="auto"
         className="hidden"
       />
@@ -122,6 +211,8 @@ const KidsPage: FC = () => {
               height={130}
               className="r-img-lg object-contain bg-white rounded-full aspect-square"
               priority
+              quality={90}
+              unoptimized
             />
           </div>
 
@@ -135,15 +226,14 @@ const KidsPage: FC = () => {
               }`}
             >
               <Image
-                src={
-                  activeNav === "home"
-                    ? "/images/kids/nav/home_active.svg"
-                    : "/images/kids/nav/home.svg"
-                }
+                src={navImages.home}
                 alt="Home"
                 width={150}
                 height={100}
                 className="r-img-md object-contain"
+                loading="eager"
+                quality={90}
+                unoptimized
               />
             </a>
             <a
@@ -154,15 +244,14 @@ const KidsPage: FC = () => {
               }`}
             >
               <Image
-                src={
-                  activeNav === "stories"
-                    ? "/images/kids/nav/stories_active.svg"
-                    : "/images/kids/nav/stories.svg"
-                }
+                src={navImages.stories}
                 alt="Stories"
                 width={150}
                 height={100}
                 className="r-img-md object-contain"
+                loading="eager"
+                quality={90}
+                unoptimized
               />
             </a>
             <a
@@ -173,15 +262,14 @@ const KidsPage: FC = () => {
               }`}
             >
               <Image
-                src={
-                  activeNav === "videos"
-                    ? "/images/kids/nav/videos_active.svg"
-                    : "/images/kids/nav/videos.svg"
-                }
+                src={navImages.videos}
                 alt="Videos"
                 width={150}
                 height={100}
                 className="r-img-md object-contain"
+                loading="eager"
+                quality={90}
+                unoptimized
               />
             </a>
             <a
@@ -192,15 +280,14 @@ const KidsPage: FC = () => {
               }`}
             >
               <Image
-                src={
-                  activeNav === "movies"
-                    ? "/images/kids/nav/movies_active.svg"
-                    : "/images/kids/nav/movies.svg"
-                }
+                src={navImages.movies}
                 alt="Movies"
                 width={150}
                 height={100}
                 className="r-img-md object-contain"
+                loading="eager"
+                quality={90}
+                unoptimized
               />
             </a>
           </div>
@@ -395,19 +482,19 @@ const AnimatedGrass: FC = () => {
     if (!isClient) return;
 
     const longGrassCount = 20;
-    const smallGrassCount = 300;
+    const smallGrassCount = 200; // Reduced from 300
     const newGrassElements: React.ReactNode[] = [];
 
-    // Long grass with height variations
+    // Long grass with height variations - reduce height
     for (let i = 0; i < longGrassCount; i++) {
       const grassNum = (i % 5) + 1;
       const left = (i / longGrassCount) * 100 + (Math.random() * 5 - 2.5);
       // Speed up animation by reducing duration
-      const duration = 1 + Math.random() * 1.5; // Faster animation (was 2-5, now 1-2.5)
+      const duration = 1 + Math.random() * 1.5; // Faster animation
       const delay = Math.random() * 0.1;
 
-      // Vary the heights of grass
-      const heightScale = 0.7 + Math.random() * 0.6; // 70%-130% height variation
+      // Reduce the heights of grass
+      const heightScale = 0.5 + Math.random() * 0.4; // Reduced from 0.7 + 0.6
 
       newGrassElements.push(
         <div
@@ -426,22 +513,24 @@ const AnimatedGrass: FC = () => {
             alt="Grass"
             width={120}
             height={80}
-            className="w-auto h-[clamp(40px,calc(15vh * var(--scale-factor)),100px)]"
+            className="w-auto h-[clamp(30px,calc(12vh * var(--scale-factor)),80px)]" // Reduced from 15vh
+            loading="lazy"
+            unoptimized
           />
         </div>
       );
     }
 
-    // Add more variety with regular grass types and varying heights
+    // Add more variety with regular grass types and varying heights - reduce height
     for (let i = 0; i < 100; i++) {
       const grassNum = (i % 12) + 1;
       const left = (i / 10) * 100 + (Math.random() * 5 - 2.5);
       // Speed up animation
-      const duration = 1 + Math.random() * 1.5; // Faster animation (was 2-5, now 1-2.5)
+      const duration = 1 + Math.random() * 1.5;
       const delay = Math.random() * 0.1;
 
-      // Vary the heights of grass
-      const heightScale = 0.7 + Math.random() * 0.6; // 70%-130% height variation
+      // Reduce the heights of grass
+      const heightScale = 0.5 + Math.random() * 0.4; // Reduced from 0.7 + 0.6
 
       newGrassElements.push(
         <div
@@ -460,7 +549,9 @@ const AnimatedGrass: FC = () => {
             alt="Grass Variety"
             width={100}
             height={70}
-            className="w-auto h-[clamp(30px,calc(12vh * var(--scale-factor)),80px)]"
+            className="w-auto h-[clamp(25px,calc(10vh * var(--scale-factor)),70px)]" // Reduced from 12vh
+            loading="lazy"
+            unoptimized
           />
         </div>
       );
@@ -471,11 +562,11 @@ const AnimatedGrass: FC = () => {
       const grassNum = (i % 11) + 1;
       const left = Math.random() * 98;
       // Speed up animation
-      const duration = 0.5 + Math.random() * 1; // Faster animation (was 1-3, now 0.5-1.5)
+      const duration = 0.5 + Math.random() * 1;
       const delay = Math.random() * 0.1;
 
-      // Vary the heights of small grass
-      const heightScale = 0.6 + Math.random() * 0.7; // 60%-130% height variation for more diversity
+      // Reduce the heights of small grass
+      const heightScale = 0.4 + Math.random() * 0.4; // Reduced from 0.6 + 0.7
 
       newGrassElements.push(
         <div
@@ -494,7 +585,9 @@ const AnimatedGrass: FC = () => {
             alt="Small Grass"
             width={60}
             height={40}
-            className="w-auto h-[clamp(20px,calc(8vh * var(--scale-factor)),60px)]"
+            className="w-auto h-[clamp(15px,calc(6vh * var(--scale-factor)),40px)]" // Reduced from 8vh
+            loading="lazy"
+            unoptimized
           />
         </div>
       );
@@ -504,7 +597,9 @@ const AnimatedGrass: FC = () => {
   }, [isClient]);
 
   return (
-    <div className="relative w-full h-[20vh] overflow-hidden z-50">
+    <div className="relative w-full h-[15vh] overflow-hidden z-50">
+      {" "}
+      {/* Reduced from 20vh */}
       {/* Base grass layer */}
       <div className="absolute bottom-0 left-0 w-full">
         <Image
@@ -513,6 +608,9 @@ const AnimatedGrass: FC = () => {
           width={1920}
           height={100}
           className="w-full h-auto"
+          priority
+          quality={90}
+          unoptimized
         />
       </div>
       {grassElements}
@@ -559,6 +657,7 @@ const AnimatedSun: FC = () => {
             alt="Cloud"
             width={80}
             height={40}
+            unoptimized
             className="w-auto h-[clamp(20px,calc(8vh * var(--scale-factor)),60px)]"
           />
         </div>
@@ -597,6 +696,7 @@ const AnimatedSun: FC = () => {
           alt="Sun"
           width={200}
           height={200}
+          unoptimized
           className="w-auto opacity-100 h-[clamp(100px,calc(20vh * var(--scale-factor)),200px)]"
           style={{
             animation: "rotate 60s linear infinite",

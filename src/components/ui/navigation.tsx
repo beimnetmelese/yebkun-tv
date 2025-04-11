@@ -1,14 +1,15 @@
-'use client'
+"use client";
 import Image from "next/image";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
 
 interface NavigationItemProps {
   href: string;
   label: string;
   icon: string;
   active?: boolean;
+  onClick?: () => void;
 }
 
 const NavigationItem = ({
@@ -16,11 +17,13 @@ const NavigationItem = ({
   label,
   icon,
   active = false,
+  onClick,
 }: NavigationItemProps) => {
   return (
     <Link
       href={href}
       className="flex flex-col items-center gap-[1px] px-[10px] py-[10px] transition-colors no-underline text-[#FFFFFF]/90"
+      onClick={onClick}
     >
       <div
         className={`w-55 h-55 rounded-full flex items-center justify-center text-black p-[10px] ${
@@ -31,7 +34,16 @@ const NavigationItem = ({
           boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
         }}
       >
-        <Image src={icon} alt={label} width={33} height={33} color={`${active ? '#FFFFFF' : ""}`} />
+        <Image
+          src={icon}
+          alt={label}
+          width={33}
+          height={33}
+          color={`${active ? "#FFFFFF" : ""}`}
+          loading="eager"
+          quality={90}
+          unoptimized
+        />
       </div>
       <span className="text-[22px] text-white font-bold-500">{label}</span>
     </Link>
@@ -40,9 +52,26 @@ const NavigationItem = ({
 
 export default function Navigation() {
   const pathname = usePathname();
+  const clickSoundRef = useRef<HTMLAudioElement>(null);
+
+  const handleNavClick = () => {
+    // Play click sound
+    if (clickSoundRef.current) {
+      clickSoundRef.current.currentTime = 0;
+      clickSoundRef.current
+        .play()
+        .catch((err) => console.error("Error playing click sound:", err));
+    }
+  };
 
   return (
     <header className="fixed top-[0px] left-[0px] right-[0px] w-full h-[150px] z-50">
+      <audio
+        ref={clickSoundRef}
+        src="/audio/click.mp3"
+        preload="auto"
+        className="hidden"
+      />
       <div
         className="w-full h-full bg-[#000000]"
         style={{
@@ -57,36 +86,42 @@ export default function Navigation() {
               label="Dashpak"
               icon="/images/navigation/destpek.svg"
               active={pathname === "/adult"}
+              onClick={handleNavClick}
             />
             <NavigationItem
               href="/cinema"
               label="Cinema"
               icon="/images/navigation/muzik.svg"
               active={pathname === "/cinema"}
+              onClick={handleNavClick}
             />
             <NavigationItem
               href="/videos"
               label="Videos"
               icon="/images/navigation/sinema.svg"
               active={pathname === "/videos"}
+              onClick={handleNavClick}
             />
             <NavigationItem
               href="/shwazi"
               label="Shwazi"
               icon="/images/navigation/videos.svg"
               active={pathname === "/shwazi"}
+              onClick={handleNavClick}
             />
             <NavigationItem
               href="/stream"
               label="Stream"
               icon="/images/navigation/stream.svg"
               active={pathname === "/stream"}
+              onClick={handleNavClick}
             />
             <NavigationItem
               href="/gerandin"
               label="Gerandin"
               icon="images/navigation/gerandin.svg"
               active={pathname === "/gerandin"}
+              onClick={handleNavClick}
             />
           </div>
 
@@ -110,6 +145,9 @@ export default function Navigation() {
                 width={33}
                 height={33}
                 className="cursor-pointer"
+                loading="eager"
+                quality={90}
+                unoptimized
               />
             </div>
           </div>
@@ -121,30 +159,35 @@ export default function Navigation() {
               label="KulturTV"
               icon="/images/navigation/malbat.svg"
               active={pathname === "/kulturtv"}
+              onClick={handleNavClick}
             />
             <NavigationItem
               href="/zaroktv"
               label="ZarokTV"
               icon="/images/navigation/zarok_tv.svg"
               active={pathname === "/zaroktv"}
+              onClick={handleNavClick}
             />
             <NavigationItem
               href="/settings"
               label="Evin"
               icon="/images/navigation/eyar.svg"
               active={pathname === "/settings"}
+              onClick={handleNavClick}
             />
             <NavigationItem
               href="/archive"
               label="Archive"
               icon="/images/navigation/archive.svg"
               active={pathname === "/archive"}
+              onClick={handleNavClick}
             />
             <NavigationItem
               href="/user"
               label="User"
               icon="/images/navigation/user.png"
               active={pathname === "/user"}
+              onClick={handleNavClick}
             />
           </div>
         </div>

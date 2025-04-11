@@ -154,18 +154,18 @@ export default function LatestMoviesSeries() {
     const container = scrollContainerRef.current;
     if (container) {
       // Instead of relying on finding an element, use our tv-card class width
-      let cardWidth = 270; // Default HD size
+      let cardWidth = 170; // Default portrait width
 
       // Adjust based on screen width
       if (window.innerWidth >= 7680) {
         // 8K
-        cardWidth = 490;
+        cardWidth = 250;
       } else if (window.innerWidth >= 2560) {
         // 3K/4K
-        cardWidth = 390;
+        cardWidth = 200;
       } else if (window.innerWidth >= 1920) {
         // FHD
-        cardWidth = 320;
+        cardWidth = 190;
       }
 
       const gap = 16;
@@ -186,28 +186,28 @@ export default function LatestMoviesSeries() {
 
   return (
     <div
-      className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-4"
+      className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-2"
       style={{
         borderRadius: "var(--radius)",
       }}
     >
-      <h5 className="text-black tv-text-title font-[500] font-genos mb-2">
+      <h5 className="text-black tv-text-title font-[500] font-genos mb-1">
         Latest Movies and Series
       </h5>
       <div className="relative w-full">
         <div
           ref={scrollContainerRef}
-          className="flex overflow-x-auto py-2 snap-x scrollbar-hide"
+          className="flex overflow-x-auto py-1 snap-x scrollbar-hide"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
             gap: "var(--space-md)",
-            paddingLeft: "4px",
-            paddingRight: "4px",
+            paddingLeft: "2px",
+            paddingRight: "2px",
           }}
         >
           {displayedMovies.map((movie) => (
-            <div key={movie.title} className="snap-start flex-shrink-0">
+            <div key={movie.id} className="snap-start flex-shrink-0">
               <MoviesAndSeriesCard
                 id={movie.id}
                 video={movie.video}

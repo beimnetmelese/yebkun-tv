@@ -1,7 +1,7 @@
 "use client";
 
 import TimeUp from "@/app/kids/movie/time_up";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface CircularTimerProps {
   totalMinutes: number;
@@ -11,6 +11,7 @@ interface CircularTimerProps {
 const CircularTimer = ({ totalMinutes, cMinutes }: CircularTimerProps) => {
   const [currentMinutes, setCurrentMinutes] = useState(cMinutes);
   const [showTimeUp, setShowTimeUp] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const segments = 60;
   const radius = 50;
   const strokeWidth = 1;
@@ -75,9 +76,29 @@ const CircularTimer = ({ totalMinutes, cMinutes }: CircularTimerProps) => {
     setShowTimeUp(false);
   };
 
+  const handleTimerClick = () => {
+    // Play click sound
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current
+        .play()
+        .catch((err) => console.error("Error playing sound:", err));
+    }
+    setShowTimeUp(true);
+  };
+
   return (
     <>
-      <div className="relative w-[clamp(80px,10vw,120px)] h-[clamp(80px,10vw,120px)] flex items-center justify-center">
+      <audio
+        ref={audioRef}
+        src="/audio/click.mp3"
+        preload="auto"
+        className="hidden"
+      />
+      <div
+        className="relative w-[clamp(80px,10vw,120px)] h-[clamp(80px,10vw,120px)] flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity"
+        onClick={handleTimerClick}
+      >
         <svg
           width={size}
           height={size}

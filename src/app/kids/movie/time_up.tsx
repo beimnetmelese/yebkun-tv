@@ -1,7 +1,7 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface TimeUpProps {
   open: boolean;
@@ -15,6 +15,18 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
     parent_code_success: false,
   });
   const [selectedTime, setSelectedTime] = useState<number | null>(null);
+
+  // Reset modal state when dialog is opened
+  useEffect(() => {
+    if (open) {
+      setIsShowModal({
+        time_up: true,
+        parent_code: false,
+        parent_code_success: false,
+      });
+      setSelectedTime(null);
+    }
+  }, [open]);
 
   const handleShowModal = (modal: keyof typeof isShowModal) => {
     setIsShowModal((prev) => ({ ...prev, [modal]: !prev[modal] }));
@@ -91,7 +103,7 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
     <Dialog open={open}>
       <DialogTitle className="sr-only">Time Up</DialogTitle>
       <DialogContent
-        className={`${getDialogSizeClass()} bg-white p-6 rounded-xl shadow-lg overflow-auto max-h-[90vh] transform-gpu transition-all duration-200`}
+        className={`${getDialogSizeClass()} bg-white p-6 rounded-xl [&>button]:hidden border-none shadow-lg overflow-auto max-h-[90vh] transform-gpu transition-all duration-200`}
       >
         {isShowModal["time_up"] && (
           <div className="flex flex-col items-center justify-center rounded-lg py-[8px]">
@@ -100,6 +112,9 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
               alt="break icon"
               width={438}
               height={365}
+              loading="eager"
+              quality={90}
+              priority
             />
 
             <div className="flex flex-row w-full h-[20%] rounded-none rounded-l-full rounded-r-[20px] bg-[#F2F2F2] px-2 py-4">
@@ -108,6 +123,9 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
                 alt="time up icon"
                 width={70}
                 height={70}
+                loading="eager"
+                quality={90}
+                unoptimized
               />
               <span className="flex flex-col items-center justify-center ml-4">
                 <p className="text-black text-[22px] font-[500] font-[oswald]">
@@ -188,6 +206,9 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
                   alt="information"
                   width={50}
                   height={50}
+                  loading="eager"
+                  quality={90}
+                  unoptimized
                 />
               </div>
               <div className="flex flex-col px-[0px] items-center justify-center flex-1">
@@ -224,6 +245,9 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
                       alt={`${minutes} min`}
                       width={70}
                       height={70}
+                      loading="eager"
+                      quality={80}
+                      unoptimized
                     />
                     <span className="text-sm font-medium mt-1">
                       {minutes} min
@@ -239,6 +263,9 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
                   alt="information"
                   width={50}
                   height={50}
+                  loading="eager"
+                  quality={90}
+                  unoptimized
                 />
               </div>
               <div>
