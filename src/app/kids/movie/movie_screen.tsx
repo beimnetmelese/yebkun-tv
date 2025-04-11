@@ -57,26 +57,26 @@ function VideoScreen({
   videoQuality,
   ageLimit,
   numberOfViews,
-  videoId,
+  videoId, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoTitle,
-  videoDescription,
+  videoDescription, // eslint-disable-line @typescript-eslint/no-unused-vars
   numberOfSeasons,
   numberOfEpisodes,
   videoThumbnail,
   videoUrl,
   videoDuration,
-  videoGenre,
-  videoRating,
-  relatedVideos,
-  videoEpisode,
-  videoSeason,
-  videoEpisodeTitle,
-  videoEpisodeDescription,
-  videoEpisodeThumbnail,
-  videoEpisodeUrl,
-  videoEpisodeDuration,
-  videoEpisodeGenre,
-  videoEpisodeRating,
+  videoGenre, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoRating, // eslint-disable-line @typescript-eslint/no-unused-vars
+  relatedVideos, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoEpisode, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoSeason, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoEpisodeTitle, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoEpisodeDescription, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoEpisodeThumbnail, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoEpisodeUrl, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoEpisodeDuration, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoEpisodeGenre, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoEpisodeRating, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoEpisodeRelatedVideos,
 }: VideoScreenProps) {
   const videoRef = useRef<HTMLVideoElement>(null);

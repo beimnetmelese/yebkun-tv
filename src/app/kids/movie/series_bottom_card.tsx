@@ -11,8 +11,8 @@ interface Video {
 function SeriesBottomCard({
   thumbnail,
   title,
-  description,
-  url,
+  description, // eslint-disable-line @typescript-eslint/no-unused-vars
+  url, // eslint-disable-line @typescript-eslint/no-unused-vars
   episodeNumber,
 }: Video) {
   return (
