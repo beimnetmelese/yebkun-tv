@@ -3,9 +3,10 @@
 import { PauseCircle, PlayCircle } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
-export default function VideoPlayerPage() {
+// Create a separate component that uses useSearchParams
+function VideoPlayer() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -194,5 +195,20 @@ export default function VideoPlayerPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Wrap the component in a Suspense boundary
+export default function VideoPlayerPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-screen w-screen bg-black flex items-center justify-center text-white text-2xl">
+          Loading...
+        </div>
+      }
+    >
+      <VideoPlayer />
+    </Suspense>
   );
 }
