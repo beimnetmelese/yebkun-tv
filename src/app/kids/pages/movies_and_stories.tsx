@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import LatestMoviesSeries from "../components/movies_and_stories/latest_movies_series";
-import MoviesAndSeriesCard from "../components/movies_and_stories/movies_and_stories_card";
+
 import RelatedContent from "../components/related_content/related_content";
+import LatestMoviesCard from "../components/movies_and_stories/latest_movies_card";
 
 type MediaType = "Stories" | "Videos" | "Movies";
 type VideoType = "series" | "movie" | "story";
@@ -107,6 +108,24 @@ const mediaCategories: MediaCategory[] = [
         views: 7621,
         videoType: "movie",
       },
+      {
+        id: "the_lion_king1ewr",
+        video: "/images/kids/sample_videos/nesha.mp4",
+        title: "The Lion King",
+        thumbnail: "/images/kids/thumb_nails/strange_world.png",
+        type: "Movies",
+        views: 8765,
+        videoType: "movie",
+      },
+      {
+        id: "zootopia1er",
+        video: "/images/kids/sample_videos/nesha.mp4",
+        title: "Zootopia",
+        thumbnail: "/images/kids/thumb_nails/cartoon.png",
+        type: "Movies",
+        views: 7621,
+        videoType: "movie",
+      },
     ],
   },
   {
@@ -186,6 +205,42 @@ const mediaCategories: MediaCategory[] = [
       },
       {
         id: "zig_and_sharko1_2",
+        video: "/images/kids/sample_videos/nesha.mp4",
+        title: "Zig & Sharko",
+        thumbnail: "/images/kids/thumb_nails/cartoon.png",
+        type: "Stories",
+        views: 9654,
+        videoType: "story",
+      },
+      {
+        id: "shaun_the_sheep1_21",
+        video: "/images/kids/sample_videos/nesha.mp4",
+        title: "Shaun the Sheep",
+        thumbnail: "/images/kids/thumb_nails/ice_age.png",
+        type: "Stories",
+        views: 3542,
+        videoType: "story",
+      },
+      {
+        id: "zig_and_sharko1_21",
+        video: "/images/kids/sample_videos/nesha.mp4",
+        title: "Zig & Sharko",
+        thumbnail: "/images/kids/thumb_nails/cartoon.png",
+        type: "Stories",
+        views: 9654,
+        videoType: "story",
+      },
+      {
+        id: "shaun_the_sheep1_223",
+        video: "/images/kids/sample_videos/nesha.mp4",
+        title: "Shaun the Sheep",
+        thumbnail: "/images/kids/thumb_nails/ice_age.png",
+        type: "Stories",
+        views: 3542,
+        videoType: "story",
+      },
+      {
+        id: "zig_and_sharko1_232e",
         video: "/images/kids/sample_videos/nesha.mp4",
         title: "Zig & Sharko",
         thumbnail: "/images/kids/thumb_nails/cartoon.png",
@@ -383,7 +438,7 @@ function MediaRow({ category }: { category: MediaCategory }) {
         >
           {category.items.map((item) => (
             <div key={item.id} className="snap-start flex-shrink-0">
-              <MoviesAndSeriesCard
+              <LatestMoviesCard
                 id={item.id}
                 video={item.video}
                 title={item.title}
@@ -457,10 +512,8 @@ export default function MoviesAndStories() {
       </div>
 
       {/* Scrollable media categories */}
-      <div className="flex flex-col mt-2">
-        <h2 className="text-black tv-text-title font-[500] font-genos mb-1 px-4 flex-shrink-0">
-          Our Movies & Series
-        </h2>
+      <div className="flex flex-col mt-4">
+        
 
         <div
           className="overflow-y-auto px-4"

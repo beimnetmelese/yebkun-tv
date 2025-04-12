@@ -51,6 +51,59 @@ interface VideoScreenProps {
   videoEpisodeRelatedVideos: Episode[];
 }
 
+interface RelatedVideo {
+  id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  url: string;
+  videoType: "series" | "movie" | "story";
+}
+
+// Related Video Card for Movies and Stories
+function RelatedVideoCard({
+  id,
+  thumbnail,
+  title,
+  description,
+
+}: RelatedVideo) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/kids/movie/${encodeURIComponent(id)}`);
+  };
+
+  return (
+    <div
+      className="group relative cursor-pointer w-[280px] h-[200px] z-10"
+      onClick={handleClick}
+    >
+      <div className="w-full h-full rounded-lg relative transition-all duration-300 ease-in-out transform group-hover:scale-105 group-hover:shadow-xl group-hover:border-2 group-hover:border-red-500 group-hover:border-[4px]">
+        <Image
+          src={thumbnail}
+          alt={title}
+          width={280}
+          height={200}
+          className="rounded-lg w-full h-full object-cover transition-transform duration-300 ease-in-out"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-lg"></div>
+        <div className="absolute bottom-0 left-0 w-full p-3">
+          <h3 className="text-white text-md font-semibold font-[oswald] line-clamp-1">
+            {title}
+          </h3>
+          <p className="text-gray-200 text-xs line-clamp-2">{description}</p>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
+            <PlayIcon className="h-8 w-8 text-white" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function VideoScreen({
   videoType,
   yearPublished,
@@ -67,7 +120,7 @@ function VideoScreen({
   videoDuration,
   videoGenre, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoRating, // eslint-disable-line @typescript-eslint/no-unused-vars
-  relatedVideos, // eslint-disable-line @typescript-eslint/no-unused-vars
+  relatedVideos,
   videoEpisode, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoSeason, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoEpisodeTitle, // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -84,7 +137,9 @@ function VideoScreen({
   const [selectedSeason, setSelectedSeason] = useState(1);
   const [seasonEpisodes, setSeasonEpisodes] = useState<Episode[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [relatedCurrentPage, setRelatedCurrentPage] = useState(0);
   const pageSize = 4;
+  const relatedPageSize = 4;
   const router = useRouter();
 
   const storageKey = `video-progress-${videoTitle
@@ -169,7 +224,7 @@ function VideoScreen({
         ref={videoRef}
       />
       <div className="absolute inset-0 z-10 flex items-center justify-center">
-        <Image src={videoThumbnail} alt={videoTitle} fill />
+        <Image src={videoThumbnail} alt={videoTitle} fill sizes="100vw" />
       </div>
 
       <div
@@ -278,7 +333,7 @@ function VideoScreen({
 
       {videoType === "series" && (
         <div className="absolute bottom-0 w-full z-30 p-6 bg-[rgba(0,0,0,0.6)]">
-          <div className="flex gap-4 overflow-x-auto pb-4">
+          <div className="flex gap-4">
             {Array.from({ length: numberOfSeasons }, (_, i) => (
               <button
                 key={i}
@@ -286,32 +341,38 @@ function VideoScreen({
                   setSelectedSeason(i + 1);
                   setCurrentPage(0);
                 }}
-                className={`px-4 py-2 border ${
+                className={`px-4 py-1 border ${
                   selectedSeason === i + 1
-                    ? "bg-red-600 text-white border-red-600"
+                    ? "bg-[#FFFFFF]/30   text-white border-none"
                     : "text-white border-white"
-                } rounded-full font-[oswald]`}
+                } rounded-lg font-[oswald]`}
               >
                 Season {i + 1}
               </button>
             ))}
           </div>
 
-          <div className="mt-4 flex flex-col items-center gap-4">
+          <div className="mt-2 flex flex-col items-center gap-4">
             <div className="flex flex-row items-center gap-4 w-full justify-center">
               <button
                 disabled={currentPage === 0}
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
                 className={`px-4 py-2 rounded-full font-[oswald] ${
                   currentPage === 0
-                    ? "bg-gray-500 text-white cursor-not-allowed"
+                    ? "text-white cursor-not-allowed"
                     : "bg-white text-black"
                 }`}
               >
-                Prev
+                <Image
+                  src={"/images/kids/back_arrow.svg"}
+                  alt={videoEpisodeTitle}
+                  width={20}
+                  height={20}
+                  unoptimized
+                />
               </button>
 
-              <div className="flex gap-4 overflow-x-auto max-w-[80vw]">
+              <div className="flex gap-4 max-w-[80vw]">
                 {seasonEpisodes
                   .slice(
                     currentPage * pageSize,
@@ -340,16 +401,104 @@ function VideoScreen({
                 }
                 className={`px-4 py-2 rounded-full font-[oswald] ${
                   (currentPage + 1) * pageSize >= seasonEpisodes.length
-                    ? "bg-gray-500 text-white cursor-not-allowed"
+                    ? "text-white cursor-not-allowed"
                     : "bg-white text-black"
                 }`}
               >
-                Next
+                <Image
+                  src={"/images/kids/forward_arrow.svg"}
+                  alt={videoEpisodeTitle}
+                  width={20}
+                  height={20}
+                  unoptimized
+                />
               </button>
             </div>
           </div>
         </div>
       )}
+
+      {/* Related videos section for Movies and Stories */}
+      {(videoType === "movie" || videoType === "story") &&
+        relatedVideos &&
+        relatedVideos.length > 0 && (
+          <div className="absolute bottom-0 w-full z-30 p-6 bg-[rgba(0,0,0,0.6)]">
+            <h3 className="text-white text-xl font-[600] font-[oswald] mb-4">
+              {videoType === "movie" ? "More Movies" : "More Stories"} Like This
+            </h3>
+
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex flex-row items-center gap-4 w-full justify-center">
+                <button
+                  disabled={relatedCurrentPage === 0}
+                  onClick={() =>
+                    setRelatedCurrentPage((prev) => Math.max(prev - 1, 0))
+                  }
+                  className={`px-4 py-2 rounded-full font-[oswald] ${
+                    relatedCurrentPage === 0
+                      ? "text-white cursor-not-allowed"
+                      : "bg-white text-black"
+                  }`}
+                >
+                  <Image
+                    src={"/images/kids/back_arrow.svg"}
+                    alt="Previous"
+                    width={20}
+                    height={20}
+                    unoptimized
+                  />
+                </button>
+
+                <div className="flex gap-4 max-w-[80vw]">
+                  {relatedVideos
+                    .slice(
+                      relatedCurrentPage * relatedPageSize,
+                      relatedCurrentPage * relatedPageSize + relatedPageSize
+                    )
+                    .map((video) => (
+                      <RelatedVideoCard
+                        key={video.id}
+                        id={video.id}
+                        thumbnail={video.thumbnail}
+                        title={video.title}
+                        description={video.description}
+                        url={video.url}
+                        videoType={video.videoType}
+                      />
+                    ))}
+                </div>
+
+                <button
+                  disabled={
+                    (relatedCurrentPage + 1) * relatedPageSize >=
+                    relatedVideos.length
+                  }
+                  onClick={() =>
+                    setRelatedCurrentPage((prev) =>
+                      (prev + 1) * relatedPageSize < relatedVideos.length
+                        ? prev + 1
+                        : prev
+                    )
+                  }
+                  className={`px-4 py-2 rounded-full font-[oswald] ${
+                    (relatedCurrentPage + 1) * relatedPageSize >=
+                    relatedVideos.length
+                      ? "text-white cursor-not-allowed"
+                      : "bg-white text-black"
+                  }`}
+                >
+                  <Image
+                    src={"/images/kids/forward_arrow.svg"}
+                    alt="Next"
+                    width={20}
+                    height={20}
+                    unoptimized
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
     </div>
   );
 }

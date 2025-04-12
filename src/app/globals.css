@@ -800,6 +800,12 @@
   border-radius: 8px;
 }
 
+.tv-card-big {
+  width: 300px;
+  height: 160px;
+  border-radius: 8px;
+}
+
 .tv-card-ms {
   width: 160px;
   height: 200px;
@@ -830,6 +836,11 @@
   .tv-card-small {
     width: 300px;
     height: 120px;
+  }
+
+  .tv-card-big {
+    width: 400px;
+    height: 200px;
   }
 
   .tv-card-ms {
@@ -864,6 +875,11 @@
     height: 220px;
   }
 
+  .tv-card-big {
+    width: 450px;
+    height: 250px;
+  }
+
   .tv-card-ms {
     width: 220px;
     height: 350px;
@@ -892,6 +908,11 @@
   .tv-card-small {
     width: 430px;
     height: 280px;
+  }
+
+  .tv-card-big {
+    width: 550px;
+    height: 350px;
   }
 
   .tv-card-ms {

@@ -448,10 +448,24 @@ function VideoRow({ category }: { category: VideoCategory }) {
         {showLeftScroll && (
           <button
             onClick={() => scroll("left")}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-50 rounded-full w-8 h-8 flex items-center justify-center text-white"
-            style={{ minWidth: "32px", minHeight: "32px" }}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+            aria-label="Scroll left"
           >
-            ◀
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
         )}
         <div
@@ -482,10 +496,24 @@ function VideoRow({ category }: { category: VideoCategory }) {
         {showRightScroll && (
           <button
             onClick={() => scroll("right")}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-50 rounded-full w-8 h-8 flex items-center justify-center text-white"
-            style={{ minWidth: "32px", minHeight: "32px" }}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+            aria-label="Scroll right"
           >
-            ▶
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 6L15 12L9 18"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </button>
         )}
       </div>
@@ -502,8 +530,8 @@ export default function Video() {
       </div>
 
       {/* Scrollable video categories */}
-      <div className="flex flex-col mt-2">
-        <h2 className="text-black tv-text-title font-[500] font-genos mb-1 px-4 flex-shrink-0">
+      <div className="flex flex-col mt-4">
+        <h2 className="text-black tv-text-title font-[500] font-[genos] mb-1 px-4 flex-shrink-0">
           Our Videos
         </h2>
 

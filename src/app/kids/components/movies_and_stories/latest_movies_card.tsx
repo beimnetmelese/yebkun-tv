@@ -3,13 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-interface NewStoriesCardProps {
+interface MostViewedCardProps {
   id: string;
-  thumbnail: string;
-  title: string;
-  views: number;
   video: string;
-  type: "Stories" | "Videos" | "Movies";
+  title: string;
+  thumbnail: string;
+  type: "Stories" | "Videos" | "Movies" | "Series";
+  views: number;
   videoType?: "series" | "movie" | "story";
 }
 
@@ -24,13 +24,13 @@ function formatDuration(seconds: number): string {
   return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 }
 
-const NewStoriesCard = ({
+const MoviesAndSeriesCard = ({
   id,
-  thumbnail,
-  title,
-  views,
   video,
-}: NewStoriesCardProps) => {
+  title,
+  thumbnail,
+  views,
+}: MostViewedCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -43,7 +43,7 @@ const NewStoriesCard = ({
 
   useEffect(() => {
     // Load saved progress from localStorage if exists
-    const savedProgress = localStorage.getItem(`story-progress-${id}`);
+    const savedProgress = localStorage.getItem(`movie-progress-${id}`);
     if (savedProgress) {
       const parsedProgress = parseInt(savedProgress, 10);
       setVideoProgress(parsedProgress);
@@ -53,7 +53,7 @@ const NewStoriesCard = ({
   // Save progress to localStorage when component unmounts or progress changes
   useEffect(() => {
     if (videoProgress > 0) {
-      localStorage.setItem(`story-progress-${id}`, videoProgress.toString());
+      localStorage.setItem(`movie-progress-${id}`, videoProgress.toString());
     }
   }, [id, videoProgress]);
 
@@ -180,8 +180,8 @@ const NewStoriesCard = ({
   const handleVideoError = () => {
     setHasError(true);
     console.error(`Video failed to load: ${video}`);
-    // If this is a stories video with a specific naming pattern, try the fallback
-    if (video.includes("/videos/Stories/")) {
+    // If this is a movie or series video with a specific naming pattern, try a fallback
+    if (video.includes("/videos/Movies & Series/")) {
       console.log("Attempting to use fallback video");
       // If we had the option, we'd dynamically update the video source here
     }
@@ -190,12 +190,17 @@ const NewStoriesCard = ({
   return (
     <div
       ref={containerRef}
-      className="tv-card-big relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
+      className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{
+        aspectRatio: "2/3",
+        width: "170px",
+        height: "auto",
+      }}
     >
       <Link
-        href={`/kids/story/${encodeURIComponent(id)}`}
+        href={`/kids/movie/${encodeURIComponent(id)}`}
         className="block w-full h-full"
       >
         {/* Video Element */}
@@ -211,7 +216,7 @@ const NewStoriesCard = ({
             onTimeUpdate={handleVideoTimeUpdate}
             onLoadedData={handleVideoLoaded}
             onError={handleVideoError}
-            preload="metadata"
+            preload="none"
           >
             <source src={video} type="video/mp4" />
             Your browser does not support the video tag.
@@ -230,9 +235,11 @@ const NewStoriesCard = ({
             src={thumbnail}
             alt={title}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="170px"
             className="object-cover"
-            priority
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
           />
           <div
             className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 ${
@@ -263,6 +270,7 @@ const NewStoriesCard = ({
           </div>
         </div>
 
+        {/* Error indicator */}
         {hasError && (
           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
             <div className="text-white text-center p-4">
@@ -285,26 +293,22 @@ const NewStoriesCard = ({
           </div>
         )}
 
-        {/* Views badge */}
-        <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge flex flex-row items-center justify-center gap-1">
-          <Eye className="w-4 h-4 mr-2" />
-          <span>{formatViews(views)}</span>
+        {/* Progress Bar */}
+        <div
+          className={`absolute bottom-8 left-0 w-full px-2 ${
+            videoProgress === 0 ? "hidden" : ""
+          }`}
+        >
+          <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
+            <div
+              className="bg-primary h-full rounded-full"
+              style={{ width: `${videoProgress}%` }}
+            />
+          </div>
         </div>
 
-        {/* Progress Bar */}
-        {isHovered && (
-          <div className="absolute bottom-8 left-0 w-full px-3">
-            <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
-              <div
-                className="bg-primary h-full rounded-full"
-                style={{ width: `${videoProgress}%` }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Title */}
-        <div className="absolute bottom-0 left-0 w-full p-3 justify-between flex items-center">
+        {/* Title and Duration */}
+        <div className="absolute bottom-0 left-0 w-full p-2 flex flex-row items-center justify-between">
           <h3 className="text-white font-[400] tv-text-title line-clamp-1">
             {title}
           </h3>
@@ -312,9 +316,14 @@ const NewStoriesCard = ({
             {formatDuration(duration)}
           </p>
         </div>
+
+        <div className="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded flex items-center gap-1 tv-text-badge">
+          <Eye className="w-3 h-3" />
+          {formatViews(views)}
+        </div>
       </Link>
     </div>
   );
 };
 
-export default NewStoriesCard;
+export default MoviesAndSeriesCard;
