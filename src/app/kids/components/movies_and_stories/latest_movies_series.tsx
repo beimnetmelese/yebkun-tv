@@ -21,6 +21,24 @@ const mostViewedMovies: NewStoriesCardProps[] = [
     views: 3542,
     videoType: "movie",
   },
+  {
+    id: "the_super_mario_bros1  ",
+    video: "/images/kids/sample_videos/nesha.mp4",
+    title: "The Super Mario Bros",
+    thumbnail: "/images/kids/thumb_nails/ice_age.png",
+    type: "Series",
+    views: 3542,
+    videoType: "movie",
+  },
+  {
+    id: "the_super_mario_bros33",
+    video: "/images/kids/sample_videos/nesha.mp4",
+    title: "The Super Mario Bros",
+    thumbnail: "/images/kids/thumb_nails/ice_age.png",
+    type: "Series",
+    views: 3542,
+    videoType: "movie",
+  },
 
   {
     id: "the_lion_king",
@@ -107,32 +125,53 @@ const mostViewedMovies: NewStoriesCardProps[] = [
     views: 7621,
     videoType: "series",
   },
+  {
+    id: "kung_fu_panda_311",
+    video: "/images/kids/sample_videos/nesha.mp4",
+    title: "Kung Fu Panda 3",
+    thumbnail: "/images/kids/thumb_nails/inside_out.png",
+    type: "Videos",
+    views: 5421,
+    videoType: "series",
+  },
+
+  {
+    id: "tom_and_jerry11",
+    video: "/images/kids/sample_videos/nesha.mp4",
+    title: "Tom and Jerry",
+    thumbnail: "/images/kids/thumb_nails/cartoon.png",
+    type: "Videos",
+    views: 7621,
+    videoType: "series",
+  },
+  {
+    id: "kung_fu_panda_311221",
+    video: "/images/kids/sample_videos/nesha.mp4",
+    title: "Kung Fu Panda 3",
+    thumbnail: "/images/kids/thumb_nails/inside_out.png",
+    type: "Videos",
+    views: 5421,
+    videoType: "series",
+  },
+
+  {
+    id: "tom_and_jerry11313",
+    video: "/images/kids/sample_videos/nesha.mp4",
+    title: "Tom and Jerry",
+    thumbnail: "/images/kids/thumb_nails/cartoon.png",
+    type: "Videos",
+    views: 7621,
+    videoType: "series",
+  },
 ];
 
 export default function LatestMoviesSeries() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [visibleCards, setVisibleCards] = useState(3);
+
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 1280) {
-        setVisibleCards(2);
-      } else if (width < 1920) {
-        setVisibleCards(3);
-      } else if (width < 3840) {
-        setVisibleCards(4);
-      } else {
-        setVisibleCards(5);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+ 
 
   useEffect(() => {
     const checkScroll = () => {
@@ -178,11 +217,6 @@ export default function LatestMoviesSeries() {
     }
   };
 
-  // Display more cards than just visible to enable smooth scrolling
-  const displayedMovies = mostViewedMovies.slice(
-    0,
-    Math.min(mostViewedMovies.length, visibleCards * 2)
-  );
 
   return (
     <div
@@ -206,7 +240,7 @@ export default function LatestMoviesSeries() {
             paddingRight: "2px",
           }}
         >
-          {displayedMovies.map((movie) => (
+          {mostViewedMovies.map((movie) => (
             <div key={movie.id} className="snap-start flex-shrink-0">
               <MoviesAndSeriesCard
                 id={movie.id}

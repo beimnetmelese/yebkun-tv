@@ -16,8 +16,8 @@ function SeriesBottomCard({
   episodeNumber,
 }: Video) {
   return (
-    <div className="group relative cursor-pointer w-[250px] h-[230px] z-10 ">
-      <div className="w-full h-full rounded-lg relative transition-all duration-300 ease-in-out transform group-hover:scale-105 group-hover:shadow-xl group-hover:border-2 group-hover:border-red-500">
+    <div className="group relative cursor-pointer w-[329px] h-[234px] z-10 ">
+      <div className="w-full h-full rounded-lg relative transition-all duration-300 ease-in-out transform group-hover:scale-105 group-hover:shadow-xl group-hover:border-2 group-hover:border-red-500 group-hover:border-[4px]">
         <Image
           src={thumbnail}
           alt={title}

@@ -513,7 +513,7 @@ const AnimatedGrass: FC = () => {
             alt="Grass"
             width={120}
             height={80}
-            className="w-auto h-[clamp(30px,calc(12vh * var(--scale-factor)),80px)]" // Reduced from 15vh
+            className="w-auto h-[clamp(20px,calc(8vh * var(--scale-factor)),80px)]" // Reduced from 15vh
             loading="lazy"
             unoptimized
           />

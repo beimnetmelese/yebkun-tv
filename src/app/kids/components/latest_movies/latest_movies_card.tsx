@@ -30,7 +30,8 @@ const LatestMoviesCard = ({
   title,
   views,
   video,
-
+  type,
+  videoType = "movie",
 }: LatestMoviesCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -188,7 +189,7 @@ const LatestMoviesCard = ({
   return (
     <div
       ref={containerRef}
-      className="tv-card-small relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
+      className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -270,20 +271,18 @@ const LatestMoviesCard = ({
         </div>
 
         {/* Progress Bar */}
-        {isHovered && (
-          <div
-            className={`absolute bottom-6 left-0 w-full px-2 ${
-              videoProgress === 0 ? "hidden" : ""
-            }`}
-          >
-            <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
-              <div
-                className="bg-primary h-full rounded-full"
-                style={{ width: `${videoProgress}%` }}
-              />
-            </div>
+        <div
+          className={`absolute bottom-8 left-0 w-full px-2 ${
+            videoProgress === 0 ? "hidden" : ""
+          }`}
+        >
+          <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
+            <div
+              className="bg-primary h-full rounded-full"
+              style={{ width: `${videoProgress}%` }}
+            />
           </div>
-        )}
+        </div>
 
         {/* Title */}
         <div className="absolute bottom-0 left-0 w-full p-2 flex flex-row items-center justify-between">
@@ -294,6 +293,16 @@ const LatestMoviesCard = ({
             {formatDuration(duration)}
           </p>
         </div>
+
+        <span className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
+          {type}
+        </span>
+
+        {videoType && (
+          <span className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
+            {videoType}
+          </span>
+        )}
       </Link>
     </div>
   );
