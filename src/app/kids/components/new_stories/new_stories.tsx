@@ -1,88 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import NewStoriesCard from "./new_stories_card";
 
-interface NewStoriesCardProps {
+
+interface Story {
   id: string;
-  video: string;
+  url: string;
   title: string;
   thumbnail: string;
-  type: "Stories" | "Videos" | "Movies";
+  type: "Stories" | "Videos" | "Movies" | "Series";
   views: number;
   videoType?: "series" | "movie" | "story";
 }
 
-const newStoriesData: NewStoriesCardProps[] = [
-  {
-    id: "BERFÎNA SPÎ Û HEFT QUTIK",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "BERFÎNA SPÎ Û HEFT QUTIK",
-    thumbnail: "/images/kids/thumb_nails/stories.png",
-    type: "Stories",
-    views: 2456,
-    videoType: "story",
-  },
-  {
-    id: "Eledîn û Lembeya Newaze",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Eledîn û Lembeya Newaze",
-    thumbnail: "/images/kids/thumb_nails/stories.png",
-    type: "Stories",
-    views: 3789,
-    videoType: "story",
-  },
-  {
-    id: "JACK Û DARA FASÛLYÊ",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Jack and the Beanstalk",
-    thumbnail: "/images/kids/thumb_nails/stories.png",
-    type: "Stories",
-    views: 4321,
-    videoType: "story",
-  },
-  {
-    id: "Keç Tilî",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Keç Tilî",
-    thumbnail: "/images/kids/thumb_nails/stories.png",
-    type: "Stories",
-    views: 6543,
-    videoType: "story",
-  },
-  {
-    id: "Mîrzayê Beqê",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Mîrzayê Beqê",
-    thumbnail: "/images/kids/thumb_nails/stories.png",
-    type: "Stories",
-    views: 5432,
-    videoType: "story",
-  },
-];
 
-export default function NewStories() {
+
+
+export default function NewStories({stories}: {stories: Story[]}) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [visibleCards, setVisibleCards] = useState(3);
+
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 1280) {
-        setVisibleCards(2);
-      } else if (width < 1920) {
-        setVisibleCards(3);
-      } else if (width < 3840) {
-        setVisibleCards(4);
-      } else {
-        setVisibleCards(5);
-      }
-    };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     const checkScroll = () => {
@@ -128,11 +67,6 @@ export default function NewStories() {
     }
   };
 
-  // Display more cards than just visible to enable smooth scrolling
-  const displayedStories = newStoriesData.slice(
-    0,
-    Math.min(newStoriesData.length, visibleCards * 2)
-  );
 
   return (
     <div
@@ -179,11 +113,11 @@ export default function NewStories() {
             paddingRight: "4px",
           }}
         >
-          {displayedStories.map((story) => (
+          {stories.map((story) => (
             <div key={story.title} className="snap-start flex-shrink-0">
               <NewStoriesCard
                 id={story.id}
-                video={story.video}
+                video={story.url}
                 title={story.title}
                 thumbnail={story.thumbnail}
                 type={story.type}

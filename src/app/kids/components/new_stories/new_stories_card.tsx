@@ -9,7 +9,7 @@ interface NewStoriesCardProps {
   title: string;
   views: number;
   video: string;
-  type: "Stories" | "Videos" | "Movies";
+  type: "Stories" | "Videos" | "Movies" | "Series";
   videoType?: "series" | "movie" | "story";
 }
 
