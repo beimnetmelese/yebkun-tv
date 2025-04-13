@@ -140,7 +140,7 @@ export default function LatestVideos({ videos }: {videos: Video[]}) {
         </div>
       </div>
     ) : (
-      <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen">No videos found</div>
+      <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen">Loading...</div>
     )
   );
 }
