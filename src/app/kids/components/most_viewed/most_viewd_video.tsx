@@ -57,6 +57,7 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
 
 
   return (
+     videos.length > 0 ? (
     <div
       className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-4"
       style={{
@@ -142,5 +143,8 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
         )}
       </div>
     </div>
+  ) : (
+    <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
+  )
   );
 }
