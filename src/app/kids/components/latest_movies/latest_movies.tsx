@@ -58,85 +58,89 @@ export default function LatestVideos({ videos }: {videos: Video[]}) {
   };
 
   return (
-    <div
-      className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-2"
-      style={{
-        borderRadius: "var(--radius)",
-      }}
-    >
-      <h5 className="text-black tv-text-title font-[500] font-genos mb-1">
-        Latest Videos
-      </h5>
-      <div className="relative w-full">
-        <div
-          ref={scrollContainerRef}
-          className="flex overflow-x-auto py-1 snap-x scrollbar-hide"
-          style={{
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            gap: "var(--space-md)",
-            paddingLeft: "2px",
-            paddingRight: "2px",
-          }}
-        >
-          {videos.map((video) => (
-            <div key={video.id} className="snap-start flex-shrink-0">
-              <LatestMoviesCard
-                video={video}
+    videos.length > 0 ? (
+      <div
+        className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-2"
+        style={{
+          borderRadius: "var(--radius)",
+        }}
+      >
+        <h5 className="text-black tv-text-title font-[500] font-genos mb-1">
+          Latest Videos
+        </h5>
+        <div className="relative w-full">
+          <div
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto py-1 snap-x scrollbar-hide"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+              gap: "var(--space-md)",
+              paddingLeft: "2px",
+              paddingRight: "2px",
+            }}
+          >
+            {videos.map((video) => (
+              <div key={video.id} className="snap-start flex-shrink-0">
+                <LatestMoviesCard
+                  video={video}
 
-              />
-            </div>
-          ))}
+                />
+              </div>
+            ))}
+          </div>
+
+          {showLeftScroll && (
+            <button
+              onClick={() => scroll("left")}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+              aria-label="Scroll left"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          )}
+
+          {showRightScroll && (
+            <button
+              onClick={() => scroll("right")}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+              aria-label="Scroll right"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 6L15 12L9 18"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          )}
         </div>
-
-        {showLeftScroll && (
-          <button
-            onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
-            aria-label="Scroll left"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        )}
-
-        {showRightScroll && (
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
-            aria-label="Scroll right"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9 6L15 12L9 18"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        )}
       </div>
-    </div>
+    ) : (
+      <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen">No videos found</div>
+    )
   );
 }

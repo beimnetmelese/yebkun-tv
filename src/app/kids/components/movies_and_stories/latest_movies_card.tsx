@@ -188,6 +188,7 @@ const MoviesAndSeriesCard = ({
   };
 
   return (
+    video ? (
     <div
       ref={containerRef}
       className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
@@ -323,6 +324,9 @@ const MoviesAndSeriesCard = ({
         </div>
       </Link>
     </div>
+  ) : (
+    <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
+  )
   );
 };
 

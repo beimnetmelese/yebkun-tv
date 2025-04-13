@@ -56,6 +56,7 @@ export default function LatestMoviesSeries({ movies, series} : {movies: Video[],
   };
 
   return (
+    movies.length > 0 && series.length > 0 ? (
     <div
       className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-2"
       style={{
@@ -141,5 +142,8 @@ export default function LatestMoviesSeries({ movies, series} : {movies: Video[],
         )}
       </div>
     </div>
+  ) : (
+    <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
+  )
   );
 }
