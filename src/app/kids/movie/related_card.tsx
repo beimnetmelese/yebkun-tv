@@ -102,7 +102,7 @@ function VideoScreen({
   videoDuration,
   videoGenre, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoRating, // eslint-disable-line @typescript-eslint/no-unused-vars
-  relatedVideos, // eslint-disable-line @typescript-eslint/no-unused-vars
+  relatedVideos, 
   videoEpisode, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoSeason, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoEpisodeTitle, // eslint-disable-line @typescript-eslint/no-unused-vars

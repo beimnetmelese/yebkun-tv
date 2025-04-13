@@ -243,7 +243,7 @@ function VideoPlayer() {
         clearTimeout(controlsTimeoutRef.current);
       }
     };
-  }, [isPlaying, showRelatedPanel]);
+  }, [isPlaying, showRelatedPanel, resetInactivityTimer]);
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -331,7 +331,7 @@ function VideoPlayer() {
       videoElement.removeEventListener("pause", handlePause);
       videoElement.removeEventListener("ended", handleEnded);
     };
-  }, [initialTime, isMuted]);
+  }, [initialTime, isMuted, resetInactivityTimer]);
 
   // Format time in MM:SS format
   const formatTime = (seconds: number) => {
