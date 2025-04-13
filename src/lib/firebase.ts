@@ -1,6 +1,6 @@
 // Import the functions needed from the SDKs
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+// import { getFirestore } from "firebase/firestore";
 import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 
 // Firebase configuration
@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// const db = getFirestore(app);
 const storage = getStorage(app);
 
 // Storage paths
@@ -72,6 +72,7 @@ export async function getVideosFromStorage(
           const thumbnailRef = ref(storage, thumbnailPath);
           thumbnail = await getDownloadURL(thumbnailRef);
         } catch (error) {
+          console.error("Error fetching thumbnail:", error);
           // If thumbnail doesn't exist, use a default image
           thumbnail = "/images/kids/thumb_nails/dummy.png";
         }
@@ -116,6 +117,7 @@ export async function getSeriesEpisodes(
           const thumbnailRef = ref(storage, thumbnailPath);
           thumbnail = await getDownloadURL(thumbnailRef);
         } catch (error) {
+          console.error("Error fetching thumbnail:", error);
           // If thumbnail doesn't exist, use a default image
           thumbnail = "/images/kids/thumb_nails/dummy.png";
         }
@@ -204,7 +206,7 @@ export async function getAllSeries() {
 
 // Get funny videos
 export async function getFunnyVideos() {
-  return getVideosFromStorage(STORAGE_PATHS.FUNNY_VIDEOS, "Videos", "video");
+  return getVideosFromStorage(STORAGE_PATHS.FUNNY_VIDEOS, "Videos", "movie" );
 }
 
 // Get movies

@@ -105,7 +105,7 @@ function VideoScreen({
   relatedVideos,
   videoEpisode, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoSeason, // eslint-disable-line @typescript-eslint/no-unused-vars
-  videoEpisodeTitle, // eslint-disable-line @typescript-eslint/no-unused-vars
+  videoEpisodeTitle,
   videoEpisodeDescription, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoEpisodeThumbnail, // eslint-disable-line @typescript-eslint/no-unused-vars
   videoEpisodeUrl, // eslint-disable-line @typescript-eslint/no-unused-vars
