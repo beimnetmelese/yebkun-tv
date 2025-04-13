@@ -1,16 +1,8 @@
+import { Video } from "@/lib/firebase";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-interface MostViewedCardProps {
-  id: string;
-  video: string;
-  title: string;
-  thumbnail: string;
-  type: "Stories" | "Videos" | "Movies";
-  views: number;
-  videoType?: "series" | "movie" | "story";
-}
 
 function formatViews(views: number): string {
   return views >= 1000 ? `${(views / 1000).toFixed(1)}K` : views.toString();
@@ -18,13 +10,13 @@ function formatViews(views: number): string {
 
 const MostViewedCard = ({
   id,
-  video,
+  url,
   title,
   thumbnail,
   type,
   views,
   videoType = "movie",
-}: MostViewedCardProps) => {
+}: Video) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -165,7 +157,7 @@ const MostViewedCard = ({
             onError={handleVideoError}
             preload="metadata"
           >
-            <source src={video} type="video/mp4" />
+            <source src={url} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         )}

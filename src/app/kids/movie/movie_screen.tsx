@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import SeriesBottomCard from "./series_bottom_card";
+import { Video } from "@/lib/firebase";
 
 interface Episode {
   id: string;
@@ -13,17 +14,11 @@ interface Episode {
   episodeNumber: number;
 }
 
-interface Video {
-  id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  url: string;
-  videoType: "series" | "movie" | "story";
-}
+
 
 interface VideoScreenProps {
-  videoType: "movie" | "series" | "story";
+  videoType: "movie" | "series" | "story" | 'video'
+
   videoId: string;
   videoTitle: string;
   videoDescription: string;
@@ -51,23 +46,15 @@ interface VideoScreenProps {
   videoEpisodeRelatedVideos: Episode[];
 }
 
-interface RelatedVideo {
-  id: string;
-  title: string;
-  description: string;
-  thumbnail: string;
-  url: string;
-  videoType: "series" | "movie" | "story";
-}
+
 
 // Related Video Card for Movies and Stories
 function RelatedVideoCard({
   id,
   thumbnail,
   title,
-  description,
 
-}: RelatedVideo) {
+}: Video) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -76,24 +63,19 @@ function RelatedVideoCard({
 
   return (
     <div
-      className="group relative cursor-pointer w-[280px] h-[200px] z-10"
+      className="group relative cursor-pointer w-[185px] h-[260px] z-10"
       onClick={handleClick}
     >
       <div className="w-full h-full rounded-lg relative transition-all duration-300 ease-in-out transform group-hover:scale-105 group-hover:shadow-xl group-hover:border-2 group-hover:border-red-500 group-hover:border-[4px]">
         <Image
           src={thumbnail}
           alt={title}
-          width={280}
-          height={200}
+          width={185}
+          height={260}
           className="rounded-lg w-full h-full object-cover transition-transform duration-300 ease-in-out"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-lg"></div>
-        <div className="absolute bottom-0 left-0 w-full p-3">
-          <h3 className="text-white text-md font-semibold font-[oswald] line-clamp-1">
-            {title}
-          </h3>
-          <p className="text-gray-200 text-xs line-clamp-2">{description}</p>
-        </div>
+        
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
             <PlayIcon className="h-8 w-8 text-white" />
@@ -216,6 +198,7 @@ function VideoScreen({
   };
 
   return (
+    videoUrl ? (
     <div className="flex flex-col items-center justify-center h-screen w-screen bg-black relative">
       <video
         src={videoUrl}
@@ -437,7 +420,7 @@ function VideoScreen({
                   className={`px-4 py-2 rounded-full font-[oswald] ${
                     relatedCurrentPage === 0
                       ? "text-white cursor-not-allowed"
-                      : "bg-white text-black"
+                      : ""
                   }`}
                 >
                   <Image
@@ -464,6 +447,9 @@ function VideoScreen({
                         description={video.description}
                         url={video.url}
                         videoType={video.videoType}
+                        views={video.views}
+                        duration={video.duration}
+                        type={video.videoType as "Videos" | "Movies" | "Stories" | "Series"}
                       />
                     ))}
                 </div>
@@ -484,7 +470,7 @@ function VideoScreen({
                     (relatedCurrentPage + 1) * relatedPageSize >=
                     relatedVideos.length
                       ? "text-white cursor-not-allowed"
-                      : "bg-white text-black"
+                      : ""
                   }`}
                 >
                   <Image
@@ -500,6 +486,9 @@ function VideoScreen({
           </div>
         )}
     </div>
+  ) : (
+    <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen">Loading...</div>
+  )
   );
 }
 

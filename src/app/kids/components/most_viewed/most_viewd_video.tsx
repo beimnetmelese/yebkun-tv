@@ -1,91 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import MostViewedCard from "./most_viewed_card";
+import { Video } from "@/lib/firebase";
 
-interface NewStoriesCardProps {
-  id: string;
-  video: string;
-  title: string;
-  thumbnail: string;
-  type: "Stories" | "Videos" | "Movies";
-  views: number;
-  videoType?: "series" | "movie" | "story";
-}
 
-const mostViewedMovies: NewStoriesCardProps[] = [
-  {
-    id: "nesha",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Ice Age",
-    thumbnail: "/images/kids/thumb_nails/ice_age.png",
-    type: "Movies",
-    views: 3542,
-    videoType: "movie",
-  },
-
-  {
-    id: "strange_world",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Strange World",
-    thumbnail: "/images/kids/thumb_nails/strange_world.png",
-    type: "Stories",
-    views: 8765,
-    videoType: "story",
-  },
-
-  {
-    id: "inside_out",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Inside Out",
-    thumbnail: "/images/kids/thumb_nails/inside_out.png",
-    type: "Videos",
-    views: 5421,
-    videoType: "series",
-  },
-
-  {
-    id: "cartoon_network",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Cartoon Network",
-    thumbnail: "/images/kids/thumb_nails/cartoon.png",
-    type: "Videos",
-    views: 7621,
-    videoType: "series",
-  },
-  {
-    id: "ice_age_2",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Ice Age 2",
-    thumbnail: "/images/kids/thumb_nails/ice_age.png",
-    type: "Movies",
-    views: 9654,
-    videoType: "movie",
-  },
-];
-
-export default function MostViewedVideo() {
+export default function MostViewedVideo({ videos }: { videos: Video[] }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
-  const [visibleCards, setVisibleCards] = useState(3);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 1280) {
-        setVisibleCards(2);
-      } else if (width < 1920) {
-        setVisibleCards(3);
-      } else if (width < 3840) {
-        setVisibleCards(4);
-      } else {
-        setVisibleCards(5);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  console.log("videos");
+  console.log(videos);
 
   useEffect(() => {
     const checkScroll = () => {
@@ -131,11 +55,6 @@ export default function MostViewedVideo() {
     }
   };
 
-  // Display more cards than just visible to enable smooth scrolling
-  const displayedMovies = mostViewedMovies.slice(
-    0,
-    Math.min(mostViewedMovies.length, visibleCards * 2)
-  );
 
   return (
     <div
@@ -182,16 +101,18 @@ export default function MostViewedVideo() {
             paddingRight: "4px",
           }}
         >
-          {displayedMovies.map((movie) => (
-            <div key={movie.title} className="snap-start flex-shrink-0">
+          {videos.map((video) => (
+            <div key={video.title} className="snap-start flex-shrink-0">
               <MostViewedCard
-                id={movie.id}
-                video={movie.video}
-                title={movie.title}
-                thumbnail={movie.thumbnail}
-                type={movie.type}
-                views={movie.views}
-                videoType={movie.videoType}
+                id={video.id}
+                url={video.url}
+                title={video.title}
+                thumbnail={video.thumbnail}
+                type={video.type}
+                views={video.views}
+                videoType={video.videoType}
+                description={video.description}
+                duration={video.duration}
               />
             </div>
           ))}

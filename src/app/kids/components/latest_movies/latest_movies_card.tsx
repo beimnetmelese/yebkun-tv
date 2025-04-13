@@ -1,17 +1,8 @@
+import { Video } from "@/lib/firebase";
 import { Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-
-interface LatestMoviesCardProps {
-  id: string;
-  thumbnail: string;
-  title: string;
-  views: number;
-  video: string;
-  type: "Stories" | "Videos" | "Movies";
-  videoType?: "series" | "movie" | "story";
-}
 
 function formatViews(views: number): string {
   return views >= 1000 ? `${(views / 1000).toFixed(1)}K` : views.toString();
@@ -24,15 +15,7 @@ function formatDuration(seconds: number): string {
   return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 }
 
-const LatestMoviesCard = ({
-  id,
-  thumbnail,
-  title,
-  views,
-  video,
-  type,
-  videoType = "movie",
-}: LatestMoviesCardProps) => {
+const LatestMoviesCard = ({ video }: { video: Video }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -42,22 +25,26 @@ const LatestMoviesCard = ({
   const [duration, setDuration] = useState(0);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const playPromiseRef = useRef<Promise<void> | null>(null);
-
+  console.log("latest movies card");
+  console.log(`duration: ${duration}`);
   useEffect(() => {
     // Load saved progress from localStorage if exists
-    const savedProgress = localStorage.getItem(`movie-progress-${id}`);
+    const savedProgress = localStorage.getItem(`movie-progress-${video.id}`);
     if (savedProgress) {
       const parsedProgress = parseInt(savedProgress, 10);
       setVideoProgress(parsedProgress);
     }
-  }, [id]);
+  }, [video.id]);
 
   // Save progress to localStorage when component unmounts or progress changes
   useEffect(() => {
     if (videoProgress > 0) {
-      localStorage.setItem(`movie-progress-${id}`, videoProgress.toString());
+      localStorage.setItem(
+        `movie-progress-${video.id}`,
+        videoProgress.toString()
+      );
     }
-  }, [id, videoProgress]);
+  }, [video.id, videoProgress]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -194,7 +181,7 @@ const LatestMoviesCard = ({
       onMouseLeave={handleMouseLeave}
     >
       <Link
-        href={`/kids/movie/${encodeURIComponent(id)}`}
+        href={`/kids/movie/${encodeURIComponent(video.id)}`}
         className="block w-full h-full"
       >
         {/* Video Element */}
@@ -206,13 +193,13 @@ const LatestMoviesCard = ({
             }`}
             muted
             playsInline
-            poster={thumbnail}
+            poster={video.thumbnail}
             onTimeUpdate={handleVideoTimeUpdate}
             onLoadedData={handleVideoLoaded}
             onError={handleVideoError}
             preload="none"
           >
-            <source src={video} type="video/mp4" />
+            <source src={video.url} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         )}
@@ -226,8 +213,8 @@ const LatestMoviesCard = ({
           }`}
         >
           <Image
-            src={thumbnail}
-            alt={title}
+            src={video.thumbnail}
+            alt={video.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 270px"
             className="object-cover"
@@ -267,7 +254,7 @@ const LatestMoviesCard = ({
         {/* Views */}
         <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge flex items-center">
           <Eye className="w-4 h-4 mr-2" />
-          <span>{formatViews(views)}</span>
+          <span>{formatViews(video.views || 0)}</span>
         </div>
 
         {/* Progress Bar */}
@@ -287,22 +274,12 @@ const LatestMoviesCard = ({
         {/* Title */}
         <div className="absolute bottom-0 left-0 w-full p-2 flex flex-row items-center justify-between">
           <h3 className="text-white font-[400] tv-text-title line-clamp-1">
-            {title}
+            {video.title}
           </h3>
           <p className="text-white font-[400] tv-text-title line-clamp-1">
-            {formatDuration(duration)}
+            {formatDuration(parseInt(video.duration))}
           </p>
         </div>
-
-        <span className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
-          {type}
-        </span>
-
-        {videoType && (
-          <span className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge">
-            {videoType}
-          </span>
-        )}
       </Link>
     </div>
   );

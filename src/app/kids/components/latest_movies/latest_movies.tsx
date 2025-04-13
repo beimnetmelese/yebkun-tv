@@ -1,127 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import LatestMoviesCard from "./latest_movies_card";
+import { Video } from "@/lib/firebase";
 
-interface NewStoriesCardProps {
-  id: string;
-  video: string;
-  title: string;
-  thumbnail: string;
-  type: "Stories" | "Videos" | "Movies";
-  views: number;
-  videoType?: "series" | "movie" | "story";
-}
 
-const latestMovies: NewStoriesCardProps[] = [
-  {
-    id: "Funny Animals 1",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Funny Animals 1",
-    thumbnail: "/images/kids/thumb_nails/cow.png",
-    type: "Videos",
-    views: 100,
-    videoType: "movie",
-  },
-
-  {
-    id: "Funny Animals 2",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Funny Animals 2",
-    thumbnail: "/images/kids/thumb_nails/cow.png",
-    type: "Videos",
-    views: 200,
-    videoType: "movie",
-  },
-
-  {
-    id: "Funny Animals 3",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Funny Animals 3",
-    thumbnail: "/images/kids/thumb_nails/cow.png",
-    type: "Videos",
-    views: 300,
-    videoType: "movie",
-  },
-
-  {
-    id: "Funny Babies",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Funny Babies",
-    thumbnail: "/images/kids/thumb_nails/cow.png",
-    type: "Videos",
-    views: 400,
-    videoType: "movie",
-  },
-  {
-    id: "Funny Babies 2",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Funny Babies 2",
-    thumbnail: "/images/kids/thumb_nails/cow.png",
-    type: "Videos",
-    views: 500,
-    videoType: "movie",
-  },
-  {
-    id: "Funny Animals 4",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Funny Animals 4",
-    thumbnail: "/images/kids/thumb_nails/cow.png",
-    type: "Videos",
-    views: 600,
-    videoType: "movie",
-  },
-  {
-    id: "Funny Animals 5",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Funny Animals 5",
-    thumbnail: "/images/kids/thumb_nails/cow.png",
-    type: "Videos",
-    views: 700,
-    videoType: "movie",
-  },
-  {
-    id: "Funny Animals 6",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Funny Animals 6",
-    thumbnail: "/images/kids/thumb_nails/cow.png",
-    type: "Videos",
-    views: 800,
-    videoType: "movie",
-  },
-  {
-    id: "Funny Babies 3",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Funny Babies 3",
-    thumbnail: "/images/kids/thumb_nails/cow.png",
-    type: "Videos",
-    views: 900,
-    videoType: "movie",
-  },
-];
-
-export default function LatestMovies() {
+export default function LatestVideos({ videos }: {videos: Video[]}) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [visibleCards, setVisibleCards] = useState(3);
+
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 1280) {
-        setVisibleCards(2);
-      } else if (width < 1920) {
-        setVisibleCards(3);
-      } else if (width < 3840) {
-        setVisibleCards(4);
-      } else {
-        setVisibleCards(5);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  console.log("movies in latest movies");
+  console.log(videos);
+  console.log(typeof videos);
+  console.log(Array.isArray(videos));
 
   useEffect(() => {
     const checkScroll = () => {
@@ -167,12 +57,6 @@ export default function LatestMovies() {
     }
   };
 
-  // Display more cards than just visible to enable smooth scrolling
-  const displayedMovies = latestMovies.slice(
-    0,
-    Math.min(latestMovies.length, visibleCards * 2)
-  );
-
   return (
     <div
       className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-2"
@@ -195,16 +79,11 @@ export default function LatestMovies() {
             paddingRight: "2px",
           }}
         >
-          {displayedMovies.map((movie) => (
-            <div key={movie.title} className="snap-start flex-shrink-0">
+          {videos.map((video) => (
+            <div key={video.id} className="snap-start flex-shrink-0">
               <LatestMoviesCard
-                id={movie.id}
-                video={movie.video}
-                title={movie.title}
-                thumbnail={movie.thumbnail}
-                type={movie.type}
-                views={movie.views}
-                videoType={movie.videoType}
+                video={video}
+
               />
             </div>
           ))}

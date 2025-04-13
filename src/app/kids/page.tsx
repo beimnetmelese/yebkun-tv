@@ -7,8 +7,24 @@ import { FC, useEffect, useRef, useState } from "react";
 import Home from "./pages/home";
 import MoviesAndStories from "./pages/movies_and_stories";
 import Stories from "./pages/stories";
-import Video from "./pages/video";
+import { Episode, getAllContent, Video } from "@/lib/firebase";
+import MostViewedVideo from "./components/most_viewed/most_viewd_video";
 
+
+export interface Series {
+  id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  url: string;
+  views: number;
+  duration: string;
+  type: string;
+  videoType: string;
+  episodes: Episode[];
+  seasons: number;
+  numberOfEpisodes: number;
+}
 // Generate consistent positions and animations
 const useClientSideRendering = () => {
   const [isClient, setIsClient] = useState(false);
@@ -30,6 +46,32 @@ const KidsPage: FC = () => {
     videos: "/images/kids/nav/videos.svg",
     movies: "/images/kids/nav/movies.svg",
   });
+
+ 
+
+    
+  // fetch data from firebase
+  const [stories, setStories] = useState<Video[]>([]);
+  const [movies, setMovies] = useState<Video[]>([]);
+  const [videos, setVideos] = useState<Video[]>([]);  
+  const [series, setSeries] = useState<Series[]>([]);
+  const [funnyVideos, setFunnyVideos] = useState<Video[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const content = await getAllContent();
+      setStories(content.stories);
+      setMovies(content.movies);
+      setVideos(content.movies);
+      setFunnyVideos(content.movies);
+      setSeries(content.series);
+      console.log(content);
+    };
+
+    fetchData();
+  }, []);   
+
+
 
   // Preload nav images on component mount
   useEffect(() => {
@@ -309,12 +351,12 @@ const KidsPage: FC = () => {
           paddingRight: "var(--space-lg)",
         }}
       >
-        {activeNav === "home" && <Home />}
-        {activeNav === "stories" && <Stories />}
+        {activeNav === "home" && <Home stories={stories} videos={funnyVideos} series={series} movies={movies} />}
+        {activeNav === "stories" && <Stories stories={stories} />}
 
-        {activeNav === "videos" && <Video />}
+        {activeNav === "videos" && <MostViewedVideo videos={videos} />}
 
-        {activeNav === "movies" && <MoviesAndStories />}
+        {activeNav === "movies" && <MoviesAndStories series={series} movies={movies} />}
       </main>
 
       {/* Responsive helper during development */}

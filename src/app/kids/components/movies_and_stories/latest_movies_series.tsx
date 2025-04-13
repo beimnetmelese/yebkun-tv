@@ -1,178 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import MoviesAndSeriesCard from "./movies_and_stories_card";
+import { Series } from "../../page";
+import { Video } from "@/lib/firebase";
 
-interface NewStoriesCardProps {
-  id: string;
-  video: string;
-  title: string;
-  thumbnail: string;
-  type: "Stories" | "Videos" | "Movies" | "Series";
-  views: number;
-  videoType?: "series" | "movie" | "story";
-}
 
-const mostViewedMovies: NewStoriesCardProps[] = [
-  {
-    id: "the_super_mario_bros",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "The Super Mario Bros",
-    thumbnail: "/images/kids/thumb_nails/ice_age.png",
-    type: "Series",
-    views: 3542,
-    videoType: "movie",
-  },
-  {
-    id: "the_super_mario_bros1  ",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "The Super Mario Bros",
-    thumbnail: "/images/kids/thumb_nails/ice_age.png",
-    type: "Series",
-    views: 3542,
-    videoType: "movie",
-  },
-  {
-    id: "the_super_mario_bros33",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "The Super Mario Bros",
-    thumbnail: "/images/kids/thumb_nails/ice_age.png",
-    type: "Series",
-    views: 3542,
-    videoType: "movie",
-  },
 
-  {
-    id: "the_lion_king",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "The Lion King",
-    thumbnail: "/images/kids/thumb_nails/strange_world.png",
-    type: "Series",
-    views: 8765,
-    videoType: "story",
-  },
-
-  {
-    id: "kung_fu_panda_3",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Kung Fu Panda 3",
-    thumbnail: "/images/kids/thumb_nails/inside_out.png",
-    type: "Videos",
-    views: 5421,
-    videoType: "series",
-  },
-
-  {
-    id: "tom_and_jerry3",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Tom and Jerry",
-    thumbnail: "/images/kids/thumb_nails/cartoon.png",
-    type: "Videos",
-    views: 7621,
-    videoType: "series",
-  },
-  {
-    id: "mufasa",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Mufasa",
-    thumbnail: "/images/kids/thumb_nails/ice_age.png",
-    type: "Movies",
-    views: 9654,
-    videoType: "movie",
-  },
-  {
-    id: "the_super_mario_bros1",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "The Super Mario Bros",
-    thumbnail: "/images/kids/thumb_nails/ice_age.png",
-    type: "Series",
-    views: 3542,
-    videoType: "movie",
-  },
-  {
-    id: "kung_fu_panda_33",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Kung Fu Panda 3",
-    thumbnail: "/images/kids/thumb_nails/inside_out.png",
-    type: "Videos",
-    views: 5421,
-    videoType: "series",
-  },
-
-  {
-    id: "tom_and_jerry2",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Tom and Jerry",
-    thumbnail: "/images/kids/thumb_nails/cartoon.png",
-    type: "Videos",
-    views: 7621,
-    videoType: "series",
-  },
-  {
-    id: "kung_fu_panda_31",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Kung Fu Panda 3",
-    thumbnail: "/images/kids/thumb_nails/inside_out.png",
-    type: "Videos",
-    views: 5421,
-    videoType: "series",
-  },
-
-  {
-    id: "tom_and_jerry1",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Tom and Jerry",
-    thumbnail: "/images/kids/thumb_nails/cartoon.png",
-    type: "Videos",
-    views: 7621,
-    videoType: "series",
-  },
-  {
-    id: "kung_fu_panda_311",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Kung Fu Panda 3",
-    thumbnail: "/images/kids/thumb_nails/inside_out.png",
-    type: "Videos",
-    views: 5421,
-    videoType: "series",
-  },
-
-  {
-    id: "tom_and_jerry11",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Tom and Jerry",
-    thumbnail: "/images/kids/thumb_nails/cartoon.png",
-    type: "Videos",
-    views: 7621,
-    videoType: "series",
-  },
-  {
-    id: "kung_fu_panda_311221",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Kung Fu Panda 3",
-    thumbnail: "/images/kids/thumb_nails/inside_out.png",
-    type: "Videos",
-    views: 5421,
-    videoType: "series",
-  },
-
-  {
-    id: "tom_and_jerry11313",
-    video: "/images/kids/sample_videos/nesha.mp4",
-    title: "Tom and Jerry",
-    thumbnail: "/images/kids/thumb_nails/cartoon.png",
-    type: "Videos",
-    views: 7621,
-    videoType: "series",
-  },
-];
-
-export default function LatestMoviesSeries() {
+export default function LatestMoviesSeries({ movies, series} : {movies: Video[], series: Series[]}) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
-
- 
-
+  console.log(series)
   useEffect(() => {
     const checkScroll = () => {
       const container = scrollContainerRef.current;
@@ -217,7 +55,6 @@ export default function LatestMoviesSeries() {
     }
   };
 
-
   return (
     <div
       className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-2"
@@ -240,11 +77,11 @@ export default function LatestMoviesSeries() {
             paddingRight: "2px",
           }}
         >
-          {mostViewedMovies.map((movie) => (
+          {movies.map((movie) => (
             <div key={movie.id} className="snap-start flex-shrink-0">
               <MoviesAndSeriesCard
                 id={movie.id}
-                video={movie.video}
+                video={movie.url}
                 title={movie.title}
                 thumbnail={movie.thumbnail}
                 type={movie.type}

@@ -1,380 +1,15 @@
+import { Video } from "@/lib/firebase";
 import { useEffect, useRef, useState } from "react";
-import LatestMoviesSeries from "../components/movies_and_stories/latest_movies_series";
-
-import RelatedContent from "../components/related_content/related_content";
 import LatestMoviesCard from "../components/movies_and_stories/latest_movies_card";
+import LatestMoviesSeries from "../components/movies_and_stories/latest_movies_series";
+import RelatedContent from "../components/related_content/related_content";
+import { Series } from "../page";
 
-type MediaType = "Stories" | "Videos" | "Movies";
-type VideoType = "series" | "movie" | "story";
-
-interface MediaItem {
-  id: string;
-  video: string;
-  title: string;
-  thumbnail: string;
-  type: MediaType;
-  views: number;
-  videoType: VideoType;
-}
-
-interface MediaCategory {
-  title: string;
-  items: MediaItem[];
-}
-
-// Define movie and series categories
-const mediaCategories: MediaCategory[] = [
-  {
-    title: "Latest Movies",
-    items: [
-      {
-        id: "the_super_mario_bros",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "The Super Mario Bros",
-        thumbnail: "/images/kids/thumb_nails/ice_age.png",
-        type: "Movies",
-        views: 3542,
-        videoType: "movie",
-      },
-      {
-        id: "kung_fu_panda_3",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Kung Fu Panda 3",
-        thumbnail: "/images/kids/thumb_nails/inside_out.png",
-        type: "Movies",
-        views: 5421,
-        videoType: "movie",
-      },
-      {
-        id: "mufasa",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Mufasa",
-        thumbnail: "/images/kids/thumb_nails/ice_age.png",
-        type: "Movies",
-        views: 9654,
-        videoType: "movie",
-      },
-      {
-        id: "the_lion_king",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "The Lion King",
-        thumbnail: "/images/kids/thumb_nails/strange_world.png",
-        type: "Movies",
-        views: 8765,
-        videoType: "movie",
-      },
-      {
-        id: "zootopia",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Zootopia",
-        thumbnail: "/images/kids/thumb_nails/cartoon.png",
-        type: "Movies",
-        views: 7621,
-        videoType: "movie",
-      },
-      {
-        id: "kung_fu_panda_3_2",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Kung Fu Panda 3",
-        thumbnail: "/images/kids/thumb_nails/inside_out.png",
-        type: "Movies",
-        views: 5421,
-        videoType: "movie",
-      },
-      {
-        id: "mufasa1",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Mufasa",
-        thumbnail: "/images/kids/thumb_nails/ice_age.png",
-        type: "Movies",
-        views: 9654,
-        videoType: "movie",
-      },
-      {
-        id: "the_lion_king1",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "The Lion King",
-        thumbnail: "/images/kids/thumb_nails/strange_world.png",
-        type: "Movies",
-        views: 8765,
-        videoType: "movie",
-      },
-      {
-        id: "zootopia1",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Zootopia",
-        thumbnail: "/images/kids/thumb_nails/cartoon.png",
-        type: "Movies",
-        views: 7621,
-        videoType: "movie",
-      },
-      {
-        id: "the_lion_king1ewr",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "The Lion King",
-        thumbnail: "/images/kids/thumb_nails/strange_world.png",
-        type: "Movies",
-        views: 8765,
-        videoType: "movie",
-      },
-      {
-        id: "zootopia1er",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Zootopia",
-        thumbnail: "/images/kids/thumb_nails/cartoon.png",
-        type: "Movies",
-        views: 7621,
-        videoType: "movie",
-      },
-    ],
-  },
-  {
-    title: "Our Stories",
-    items: [
-      {
-        id: "tom_and_jerry",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Tom and Jerry",
-        thumbnail: "/images/kids/thumb_nails/cartoon.png",
-        type: "Stories",
-        views: 7621,
-        videoType: "story",
-      },
-      {
-        id: "oscars_oasis1_1",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Oscar's Oasis",
-        thumbnail: "/images/kids/thumb_nails/strange_world.png",
-        type: "Stories",
-        views: 8765,
-        videoType: "story",
-      },
-      {
-        id: "oggy_and_the_cockroaches1_1",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Oggy and the Cockroaches",
-        thumbnail: "/images/kids/thumb_nails/inside_out.png",
-        type: "Stories",
-        views: 5421,
-        videoType: "story",
-      },
-      {
-        id: "shaun_the_sheep1_1",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Shaun the Sheep",
-        thumbnail: "/images/kids/thumb_nails/ice_age.png",
-        type: "Stories",
-        views: 3542,
-        videoType: "story",
-      },
-      {
-        id: "zig_and_sharko1_1",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Zig & Sharko",
-        thumbnail: "/images/kids/thumb_nails/cartoon.png",
-        type: "Stories",
-        views: 9654,
-        videoType: "story",
-      },
-      {
-        id: "oscars_oasis1_2",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Oscar's Oasis",
-        thumbnail: "/images/kids/thumb_nails/strange_world.png",
-        type: "Stories",
-        views: 8765,
-        videoType: "story",
-      },
-      {
-        id: "oggy_and_the_cockroaches1_2",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Oggy and the Cockroaches",
-        thumbnail: "/images/kids/thumb_nails/inside_out.png",
-        type: "Stories",
-        views: 5421,
-        videoType: "story",
-      },
-      {
-        id: "shaun_the_sheep1_2",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Shaun the Sheep",
-        thumbnail: "/images/kids/thumb_nails/ice_age.png",
-        type: "Stories",
-        views: 3542,
-        videoType: "story",
-      },
-      {
-        id: "zig_and_sharko1_2",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Zig & Sharko",
-        thumbnail: "/images/kids/thumb_nails/cartoon.png",
-        type: "Stories",
-        views: 9654,
-        videoType: "story",
-      },
-      {
-        id: "shaun_the_sheep1_21",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Shaun the Sheep",
-        thumbnail: "/images/kids/thumb_nails/ice_age.png",
-        type: "Stories",
-        views: 3542,
-        videoType: "story",
-      },
-      {
-        id: "zig_and_sharko1_21",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Zig & Sharko",
-        thumbnail: "/images/kids/thumb_nails/cartoon.png",
-        type: "Stories",
-        views: 9654,
-        videoType: "story",
-      },
-      {
-        id: "shaun_the_sheep1_223",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Shaun the Sheep",
-        thumbnail: "/images/kids/thumb_nails/ice_age.png",
-        type: "Stories",
-        views: 3542,
-        videoType: "story",
-      },
-      {
-        id: "zig_and_sharko1_232e",
-        video: "/images/kids/sample_videos/nesha.mp4",
-        title: "Zig & Sharko",
-        thumbnail: "/images/kids/thumb_nails/cartoon.png",
-        type: "Stories",
-        views: 9654,
-        videoType: "story",
-      },
-    ],
-  },
-];
-
-// Import the episodes database
-const episodesDatabase = {
-  nesha: [
-    {
-      id: "ep1",
-      title: "Nesha and the Monkey",
-      description: "Nesha meets a cheeky monkey who steals her map.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 1,
-    },
-    {
-      id: "ep2",
-      title: "The River Challenge",
-      description: "Crossing a wild river isn't easy!",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 2,
-    },
-    {
-      id: "ep3",
-      title: "Lost in the Jungle",
-      description: "A sudden storm gets Nesha lost.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 3,
-    },
-    {
-      id: "ep4",
-      title: "Jungle Dance Party",
-      description: "The animals throw a party for Nesha.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 4,
-    },
-    {
-      id: "ep5",
-      title: "Map to the Waterfall",
-      description: "Nesha follows a mysterious treasure map.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 5,
-    },
-    {
-      id: "ep6",
-      title: "Echo Cave",
-      description: "Strange voices in a cave reveal a secret.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 6,
-    },
-    {
-      id: "ep7",
-      title: "The Bamboo Bridge",
-      description: "Crossing a shaky bridge over crocodiles!",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 7,
-    },
-    {
-      id: "ep8",
-      title: "Forest Maze",
-      description: "Nesha races against time in a jungle maze.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 8,
-    },
-    {
-      id: "ep9",
-      title: "Jungle Friends Forever",
-      description: "Nesha says goodbye to her animal friends.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 9,
-    },
-    {
-      id: "ep10",
-      title: "Treasure Under the Tree",
-      description: "The journey ends with a sparkling surprise.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 10,
-    },
-    {
-      id: "ep11",
-      title: "Nesha's New Adventure",
-      description: "Nesha begins a new journey in the mountains.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 11,
-    },
-    {
-      id: "ep12",
-      title: "Mountain Mystery",
-      description: "Strange footprints lead to an unexpected discovery.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 12,
-    },
-    {
-      id: "ep13",
-      title: "Snow Friends",
-      description: "Nesha meets mountain animals during a snowstorm.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 13,
-    },
-    {
-      id: "ep14",
-      title: "The Hidden Cave",
-      description: "A cave holds ancient secrets and beautiful crystals.",
-      thumbnail: "/images/kids/thumb_nails/ice_age.png",
-      url: "/images/kids/sample_videos/nesha.mp4",
-      episodeNumber: 14,
-    },
-  ],
-};
-
-function MediaRow({ category }: { category: MediaCategory }) {
+function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
-
+  console.log(series)
   useEffect(() => {
     const checkScroll = () => {
       const container = scrollContainerRef.current;
@@ -421,9 +56,6 @@ function MediaRow({ category }: { category: MediaCategory }) {
 
   return (
     <div className="pb-1">
-      <h5 className="text-black tv-text-title font-[500] font-genos mb-2">
-        {category.title}
-      </h5>
       <div className="relative w-full">
         <div
           ref={scrollContainerRef}
@@ -436,11 +68,11 @@ function MediaRow({ category }: { category: MediaCategory }) {
             paddingRight: "4px",
           }}
         >
-          {category.items.map((item) => (
+          {movies.map((item) => (
             <div key={item.id} className="snap-start flex-shrink-0">
               <LatestMoviesCard
                 id={item.id}
-                video={item.video}
+                video={item.url}
                 title={item.title}
                 thumbnail={item.thumbnail}
                 type={item.type}
@@ -503,18 +135,23 @@ function MediaRow({ category }: { category: MediaCategory }) {
   );
 }
 
-export default function MoviesAndStories() {
+const MoviesAndStories = ({
+  series,
+  movies,
+}: {
+  series: Series[];
+  movies: Video[];
+}) => {
+
   return (
     <div className="flex flex-col h-full">
       {/* Fixed top section */}
       <div className="flex-shrink-0">
-        <LatestMoviesSeries />
+        <LatestMoviesSeries movies={movies} series={series} />
       </div>
 
       {/* Scrollable media categories */}
       <div className="flex flex-col mt-4">
-        
-
         <div
           className="overflow-y-auto px-4"
           style={{
@@ -522,9 +159,7 @@ export default function MoviesAndStories() {
           }} /* Reduced height to make room for related content */
         >
           <div className="space-y-1">
-            {mediaCategories.map((category) => (
-              <MediaRow key={category.title} category={category} />
-            ))}
+            <MediaRow movies={movies} series={series} />
           </div>
         </div>
       </div>
@@ -534,14 +169,16 @@ export default function MoviesAndStories() {
         {/* Series episodes */}
         <RelatedContent
           contentType="series"
-          episodes={episodesDatabase.nesha.map((ep) => ({
-            id: ep.id,
-            title: ep.title,
-            thumbnail: ep.thumbnail,
-            episodeNumber: ep.episodeNumber,
-            duration: "26:00", // Add a fixed duration since it's not in the original data
-          }))}
-          seasons={2}
+          episodes={series
+            .map((s) => s.episodes)
+            .flat()
+            .map((ep) => ({
+              id: ep.id,
+              title: ep.title,
+              thumbnail: ep.thumbnail,
+              episodeNumber: ep.episodeNumber,
+              duration: "26:00", // Add a fixed duration since it's not in the original data
+            }))}
         />
 
         {/* Related movies */}
@@ -583,4 +220,6 @@ export default function MoviesAndStories() {
       </div>
     </div>
   );
-}
+};
+
+export default MoviesAndStories;
