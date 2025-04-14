@@ -67,10 +67,10 @@ export async function getVideosFromStorage(
         const name = item.name.replace(/\.[^/.]+$/, ""); // Remove file extension
         const thumbnailPath = `/images/kids/thumb_nails/${name}.png`;
         let thumbnail;
-
+        console.log("thumbnailPath");
+        console.log(thumbnailPath);
         try {
-          const thumbnailRef = ref(storage, thumbnailPath);
-          thumbnail = await getDownloadURL(thumbnailRef);
+          thumbnail = `/images/kids/thumb_nails/${name}.png`;
         } catch (error) {
           console.error("Error fetching thumbnail:", error);
           // If thumbnail doesn't exist, use a default image
@@ -110,12 +110,12 @@ export async function getSeriesEpisodes(
       result.items.map(async (item, index) => {
         const url = await getDownloadURL(item);
         const name = item.name.replace(/\.[^/.]+$/, ""); // Remove file extension
-        const thumbnailPath = `/images/kids/thumb_nails/${name}.png`;
         let thumbnail;
 
         try {
-          const thumbnailRef = ref(storage, thumbnailPath);
-          thumbnail = await getDownloadURL(thumbnailRef);
+          thumbnail = `/images/kids/thumb_nails/${encodeURIComponent(
+            name
+          )}.png`;
         } catch (error) {
           console.error("Error fetching thumbnail:", error);
           // If thumbnail doesn't exist, use a default image
@@ -206,7 +206,7 @@ export async function getAllSeries() {
 
 // Get funny videos
 export async function getFunnyVideos() {
-  return getVideosFromStorage(STORAGE_PATHS.FUNNY_VIDEOS, "Videos", "movie" );
+  return getVideosFromStorage(STORAGE_PATHS.FUNNY_VIDEOS, "Videos", "movie");
 }
 
 // Get movies

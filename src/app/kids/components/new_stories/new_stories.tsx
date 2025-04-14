@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import NewStoriesCard from "./new_stories_card";
 
-
 interface Story {
   id: string;
   url: string;
@@ -12,16 +11,11 @@ interface Story {
   videoType?: "series" | "movie" | "story";
 }
 
-
-
-
-export default function NewStories({stories}: {stories: Story[]}) {
+export default function NewStories({ stories }: { stories: Story[] }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
-
-
 
   useEffect(() => {
     const checkScroll = () => {
@@ -67,13 +61,13 @@ export default function NewStories({stories}: {stories: Story[]}) {
     }
   };
 
-
-  return (
-    stories.length > 0 ? (
+  return stories.length > 0 ? (
     <div
-      className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-4"
+      className="flex flex-col rounded-lg bg-black/30 backdrop-blur-sm p-4 overflow-hidden"
       style={{
         borderRadius: "var(--radius)",
+        width: "fit-content",
+        maxWidth: "100%",
       }}
     >
       <h5 className="text-black tv-text-title font-[500] font-genos mb-2">
@@ -155,6 +149,5 @@ export default function NewStories({stories}: {stories: Story[]}) {
     </div>
   ) : (
     <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
-  )
   );
 }

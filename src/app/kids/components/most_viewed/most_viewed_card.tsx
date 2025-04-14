@@ -4,17 +4,15 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 
-function formatViews(views: number): string {
-  return views >= 1000 ? `${(views / 1000).toFixed(1)}K` : views.toString();
-}
+// function formatViews(views: number): string {
+//   return views >= 1000 ? `${(views / 1000).toFixed(1)}K` : views.toString();
+// }
 
 const MostViewedCard = ({
   id,
   url,
   title,
   thumbnail,
-  type,
-  views,
   videoType = "movie",
 }: Video) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -178,11 +176,7 @@ const MostViewedCard = ({
             className="object-cover"
             priority
           />
-          <div
-            className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 ${
-              isHovered ? "opacity-0" : "opacity-100"
-            }`}
-          />
+       
         </div>
 
         {/* Play Icon */}
@@ -208,7 +202,7 @@ const MostViewedCard = ({
         </div>
 
         {/* Type & Views */}
-        <div className="absolute bottom-0 left-0 w-full p-3">
+        {/* <div className="absolute bottom-0 left-0 w-full p-3">
           <div className="flex items-center justify-between">
             <h3 className="text-white font-medium tv-text-title line-clamp-1 mr-2">
               {title}
@@ -222,7 +216,7 @@ const MostViewedCard = ({
               </span>
             </div>
           </div>
-        </div>
+        </div> */}
       </Link>
     </div>
   );

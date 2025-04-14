@@ -188,11 +188,7 @@ const MoviesAndSeriesCard = ({
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
           />
-          <div
-            className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 ${
-              isHovered ? "opacity-0" : "opacity-100"
-            }`}
-          />
+
         </div>
 
         {/* Play Icon */}
