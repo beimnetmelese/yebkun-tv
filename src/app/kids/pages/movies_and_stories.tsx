@@ -2,7 +2,6 @@ import { Video } from "@/lib/firebase";
 import { useEffect, useRef, useState } from "react";
 import LatestMoviesCard from "../components/movies_and_stories/latest_movies_card";
 import LatestMoviesSeries from "../components/movies_and_stories/latest_movies_series";
-import RelatedContent from "../components/related_content/related_content";
 import { Series } from "../page";
 
 function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
@@ -57,6 +56,7 @@ function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
   return (
     <div className="pb-1">
       <div className="relative w-full">
+        <h1 className="text-black font-genos font-[500] text-sm">Latest Movies</h1>
         <div
           ref={scrollContainerRef}
           className="flex overflow-x-auto py-1 snap-x scrollbar-hide"
@@ -69,7 +69,7 @@ function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
           }}
         >
           {movies.map((item) => (
-            <div key={item.id} className="snap-start flex-shrink-0">
+            <div key={item.id} className="snap-start flex">
               <LatestMoviesCard
                 id={item.id}
                 video={item.url}
@@ -78,6 +78,82 @@ function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
                 type={item.type}
                 views={item.views}
                 videoType={item.videoType}
+              />
+            </div>
+          ))}
+        </div>
+
+        {showLeftScroll && (
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+            aria-label="Scroll left"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 18L9 12L15 6"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        )}
+
+        {showRightScroll && (
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+            aria-label="Scroll right"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 6L15 12L9 18"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        )}
+      </div>
+      <div className="relative w-full">
+        <h1 className="text-black font-genos font-[500] text-sm">Our Series</h1>
+        <div
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto py-1 snap-x scrollbar-hide"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            gap: "16px",
+            paddingLeft: "4px",
+            paddingRight: "4px",
+          }}
+        >
+          {series.map((item) => (
+            <div key={item.id} className="snap-start flex">
+              <LatestMoviesCard
+                id={item.id}
+                video={item.url}
+                title={item.title}
+                thumbnail={item.thumbnail}
+                type={item.type as 'Series'|'Movies'|'Videos'}
+                views={item.views}
+                videoType={item.videoType as 'series'|'movie'|'story'}
               />
             </div>
           ))}
@@ -146,7 +222,14 @@ const MoviesAndStories = ({
   return (
     <div className="flex flex-col h-full">
       {/* Fixed top section */}
-      <div className="flex-shrink-0">
+      <div
+        className="flex flex-col rounded-lg backdrop-blur-sm p-4 overflow-hidden"
+        style={{
+          borderRadius: "var(--radius)",
+          width: "fit-content",
+          maxWidth: "100%",
+        }}
+      >
         <LatestMoviesSeries movies={movies} series={series} />
       </div>
 
@@ -162,61 +245,6 @@ const MoviesAndStories = ({
             <MediaRow movies={movies} series={series} />
           </div>
         </div>
-      </div>
-
-      {/* Related content sections */}
-      <div className="mt-4 px-4 space-y-6">
-        {/* Series episodes */}
-        <RelatedContent
-          contentType="series"
-          episodes={series
-            .map((s) => s.episodes)
-            .flat()
-            .map((ep) => ({
-              id: ep.id,
-              title: ep.title,
-              thumbnail: ep.thumbnail,
-              episodeNumber: ep.episodeNumber,
-              duration: "26:00", // Add a fixed duration since it's not in the original data
-            }))}
-        />
-
-        {/* Related movies */}
-        <RelatedContent
-          contentType="movie"
-          relatedItems={[
-            {
-              id: "nesha",
-              title: "Nesha the Explorer",
-              thumbnail: "/images/kids/thumb_nails/ice_age.png",
-            },
-            {
-              id: "the_super_mario_bros",
-              title: "The Super Mario Bros",
-              thumbnail: "/images/kids/thumb_nails/ice_age.png",
-            },
-            {
-              id: "kung_fu_panda_3",
-              title: "Kung Fu Panda 3",
-              thumbnail: "/images/kids/thumb_nails/inside_out.png",
-            },
-            {
-              id: "mufasa",
-              title: "Mufasa",
-              thumbnail: "/images/kids/thumb_nails/ice_age.png",
-            },
-            {
-              id: "the_lion_king",
-              title: "The Lion King",
-              thumbnail: "/images/kids/thumb_nails/strange_world.png",
-            },
-            {
-              id: "strange_world",
-              title: "Strange World",
-              thumbnail: "/images/kids/thumb_nails/strange_world.png",
-            },
-          ]}
-        />
       </div>
     </div>
   );

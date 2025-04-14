@@ -1,12 +1,10 @@
+import { Video } from "@/lib/firebase";
 import { useEffect, useRef, useState } from "react";
 import NewStories from "../components/new_stories/new_stories";
 import NewStoriesCard from "../components/new_stories/new_stories_card";
 import RelatedContent from "../components/related_content/related_content";
-import { Video } from "@/lib/firebase";
 
-
-
-function StoryRow({ stories }: {stories: Video[]}) {
+function StoryRow({ stories }: { stories: Video[] }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
@@ -47,7 +45,14 @@ function StoryRow({ stories }: {stories: Video[]}) {
 
   return (
     <div className="pb-1">
-      <div className="relative w-full">
+      <div
+        className="flex flex-col rounded-lg bg-black/30 backdrop-blur-sm p-4 overflow-hidden"
+        style={{
+          borderRadius: "var(--radius)",
+          width: "fit-content",
+          maxWidth: "100%",
+        }}
+      >
         {showLeftScroll && (
           <button
             onClick={() => scroll("left")}
@@ -124,9 +129,7 @@ function StoryRow({ stories }: {stories: Video[]}) {
   );
 }
 
-export default function Stories({stories}: {stories: Video[]}) {
-
-
+export default function Stories({ stories }: { stories: Video[] }) {
   return (
     <div className="flex flex-col h-full">
       {/* Fixed top section */}

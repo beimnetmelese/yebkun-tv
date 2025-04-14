@@ -1,7 +1,6 @@
+import { Video } from "@/lib/firebase";
 import { useEffect, useRef, useState } from "react";
 import MostViewedCard from "./most_viewed_card";
-import { Video } from "@/lib/firebase";
-
 
 export default function MostViewedVideo({ videos }: { videos: Video[] }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -55,13 +54,13 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
     }
   };
 
-
-  return (
-     videos.length > 0 ? (
+  return videos.length > 0 ? (
     <div
-      className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-4"
+      className="flex flex-col rounded-lg bg-black/30 backdrop-blur-sm p-4 overflow-hidden"
       style={{
         borderRadius: "var(--radius)",
+        width: "fit-content", 
+        maxWidth: "100%", 
       }}
     >
       <h5 className="text-black tv-text-title font-[500] font-genos mb-2">
@@ -145,6 +144,5 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
     </div>
   ) : (
     <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
-  )
   );
 }

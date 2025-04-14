@@ -236,7 +236,7 @@ const NewStoriesCard = ({
           />
           <div
             className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 ${
-              isHovered ? "opacity-0" : "opacity-100"
+              isHovered ? "opacity-0" : "opacity-70"
             }`}
           />
         </div>

@@ -1,16 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import MoviesAndSeriesCard from "./movies_and_stories_card";
-import { Series } from "../../page";
 import { Video } from "@/lib/firebase";
+import { useEffect, useRef, useState } from "react";
+import { Series } from "../../page";
+import MoviesAndSeriesCard from "./movies_and_stories_card";
 
-
-
-export default function LatestMoviesSeries({ movies, series} : {movies: Video[], series: Series[]}) {
+export default function LatestMoviesSeries({
+  movies,
+  series,
+}: {
+  movies: Video[];
+  series: Series[];
+}) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
-  console.log(series)
+  console.log(series);
   useEffect(() => {
     const checkScroll = () => {
       const container = scrollContainerRef.current;
@@ -55,12 +59,13 @@ export default function LatestMoviesSeries({ movies, series} : {movies: Video[],
     }
   };
 
-  return (
-    movies.length > 0 && series.length > 0 ? (
+  return movies.length > 0 && series.length > 0 ? (
     <div
-      className="flex flex-col w-full rounded-lg bg-black/30 backdrop-blur-sm p-2"
+      className="flex flex-col rounded-lg bg-black/30 backdrop-blur-sm p-4 overflow-hidden"
       style={{
         borderRadius: "var(--radius)",
+        width: "fit-content",
+        maxWidth: "100%",
       }}
     >
       <h5 className="text-black tv-text-title font-[500] font-genos mb-1">
@@ -141,9 +146,10 @@ export default function LatestMoviesSeries({ movies, series} : {movies: Video[],
           </button>
         )}
       </div>
+     
     </div>
+    
   ) : (
     <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
-  )
   );
 }

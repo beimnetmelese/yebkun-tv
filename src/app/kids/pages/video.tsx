@@ -145,9 +145,9 @@ export default function Videos({videos}: {videos: Video[]}) {
   
    console.log(`videos: ${videos}`);
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full w-[100%]">
       {/* Fixed top section */}
-      <div className="flex-shrink-0">
+      <div className="w-[10%]">
           <MostViewedVideo videos={videos} />
         </div>
 

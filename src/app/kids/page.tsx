@@ -2,14 +2,13 @@
 
 import CircularTimer from "@/app/components/CircularTimer";
 import ResponsiveHelper from "@/app/components/ResponsiveHelper";
+import { Episode, getAllContent, Video } from "@/lib/firebase";
 import Image from "next/image";
 import { FC, useEffect, useRef, useState } from "react";
+import MostViewedVideo from "./components/most_viewed/most_viewd_video";
 import Home from "./pages/home";
 import MoviesAndStories from "./pages/movies_and_stories";
 import Stories from "./pages/stories";
-import { Episode, getAllContent, Video } from "@/lib/firebase";
-import MostViewedVideo from "./components/most_viewed/most_viewd_video";
-
 
 export interface Series {
   id: string;
@@ -47,13 +46,10 @@ const KidsPage: FC = () => {
     movies: "/images/kids/nav/movies.svg",
   });
 
- 
-
-    
   // fetch data from firebase
   const [stories, setStories] = useState<Video[]>([]);
   const [movies, setMovies] = useState<Video[]>([]);
-  const [videos, setVideos] = useState<Video[]>([]);  
+  const [videos, setVideos] = useState<Video[]>([]);
   const [series, setSeries] = useState<Series[]>([]);
   const [funnyVideos, setFunnyVideos] = useState<Video[]>([]);
 
@@ -69,9 +65,7 @@ const KidsPage: FC = () => {
     };
 
     fetchData();
-  }, []);   
-
-
+  }, []);
 
   // Preload nav images on component mount
   useEffect(() => {
@@ -179,6 +173,9 @@ const KidsPage: FC = () => {
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
+  console.log("check the active nav");
+  console.log(activeNav);
+
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
       {/* Background Audio - set to loop and persist */}
@@ -186,7 +183,7 @@ const KidsPage: FC = () => {
         ref={audioRef}
         src="/images/kids/animation/birds.mp3"
         loop
-        preload="auto"  
+        preload="auto"
         className="hidden"
       />
 
@@ -267,16 +264,29 @@ const KidsPage: FC = () => {
                 activeNav === "home" ? "scale-110" : "hover:scale-110"
               }`}
             >
-              <Image
-                src={navImages.home}
-                alt="Home"
-                width={150}
-                height={100}
-                className="r-img-md object-contain"
-                loading="eager"
-                quality={90}
-                unoptimized
-              />
+              {activeNav === "home" ? (
+                <Image
+                  src={"/images/kids/nav/home_active.svg"}
+                  alt="Home"
+                  width={150}
+                  height={100}
+                  className="r-img-md object-contain"
+                  loading="eager"
+                  quality={90}
+                  unoptimized
+                />
+              ) : (
+                <Image
+                  src={navImages.home}
+                  alt="Home"
+                  width={150}
+                  height={100}
+                  className="r-img-md object-contain"
+                  loading="eager"
+                  quality={90}
+                  unoptimized
+                />
+              )}
             </a>
             <a
               onClick={() => handleNavClick("stories")}
@@ -351,12 +361,21 @@ const KidsPage: FC = () => {
           paddingRight: "var(--space-lg)",
         }}
       >
-        {activeNav === "home" && <Home stories={stories} videos={funnyVideos} series={series} movies={movies} />}
+        {activeNav === "home" && (
+          <Home
+            stories={stories}
+            videos={funnyVideos}
+            series={series}
+            movies={movies}
+          />
+        )}
         {activeNav === "stories" && <Stories stories={stories} />}
 
         {activeNav === "videos" && <MostViewedVideo videos={videos} />}
 
-        {activeNav === "movies" && <MoviesAndStories series={series} movies={movies} />}
+        {activeNav === "movies" && (
+          <MoviesAndStories series={series} movies={movies} />
+        )}
       </main>
 
       {/* Responsive helper during development */}
@@ -377,17 +396,31 @@ const AnimatedClouds: FC = () => {
     const smallCloudCount = 40;
     const newCloudElements: React.ReactNode[] = [];
 
-    // Large clouds - distribute them across the upper sky
+    // Large clouds - distribute them across the entire width with emphasis on left edge
     for (let i = 0; i < largeCloudCount; i++) {
       const cloudNum = (i % 10) + 1;
+
+      // Ensure clouds start from the left edge and extend beyond
+      // For the first few clouds, position them at or beyond the left edge
+      let left;
+      if (i < 5) {
+        // Position first few clouds from -10% to 5% to ensure left edge coverage
+        left = -10 + i * 3;
+      } else {
+        // Distribute the rest evenly
+        left = ((i - 5) / (largeCloudCount - 5)) * 105;
+      }
+
+      // Add a smaller random variation
+      left += Math.random() * 6 - 3;
+
       // Keep large clouds in the upper part of the sky
       const top = Math.random() * 20;
-      const left = Math.random() * 95;
       // Make clouds move faster
-      const duration = 5 + Math.random() * 10; // Much faster movement (was 10-25, now 5-15)
+      const duration = 5 + Math.random() * 10;
       const delay = Math.random() * 2;
       // Increase visibility with transform scale and opacity pulsing
-      const scale = 0.8 + Math.random() * 0.5; // Larger scale for better visibility
+      const scale = 0.8 + Math.random() * 0.5;
 
       newCloudElements.push(
         <div
@@ -413,12 +446,13 @@ const AnimatedClouds: FC = () => {
       );
     }
 
-    // Small clouds - keep them in the middle part of the sky, not at the bottom
+    // Small clouds - distribute them evenly across the entire width
     for (let i = 0; i < smallCloudCount; i++) {
       const cloudNum = (i % 6) + 1;
+      // Ensure even distribution across the width
+      const left = (i / smallCloudCount) * 100 + (Math.random() * 10 - 5); // Distribute evenly with some randomness
       // Position small clouds in the middle part of the sky
       const top = 5 + Math.random() * 15;
-      const left = Math.random() * 95;
       // Make small clouds move faster too
       const duration = 6 + Math.random() * 6; // Much faster movement (was 12-22, now 6-12)
       const delay = Math.random() * 3;
