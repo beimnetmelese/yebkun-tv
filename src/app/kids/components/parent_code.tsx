@@ -46,7 +46,7 @@ function ParentCode({ onClose }: { isOpen?: boolean; onClose: () => void }) {
             {pin.map((digit, index) => (
               <div
                 key={index}
-                className="w-20 h-16 bg-[#F2F2F2] rounded-[5px] flex items-center justify-center text-[32px] font-[genos] font-medium"
+                className="w-20 h-20 bg-[#F2F2F2] rounded-lg flex items-center justify-center text-[32px] font-[genos] font-medium"
               >
                 {digit ? "●" : ""}
               </div>
@@ -58,43 +58,58 @@ function ParentCode({ onClose }: { isOpen?: boolean; onClose: () => void }) {
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
               <button
                 key={number}
-                className="w-16 h-16 bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-3xl rounded-[15px] flex items-center justify-center"
+                className="w-16 h-16 bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-[52px] rounded-[15px] flex items-center justify-center"
                 onClick={() => handleNumberClick(number.toString())}
               >
                 {number}
               </button>
             ))}
-            <button
-              className="w-16 h-16 bg-[#FFFFFF] font-[genos] font-[500] text-[#5DC90A] border-dashed border-[#5DC90A] text-3xl rounded-[15px] flex items-center justify-center"
-              onClick={() => confirmPin()}
+            <div
+              onClick={confirmPin}
+              className="w-16 h-16 bg-[#FFFFFF] font-[genos] font-[500] text-[#5DC90A] border-dashed border-[#5DC90A] text-3xl rounded-[15px] flex items-center justify-center cursor-pointer"
             >
-              ✓
-            </button>
+              <Image
+                src={"/images/start_screen/right.svg"}
+                alt="check"
+                width={68}
+                height={68}
+                unoptimized
+              />
+            </div>
             <button
-              className="w-16 h-16 bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-3xl rounded-[15px] flex items-center justify-center"
+              key={0}
+              className="w-16 h-16 bg-[#BBDDFF] font-[genos] font-[500] text-[52px] text-[#FFFFFF] border-none rounded-[15px] flex items-center justify-center cursor-pointer"
               onClick={() => handleNumberClick("0")}
             >
               0
             </button>
-            <button
-              className="w-16 h-16 bg-[#FFFFFF] font-[genos] font-[500] text-[#FF270E] border-[#FF270E] border-dashed text-3xl rounded-[15px] flex items-center justify-center"
+            {/* Backspace */}
+            <div
               onClick={handleBackspaceClick}
+              className="w-16 h-16 bg-[#FFFFFF] font-[genos] font-[500] text-[#FF270E] border-[#FF270E] border-dashed text-3xl rounded-[15px] flex items-center justify-center cursor-pointer"
             >
-              ✕
-            </button>
+              <Image
+                src={"/images/start_screen/back.svg"}
+                alt="check"
+                width={68}
+                height={68}
+                unoptimized
+              />
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-row items-center justify-between bg-[#F2F2F2] w-full rounded-[15px] p-4">
-          <div className="flex items-center justify-center p-2">
+        <div className="flex flex-row items-center justify-between bg-[#F2F2F2] w-full rounded-[15px] p-2">
+          <div className="flex items-center justify-center p-2 ">
             <Image
               src={"/images/kids/information.svg"}
               alt="information"
-              width={50}
-              height={50}
+              width={130}
+              height={130}
+              unoptimized
             />
           </div>
-          <div className="flex flex-col items-center justify-center flex-1 px-4">
+          <div className="flex flex-col items-center justify-center">
             <h6 className="text-[#000000] text-lg font-[genos] font-[500] text-center w-full m-0">
               Information
             </h6>
