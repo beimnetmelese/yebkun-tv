@@ -50,18 +50,20 @@ function Card({ image, title }: { image: string; title: string }) {
         height={120}
         loading="eager"
         className="w-[98%] h-[91.65px] object-contain mx-auto"
+      
       />
 
       {/* App Info Section */}
       <div className="w-[90%] p-[10px] py-[5px] bg-[#F2F2F2] mx-auto gap-[5px] rounded-[10px] left-[0px] right[0px] flex flex-col items-center justify-center">
         <Image
-          src="/images/start_screen/app-logo-2.png"
+          src="/images/start_screen/app-logo-2.svg"
           alt={title}
           width={95}
           height={85}
           placeholder="blur"
           blurDataURL="/images/start_screen/placeholder.png"
           className="w-[94%] mx-auto object-contain py-[5px]"
+          unoptimized
         />
         <div className="flex flex-col items-center">
           <h1 className="font-semibold text-[28px] text-[#1C274C] m-[0px]">YekBûn</h1>
@@ -77,13 +79,14 @@ function Card({ image, title }: { image: string; title: string }) {
           Download App Now!
         </h1>
         <Image
-          src="/images/start_screen/qr.png"
+          src="/images/start_screen/qr.svg"
           alt="QR Code"
           width={100}
           height={90}
           placeholder="blur"
           blurDataURL="/images/start_screen/placeholder.png"
           className="w-full h-[91px] object-contain"
+          unoptimized
         />
       </div>
     </div>

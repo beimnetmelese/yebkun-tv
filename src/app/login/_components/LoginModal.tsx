@@ -28,14 +28,13 @@ function LoginModal({
 
         {/* Parent Code before kids section */}
         {isParentCodeOpen && (
-          <div className="fixed inset-0 z-50 bg-[#00000099] flex items-center justify-center">
+
             <div className="relative w-full h-full flex items-center justify-center">
               <ParentCode
                 isOpen={isParentCodeOpen}
                 onClose={handleParentCodeClose}
               />
             </div>
-          </div>
         )}
 
         {firstPopup && (
@@ -46,7 +45,6 @@ function LoginModal({
                 src="/images/start_screen/pattern.png"
                 alt="Background Pattern"
                 fill
-          
                 priority
                 className="object-cover absolute top-0 left-0 rounded-[25px] z-0"
               />
@@ -55,12 +53,12 @@ function LoginModal({
                 {/* Left Side - Phone Mockup */}
                 <div className="relative z-[1] shrink-0 flex-none">
                   <Image
-                    src="/images/start_screen/mobile-mockup.png"
+                    src="/images/start_screen/mobile-mockup.svg"
                     alt="Phone Mockup"
                     width={261}
                     height={620}
                     className="object-contain"
-     
+                    unoptimized
                   />
                 </div>
 
@@ -78,38 +76,50 @@ function LoginModal({
                     <div className="flex flex-col items-center justify-start gap-[8px] bg-[#F2F2F2] h-[395px] w-[253px] shrink-0 flex-none">
                       <button className="bg-[#000000] w-full h-[70px] text-[#FFFFFF] px-[4px] py-[4px] rounded-[10px] flex items-center justify-center gap-[12px]">
                         <Image
-                          src="/images/home_screen/apple.png"
+                          src="/images/home_screen/apple.svg"
                           alt="App Store"
                           width={50}
                           height={50}
+                          unoptimized
                         />
                         <div className="flex flex-col justify-center items-start">
-                          <span className="text-[18px] font-[500] ">
+                          <span className="text-[18px] font-[500] font-[genos]">
                             Download on the
                           </span>
-                          <span className="text-[30px] font-[600]">
+                          <span className="text-[30px] font-[600] font-[genos]">
                             App Store
                           </span>
                         </div>
                       </button>
-                      <div className="w-full h-[149px] bg-[#FFFFFF] flex items-center justify-center">
+
+                      <div className="w-full h-[149px] bg-[#FFFFFF] flex items-center justify-center flex-col py-[10px]">
                         <Image
-                          src={"/images/logo.png"}
+                          src={"/images/logo.svg"}
                           alt="Company logo"
-                          width={168}
-                          height={132}
+                          width={78}
+                          height={78}
+                          unoptimized
                         />
+                        <p className="font-[genos] text-[32px] font-[500] text-[#1C274C]">
+                          YekBûn
+                        </p>
+                        <p className="font-[genos] text-[18px] font-[400] text-[#101010]">
+                          Sosialmedia Kurdî
+                        </p>
                       </div>
                       <p className="font-[genos] text-[24px] font-[500] m-[0px]">
                         Download App Now
                       </p>
-                      <Image
-                        src="/images/start_screen/qr.png"
-                        alt="App Store QR"
-                        width={120}
-                        height={120}
-                        className="rounded-[10px]"
-                      />
+                      <div className="">
+                        <Image
+                          src="/images/start_screen/qr.svg"
+                          alt="App Store QR"
+                          width={105}
+                          height={105}
+                          className="rounded-[10px]"
+                          unoptimized
+                        />
+                      </div>
                     </div>
 
                     {/* Google Play */}
@@ -121,32 +131,40 @@ function LoginModal({
                           width={45}
                           height={45}
                         />
-                        <div className="flex flex-col justify-start items-start">
-                          <span className="text-[18px] font-[500]">
+                        <div className="flex flex-col justify-center items-start">
+                          <span className="text-[18px] font-[500] font-[genos]">
                             Get it on
                           </span>
-                          <span className="text-[30px] font-[600]">
+                          <span className="text-[30px] font-[600] font-[genos]">
                             Google Play
                           </span>
                         </div>
                       </button>
-                      <div className="w-full h-[149px] bg-[#FFFFFF] flex items-center justify-center">
+                      <div className="w-full h-[149px] bg-[#FFFFFF] flex items-center justify-center flex-col py-[10px]">
                         <Image
-                          src={"/images/logo.png"}
+                          src={"/images/logo.svg"}
                           alt="Company logo"
-                          width={168}
-                          height={132}
+                          width={78}
+                          height={78}
+                          unoptimized
                         />
+                        <p className="font-[genos] text-[32px] font-[500] text-[#1C274C]">
+                          YekBûn
+                        </p>
+                        <p className="font-[genos] text-[18px] font-[400] text-[#101010]">
+                          Sosialmedia Kurdî
+                        </p>
                       </div>
-                      <p className="font-[genos] text-[24px] font-[500] m-[0px]">
+                      <p className="font-[genos] text-[24px]  font-[500] m-[0px]">
                         Download App Now
                       </p>
                       <Image
-                        src="/images/start_screen/qr.png"
+                        src="/images/start_screen/googleqr.svg"
                         alt="Play Store QR"
-                        width={120}
-                        height={120}
+                        width={105}
+                        height={105}
                         className="rounded-[10px]"
+                        unoptimized
                       />
                     </div>
                   </div>
@@ -167,26 +185,28 @@ function LoginModal({
             <div className="bg-[#FFFFFF] p-[20px] md:p-[42px] rounded-[25px] shadow-lg flex flex-col items-center w-full md:min-w-[480px] md:w-[400px] min-h-[700px]">
               <div className="flex flex-col items-center gap-[24px] mb-[32px]">
                 <Image
-                  src="/images/start_screen/activate.png"
+                  src="/images/start_screen/activate.svg"
                   alt="YekBûn Logo"
                   width={298}
                   height={290}
                   className="rounded-[10px]"
+                  unoptimized
                 />
                 <div className="flex flex-col h-[156px] w-[172px] items-center justify-center bg-[#F2F2F2] rounded-[15px]">
                   <Image
-                    src={"/images/start_screen/tv.png"}
+                    src={"/images/start_screen/tv.svg"}
                     alt="tv"
                     width={71}
                     height={53}
+                    unoptimized
                   />
-                  <div className="bg-[#FFFFFF] w-[124px] h-[23px] p-[4px] rounded-[10px] mt-[10px]">
+                  <div className="bg-[#FFFFFF] w-[124px] h-[23px] p-[4px] rounded-[10px] mt-[10px] flex items-center justify-center">
                     <p className="flex items-center justify-center font-[genos] text-[18px] font-[600] m-[0px]">
                       Tv Type
                     </p>
                   </div>
-                  <div className="bg-[#FFFFFF] w-[124px] h-[23px] p-[4px] rounded-[10px] mt-[10px]">
-                    <p className="flex items-center justify-center font-[genos] text-[16px] font-[400] m-[0px]">
+                  <div className="bg-[#FFFFFF] w-[124px] h-[23px] p-[4px] rounded-[10px] mt-[10px] flex items-center justify-center">
+                    <p className="flex items-center justify-center font-[genos] text-[16px] font-[400]">
                       MAC ADDRESS
                     </p>
                   </div>
@@ -196,47 +216,48 @@ function LoginModal({
               <div className="flex flex-col gap-[16px] mb-[32px]">
                 <div className="flex fex-row">
                   <Image
-                    src={"/images/start_screen/device_id.png"}
+                    src={"/images/start_screen/device_id.svg"}
                     alt="tv"
                     width={24}
                     height={24}
+                    unoptimized
                   />
-                  <span className="ml-[10px] text-[24px] font-[500] font-[genos] text-[c#1C274C] m-[0px] flex items-start justify-start">
+                  <span className="ml-[10px] text-[24px] font-[500] font-[genos] text-[c#1C274C] m-[0px] flex items-F8F8F8start justify-start">
                     DEVICE ID
                   </span>
                 </div>
                 <div className="flex gap-[8px] text-[32px] font-bold">
-                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F8F8F8] rounded-[8px]">
+                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F2F2F2] rounded-[8px]">
                     <p className="font-[genos] font-[600] text-[48px] m-[0px]">
                       4
                     </p>
                   </span>
-                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F8F8F8] rounded-[8px]">
+                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F2F2F2] rounded-[8px]">
                     <p className="font-[genos] font-[600] text-[48px] m-[0px]">
                       4
                     </p>
                   </span>
-                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F8F8F8] rounded-[8px]">
+                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F2F2F2] rounded-[8px]">
                     <p className="font-[genos] font-[600] text-[48px] m-[0px]">
                       4
                     </p>
                   </span>
-                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F8F8F8] rounded-[8px]">
+                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F2F2F2] rounded-[8px]">
                     <p className="font-[genos] font-[600] text-[48px] m-[0px] text-[#1EC981]">
                       -
                     </p>
                   </span>
-                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F8F8F8] rounded-[8px]">
+                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F2F2F2] rounded-[8px]">
                     <p className="font-[genos] font-[600] text-[48px] m-[0px]">
                       4
                     </p>
                   </span>
-                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F8F8F8] rounded-[8px]">
+                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F2F2F2] rounded-[8px]">
                     <p className="font-[genos] font-[600] text-[48px] m-[0px]">
                       4
                     </p>
                   </span>
-                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F8F8F8] rounded-[8px]">
+                  <span className="w-[50px] h-[50px] flex items-center justify-center bg-[#F2F2F2] rounded-[8px]">
                     <p className="font-[genos] font-[600] text-[48px] m-[0px]">
                       4
                     </p>
@@ -248,21 +269,22 @@ function LoginModal({
                   setFirstPopup(false);
                   setThirdPopup(true);
                 }}
-                className="flex flex-row items-center justify-start w-full h-[53px] bg-[#F2F2F2] px-[10px] rounded-[15px] cursor-[pointer]"
+                className="flex flex-row items-center justify-start w-full h-[70px] bg-[#F2F2F2] px-[10px] rounded-[15px] cursor-[pointer]"
               >
                 <span className="bg-[#FFFFFF]">
                   <Image
-                    src={"/images/start_screen/thunder.png"}
+                    src={"/images/start_screen/thunder.svg"}
                     alt="activate icon"
-                    width={40}
-                    height={40}
+                    width={33}
+                    height={33}
+                    unoptimized
                   />
                 </span>
-                <span className="flex flex-col items-center justify-center px-[10px] ml-[15px] py-[30px]">
+                <span className="flex flex-col items-center justify-center px-[6  px] ml-[15px] py-[30px]">
                   <p className="font-[genos] font-[500] m-[0px] text-[20px]">
                     ACTIVATE YOUR TV APP
                   </p>
-                  <p className="font-[genos] font-[500] text-[14px]">
+                  <p className="font-[genos] font-[500] text-[14px] ">
                     To get started, simply add this to your YekBûn App
                   </p>
                 </span>
@@ -275,14 +297,15 @@ function LoginModal({
           <div className="fixed inset-0 flex items-center justify-center">
             <div className="w-auto h-auto">
               <div className="flex flex-row gap-14">
-                <div className="bg-white rounded-[15px] shadow-lg pb-4 flex flex-col items-center w-[400px]">
-                  <div className="w-full">
+                <div className="bg-white rounded-t-[50px] rounded-b-[20px] pb-4 flex flex-col items-center w-[400px]">
+                  <div className="w-full border-none">
                     <Image
-                      src={"/images/start_screen/zarok_card.png"}
+                      src={"/images/start_screen/zarok_card.svg"}
                       alt="Zarok image"
                       width={400}
                       height={400}
                       className="w-full"
+                      unoptimized
                     />
                   </div>
                   <div className="mt-2 mb-4">
@@ -306,14 +329,15 @@ function LoginModal({
                   </button>
                 </div>
 
-                <div className="bg-white rounded-[15px] shadow-lg pb-4 flex flex-col items-center w-[400px]">
+                <div className="bg-white rounded-t-[50px] rounded-b-[20px] pb-4 flex flex-col items-center w-[400px]">
                   <div className="w-full">
                     <Image
-                      src={"/images/start_screen/malbat.png"}
+                      src={"/images/start_screen/malbat.svg"}
                       alt="Malbat image"
                       width={400}
                       height={400}
                       className="w-full"
+                      unoptimized
                     />
                   </div>
                   <div className="mt-2 mb-4">
