@@ -24,15 +24,7 @@ export interface Series {
   seasons: number;
   numberOfEpisodes: number;
 }
-// Generate consistent positions and animations
-const useClientSideRendering = () => {
-  const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  return isClient;
-};
 
 const KidsPage: FC = () => {
   const [activeNav, setActiveNav] = useState<string>("home");
@@ -194,48 +186,38 @@ const KidsPage: FC = () => {
         className="hidden"
       />
 
+      {/* Animated Background Elements - Cloud GIF that includes sun */}
+      <div className="absolute top-0 left-0 w-full h-[30%] z-1 overflow-hidden">
+        <Image
+          src="/images/kids/cloud.gif"
+          alt="Animated Clouds and Sun"
+          fill
+          className="object-cover"
+          priority
+          unoptimized
+        />
+      </div>
+
       {/* Custom background with sky only at top 20% */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 top-[10%] h-[80%]"
         style={{
           background:
-            "linear-gradient(to bottom, #7dd3fc 0%, #7dd3fc 10%, white 20%, white 100%)",
+            "linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)",
         }}
       ></div>
 
-      {/* <LatestMovies />
-      <div
-        className="flex flex-col w-full h-[10%]  p-tv-2 rounded-lg gap-tv-2"
-        style={{
-          background: "rgba(103, 101, 113, 0.34)",
-        }}
-      >
-        <h5 className="text-black text-[36px] font-[500] font-genos">
-          New Stories
-        </h5>
-        <div className="flex flex-row gap-tv-2">
-          {dummyNewStories.map((story) => (
-            <NewStoriesCard
-              key={story.title}
-              title={story.title}
-              thumbnail={story.thumbnail}
-              type={story.type}
-              views={story.views}
-            />
-          ))}
-        </div>
-      </div>
-      <LatestMovies />
-      <MostViewedVideo /> */}
-
-      {/* Animated Background Elements */}
-      <AnimatedClouds />
-      <AnimatedButterflies />
-      <AnimatedSun />
-
-      {/* Bottom grass */}
+      {/* Footer animation with grass and butterflies */}
       <div className="absolute bottom-0 left-0 w-full z-50">
-        <AnimatedGrass />
+        <Image
+          src="/images/kids/Footer.gif"
+          alt="Animated Footer with Grass and Butterflies"
+          width={1920}
+          height={200}
+          className="w-full h-auto"
+          priority
+          unoptimized
+        />
       </div>
 
       {/* Navbar */}
@@ -380,418 +362,6 @@ const KidsPage: FC = () => {
 
       {/* Responsive helper during development */}
       <ResponsiveHelper />
-    </div>
-  );
-};
-
-// Animated Clouds Component
-const AnimatedClouds: FC = () => {
-  const isClient = useClientSideRendering();
-  const [cloudElements, setCloudElements] = useState<React.ReactNode[]>([]);
-
-  useEffect(() => {
-    if (!isClient) return;
-
-    const largeCloudCount = 55;
-    const smallCloudCount = 40;
-    const newCloudElements: React.ReactNode[] = [];
-
-    // Large clouds - distribute them across the entire width with emphasis on left edge
-    for (let i = 0; i < largeCloudCount; i++) {
-      const cloudNum = (i % 10) + 1;
-
-      // Ensure clouds start from the left edge and extend beyond
-      // For the first few clouds, position them at or beyond the left edge
-      let left;
-      if (i < 5) {
-        // Position first few clouds from -10% to 5% to ensure left edge coverage
-        left = -10 + i * 3;
-      } else {
-        // Distribute the rest evenly
-        left = ((i - 5) / (largeCloudCount - 5)) * 105;
-      }
-
-      // Add a smaller random variation
-      left += Math.random() * 6 - 3;
-
-      // Keep large clouds in the upper part of the sky
-      const top = Math.random() * 20;
-      // Make clouds move faster
-      const duration = 5 + Math.random() * 10;
-      const delay = Math.random() * 2;
-      // Increase visibility with transform scale and opacity pulsing
-      const scale = 0.8 + Math.random() * 0.5;
-
-      newCloudElements.push(
-        <div
-          key={`cloud-${i}`}
-          className="absolute"
-          style={{
-            top: `${top}%`,
-            left: `${left}%`,
-            animation: `float-horizontal ${duration}s linear infinite ${delay}s, cloud-pulse 6s ease-in-out infinite ${delay}s`,
-            zIndex: Math.floor(Math.random() * 3),
-            transform: `scale(${scale})`,
-            filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.1))",
-          }}
-        >
-          <Image
-            src={`/images/kids/animation/cloud${cloudNum}.svg`}
-            alt="Cloud"
-            width={100}
-            height={50}
-            className="w-auto h-[clamp(30px,calc(8vh * var(--scale-factor)),80px)]"
-          />
-        </div>
-      );
-    }
-
-    // Small clouds - distribute them evenly across the entire width
-    for (let i = 0; i < smallCloudCount; i++) {
-      const cloudNum = (i % 6) + 1;
-      // Ensure even distribution across the width
-      const left = (i / smallCloudCount) * 100 + (Math.random() * 10 - 5); // Distribute evenly with some randomness
-      // Position small clouds in the middle part of the sky
-      const top = 5 + Math.random() * 15;
-      // Make small clouds move faster too
-      const duration = 6 + Math.random() * 6; // Much faster movement (was 12-22, now 6-12)
-      const delay = Math.random() * 3;
-      const scale = 0.7 + Math.random() * 0.4; // Slightly larger
-
-      newCloudElements.push(
-        <div
-          key={`small-cloud-${i}`}
-          className="absolute"
-          style={{
-            top: `${top}%`,
-            left: `${left}%`,
-            animation: `float-horizontal ${duration}s linear infinite ${delay}s, cloud-pulse 4s ease-in-out infinite ${delay}s`,
-            zIndex: Math.floor(Math.random() * 3),
-            transform: `scale(${scale})`,
-            filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.1))",
-          }}
-        >
-          <Image
-            src={`/images/kids/animation/cloud_small${cloudNum}.svg`}
-            alt="Small Cloud"
-            width={60}
-            height={30}
-            className="w-auto h-[clamp(20px,calc(5vh * var(--scale-factor)),40px)]"
-          />
-        </div>
-      );
-    }
-
-    setCloudElements(newCloudElements);
-  }, [isClient]);
-
-  return (
-    <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden">
-      {cloudElements}
-    </div>
-  );
-};
-
-// Animated Butterflies Component
-const AnimatedButterflies: FC = () => {
-  const isClient = useClientSideRendering();
-  const [butterflyElements, setButterflyElements] = useState<React.ReactNode[]>(
-    []
-  );
-
-  useEffect(() => {
-    if (!isClient) return;
-
-    const butterflyCount = 15;
-    const newButterflyElements: React.ReactNode[] = [];
-
-    for (let i = 0; i < butterflyCount; i++) {
-      const butterflyNum = (i % 6) + 1;
-
-      // Position butterflies closer to or on the grass (bottom of the screen)
-      // Using bottom positioning instead of top to place them on or near grass
-      const bottom = Math.random() * 10 + 2; // 2-22% from bottom
-      const left = Math.random() * 85;
-      const duration = 30 + Math.random() * 20;
-      const delay = Math.random() * 10;
-      const scale = 0.3 + Math.random() * 0.4; // Slightly smaller scale for better proportions
-
-      newButterflyElements.push(
-        <div
-          key={`butterfly-${i}`}
-          className="absolute"
-          style={{
-            bottom: `${bottom}%`,
-            left: `${left}%`,
-            animation: `butterfly-fly ${duration}s ease-in-out infinite ${delay}s`,
-            transform: `scale(${scale})`,
-            zIndex: 45, // Above content but below grass
-          }}
-        >
-          <Image
-            src={`/images/kids/animation/butterfly${butterflyNum}.svg`}
-            alt="Butterfly"
-            width={40}
-            height={40}
-            className="w-auto h-[clamp(20px,6vh,50px)] butterfly-wing"
-          />
-        </div>
-      );
-    }
-
-    setButterflyElements(newButterflyElements);
-  }, [isClient]);
-
-  return (
-    <div className="absolute top-0 left-0 w-full h-full z-40 overflow-hidden pointer-events-none">
-      {butterflyElements}
-    </div>
-  );
-};
-
-// Animated Grass Component
-const AnimatedGrass: FC = () => {
-  const isClient = useClientSideRendering();
-  const [grassElements, setGrassElements] = useState<React.ReactNode[]>([]);
-
-  useEffect(() => {
-    if (!isClient) return;
-
-    const longGrassCount = 20;
-    const smallGrassCount = 200; // Reduced from 300
-    const newGrassElements: React.ReactNode[] = [];
-
-    // Long grass with height variations - reduce height
-    for (let i = 0; i < longGrassCount; i++) {
-      const grassNum = (i % 5) + 1;
-      const left = (i / longGrassCount) * 100 + (Math.random() * 5 - 2.5);
-      // Speed up animation by reducing duration
-      const duration = 1 + Math.random() * 1.5; // Faster animation
-      const delay = Math.random() * 0.1;
-
-      // Reduce the heights of grass
-      const heightScale = 0.5 + Math.random() * 0.4; // Reduced from 0.7 + 0.6
-
-      newGrassElements.push(
-        <div
-          key={`grass-long-${i}`}
-          className="absolute bottom-0"
-          style={{
-            left: `${left}%`,
-            animation: `sway ${duration}s ease-in-out infinite ${delay}s`,
-            zIndex: 53,
-            transform: `scaleY(${heightScale})`,
-            transformOrigin: "bottom",
-          }}
-        >
-          <Image
-            src={`/images/kids/animation/grass_long${grassNum}.svg`}
-            alt="Grass"
-            width={120}
-            height={80}
-            className="w-auto h-[clamp(20px,calc(8vh * var(--scale-factor)),80px)]" // Reduced from 15vh
-            loading="lazy"
-            unoptimized
-          />
-        </div>
-      );
-    }
-
-    // Add more variety with regular grass types and varying heights - reduce height
-    for (let i = 0; i < 100; i++) {
-      const grassNum = (i % 12) + 1;
-      const left = (i / 10) * 100 + (Math.random() * 5 - 2.5);
-      // Speed up animation
-      const duration = 1 + Math.random() * 1.5;
-      const delay = Math.random() * 0.1;
-
-      // Reduce the heights of grass
-      const heightScale = 0.5 + Math.random() * 0.4; // Reduced from 0.7 + 0.6
-
-      newGrassElements.push(
-        <div
-          key={`grass-variety-${i}`}
-          className="absolute bottom-0 z-60"
-          style={{
-            left: `${left}%`,
-            animation: `sway ${duration}s ease-in-out infinite ${delay}s`,
-            zIndex: 52,
-            transform: `scaleY(${heightScale})`,
-            transformOrigin: "bottom",
-          }}
-        >
-          <Image
-            src={`/images/kids/animation/grass${grassNum}.svg`}
-            alt="Grass Variety"
-            width={100}
-            height={70}
-            className="w-auto h-[clamp(25px,calc(10vh * var(--scale-factor)),70px)]" // Reduced from 12vh
-            loading="lazy"
-            unoptimized
-          />
-        </div>
-      );
-    }
-
-    // Small grass elements spread throughout with height variations
-    for (let i = 0; i < smallGrassCount; i++) {
-      const grassNum = (i % 11) + 1;
-      const left = Math.random() * 98;
-      // Speed up animation
-      const duration = 0.5 + Math.random() * 1;
-      const delay = Math.random() * 0.1;
-
-      // Reduce the heights of small grass
-      const heightScale = 0.4 + Math.random() * 0.4; // Reduced from 0.6 + 0.7
-
-      newGrassElements.push(
-        <div
-          key={`grass-small-${i}`}
-          className="absolute bottom-0"
-          style={{
-            left: `${left}%`,
-            animation: `sway ${duration}s ease-in-out infinite ${delay}s`,
-            zIndex: 51,
-            transform: `scaleY(${heightScale})`,
-            transformOrigin: "bottom",
-          }}
-        >
-          <Image
-            src={`/images/kids/animation/grass_small${grassNum}.svg`}
-            alt="Small Grass"
-            width={60}
-            height={40}
-            className="w-auto h-[clamp(15px,calc(6vh * var(--scale-factor)),40px)]" // Reduced from 8vh
-            loading="lazy"
-            unoptimized
-          />
-        </div>
-      );
-    }
-
-    setGrassElements(newGrassElements);
-  }, [isClient]);
-
-  return (
-    <div className="relative w-full h-[15vh] overflow-hidden z-50">
-      {" "}
-      {/* Reduced from 20vh */}
-      {/* Base grass layer */}
-      <div className="absolute bottom-0 left-0 w-full">
-        <Image
-          src="/images/kids/animation/grass_base.svg"
-          alt="Grass Base"
-          width={1920}
-          height={100}
-          className="w-full h-auto"
-          priority
-          quality={90}
-          unoptimized
-        />
-      </div>
-      {grassElements}
-    </div>
-  );
-};
-
-// Animated Sun Component
-const AnimatedSun: FC = () => {
-  const isClient = useClientSideRendering();
-  const [sunClouds, setSunClouds] = useState<React.ReactNode[]>([]);
-
-  useEffect(() => {
-    if (!isClient) return;
-
-    // Create clouds that will partially cover the bottom of the sun
-    const newSunClouds: React.ReactNode[] = [];
-    const cloudCount = 4; // Number of clouds to place around the sun
-
-    for (let i = 0; i < cloudCount; i++) {
-      const cloudNum = Math.floor(Math.random() * 10) + 1; // Random cloud image
-      const cloudSize = 0.6 + Math.random() * 0.4; // Random cloud size (60%-100%)
-
-      // Position clouds to cover bottom part of sun
-      const horizontalPos = 20 + i * 15; // Distribute horizontally across sun's width
-      const verticalPos = 80 - Math.random() * 10; // Position at ~70-80% down the sun
-
-      newSunClouds.push(
-        <div
-          key={`sun-cloud-${i}`}
-          className="absolute"
-          style={{
-            left: `${horizontalPos}%`,
-            top: `${verticalPos}%`,
-            transform: `scale(${cloudSize})`,
-            zIndex: 1, // Above sun
-            animation: `float-horizontal ${
-              8 + Math.random() * 5
-            }s linear infinite ${Math.random() * 5}s`, // Faster cloud movement
-          }}
-        >
-          <Image
-            src={`/images/kids/animation/cloud${cloudNum}.svg`}
-            alt="Cloud"
-            width={80}
-            height={40}
-            unoptimized
-            className="w-auto h-[clamp(20px,calc(8vh * var(--scale-factor)),60px)]"
-          />
-        </div>
-      );
-    }
-
-    setSunClouds(newSunClouds);
-  }, [isClient]);
-
-  return (
-    <div
-      className="absolute z-0"
-      style={{
-        top: "5%",
-        right: "5%",
-      }}
-    >
-      <div className="relative">
-        {/* Sun glow effect */}
-        <div
-          className="absolute"
-          style={{
-            width: "120%",
-            height: "120%",
-            top: "-10%",
-            left: "-10%",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(253,231,96,0.5) 0%, rgba(253,231,96,0) 70%)",
-            animation: "pulse 5s ease-in-out infinite",
-          }}
-        ></div>
-
-        <Image
-          src="/images/kids/animation/sun.svg"
-          alt="Sun"
-          width={200}
-          height={200}
-          unoptimized
-          className="w-auto opacity-100 h-[clamp(100px,calc(20vh * var(--scale-factor)),200px)]"
-          style={{
-            animation: "rotate 60s linear infinite",
-            filter: "drop-shadow(0 0 15px rgba(255, 191, 0, 0.4))",
-          }}
-        />
-
-        {/* Sun reflection */}
-        <div
-          className="absolute top-[45%] left-[45%] w-[10%] h-[10%] rounded-full bg-white opacity-80"
-          style={{
-            animation: "shine 3s ease-in-out infinite",
-            boxShadow: "0 0 10px 5px rgba(255,255,255,0.8)",
-          }}
-        ></div>
-
-        {/* Clouds covering bottom of sun */}
-        {sunClouds}
-      </div>
     </div>
   );
 };

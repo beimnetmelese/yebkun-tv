@@ -128,10 +128,10 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
                 unoptimized
               />
               <span className="flex flex-col items-center justify-center ml-4">
-                <p className="text-black text-[22px] font-[500] font-[oswald]">
+                <p className="text-black text-[22px] font-[500] font-[genos]">
                   Time for a Break
                 </p>
-                <p className="text-black text-[16px] font-[500] font-[oswald] flex items-center justify-center">
+                <p className="text-black text-[16px] font-[500] font-[genos] flex items-center justify-center">
                   We had a great time today! Now it&apos;s time to take a break.
                   We&apos;ll see you tomorrow for more fun. See you soon!
                 </p>
