@@ -195,24 +195,24 @@ function VideoScreen({
             "linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))",
         }}
       >
-        <p className="text-white text-[90px] font-[700] font-[oswald]">
+        <p className="text-white text-[90px] font-[700] font-[genos]">
           {videoTitle}
         </p>
 
         <div className="flex flex-row gap-5">
           <span className="bg-[rgba(255,255,255,0.25)] w-[80px] h-[30px] flex items-center justify-center gap-2 rounded-lg">
             <EyeIcon className="w-5 h-5 text-white" />
-            <p className="text-white text-[16px] font-[400] font-[oswald]">
+            <p className="text-white text-[16px] font-[400] font-[genos]">
               {numberOfViews}
             </p>
           </span>
           <span className="bg-[rgba(255,255,255,0.25)] w-[40px] h-[30px] flex items-center justify-center rounded-lg">
-            <p className="text-white text-[16px] font-[400] font-[oswald]">
+            <p className="text-white text-[16px] font-[400] font-[genos]">
               {ageLimit}
             </p>
           </span>
           <span className="bg-[rgba(255,255,255,0.25)] w-[50px] h-[30px] flex items-center justify-center rounded-lg">
-            <p className="text-white text-[16px] font-[400] font-[oswald]">
+            <p className="text-white text-[16px] font-[400] font-[genos]">
               {videoQuality}
             </p>
           </span>
@@ -220,21 +220,21 @@ function VideoScreen({
 
         <div className="gap-2 my-5 flex flex-row items-center justify-center">
           <span className="bg-[rgba(255,255,255,0.25)] w-[5px] h-[5px] rounded-full"></span>
-          <p className="text-white text-[16px] font-[400] font-[oswald]">
+          <p className="text-white text-[16px] font-[400] font-[genos]">
             {yearPublished}
           </p>
           <span className="bg-[rgba(255,255,255,0.25)] w-[5px] h-[5px] rounded-full"></span>
           {videoType !== "series" ? (
-            <p className="text-white text-[16px] font-[400] font-[oswald]">
+            <p className="text-white text-[16px] font-[400] font-[genos]">
               {formatVideoDuration(videoDuration)}
             </p>
           ) : (
             <>
-              <p className="text-white text-[16px] font-[400] font-[oswald]">
+              <p className="text-white text-[16px] font-[400] font-[genos]">
                 {numberOfSeasons} {numberOfSeasons > 1 ? "Seasons" : "Season"}
               </p>
               <span className="bg-[rgba(255,255,255,0.25)] w-[5px] h-[5px] rounded-full"></span>
-              <p className="text-white text-[16px] font-[400] font-[oswald]">
+              <p className="text-white text-[16px] font-[400] font-[genos]">
                 {numberOfEpisodes}{" "}
                 {numberOfEpisodes > 1 ? "Episodes" : "Episode"}
               </p>
@@ -251,7 +251,7 @@ function VideoScreen({
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
-              <div className="text-white text-[16px] font-[400] font-[oswald]">
+              <div className="text-white text-[16px] font-[400] font-[genos]">
                 {videoRef.current
                   ? formatVideoDuration(
                       parseInt(videoDuration) - videoRef.current.currentTime
@@ -263,18 +263,18 @@ function VideoScreen({
             <div className="flex flex-row gap-4 mt-8">
               <button className="bg-[#81B616] text-black px-4 py-2 rounded-full border-none flex flex-row gap-2 items-center justify-center">
                 <PlayIcon className="w-5 h-5 text-white" />
-                <p className="text-white text-[32px] font-[600] font-[oswald]">
+                <p className="text-white text-[32px] font-[600] font-[genos]">
                   Continue
                 </p>
               </button>
               <button className="bg-[#3D76E1] px-4 py-2 rounded-full flex gap-2 items-center">
                 <LucideRefreshCcw className="w-5 h-5 text-white" />
-                <p className="text-white text-[32px] font-[600] font-[oswald]">
+                <p className="text-white text-[32px] font-[600] font-[genos]">
                   Restart
                 </p>
               </button>
               <button className="bg-black/20 px-4 py-2 rounded-full border border-white flex gap-2 items-center">
-                <p className="text-white text-[32px] font-[600] font-[oswald]">
+                <p className="text-white text-[32px] font-[600] font-[genos]">
                   Trailer
                 </p>
               </button>
@@ -295,7 +295,7 @@ function VideoScreen({
                   selectedSeason === i + 1
                     ? "bg-red-600 text-white border-red-600"
                     : "text-white border-white"
-                } rounded-full font-[oswald]`}
+                } rounded-full font-[genos]`}
               >
                 Season {i + 1}
               </button>
@@ -320,7 +320,7 @@ function VideoScreen({
       {/* Related for non-series */}
       {videoType !== "series" && relatedVideos.length > 0 && (
         <div className="absolute bottom-0 w-full z-30 p-6 bg-[rgba(0,0,0,0.6)]">
-          <p className="text-white text-[32px] font-[700] font-[oswald] mb-4">
+          <p className="text-white text-[32px] font-[700] font-[genos] mb-4">
             Related Videos
           </p>
           <div className="flex gap-6 overflow-x-auto pb-4">

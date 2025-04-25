@@ -447,7 +447,7 @@ function VideoPlayer() {
             unoptimized
           />
         </button>
-        <h1 className="text-white text-3xl font-bold font-[oswald] truncate">
+        <h1 className="text-white text-3xl font-bold font-[genos] truncate">
           {title}
         </h1>
       </div>
@@ -572,7 +572,7 @@ function VideoPlayer() {
             ></div>
           </div>
           {/* Current time / Duration */}
-          <div className="text-white text-xl font-[oswald]">
+          <div className="text-white text-xl font-[genos]">
             {formatTime(currentTime)} / {formatTime(duration)}
           </div>
         </div>
