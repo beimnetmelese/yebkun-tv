@@ -3,7 +3,7 @@
 import { PauseCircle } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 
 // Use actual thumbnails from existing content
 const RELATED_VIDEOS = [
@@ -198,9 +198,8 @@ function VideoPlayer() {
       relatedPanel.removeEventListener("touchend", handleTouchEnd);
     };
   }, [showRelatedPanel]);
-
   // Function to reset the inactivity timer
-  const resetInactivityTimer = () => {
+  const resetInactivityTimer = React.useCallback(() => {
     if (controlsTimeoutRef.current) {
       clearTimeout(controlsTimeoutRef.current);
     }
@@ -212,8 +211,8 @@ function VideoPlayer() {
         setShowControls(false);
       }
     }, 3000); // Hide controls after 3 seconds of inactivity
-  };
-
+  }, [isPlaying, showRelatedPanel]); // Add empty dependency array
+        
   // Set up mouse/touch event listeners for showing controls
   useEffect(() => {
     const container = containerRef.current;
