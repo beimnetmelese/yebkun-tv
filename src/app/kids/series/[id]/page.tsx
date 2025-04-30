@@ -27,7 +27,6 @@ export default function SeriesPage() {
   }, []);
 
   const currentSeries = allSeries.find((series) => series.id === id);
-  const relatedSeries = allSeries.filter((series) => series.id !== id);
 
   if (!currentSeries) {
     return <div className="text-white p-10">Series not found! ID: {id}</div>;

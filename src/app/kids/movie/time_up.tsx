@@ -56,7 +56,7 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
       }
       
     };
-  }, [isShowModal.time_up, isShowModal]);
+  }, [isShowModal.time_up, isShowModal, open,router]);
 
   const handleShowModal = (modal: keyof typeof isShowModal) => {
     setIsShowModal((prev) => ({ ...prev, [modal]: !prev[modal] }));

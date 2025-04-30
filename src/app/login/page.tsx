@@ -1,11 +1,11 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import LoginModal from "./_components/LoginModal";
 import MovieList from "./_components/MovieList";
 import RightSection from "./_components/RightSection";
 
-export default function Login() {
+function LoginContent() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [initialPopup, setInitialPopup] = useState<string | null>(null);
   const searchParams = useSearchParams();
@@ -53,5 +53,13 @@ export default function Login() {
         </div>
       )}
     </section>
+  );
+}
+
+export default function Login() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }
