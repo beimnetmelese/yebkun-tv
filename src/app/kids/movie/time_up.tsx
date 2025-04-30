@@ -1,7 +1,10 @@
+"use client";
+
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 interface TimeUpProps {
   open: boolean;
@@ -9,6 +12,9 @@ interface TimeUpProps {
 }
 
 function TimeUp({ open, onTimeSet }: TimeUpProps) {
+  const router = useRouter();
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isShowModal, setIsShowModal] = useState({
     time_up: true,
     parent_code: false,
@@ -25,8 +31,32 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
         parent_code_success: false,
       });
       setSelectedTime(null);
+
+      // Play audio immediately when modal opens
+      if (audioRef.current) {
+        audioRef.current.play().catch((error) => {
+          console.error("Error playing audio:", error);
+        });
+      }
     }
   }, [open]);
+
+  useEffect(() => {
+    // Set timeout for redirect
+    if (open) {
+      timeoutRef.current = setTimeout(() => {
+        // Redirect to login page with modal open and thirPopup
+        router.push("/login?modal=true&popup=thirPopup");
+      }, 30000); // 30 seconds
+    }
+    // Cleanup
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      
+    };
+  }, [isShowModal.time_up, isShowModal]);
 
   const handleShowModal = (modal: keyof typeof isShowModal) => {
     setIsShowModal((prev) => ({ ...prev, [modal]: !prev[modal] }));
@@ -105,6 +135,16 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
       <DialogContent
         className={`${getDialogSizeClass()} bg-white p-6 rounded-xl [&>button]:hidden border-none shadow-lg overflow-auto max-h-[90vh] transform-gpu transition-all duration-200`}
       >
+        {open && (
+          <audio
+            ref={audioRef}
+            src="/images/kids/back.mp3"
+            loop
+            preload="auto"
+            autoPlay
+            className="hidden"
+          />
+        )}
         {isShowModal["time_up"] && (
           <div className="flex flex-col items-center justify-center rounded-lg py-[8px]">
             <Image
@@ -153,14 +193,14 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
         )}
 
         {isShowModal["parent_code"] && (
-          <div className="flex flex-col items-center justify-center rounded-lg py-[8px]">
-            <div className="flex flex-col items-center justify-center">
+          <div className="relative bg-white rounded-[15px] flex flex-col items-center justify-center w-full h-full">
+            <div className="flex flex-col items-center justify-center w-full">
               {/* PIN Display */}
-              <div className="flex gap-3 mb-6 items-center justify-center">
+              <div className="flex gap-4 mb-8 items-center justify-center">
                 {pin.map((digit, index) => (
                   <div
                     key={index}
-                    className="w-12 h-12 md:w-16 md:h-16 bg-[#F2F2F2] rounded-[5px] flex items-center justify-center text-[32px] font-[genos] font-medium"
+                    className="w-20 h-20 bg-[#F2F2F2] rounded-lg flex items-center justify-center text-[32px] font-[genos] font-medium"
                   >
                     {digit ? "●" : ""}
                   </div>
@@ -168,50 +208,62 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
               </div>
 
               {/* Keypad */}
-              <div className="grid grid-cols-3 gap-2 md:gap-3">
+              <div className="grid grid-cols-3 gap-4 mb-8">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
                   <button
                     key={number}
-                    className="w-14 h-14 md:w-16 md:h-16 bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-2xl md:text-3xl rounded-[15px] flex items-center justify-center hover:bg-[#a5d0ff] transition-colors"
+                    className="w-16 h-16 bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-[52px] rounded-[15px] flex items-center justify-center"
                     onClick={() => handleNumberClick(number.toString())}
                   >
                     {number}
                   </button>
                 ))}
-                <button
-                  className="w-14 h-14 md:w-16 md:h-16 bg-[#FFFFFF] font-[genos] font-[500] text-[#5DC90A] border-dashed border-[#5DC90A] text-2xl md:text-3xl rounded-[15px] flex items-center justify-center hover:bg-[#f0f0f0] transition-colors"
-                  onClick={() => confirmPin()}
+                <div
+                  onClick={confirmPin}
+                  className="w-16 h-16 bg-[#FFFFFF] font-[genos] font-[500] text-[#5DC90A] border-dashed border-[#5DC90A] text-3xl rounded-[15px] flex items-center justify-center cursor-pointer"
                 >
-                  ✓
-                </button>
+                  <Image
+                    src={"/images/start_screen/right.svg"}
+                    alt="check"
+                    width={68}
+                    height={68}
+                    unoptimized
+                  />
+                </div>
                 <button
-                  className="w-14 h-14 md:w-16 md:h-16 bg-[#BBDDFF] font-[genos] font-[500] text-[#FFFFFF] border-none text-2xl md:text-3xl rounded-[15px] flex items-center justify-center hover:bg-[#a5d0ff] transition-colors"
+                  key={0}
+                  className="w-16 h-16 bg-[#BBDDFF] font-[genos] font-[500] text-[52px] text-[#FFFFFF] border-none rounded-[15px] flex items-center justify-center cursor-pointer"
                   onClick={() => handleNumberClick("0")}
                 >
                   0
                 </button>
-                <button
-                  className="w-14 h-14 md:w-16 md:h-16 bg-[#FFFFFF] font-[genos] font-[500] text-[#FF270E] border-[#FF270E] border-dashed text-2xl md:text-3xl rounded-[15px] flex items-center justify-center hover:bg-[#f0f0f0] transition-colors"
+                {/* Backspace */}
+                <div
                   onClick={handleBackspaceClick}
+                  className="w-16 h-16 bg-[#FFFFFF] font-[genos] font-[500] text-[#FF270E] border-[#FF270E] border-dashed text-3xl rounded-[15px] flex items-center justify-center cursor-pointer"
                 >
-                  ✕
-                </button>
+                  <Image
+                    src={"/images/start_screen/back.svg"}
+                    alt="check"
+                    width={68}
+                    height={68}
+                    unoptimized
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-row items-center justify-between bg-[#F2F2F2] w-full mt-6 rounded-[15px] p-4">
-              <div className="flex items-center justify-center p-2">
+            <div className="flex flex-row items-center justify-between bg-[#F2F2F2] w-full rounded-[15px] p-2">
+              <div className="flex items-center justify-center p-2 ">
                 <Image
                   src={"/images/kids/information.svg"}
                   alt="information"
-                  width={50}
-                  height={50}
-                  loading="eager"
-                  quality={90}
+                  width={130}
+                  height={130}
                   unoptimized
                 />
               </div>
-              <div className="flex flex-col px-[0px] items-center justify-center flex-1">
+              <div className="flex flex-col px-[0px] items-center justify-center">
                 <h6 className="text-[#000000] text-lg font-[genos] font-[500] text-center w-full m-[0px]">
                   Information
                 </h6>
@@ -268,11 +320,11 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
                   unoptimized
                 />
               </div>
-              <div>
+              <div className="flex flex-col items-center justify-center">
                 <h6 className="text-[#000000] text-lg font-[genos] font-[500] text-center w-full m-[0px]">
                   Information
                 </h6>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-black font-[genos]">
                   Children shouldn&apos;t watch TV for more than an hour at a
                   time. Regular breaks are important for their health and focus.
                 </p>

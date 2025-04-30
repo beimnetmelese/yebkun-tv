@@ -53,16 +53,48 @@ function RelatedVideoCard({ id, thumbnail, title }: Video) {
   };
 
   return (
+      <div
+        className="group relative cursor-pointer w-[185px] h-[220px] z-10 flex items-center justify-center"
+        onClick={handleClick}
+      >
+        <div className="w-full h-full flex items-center justify-center rounded-lg relative transition-all duration-300 ease-in-out transform group-hover:scale-105 group-hover:shadow-xl group-hover:border-2 group-hover:h-[260px] group-hover:border-red-500 group-hover:border-[4px]">
+          <Image
+            src={thumbnail}
+            alt={title}
+            width={185}
+            height={220}
+            className="rounded-lg w-full h-full object-cover transition-transform duration-300 ease-in-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-lg"></div>
+
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
+              <PlayIcon className="h-8 w-8 text-white" />
+            </div>
+          </div>
+        </div>
+      </div>
+  );
+}
+
+function RelatedStoryCard({ id, thumbnail, title,  }: Video) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/kids/movie/${encodeURIComponent(id)}`);
+  };
+
+  return  (
     <div
-      className="group relative cursor-pointer w-[185px] h-[260px] z-10"
+      className="group relative cursor-pointer w-[220px] h-[180px] z-10 flex items-center justify-center"
       onClick={handleClick}
     >
-      <div className="w-full h-full rounded-lg relative transition-all duration-300 ease-in-out transform group-hover:scale-105 group-hover:shadow-xl group-hover:border-2 group-hover:border-red-500 group-hover:border-[4px]">
+      <div className="w-full h-full flex items-center justify-center rounded-lg relative transition-all duration-300 ease-in-out transform group-hover:scale-105 group-hover:shadow-xl group-hover:border-2 group-hover:h-[200px] group-hover:border-red-500 group-hover:border-[4px]">
         <Image
           src={thumbnail}
           alt={title}
           width={185}
-          height={260}
+          height={220}
           className="rounded-lg w-full h-full object-cover transition-transform duration-300 ease-in-out"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-lg"></div>
@@ -74,7 +106,7 @@ function RelatedVideoCard({ id, thumbnail, title }: Video) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function VideoScreen({
@@ -111,8 +143,8 @@ function VideoScreen({
   const [seasonEpisodes, setSeasonEpisodes] = useState<Episode[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [relatedCurrentPage, setRelatedCurrentPage] = useState(0);
-  const pageSize = 4;
-  const relatedPageSize = 4;
+  const pageSize = 8;
+  const relatedPageSize = 7;
   const router = useRouter();
 
   const storageKey = `video-progress-${videoTitle
@@ -207,7 +239,7 @@ function VideoScreen({
             "linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))",
         }}
       >
-        <p className="text-white text-[90px] font-[700] font-[genos]">
+        <p className="text-white text-[80px] font-[700] font-[genos] m-[0px]">
           {videoTitle}
         </p>
 
@@ -275,25 +307,25 @@ function VideoScreen({
             <div className="flex flex-row gap-4 mt-8">
               <button
                 onClick={() => navigateToPlayer("continue")}
-                className="bg-[#81B616] text-black px-4 py-2 rounded-full border-none flex flex-row gap-2 items-center justify-center cursor-pointer hover:bg-[#70a011] transition-colors"
+                className="bg-[#81B616] text-black px-4 rounded-full border-none flex flex-row gap-2 items-center justify-center cursor-pointer hover:bg-[#70a011] transition-colors"
               >
-                <PlayIcon className="w-5 h-5 text-white" />
+                <PlayIcon className="w-6 h-6 text-white font-[genos] font-bold" />
                 <p className="text-white text-[32px] font-[600] font-[genos]">
                   Continue
                 </p>
               </button>
               <button
                 onClick={() => navigateToPlayer("restart")}
-                className="bg-[#3D76E1] px-4 py-2 rounded-full flex gap-2 items-center cursor-pointer hover:bg-[#3467c5] transition-colors"
+                className="bg-[#3D76E1] px-4 rounded-full flex gap-2 items-center cursor-pointer hover:bg-[#3467c5] transition-colors"
               >
-                <LucideRefreshCcw className="w-5 h-5 text-white" />
+                <LucideRefreshCcw className="w-6 h-6 text-white font-[genos] font-bold" />
                 <p className="text-white text-[32px] font-[600] font-[genos]">
                   Restart
                 </p>
               </button>
               <button
                 onClick={() => navigateToPlayer("trailer")}
-                className="bg-black/20 px-4 py-2 rounded-full border border-white flex gap-2 items-center cursor-pointer hover:bg-black/30 transition-colors"
+                className=" navigateToPlayerbg-black/20 px-4 rounded-full border border-white flex gap-2 items-center cursor-pointer hover:bg-black/30 transition-colors"
               >
                 <p className="text-white text-[32px] font-[600] font-[genos]">
                   Trailer
@@ -305,7 +337,7 @@ function VideoScreen({
       </div>
 
       {videoType === "series" && (
-        <div className="absolute bottom-0 w-full z-30 p-6 bg-[rgba(0,0,0,0.6)]">
+        <div className="absolute bottom-0 h-[26%] w-[98%] bottom-[10px] z-30 p-6 bg-[rgba(255,255,255,0.1)] backdrop-blur-md flex flex-col items-start justify-start">
           <div className="flex gap-4">
             {Array.from({ length: numberOfSeasons }, (_, i) => (
               <button
@@ -326,11 +358,11 @@ function VideoScreen({
           </div>
 
           <div className="mt-2 flex flex-col items-center gap-4">
-            <div className="flex flex-row items-center gap-4 w-full justify-center">
+            <div className="flex flex-row items-center gap-4 w-full items-center justify-center w-full">
               <button
                 disabled={currentPage === 0}
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-                className={`px-4 py-2 rounded-full font-[genos] ${
+                className={`px-4 py-2 rounded-full font-[genos] left-[10px] ${
                   currentPage === 0
                     ? "text-white cursor-not-allowed"
                     : "bg-white text-black"
@@ -345,7 +377,7 @@ function VideoScreen({
                 />
               </button>
 
-              <div className="flex gap-4 max-w-[80vw]">
+              <div className="flex w-full gap-3">
                 {seasonEpisodes
                   .slice(
                     currentPage * pageSize,
@@ -354,11 +386,44 @@ function VideoScreen({
                   .map((ep) => (
                     <SeriesBottomCard
                       key={ep.id}
+                      id={ep.id}
                       thumbnail={ep.thumbnail}
                       title={ep.title}
                       description={ep.description}
                       url={ep.url}
                       episodeNumber={ep.episodeNumber}
+                    />
+                  ))}
+                {seasonEpisodes
+                  .slice(
+                    currentPage * pageSize,
+                    currentPage * pageSize + pageSize
+                  )
+                  .map((ep) => (
+                    <SeriesBottomCard
+                      key={ep.id}
+                      id={ep.id}
+                      thumbnail={ep.thumbnail}
+                      title={ep.title}
+                      description={ep.description}
+                      url={ep.url}
+                      episodeNumber={2}
+                    />
+                  ))}
+                {seasonEpisodes
+                  .slice(
+                    currentPage * pageSize,
+                    currentPage * pageSize + pageSize
+                  )
+                  .map((ep) => (
+                    <SeriesBottomCard
+                      key={ep.id}
+                      id={ep.id}
+                      thumbnail={ep.thumbnail}
+                      title={ep.title}
+                      description={ep.description}
+                      url={ep.url}
+                      episodeNumber={3}
                     />
                   ))}
               </div>
@@ -372,9 +437,9 @@ function VideoScreen({
                       : prev
                   )
                 }
-                className={`px-4 py-2 rounded-full font-[genos] ${
+                className={`px-4 py-2 rounded-full font-[genos] ml-[700px] ${
                   (currentPage + 1) * pageSize >= seasonEpisodes.length
-                    ? "text-white cursor-not-allowed"
+                    ? "text-white cursor-not-allowed" 
                     : "bg-white text-black"
                 }`}
               >
@@ -395,15 +460,15 @@ function VideoScreen({
       {(videoType === "movie" || videoType === "story") &&
         relatedVideos &&
         relatedVideos.length > 0 && (
-          <div className="absolute bottom-0 w-full z-30 p-6 bg-[rgba(0,0,0,0.6)]">
+          <div className="absolute bottom-0 w-[98%] h-[24%] bottom-[10px] z-30 bg-[rgba(250,250,250,0.1)] backdrop-blur-md flex items-center justify-center">
             <div className="flex flex-col items-center gap-4">
-              <div className="flex flex-row items-center gap-4 w-full justify-center">
+              <div className="flex flex-row items-center gap-4 w-full">
                 <button
                   disabled={relatedCurrentPage === 0}
                   onClick={() =>
                     setRelatedCurrentPage((prev) => Math.max(prev - 1, 0))
                   }
-                  className={`px-4 py-2 rounded-full font-[genos] ${
+                  className={`px-4 py-2 rounded-full font-[genos]  ${
                     relatedCurrentPage === 0
                       ? "text-white cursor-not-allowed"
                       : ""
@@ -417,35 +482,60 @@ function VideoScreen({
                     unoptimized
                   />
                 </button>
-
-                <div className="flex gap-4 max-w-[80vw]">
-                  {relatedVideos
-                    .slice(
-                      relatedCurrentPage * relatedPageSize,
-                      relatedCurrentPage * relatedPageSize + relatedPageSize
-                    )
-                    .map((video) => (
-                      <RelatedVideoCard
-                        key={video.id}
-                        id={video.id}
-                        thumbnail={video.thumbnail}
-                        title={video.title}
-                        description={video.description}
-                        url={video.url}
-                        videoType={video.videoType}
-                        views={video.views}
-                        duration={video.duration}
-                        type={
-                          video.videoType as
-                            | "Videos"
-                            | "Movies"
-                            | "Stories"
-                            | "Series"
-                        }
-                      />
-                    ))}
-                </div>
-
+                {videoType === "movie" ? (
+                  <div className="flex gap-4 w-full mx-[50px]">
+                    {relatedVideos
+                      .slice(relatedCurrentPage * 8, relatedCurrentPage * 8 + 8)
+                      .map((video) => (
+                        <RelatedVideoCard
+                          key={video.id}
+                          id={video.id}
+                          thumbnail={video.thumbnail}
+                          title={video.title}
+                          description={video.description}
+                          url={video.url}
+                          videoType={video.videoType}
+                          views={video.views}
+                          duration={video.duration}
+                          type={
+                            video.videoType as
+                              | "Videos"
+                              | "Movies"
+                              | "Stories"
+                              | "Series"
+                          }
+                        />
+                      ))}
+                  </div>
+                ) : (
+                  <div className="flex gap-4 w-full mx-[50px]">
+                    {relatedVideos
+                      .slice(
+                        relatedCurrentPage * relatedPageSize,
+                        relatedCurrentPage * relatedPageSize + relatedPageSize
+                      )
+                      .map((video) => (
+                        <RelatedStoryCard
+                          key={video.id}
+                          id={video.id}
+                          thumbnail={video.thumbnail}
+                          title={video.title}
+                          description={video.description}
+                          url={video.url}
+                          videoType={video.videoType}
+                          views={video.views}
+                          duration={video.duration}
+                          type={
+                            video.videoType as
+                              | "Videos"
+                              | "Movies"
+                              | "Stories"
+                              | "Series"
+                          }
+                        />
+                      ))}
+                  </div>
+                )}
                 <button
                   disabled={
                     (relatedCurrentPage + 1) * relatedPageSize >=

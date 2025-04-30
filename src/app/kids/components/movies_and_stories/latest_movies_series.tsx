@@ -2,6 +2,7 @@ import { Video } from "@/lib/firebase";
 import { useEffect, useRef, useState } from "react";
 import { Series } from "../../page";
 import MoviesAndSeriesCard from "./movies_and_stories_card";
+import SeriesCard from "./series_card";
 
 export default function LatestMoviesSeries({
   movies,
@@ -14,7 +15,7 @@ export default function LatestMoviesSeries({
 
   const [showLeftScroll, setShowLeftScroll] = useState(false);
   const [showRightScroll, setShowRightScroll] = useState(true);
-  console.log(series);
+
   useEffect(() => {
     const checkScroll = () => {
       const container = scrollContainerRef.current;
@@ -83,6 +84,7 @@ export default function LatestMoviesSeries({
             paddingRight: "2px",
           }}
         >
+          {/* Render movies */}
           {movies.map((movie) => (
             <div key={movie.id} className="snap-start flex-shrink-0">
               <MoviesAndSeriesCard
@@ -93,6 +95,42 @@ export default function LatestMoviesSeries({
                 type={movie.type}
                 views={movie.views}
                 videoType={movie.videoType}
+                videoCount={movies.length + series.length}
+              />
+            </div>
+          ))}
+          {/* Render movies */}
+          {movies.map((movie) => (
+            <div key={movie.id} className="snap-start flex-shrink-0">
+              <MoviesAndSeriesCard
+                id={movie.id}
+                video={movie.url}
+                title={movie.title}
+                thumbnail={movie.thumbnail}
+                type={movie.type}
+                views={movie.views}
+                videoType={movie.videoType}
+                videoCount={movies.length + series.length}
+              />
+            </div>
+          ))}
+
+          {/* Render series */}
+          {series.map((seriesItem) => (
+            <div key={seriesItem.id} className="snap-start flex-shrink-0">
+              <SeriesCard
+                id={seriesItem.id}
+                url={seriesItem.url}
+                title={seriesItem.title}
+                thumbnail={seriesItem.thumbnail}
+                type="Series"
+                views={seriesItem.views}
+                videoType="series"
+                description={seriesItem.description}
+                numberOfEpisodes={seriesItem.numberOfEpisodes}
+                seasons={seriesItem.seasons}
+                episodes={seriesItem.episodes}
+                videoCount={movies.length + series.length}
               />
             </div>
           ))}
@@ -146,9 +184,7 @@ export default function LatestMoviesSeries({
           </button>
         )}
       </div>
-     
     </div>
-    
   ) : (
     <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
   );

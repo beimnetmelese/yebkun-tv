@@ -3,14 +3,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-interface NewStoriesCardProps {
+interface SeriesCardProps {
   id: string;
-  thumbnail: string;
+  url: string;
   title: string;
+  thumbnail: string;
+  type: "Series";
   views: number;
-  video: string;
-  type: "Stories" | "Videos" | "Movies" | "Series";
-  videoType?: "series" | "movie" | "story";
+  videoType: "series";
+  description: string;
+  numberOfEpisodes: number;
+  seasons: number;
+  episodes: {
+    id: string;
+    title: string;
+    thumbnail: string;
+    url: string;
+  }[];
+  videoCount: number;
 }
 
 function formatViews(views: number): string {
@@ -23,14 +33,17 @@ function formatDuration(seconds: number): string {
   const remainingSeconds = Math.floor(seconds % 60);
   return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 }
+console.log(formatDuration)
 
-const NewStoriesCard = ({
+const SeriesCard = ({
   id,
-  thumbnail,
+  url,
   title,
+  thumbnail,
   views,
-  video,
-}: NewStoriesCardProps) => {
+  numberOfEpisodes,
+  seasons,
+}: SeriesCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -40,10 +53,10 @@ const NewStoriesCard = ({
   const [duration, setDuration] = useState(0);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const playPromiseRef = useRef<Promise<void> | null>(null);
-
+  console.log(duration)
   useEffect(() => {
     // Load saved progress from localStorage if exists
-    const savedProgress = localStorage.getItem(`story-progress-${id}`);
+    const savedProgress = localStorage.getItem(`series-progress-${id}`);
     if (savedProgress) {
       const parsedProgress = parseInt(savedProgress, 10);
       setVideoProgress(parsedProgress);
@@ -53,7 +66,7 @@ const NewStoriesCard = ({
   // Save progress to localStorage when component unmounts or progress changes
   useEffect(() => {
     if (videoProgress > 0) {
-      localStorage.setItem(`story-progress-${id}`, videoProgress.toString());
+      localStorage.setItem(`series-progress-${id}`, videoProgress.toString());
     }
   }, [id, videoProgress]);
 
@@ -179,23 +192,19 @@ const NewStoriesCard = ({
 
   const handleVideoError = () => {
     setHasError(true);
-    console.error(`Video failed to load: ${video}`);
-    // If this is a stories video with a specific naming pattern, try the fallback
-    if (video.includes("/videos/Stories/")) {
-      console.log("Attempting to use fallback video");
-      // If we had the option, we'd dynamically update the video source here
-    }
+    console.error(`Video failed to load: ${url}`);
   };
 
-  return (
+  console.log('screen width', screen.width)
+  return url ? (
     <div
       ref={containerRef}
-      className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
+      className={`w-[200px] h-[240px] relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <Link
-        href={`/kids/story/${encodeURIComponent(id)}`}
+        href={`/kids/series/${encodeURIComponent(id)}`}
         className="block w-full h-full"
       >
         {/* Video Element */}
@@ -211,9 +220,9 @@ const NewStoriesCard = ({
             onTimeUpdate={handleVideoTimeUpdate}
             onLoadedData={handleVideoLoaded}
             onError={handleVideoError}
-            preload="metadata"
+            preload="none"
           >
-            <source src={video} type="video/mp4" />
+            <source src={url} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         )}
@@ -230,13 +239,15 @@ const NewStoriesCard = ({
             src={thumbnail}
             alt={title}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="170px"
             className="object-cover"
-            priority
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
           />
           <div
             className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 ${
-              isHovered ? "opacity-0" : "opacity-70"
+              isHovered ? "opacity-0" : "opacity-100"
             }`}
           />
         </div>
@@ -263,6 +274,7 @@ const NewStoriesCard = ({
           </div>
         </div>
 
+        {/* Error indicator */}
         {hasError && (
           <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
             <div className="text-white text-center p-4">
@@ -287,36 +299,42 @@ const NewStoriesCard = ({
           </div>
         )}
 
-        {/* Views badge */}
-        <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded tv-text-badge flex flex-row items-center justify-center gap-1">
-          <Eye className="w-4 h-4 mr-2" />
-          <span>{formatViews(views)}</span>
+        {/* Progress Bar */}
+        <div
+          className={`absolute bottom-8 left-0 w-full px-2 ${
+            videoProgress === 0 ? "hidden" : ""
+          }`}
+        >
+          <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
+            <div
+              className="bg-primary h-full rounded-full"
+              style={{ width: `${videoProgress}%` }}
+            />
+          </div>
         </div>
 
-        {/* Progress Bar */}
-        {isHovered && (
-          <div className="absolute bottom-8 left-0 w-full px-3">
-            <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
-              <div
-                className="bg-primary h-full rounded-full"
-                style={{ width: `${videoProgress}%` }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Title */}
-        <div className="absolute bottom-0 left-0 w-full p-3 justify-between flex items-center">
+        {/* Series Info */}
+        <div className="absolute bottom-0 left-0 w-full p-2 flex flex-col">
           <h3 className="text-white font-[400] tv-text-title line-clamp-1">
             {title}
           </h3>
-          <p className="text-white font-[400] tv-text-title line-clamp-1">
-            {formatDuration(duration)}
-          </p>
+          <div className="flex items-center justify-between">
+            <p className="text-white/80 text-xs">
+              {seasons > 1 ? `${seasons} Seasons` : `${seasons} Season`} •{" "}
+              {numberOfEpisodes} Episodes
+            </p>
+          </div>
+        </div>
+
+        <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded flex items-center gap-1 tv-text-badge">
+          <Eye className="w-3 h-3" />
+          {formatViews(views)}
         </div>
       </Link>
     </div>
+  ) : (
+    <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
   );
 };
 
-export default NewStoriesCard;
+export default SeriesCard;

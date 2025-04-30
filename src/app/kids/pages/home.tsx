@@ -61,8 +61,6 @@ export default function Home({
           <div className="">
             <LatestMoviesSeries movies={movies} series={series} />
           </div>
-      
-      
     </div>
   )
   );

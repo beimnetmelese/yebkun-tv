@@ -14,7 +14,8 @@ const MostViewedCard = ({
   title,
   thumbnail,
   videoType = "movie",
-}: Video) => {
+  videoCount,
+}: Video & { videoCount: number }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -124,10 +125,13 @@ const MostViewedCard = ({
     console.error("Video failed to load");
   };
 
+  console.log(videoCount);
+  console.log(screen.width);
+
   return (
     <div
       ref={containerRef}
-      className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
+      className={`w-[${screen.width / videoCount}px] h-[200px] relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

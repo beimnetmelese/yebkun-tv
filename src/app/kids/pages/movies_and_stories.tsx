@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import LatestMoviesCard from "../components/movies_and_stories/latest_movies_card";
 import LatestMoviesSeries from "../components/movies_and_stories/latest_movies_series";
 import { Series } from "../page";
+import SeriesCard from "../components/movies_and_stories/series_card";
 
 function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -52,11 +53,13 @@ function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
       });
     }
   };
-
+  console.log('series',series)
   return (
     <div className="pb-1">
       <div className="relative w-full">
-        <h1 className="text-black font-genos font-[500] text-sm">Latest Movies</h1>
+        <h1 className="text-black font-genos font-[500] text-sm">
+          Latest Movies
+        </h1>
         <div
           ref={scrollContainerRef}
           className="flex overflow-x-auto py-1 snap-x scrollbar-hide"
@@ -78,6 +81,7 @@ function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
                 type={item.type}
                 views={item.views}
                 videoType={item.videoType}
+                videoCount={movies.length}
               />
             </div>
           ))}
@@ -144,16 +148,21 @@ function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
             paddingRight: "4px",
           }}
         >
-          {series.map((item) => (
-            <div key={item.id} className="snap-start flex">
-              <LatestMoviesCard
-                id={item.id}
-                video={item.url}
-                title={item.title}
-                thumbnail={item.thumbnail}
-                type={item.type as 'Series'|'Movies'|'Videos'}
-                views={item.views}
-                videoType={item.videoType as 'series'|'movie'|'story'}
+          {series.map((seriesItem) => (
+            <div key={seriesItem.id} className="snap-start flex-shrink-0 bg-black">
+              <SeriesCard
+                id={seriesItem.id}
+                url={seriesItem.url}
+                title={seriesItem.title}
+                thumbnail={seriesItem.thumbnail}
+                type="Series"
+                views={seriesItem.views}
+                videoType="series"
+                description={seriesItem.description}
+                numberOfEpisodes={seriesItem.numberOfEpisodes}
+                seasons={seriesItem.seasons}
+                episodes={seriesItem.episodes}
+                videoCount={movies.length + series.length}
               />
             </div>
           ))}

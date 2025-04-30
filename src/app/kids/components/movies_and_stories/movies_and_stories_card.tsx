@@ -11,6 +11,7 @@ interface MostViewedCardProps {
   type: "Stories" | "Videos" | "Movies" | "Series";
   views: number;
   videoType?: "series" | "movie" | "story";
+  videoCount: number;
 }
 
 
@@ -143,8 +144,8 @@ const MoviesAndSeriesCard = ({
       onMouseLeave={handleMouseLeave}
       style={{
         aspectRatio: "2/3",
-        width: "170px",
-        height: "auto",
+        width: `200px`,
+        height: `240px`,
       }}
     >
       <Link

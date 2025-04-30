@@ -171,13 +171,13 @@ const KidsPage: FC = () => {
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
       {/* Background Audio - set to loop and persist */}
-      <audio
+      {/* <audio
         ref={audioRef}
         src="/images/kids/animation/birds.mp3"
         loop
         preload="auto"
         className="hidden"
-      />
+      /> */}
 
       <audio
         ref={clickSoundRef}
@@ -208,13 +208,13 @@ const KidsPage: FC = () => {
       ></div>
 
       {/* Footer animation with grass and butterflies */}
-      <div className="absolute bottom-0 left-0 w-full z-50">
+      <div className="absolute bottom-0 left-0 w-full z-50 h-[10%]">
         <Image
           src="/images/kids/Footer.gif"
           alt="Animated Footer with Grass and Butterflies"
           width={1920}
           height={200}
-          className="w-full h-auto"
+          className="w-full h-full"
           priority
           unoptimized
         />
@@ -338,7 +338,7 @@ const KidsPage: FC = () => {
         ref={mainRef}
         className="absolute top-[15vh] left-0 w-full z-10 overflow-hidden"
         style={{
-          height: `calc(100vh - 15vh)`, // Subtracting nav height and grass height
+          height: `calc(100vh - 15vh)`,
           paddingLeft: "var(--space-lg)",
           paddingRight: "var(--space-lg)",
         }}

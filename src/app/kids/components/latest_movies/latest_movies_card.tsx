@@ -15,7 +15,13 @@ function formatDuration(seconds: number): string {
   return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 }
 
-const LatestMoviesCard = ({ video }: { video: Video }) => {
+const LatestMoviesCard = ({
+  video,
+
+}: {
+  video: Video;
+  videoCount: number;
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -176,7 +182,7 @@ const LatestMoviesCard = ({ video }: { video: Video }) => {
   return (
     <div
       ref={containerRef}
-      className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
+      className={`w-[240px] h-[170px] relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -222,7 +228,6 @@ const LatestMoviesCard = ({ video }: { video: Video }) => {
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
           />
-          
         </div>
 
         {/* Play Icon */}

@@ -102,7 +102,7 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
           }}
         >
           {videos.map((video) => (
-            <div key={video.title} className="snap-start flex-shrink-0">
+            <div key={video.title} className="snap-start flex-shrink-0 gap-2">
               <MostViewedCard
                 id={video.id}
                 url={video.url}
@@ -113,6 +113,7 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
                 videoType={video.videoType}
                 description={video.description}
                 duration={video.duration}
+                videoCount={videos.length}
               />
             </div>
           ))}
