@@ -30,7 +30,8 @@ const MoviesAndSeriesCard = ({
   title,
   thumbnail,
   views,
-}: MostViewedCardProps) => {
+  videoCount,
+}: MostViewedCardProps & { videoCount: number }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -186,19 +187,16 @@ const MoviesAndSeriesCard = ({
       // If we had the option, we'd dynamically update the video source here
     }
   };
-
-  return (
-    video ? (
+  console.log(videoCount);
+  console.log(screen.width);
+  return video ? (
     <div
       ref={containerRef}
-      className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
+      className={`w-[${
+        screen.width / videoCount
+      }px] h-[200px] relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{
-        aspectRatio: "2/3",
-        width: "170px",
-        height: "auto",
-      }}
     >
       <Link
         href={`/kids/movie/${encodeURIComponent(id)}`}
@@ -328,7 +326,6 @@ const MoviesAndSeriesCard = ({
     </div>
   ) : (
     <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
-  )
   );
 };
 

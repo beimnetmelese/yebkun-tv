@@ -1,4 +1,5 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import LoginModal from "./_components/LoginModal";
 import MovieList from "./_components/MovieList";
@@ -6,11 +7,28 @@ import RightSection from "./_components/RightSection";
 
 export default function Login() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [initialPopup, setInitialPopup] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+
   useEffect(() => {
-    setTimeout(() => {
+    const modal = searchParams.get("modal");
+    const popup = searchParams.get("popup");
+
+    if (modal === "open") {
       setIsLoginModalOpen(true);
-    }, 5000);
-  }, []); // Add empty dependency array to run effect only once
+    }
+    if (popup === "thirPopup") {
+      setInitialPopup("thirPopup");
+    }
+
+    // Only set timeout if modal wasn't triggered by query params
+    if (modal !== "open") {
+      const timeout = setTimeout(() => {
+        setIsLoginModalOpen(true);
+      }, 5000);
+      return () => clearTimeout(timeout);
+    }
+  }, [searchParams]);
 
   return (
     <section className="w-full h-screen flex bg-[#F2F2F2] overflow-hidden relative">
@@ -30,6 +48,7 @@ export default function Login() {
           <LoginModal
             isOpen={isLoginModalOpen}
             onClose={() => setIsLoginModalOpen(false)}
+            initialPopup={initialPopup}
           />
         </div>
       )}

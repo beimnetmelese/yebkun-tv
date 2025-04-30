@@ -109,6 +109,7 @@ function VideoRow({ videos }: { videos: Video[] }) {
                 videoType={video.videoType}
                 description={video.description}
                 duration={video.duration}
+                videoCount={videos.length}
               />
             </div>
           ))}

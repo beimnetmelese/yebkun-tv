@@ -1,7 +1,7 @@
 "use client";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ParentCode from "@/app/kids/components/parent_code";
 import { useRouter } from "next/navigation";
@@ -9,9 +9,11 @@ import { useRouter } from "next/navigation";
 function LoginModal({
   isOpen,
   onClose,
+  initialPopup,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  initialPopup: string | null;
 }) {
   const [firstPopup, setFirstPopup] = useState(true);
   const [thirPopup, setThirdPopup] = useState(false);
@@ -21,6 +23,13 @@ function LoginModal({
   };
   const router = useRouter();
 
+  useEffect(() => {
+    if (initialPopup === "thirPopup") {
+      setThirdPopup(true);
+      setIsParentCodeOpen(false);
+      setFirstPopup(false);
+    }
+  }, [initialPopup]);
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="border-none button-none flex items-center justify-center p-0 m-0 bg-transparent border-0 [&>button]:hidden max-w-[95vw] sm:max-w-[95vw] md:max-w-[95vw] lg:max-w-[95vw] xl:max-w-[95vw] w-screen h-screen">
@@ -28,13 +37,12 @@ function LoginModal({
 
         {/* Parent Code before kids section */}
         {isParentCodeOpen && (
-
-            <div className="relative w-full h-full flex items-center justify-center">
-              <ParentCode
-                isOpen={isParentCodeOpen}
-                onClose={handleParentCodeClose}
-              />
-            </div>
+          <div className="relative w-full h-full flex items-center justify-center">
+            <ParentCode
+              isOpen={isParentCodeOpen}
+              onClose={handleParentCodeClose}
+            />
+          </div>
         )}
 
         {firstPopup && (

@@ -58,7 +58,7 @@ export default function LatestVideos({ videos }: { videos: Video[] }) {
 
   return videos.length > 0 ? (
     <div
-      className="flex flex-col rounded-lg bg-black/30 backdrop-blur-sm p-4 overflow-hidden"
+      className="flex flex-col rounded-lg bg-black/30 backdrop-blur-sm p-4 overflow-hidden "
       style={{
         borderRadius: "var(--radius)",
         width: "fit-content",
@@ -81,8 +81,13 @@ export default function LatestVideos({ videos }: { videos: Video[] }) {
           }}
         >
           {videos.map((video) => (
-            <div key={video.id} className="snap-start flex-shrink-0">
-              <LatestMoviesCard video={video} />
+            <div key={video.id} className="snap-start ">
+              <LatestMoviesCard video={video} videoCount={videos.length} />
+            </div>
+          ))}
+          {videos.map((video) => (
+            <div key={video.id} className="snap-start ">
+              <LatestMoviesCard video={video} videoCount={videos.length} />
             </div>
           ))}
         </div>

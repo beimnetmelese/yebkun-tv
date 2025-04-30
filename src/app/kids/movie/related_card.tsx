@@ -306,6 +306,7 @@ function VideoScreen({
             {seasonEpisodes.map((ep) => (
               <SeriesBottomCard
                 key={ep.id}
+                id={ep.id}
                 thumbnail={ep.thumbnail}
                 title={ep.title}
                 description={ep.description}
