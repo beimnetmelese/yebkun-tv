@@ -127,11 +127,12 @@ const MostViewedCard = ({
 
   console.log(videoCount);
   console.log(screen.width);
+  console.log('most viewed card', id, title, thumbnail, url, videoType, videoCount);
 
   return (
     <div
       ref={containerRef}
-      className={`w-[${screen.width / videoCount}px] h-[200px] relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group`}
+      className={`w-[350px] h-[180px] relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

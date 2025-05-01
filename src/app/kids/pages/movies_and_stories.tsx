@@ -53,9 +53,10 @@ function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
       });
     }
   };
-  console.log('series',series)
+  console.log('series', series)
+  console.log('movies for lm', movies) 
   return (
-    <div className="pb-1">
+    <div className="pb-1 px-3">
       <div className="relative w-full">
         <h1 className="text-black font-genos font-[500] text-sm">
           Latest Movies
@@ -71,6 +72,34 @@ function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
             paddingRight: "4px",
           }}
         >
+          {movies.map((item) => (
+            <div key={item.id} className="snap-start flex">
+              <LatestMoviesCard
+                id={item.id}
+                video={item.url}
+                title={item.title}
+                thumbnail={item.thumbnail}
+                type={item.type}
+                views={item.views}
+                videoType={item.videoType}
+                videoCount={movies.length}
+              />
+            </div>
+          ))}
+          {movies.map((item) => (
+            <div key={item.id} className="snap-start flex">
+              <LatestMoviesCard
+                id={item.id}
+                video={item.url}
+                title={item.title}
+                thumbnail={item.thumbnail}
+                type={item.type}
+                views={item.views}
+                videoType={item.videoType}
+                videoCount={movies.length}
+              />
+            </div>
+          ))}
           {movies.map((item) => (
             <div key={item.id} className="snap-start flex">
               <LatestMoviesCard
@@ -149,7 +178,10 @@ function MediaRow({ movies, series }: { movies: Video[]; series: Series[] }) {
           }}
         >
           {series.map((seriesItem) => (
-            <div key={seriesItem.id} className="snap-start flex-shrink-0 bg-black">
+            <div
+              key={seriesItem.id}
+              className="snap-start flex-shrink-0 bg-black rounded-lg"
+            >
               <SeriesCard
                 id={seriesItem.id}
                 url={seriesItem.url}

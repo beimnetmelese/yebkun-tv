@@ -199,7 +199,7 @@ const SeriesCard = ({
   return url ? (
     <div
       ref={containerRef}
-      className={`w-[200px] h-[240px] relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group`}
+      className={`w-[160px] h-[200px] relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -301,9 +301,7 @@ const SeriesCard = ({
 
         {/* Progress Bar */}
         <div
-          className={`absolute bottom-8 left-0 w-full px-2 ${
-            videoProgress === 0 ? "hidden" : ""
-          }`}
+          className={`absolute bottom-8 left-0 w-full px-2`}
         >
           <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
             <div
