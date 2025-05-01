@@ -1,62 +1,27 @@
-import { Eye } from "lucide-react";
+import { Video } from "@/lib/firebase";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-interface MostViewedCardProps {
-  id: string;
-  video: string;
-  title: string;
-  thumbnail: string;
-  type: "Stories" | "Videos" | "Movies" | "Series";
-  views: number;
-  videoType?: "series" | "movie" | "story";
-}
+// function formatViews(views: number): string {
+//   return views >= 1000 ? `${(views / 1000).toFixed(1)}K` : views.toString();
+// }
 
-function formatViews(views: number): string {
-  return views >= 1000 ? `${(views / 1000).toFixed(1)}K` : views.toString();
-}
-
-// Function to format the time in mm:ss format
-function formatDuration(seconds: number): string {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = Math.floor(seconds % 60);
-  return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
-}
-
-const MoviesAndSeriesCard = ({
+const MostViewedBottomCard = ({
   id,
-  video,
+  url,
   title,
   thumbnail,
-  views,
+  videoType = "movie",
   videoCount,
-}: MostViewedCardProps & { videoCount: number }) => {
+}: Video & { videoCount: number }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [videoProgress, setVideoProgress] = useState(0);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [duration, setDuration] = useState(0);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const playPromiseRef = useRef<Promise<void> | null>(null);
-
-  useEffect(() => {
-    // Load saved progress from localStorage if exists
-    const savedProgress = localStorage.getItem(`movie-progress-${id}`);
-    if (savedProgress) {
-      const parsedProgress = parseInt(savedProgress, 10);
-      setVideoProgress(parsedProgress);
-    }
-  }, [id]);
-
-  // Save progress to localStorage when component unmounts or progress changes
-  useEffect(() => {
-    if (videoProgress > 0) {
-      localStorage.setItem(`movie-progress-${id}`, videoProgress.toString());
-    }
-  }, [id, videoProgress]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -139,14 +104,6 @@ const MoviesAndSeriesCard = ({
         const pauseVideo = () => {
           if (!videoElement.paused) {
             videoElement.pause();
-
-            // Store current progress when leaving
-            if (videoElement.currentTime > 0) {
-              const currentProgress = Math.floor(
-                (videoElement.currentTime / videoElement.duration) * 100
-              );
-              setVideoProgress(currentProgress);
-            }
           }
         };
 
@@ -162,42 +119,38 @@ const MoviesAndSeriesCard = ({
     }, 150); // Debounce delay
   };
 
-  const handleVideoTimeUpdate = () => {
-    if (videoRef.current) {
-      const currentProgress = Math.floor(
-        (videoRef.current.currentTime / videoRef.current.duration) * 100
-      );
-      setVideoProgress(currentProgress);
-    }
-  };
-
-  const handleVideoLoaded = () => {
-    setIsVideoLoaded(true);
-    if (videoRef.current) {
-      setDuration(videoRef.current.duration);
-    }
-  };
-
   const handleVideoError = () => {
     setHasError(true);
-    console.error(`Video failed to load: ${video}`);
-    // If this is a movie or series video with a specific naming pattern, try a fallback
-    if (video.includes("/videos/Movies & Series/")) {
-      console.log("Attempting to use fallback video");
-      // If we had the option, we'd dynamically update the video source here
-    }
+    console.error("Video failed to load");
   };
+
   console.log(videoCount);
   console.log(screen.width);
-  return video ? (
+  console.log(
+    "most viewed card",
+    id,
+    title,
+    thumbnail,
+    url,
+    videoType,
+    videoCount
+  );
+
+  return (
     <div
       ref={containerRef}
-      className={`w-[160px] h-[200px] relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group`}
+      className={`w-[280px] h-[170px] relative rounded-lg overflow-y-auto group`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <Link
-        href={`/kids/movie/${encodeURIComponent(id)}`}
+        href={`/kids/${
+          videoType === "story"
+            ? "story"
+            : videoType === "series"
+            ? "series"
+            : "movie"
+        }/${encodeURIComponent(id)}`}
         className="block w-full h-full"
       >
         {/* Video Element */}
@@ -210,12 +163,11 @@ const MoviesAndSeriesCard = ({
             muted
             playsInline
             poster={thumbnail}
-            onTimeUpdate={handleVideoTimeUpdate}
-            onLoadedData={handleVideoLoaded}
+            onLoadedData={() => setIsVideoLoaded(true)}
             onError={handleVideoError}
-            preload="none"
+            preload="metadata"
           >
-            <source src={video} type="video/mp4" />
+            <source src={url} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         )}
@@ -232,16 +184,9 @@ const MoviesAndSeriesCard = ({
             src={thumbnail}
             alt={title}
             fill
-            sizes="170px"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
-          />
-          <div
-            className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 ${
-              isHovered ? "opacity-0" : "opacity-100"
-            }`}
+            priority
           />
         </div>
 
@@ -267,62 +212,29 @@ const MoviesAndSeriesCard = ({
           </div>
         </div>
 
-        {/* Error indicator */}
-        {hasError && (
-          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-            <div className="text-white text-center p-4">
-              <svg
-                className="w-8 h-8 mx-auto mb-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                ></path>
-              </svg>
-              <p className="text-white text-[16px] font-[400] font-[genos]">
-                Video not available
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Progress Bar */}
-        <div
-          className={`absolute bottom-8 left-0 w-full px-2`}
-        >
-          <div className="w-full bg-gray-700/70 h-1 rounded-full overflow-hidden">
+        {/* Progress bar and info container */}
+        <div className="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black to-transparent">
+          {/* Progress bar */}
+          <div className="w-full h-1 bg-gray-600/50 rounded-full ">
             <div
-              className="bg-primary h-full rounded-full"
-              style={{ width: `${videoProgress}%` }}
-            />
+              className="h-full bg-red-500 rounded-full"
+              style={{ width: "30%" }}
+            ></div>
           </div>
-        </div>
 
-        {/* Title and Duration */}
-        <div className="absolute bottom-0 left-0 w-full p-2 flex flex-row items-center justify-between">
-          <h3 className="text-white font-[400] tv-text-title line-clamp-1">
-            {title}
-          </h3>
-          <p className="text-white font-[400] tv-text-title line-clamp-1">
-            {formatDuration(duration)}
-          </p>
-        </div>
-
-        <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2 py-1 rounded flex items-center gap-1 tv-text-badge">
-          <Eye className="w-3 h-3" />
-          {formatViews(views)}
+          {/* Title and duration */}
+          <div className="flex items-center justify-between">
+            <h3 className="text-white font-medium tv-text-title line-clamp-1 mr-2">
+              {title}
+            </h3>
+            <span className="text-white text-sm bg-black/0 px-2 py-1 rounded">
+              03:45
+            </span>
+          </div>
         </div>
       </Link>
     </div>
-  ) : (
-    <div className="text-black p-10 text-2xl font-bold flex justify-center items-center h-screen"></div>
   );
 };
 
-export default MoviesAndSeriesCard;
+export default MostViewedBottomCard;

@@ -139,7 +139,7 @@ const MoviesAndSeriesCard = ({
   return (
     <div
       ref={containerRef}
-      className="tv-card relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
+      className=" relative rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 group"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{

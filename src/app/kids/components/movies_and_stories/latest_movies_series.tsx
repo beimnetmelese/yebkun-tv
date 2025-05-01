@@ -2,7 +2,6 @@ import { Video } from "@/lib/firebase";
 import { useEffect, useRef, useState } from "react";
 import { Series } from "../../page";
 import MoviesAndSeriesCard from "./movies_and_stories_card";
-import SeriesCard from "./series_card";
 
 export default function LatestMoviesSeries({
   movies,
@@ -114,9 +113,23 @@ export default function LatestMoviesSeries({
               />
             </div>
           ))}
+          {movies.map((movie) => (
+            <div key={movie.id} className="snap-start flex-shrink-0">
+              <MoviesAndSeriesCard
+                id={movie.id}
+                video={movie.url}
+                title={movie.title}
+                thumbnail={movie.thumbnail}
+                type={movie.type}
+                views={movie.views}
+                videoType={movie.videoType}
+                videoCount={movies.length + series.length}
+              />
+            </div>
+          ))}
 
           {/* Render series */}
-          {series.map((seriesItem) => (
+          {/* {series.map((seriesItem) => (
             <div key={seriesItem.id} className="snap-start flex-shrink-0">
               <SeriesCard
                 id={seriesItem.id}
@@ -133,7 +146,7 @@ export default function LatestMoviesSeries({
                 videoCount={movies.length + series.length}
               />
             </div>
-          ))}
+          ))} */}
         </div>
 
         {showLeftScroll && (

@@ -167,6 +167,7 @@ const KidsPage: FC = () => {
 
   console.log("check the active nav");
   console.log(activeNav);
+  console.log("check the most viewed videos", videos);
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
