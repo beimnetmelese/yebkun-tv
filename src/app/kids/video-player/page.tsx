@@ -4,6 +4,8 @@ import { PauseCircle } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useRef, useState } from "react";
+import Play from "/public/images/kids/play.svg";
+
 
 // Use actual thumbnails from existing content
 const RELATED_VIDEOS = [
@@ -524,18 +526,10 @@ function VideoPlayer() {
             >
               {isPlaying ? (
                 <PauseCircle
-                  className={`w-16 h-16 ${
-                    isStoryView ? "text-blue-400" : "text-white"
-                  }`}
+                  style={{ width: "75px", height: "75px" }}
                 />
               ) : (
-                <Image
-                  src={"/images/kids/play.svg"}
-                  alt="play"
-                  width={75}
-                  height={75}
-                  unoptimized
-                />
+                <Play style={{ width: "75px", height: "75px" }} />
               )}
             </button>
 
