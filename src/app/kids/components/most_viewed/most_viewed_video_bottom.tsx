@@ -139,7 +139,7 @@ const MostViewedBottomCard = ({
   return (
     <div
       ref={containerRef}
-      className={`w-[280px] h-[170px] relative rounded-lg overflow-y-auto group`}
+      className={`w-[280px] h-[135px] relative rounded-lg overflow-y-auto group flex flex-col justify-between items-center`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

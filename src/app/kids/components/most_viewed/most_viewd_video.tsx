@@ -267,107 +267,115 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
         </div>
       </div>
       <div className="flex flex-col overflow-y-auto ">
-        <div className="flex flex-col rounded-lg bg-white/10 backdrop-blur-sm p-4 overflow-hidden">
+        <div className="flex flex-col rounded-lg bg-white/10 backdrop-blur-sm overflow-hidden">
           <h5 className="text-black tv-text-title font-[500] font-genos mb-2">
             Most Viewed
           </h5>
-          {showLeftScrollBottom && (
-            <button
-              onClick={() => scrollBottom("left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
-              aria-label="Scroll left"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+          <div className="flex flex-col overflow-y-auto px-4">
+            {showLeftScrollBottom && (
+              <button
+                onClick={() => scrollBottom("left")}
+                className="absolute left-[10px] top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+                aria-label="Scroll left"
               >
-                <path
-                  d="M15 18L9 12L15 6"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-          )}
-          <div
-            ref={scrollContainerRefBottom}
-            className="flex overflow-x-auto py-2 snap-x scrollbar-hide"
-            style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-              gap: "var(--space-md)",
-              paddingLeft: "4px",
-              paddingRight: "4px",
-            }}
-          >
-            {videos.map((video) => (
-              <div key={video.title} className="snap-start flex-shrink-0 gap-2">
-                <MostViewedBottomCard
-                  id={video.id}
-                  url={video.url}
-                  title={video.title}
-                  thumbnail={video.thumbnail}
-                  type={video.type}
-                  views={video.views}
-                  videoType={video.videoType}
-                  description={video.description}
-                  duration={video.duration}
-                  videoCount={videos.length}
-                />
-              </div>
-            ))}
-            {videos.map((video) => (
-              <div key={video.title} className="snap-start flex-shrink-0 gap-2">
-                <MostViewedBottomCard
-                  id={video.id}
-                  url={video.url}
-                  title={video.title}
-                  thumbnail={video.thumbnail}
-                  type={video.type}
-                  views={video.views}
-                  videoType={video.videoType}
-                  description={video.description}
-                  duration={video.duration}
-                  videoCount={videos.length}
-                />
-              </div>
-            ))}
-          </div>
-          {showRightScrollBottom && (
-            <button
-              onClick={() => scrollBottom("right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
-              aria-label="Scroll right"
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 18L9 12L15 6"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            )}
+            <div
+              ref={scrollContainerRefBottom}
+              className="flex overflow-x-auto py-2 snap-x scrollbar-hide"
+              style={{
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                gap: "var(--space-md)",
+                paddingLeft: "4px",
+                paddingRight: "4px",
+              }}
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              {videos.map((video) => (
+                <div
+                  key={video.title}
+                  className="snap-start flex-shrink-0 gap-2"
+                >
+                  <MostViewedBottomCard
+                    id={video.id}
+                    url={video.url}
+                    title={video.title}
+                    thumbnail={video.thumbnail}
+                    type={video.type}
+                    views={video.views}
+                    videoType={video.videoType}
+                    description={video.description}
+                    duration={video.duration}
+                    videoCount={videos.length}
+                  />
+                </div>
+              ))}
+              {videos.map((video) => (
+                <div
+                  key={video.title}
+                  className="snap-start flex-shrink-0 gap-2"
+                >
+                  <MostViewedBottomCard
+                    id={video.id}
+                    url={video.url}
+                    title={video.title}
+                    thumbnail={video.thumbnail}
+                    type={video.type}
+                    views={video.views}
+                    videoType={video.videoType}
+                    description={video.description}
+                    duration={video.duration}
+                    videoCount={videos.length}
+                  />
+                </div>
+              ))}
+            </div>
+            {showRightScrollBottom && (
+              <button
+                onClick={() => scrollBottom("right")}
+                className="absolute right-[12px] top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+                aria-label="Scroll right"
               >
-                <path
-                  d="M9 6L15 12L9 18"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-          )}
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 6L15 12L9 18"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            )}
+          </div>  
         </div>
 
-        <div className="flex flex-col rounded-lg bg-white/10 backdrop-blur-sm p-4 overflow-hidden">
+        <div className="flex flex-col rounded-lg bg-white/10 backdrop-blur-sm px-4 overflow-hidden">
           {showLeftScrollBottom2 && (
             <button
               onClick={() => scrollBottom2("left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+              className="absolute left-[10px] top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
               aria-label="Scroll left"
             >
               <svg
@@ -434,7 +442,7 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
           {showRightScrollBottom2 && (
             <button
               onClick={() => scrollBottom2("right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+              className="absolute right-[12px] top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
               aria-label="Scroll right"
             >
               <svg
@@ -455,11 +463,11 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
             </button>
           )}
         </div>
-        <div className="flex flex-col rounded-lg bg-white/10 backdrop-blur-sm p-4 overflow-hidden">
+        <div className="flex flex-col rounded-lg bg-white/10 backdrop-blur-sm px-4 overflow-hidden">
           {showLeftScrollBottom3 && (
             <button
               onClick={() => scrollBottom3("left")}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+              className="absolute left-[10px] top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
               aria-label="Scroll left"
             >
               <svg
@@ -526,7 +534,7 @@ export default function MostViewedVideo({ videos }: { videos: Video[] }) {
           {showRightScrollBottom3 && (
             <button
               onClick={() => scrollBottom3("right")}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
+              className="absolute right-[12px] top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-2 z-10"
               aria-label="Scroll right"
             >
               <svg

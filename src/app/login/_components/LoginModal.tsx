@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 import ParentCode from "@/app/kids/components/parent_code";
 import { useRouter } from "next/navigation";
+import Zarok from "/public/images/start_screen/zarok_card.svg";
+import Malbat from "/public/images/start_screen/malbat.svg";
 
 function LoginModal({
   isOpen,
@@ -307,14 +309,7 @@ function LoginModal({
               <div className="flex flex-row gap-14">
                 <div className="bg-white rounded-t-[50px] rounded-b-[20px] pb-4 flex flex-col items-center w-[400px]">
                   <div className="w-full border-none">
-                    <Image
-                      src={"/images/start_screen/zarok_card.svg"}
-                      alt="Zarok image"
-                      width={400}
-                      height={400}
-                      className="w-full"
-                      unoptimized
-                    />
+                    <Zarok />
                   </div>
                   <div className="mt-2 mb-4">
                     <Image
@@ -339,14 +334,7 @@ function LoginModal({
 
                 <div className="bg-white rounded-t-[50px] rounded-b-[20px] pb-4 flex flex-col items-center w-[400px]">
                   <div className="w-full">
-                    <Image
-                      src={"/images/start_screen/malbat.svg"}
-                      alt="Malbat image"
-                      width={400}
-                      height={400}
-                      className="w-full"
-                      unoptimized
-                    />
+                    <Malbat />
                   </div>
                   <div className="mt-2 mb-4">
                     <Image
