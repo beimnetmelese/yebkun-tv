@@ -9,6 +9,14 @@ import MostViewedVideo from "./components/most_viewed/most_viewd_video";
 import Home from "./pages/home";
 import MoviesAndStories from "./pages/movies_and_stories";
 import Stories from "./pages/stories";
+import HomeIcon from "/public/images/kids/nav/home.svg";
+import HomeActiveIcon from "/public/images/kids/nav/home_active.svg";
+import StoriesIcon from "/public/images/kids/nav/stories.svg";
+import StoriesActiveIcon from "/public/images/kids/nav/stories_active.svg";
+import VideosIcon from "/public/images/kids/nav/videos.svg";
+import VideosActiveIcon from "/public/images/kids/nav/videos_active.svg";
+import MoviesIcon from "/public/images/kids/nav/movies.svg";
+import MoviesActiveIcon from "/public/images/kids/nav/movies_active.svg";
 
 export interface Series {
   id: string;
@@ -31,12 +39,6 @@ const KidsPage: FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const clickSoundRef = useRef<HTMLAudioElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
-  const [navImages, setNavImages] = useState({
-    home: "/images/kids/nav/home.svg",
-    stories: "/images/kids/nav/stories.svg",
-    videos: "/images/kids/nav/videos.svg",
-    movies: "/images/kids/nav/movies.svg",
-  });
 
   // fetch data from firebase
   const [stories, setStories] = useState<Video[]>([]);
@@ -59,25 +61,6 @@ const KidsPage: FC = () => {
     fetchData();
   }, []);
 
-  // Preload nav images on component mount
-  useEffect(() => {
-    // Preload all nav icons (active and inactive states)
-    const iconsToPreload = [
-      "/images/kids/nav/home.svg",
-      "/images/kids/nav/home_active.svg",
-      "/images/kids/nav/stories.svg",
-      "/images/kids/nav/stories_active.svg",
-      "/images/kids/nav/videos.svg",
-      "/images/kids/nav/videos_active.svg",
-      "/images/kids/nav/movies.svg",
-      "/images/kids/nav/movies_active.svg",
-    ];
-
-    iconsToPreload.forEach((src) => {
-      const img = document.createElement("img");
-      img.src = src;
-    });
-  }, []);
 
   // Function to handle navigation clicks and set active state
   const handleNavClick = (navId: string) => {
@@ -93,25 +76,7 @@ const KidsPage: FC = () => {
     setActiveNav(navId);
 
     // Immediately update active image sources for instant feedback
-    setNavImages((prev) => ({
-      ...prev,
-      home:
-        navId === "home"
-          ? "/images/kids/nav/home_active.svg"
-          : "/images/kids/nav/home.svg",
-      stories:
-        navId === "stories"
-          ? "/images/kids/nav/stories_active.svg"
-          : "/images/kids/nav/stories.svg",
-      videos:
-        navId === "videos"
-          ? "/images/kids/nav/videos_active.svg"
-          : "/images/kids/nav/videos.svg",
-      movies:
-        navId === "movies"
-          ? "/images/kids/nav/movies_active.svg"
-          : "/images/kids/nav/movies.svg",
-    }));
+   
   };
 
   // Initialize audio when component mounts and ensure it continues playing across navigation
@@ -239,93 +204,66 @@ const KidsPage: FC = () => {
           </div>
 
           {/* Navbar Icons - using responsive gap with equal spacing */}
-          <div className="flex-1 flex items-center justify-center r-gap-md">
+          <div className="flex items-center justify-center">
             <a
               onClick={() => handleNavClick("home")}
               href="#home"
-              className={`tv-focus-animation flex flex-col items-center p-tv-2 transition-transform ${
+              className={`tv-focus-animation flex flex-col items-center transition-transform ${
                 activeNav === "home" ? "scale-110" : "hover:scale-110"
               }`}
             >
               {activeNav === "home" ? (
-                <Image
-                  src={"/images/kids/nav/home_active.svg"}
-                  alt="Home"
-                  width={150}
-                  height={100}
-                  className="r-img-md object-contain"
-                  loading="eager"
-                  quality={90}
-                  unoptimized
-                />
+                <HomeActiveIcon   style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
               ) : (
-                <Image
-                  src={navImages.home}
-                  alt="Home"
-                  width={150}
-                  height={100}
-                  className="r-img-md object-contain"
-                  loading="eager"
-                  quality={90}
-                  unoptimized
-                />
+                <HomeIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
               )}
             </a>
             <a
               onClick={() => handleNavClick("stories")}
               href="#stories"
-              className={`tv-focus-animation flex flex-col items-center p-tv-2 transition-transform ${
+              className={`tv-focus-animation flex flex-col items-center transition-transform ${
                 activeNav === "stories" ? "scale-110" : "hover:scale-110"
               }`}
             >
-              <Image
-                src={navImages.stories}
-                alt="Stories"
-                width={150}
-                height={100}
-                className="r-img-md object-contain"
-                loading="eager"
-                quality={90}
-                unoptimized
-              />
+              {
+                activeNav === "stories" ? (
+                  <StoriesActiveIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
+                ) : (
+                  <StoriesIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
+                )
+              }
             </a>
             <a
               onClick={() => handleNavClick("videos")}
               href="#videos"
-              className={`tv-focus-animation flex flex-col items-center p-tv-2 transition-transform ${
+              className={`tv-focus-animation flex flex-col items-center transition-transform ${
                 activeNav === "videos" ? "scale-110" : "hover:scale-110"
               }`}
             >
-              <Image
-                src={navImages.videos}
-                alt="Videos"
-                width={150}
-                height={100}
-                className="r-img-md object-contain"
-                loading="eager"
-                quality={90}
-                unoptimized
-              />
+              {
+                activeNav === "videos" ? (
+                  <VideosActiveIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
+                ) : (
+                  <VideosIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
+                )
+              }
             </a>
             <a
               onClick={() => handleNavClick("movies")}
               href="#movies"
-              className={`tv-focus-animation flex flex-col items-center p-tv-2 transition-transform ${
+              className={`tv-focus-animation flex flex-col items-center transition-transform ${
                 activeNav === "movies" ? "scale-110" : "hover:scale-110"
               }`}
             >
-              <Image
-                src={navImages.movies}
-                alt="Movies"
-                width={150}
-                height={100}
-                className="r-img-md object-contain"
-                loading="eager"
-                quality={90}
-                unoptimized
-              />
+              {
+                activeNav === "movies" ? (
+                  <MoviesActiveIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
+                ) : (
+                  <MoviesIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
+                )
+              }
             </a>
-          </div>
+          </div>  
 
           {/* Circular Timer */}
           <div className="flex items-center mr-[2.5vw]">
