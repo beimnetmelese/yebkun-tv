@@ -11,12 +11,12 @@ import MoviesAndStories from "./pages/movies_and_stories";
 import Stories from "./pages/stories";
 import HomeIcon from "/public/images/kids/nav/home.svg";
 import HomeActiveIcon from "/public/images/kids/nav/home_active.svg";
+import MoviesIcon from "/public/images/kids/nav/movies.svg";
+import MoviesActiveIcon from "/public/images/kids/nav/movies_active.svg";
 import StoriesIcon from "/public/images/kids/nav/stories.svg";
 import StoriesActiveIcon from "/public/images/kids/nav/stories_active.svg";
 import VideosIcon from "/public/images/kids/nav/videos.svg";
 import VideosActiveIcon from "/public/images/kids/nav/videos_active.svg";
-import MoviesIcon from "/public/images/kids/nav/movies.svg";
-import MoviesActiveIcon from "/public/images/kids/nav/movies_active.svg";
 
 export interface Series {
   id: string;
@@ -32,7 +32,6 @@ export interface Series {
   seasons: number;
   numberOfEpisodes: number;
 }
-
 
 const KidsPage: FC = () => {
   const [activeNav, setActiveNav] = useState<string>("home");
@@ -61,7 +60,6 @@ const KidsPage: FC = () => {
     fetchData();
   }, []);
 
-
   // Function to handle navigation clicks and set active state
   const handleNavClick = (navId: string) => {
     // Play click sound
@@ -76,7 +74,6 @@ const KidsPage: FC = () => {
     setActiveNav(navId);
 
     // Immediately update active image sources for instant feedback
-   
   };
 
   // Initialize audio when component mounts and ensure it continues playing across navigation
@@ -174,9 +171,9 @@ const KidsPage: FC = () => {
       ></div>
 
       {/* Footer animation with grass and butterflies */}
-      <div className="absolute bottom-0 left-0 w-full z-50 h-[10%]">
+      <div className="absolute bottom-0 left-0 w-full z-50 h-[10%] bg-transparent">
         <Image
-          src="/images/kids/Footer.gif"
+          src="/images/kids/Footer.webp"
           alt="Animated Footer with Grass and Butterflies"
           width={1920}
           height={200}
@@ -213,9 +210,25 @@ const KidsPage: FC = () => {
               }`}
             >
               {activeNav === "home" ? (
-                <HomeActiveIcon   style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
+                <HomeActiveIcon
+                  style={{
+                    width: "90px",
+                    height: "100px",
+                    marginLeft: "25px",
+                    marginRight: "25px",
+                    padding: "0 0 0 0",
+                  }}
+                />
               ) : (
-                <HomeIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
+                <HomeIcon
+                  style={{
+                    width: "90px",
+                    height: "100px",
+                    marginLeft: "25px",
+                    marginRight: "25px",
+                    padding: "0 0 0 0",
+                  }}
+                />
               )}
             </a>
             <a
@@ -225,13 +238,27 @@ const KidsPage: FC = () => {
                 activeNav === "stories" ? "scale-110" : "hover:scale-110"
               }`}
             >
-              {
-                activeNav === "stories" ? (
-                  <StoriesActiveIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
-                ) : (
-                  <StoriesIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
-                )
-              }
+              {activeNav === "stories" ? (
+                <StoriesActiveIcon
+                  style={{
+                    width: "90px",
+                    height: "100px",
+                    marginLeft: "25px",
+                    marginRight: "25px",
+                    padding: "0 0 0 0",
+                  }}
+                />
+              ) : (
+                <StoriesIcon
+                  style={{
+                    width: "90px",
+                    height: "100px",
+                    marginLeft: "25px",
+                    marginRight: "25px",
+                    padding: "0 0 0 0",
+                  }}
+                />
+              )}
             </a>
             <a
               onClick={() => handleNavClick("videos")}
@@ -240,13 +267,27 @@ const KidsPage: FC = () => {
                 activeNav === "videos" ? "scale-110" : "hover:scale-110"
               }`}
             >
-              {
-                activeNav === "videos" ? (
-                  <VideosActiveIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
-                ) : (
-                  <VideosIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
-                )
-              }
+              {activeNav === "videos" ? (
+                <VideosActiveIcon
+                  style={{
+                    width: "90px",
+                    height: "100px",
+                    marginLeft: "25px",
+                    marginRight: "25px",
+                    padding: "0 0 0 0",
+                  }}
+                />
+              ) : (
+                <VideosIcon
+                  style={{
+                    width: "90px",
+                    height: "100px",
+                    marginLeft: "25px",
+                    marginRight: "25px",
+                    padding: "0 0 0 0",
+                  }}
+                />
+              )}
             </a>
             <a
               onClick={() => handleNavClick("movies")}
@@ -255,15 +296,29 @@ const KidsPage: FC = () => {
                 activeNav === "movies" ? "scale-110" : "hover:scale-110"
               }`}
             >
-              {
-                activeNav === "movies" ? (
-                  <MoviesActiveIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
-                ) : (
-                  <MoviesIcon style={{ width: "90px", height: "100px", marginLeft: "25px", marginRight: "25px", padding: "0 0 0 0" }} />
-                )
-              }
+              {activeNav === "movies" ? (
+                <MoviesActiveIcon
+                  style={{
+                    width: "90px",
+                    height: "100px",
+                    marginLeft: "25px",
+                    marginRight: "25px",
+                    padding: "0 0 0 0",
+                  }}
+                />
+              ) : (
+                <MoviesIcon
+                  style={{
+                    width: "90px",
+                    height: "100px",
+                    marginLeft: "25px",
+                    marginRight: "25px",
+                    padding: "0 0 0 0",
+                  }}
+                />
+              )}
             </a>
-          </div>  
+          </div>
 
           {/* Circular Timer */}
           <div className="flex items-center mr-[2.5vw]">

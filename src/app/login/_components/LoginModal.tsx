@@ -92,11 +92,11 @@ function LoginModal({
                           height={50}
                           unoptimized
                         />
-                        <div className="flex flex-col justify-center items-start">
-                          <span className="text-[18px] font-[500] font-[genos]">
+                        <div className="flex flex-col justify-center items-start gap-[0px]">
+                          <span className="text-[24px] font-[500] font-[genos] leading-none">
                             Download on the
                           </span>
-                          <span className="text-[30px] font-[600] font-[genos]">
+                          <span className="text-[35px] font-[600] font-[oswald] leading-none">
                             App Store
                           </span>
                         </div>
@@ -141,11 +141,11 @@ function LoginModal({
                           width={45}
                           height={45}
                         />
-                        <div className="flex flex-col justify-center items-start">
-                          <span className="text-[18px] font-[500] font-[genos]">
+                        <div className="flex flex-col justify-center items-start gap-[0px]">
+                          <span className="text-[24px] font-[500] font-[genos] leading-none">
                             Get it on
                           </span>
-                          <span className="text-[30px] font-[600] font-[genos]">
+                          <span className="text-[35px] font-[600] font-[oswald] leading-none">
                             Google Play
                           </span>
                         </div>
