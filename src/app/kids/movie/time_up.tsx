@@ -139,7 +139,6 @@ function TimeUp({ open, onTimeSet }: TimeUpProps) {
           <audio
             ref={audioRef}
             src="/images/kids/back.mp3"
-            loop
             preload="auto"
             autoPlay
             className="hidden"
