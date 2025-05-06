@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 
 import ParentCode from "@/app/kids/components/parent_code";
 import { useRouter } from "next/navigation";
-import Zarok from "/public/images/start_screen/zarok_card.svg";
 import Malbat from "/public/images/start_screen/malbat.svg";
+import Zarok from "/public/images/start_screen/zarok_card.svg";
 
 function LoginModal({
   isOpen,
@@ -81,28 +81,28 @@ function LoginModal({
                     YEKBÛN APP
                   </h2>
 
-                  <div className="flex flex-col md:flex-row gap-[24px] items-center justify-center">
+                  <div className="flex flex-row items-center justify-center gap-[24px] rounded-lg">
                     {/* App Store */}
-                    <div className="flex flex-col items-center justify-start gap-[8px] bg-[#F2F2F2] h-[395px] w-[253px] shrink-0 flex-none">
-                      <button className="bg-[#000000] w-full h-[70px] text-[#FFFFFF] px-[4px] py-[4px] rounded-[10px] flex items-center justify-center gap-[12px]">
+                    <div className="flex flex-col items-center justify-start gap-[8px] bg-[#F2F2F2] h-[410px] w-[253px] shrink-0 py-[10px] rounded-xl">
+                      <button className="bg-[#000000] w-[94%] h-[70px] text-[#FFFFFF] px-[4px] py-[4px] rounded-[10px] flex items-center justify-center gap-[12px]">
                         <Image
                           src="/images/home_screen/apple.svg"
                           alt="App Store"
-                          width={50}
-                          height={50}
+                          width={40}
+                          height={40}
                           unoptimized
                         />
                         <div className="flex flex-col justify-center items-start gap-[0px]">
-                          <span className="text-[24px] font-[500] font-[genos] leading-none">
+                          <span className="text-[20px] font-[500] font-[genos] leading-none">
                             Download on the
                           </span>
-                          <span className="text-[35px] font-[600] font-[oswald] leading-none">
+                          <span className="text-[30px] font-[600] font-[oswald] leading-none">
                             App Store
                           </span>
                         </div>
                       </button>
 
-                      <div className="w-full h-[149px] bg-[#FFFFFF] flex items-center justify-center flex-col py-[10px]">
+                      <div className="w-[94%] rounded-lg h-[170px] bg-[#FFFFFF] flex items-center justify-center flex-col py-[10px]">
                         <Image
                           src={"/images/logo.svg"}
                           alt="Company logo"
@@ -117,10 +117,11 @@ function LoginModal({
                           Sosialmedia Kurdî
                         </p>
                       </div>
+
                       <p className="font-[genos] text-[24px] font-[500] m-[0px]">
                         Download App Now
                       </p>
-                      <div className="">
+                      <div className="w-[94%] rounded-lg h-[105px] flex items-center justify-center flex-col">
                         <Image
                           src="/images/start_screen/qr.svg"
                           alt="App Store QR"
@@ -133,24 +134,26 @@ function LoginModal({
                     </div>
 
                     {/* Google Play */}
-                    <div className="flex flex-col items-center gap-[8px] bg-[#F2F2F2] h-[395px] w-[253px] shrink-0 flex-none">
-                      <button className="bg-[#000000] text-[#FFFFFF] w-full h-[70px] px-[4px] py-[4px] rounded-[10px] flex items-center justify-center gap-[12px]">
+                    <div className="flex flex-col items-center justify-start gap-[8px] bg-[#F2F2F2] h-[410px] w-[253px] shrink-0 py-[10px] rounded-xl">
+                      <button className="bg-[#000000] text-[#FFFFFF] w-[94%] h-[70px] px-[4px] py-[4px] rounded-[10px] flex items-center justify-center gap-[12px]">
                         <Image
                           src="/images/home_screen/googleplay.png"
                           alt="Google Play"
-                          width={45}
-                          height={45}
+                          width={50}
+                          height={50}
+                          unoptimized
                         />
                         <div className="flex flex-col justify-center items-start gap-[0px]">
-                          <span className="text-[24px] font-[500] font-[genos] leading-none">
+                          <span className="text-[20px] font-[500] font-[genos] leading-none">
                             Get it on
                           </span>
-                          <span className="text-[35px] font-[600] font-[oswald] leading-none">
+                          <span className="text-[30px] font-[600] font-[oswald] leading-none">
                             Google Play
                           </span>
                         </div>
                       </button>
-                      <div className="w-full h-[149px] bg-[#FFFFFF] flex items-center justify-center flex-col py-[10px]">
+
+                      <div className="w-[94%] rounded-lg h-[170px] bg-[#FFFFFF] flex items-center justify-center flex-col py-[10px]">
                         <Image
                           src={"/images/logo.svg"}
                           alt="Company logo"
@@ -165,17 +168,20 @@ function LoginModal({
                           Sosialmedia Kurdî
                         </p>
                       </div>
-                      <p className="font-[genos] text-[24px]  font-[500] m-[0px]">
+
+                      <p className="font-[genos] text-[24px] font-[500] m-[0px]">
                         Download App Now
                       </p>
-                      <Image
-                        src="/images/start_screen/googleqr.svg"
-                        alt="Play Store QR"
-                        width={105}
-                        height={105}
-                        className="rounded-[10px]"
-                        unoptimized
-                      />
+                      <div className="w-[94%] rounded-lg h-[105px] flex items-center justify-center flex-col">
+                        <Image
+                          src="/images/start_screen/googleqr.svg"
+                          alt="Play Store QR"
+                          width={105}
+                          height={105}
+                          className="rounded-[10px]"
+                          unoptimized
+                        />
+                      </div>
                     </div>
                   </div>
 
