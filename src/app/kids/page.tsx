@@ -173,7 +173,7 @@ const KidsPage: FC = () => {
       {/* Footer animation with grass and butterflies */}
       <div className="absolute bottom-0 left-0 w-full z-50 h-[10%] bg-transparent">
         <Image
-          src="/images/kids/Footer.webp"
+          src="/images/kids/Footer.gif"
           alt="Animated Footer with Grass and Butterflies"
           width={1920}
           height={200}
