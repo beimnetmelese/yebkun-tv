@@ -233,30 +233,30 @@ function VideoScreen({
       </div>
 
       <div
-        className="absolute top-0 left-0 w-[40%] h-full z-20 flex items-start justify-start flex-col pl-10 pt-10"
+        className="absolute top-0 left-0 w-[90%] h-full z-20 flex items-start justify-start flex-col pl-10 pt-10"
         style={{
           background:
             "linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))",
         }}
       >
-        <p className="text-white text-[80px] font-[700] font-[genos] m-[0px]">
+        <p className="text-white text-[110px] font-[700] font-[genos] m-[0px]">
           {videoTitle}
         </p>
 
         <div className="flex flex-row gap-5">
-          <span className="bg-[rgba(255,255,255,0.25)] w-[80px] h-[30px] flex items-center justify-center gap-2 rounded-lg">
+          <span className="bg-[rgba(255,255,255,0.25)] w-[100px] h-[30px] flex items-center justify-center gap-2 rounded-lg">
             <EyeIcon className="w-5 h-5 text-white" />
-            <p className="text-white text-[16px] font-[400] font-[genos]">
+            <p className="text-white text-[25px] font-[400] font-[genos]">
               {numberOfViews}
             </p>
           </span>
           <span className="bg-[rgba(255,255,255,0.25)] w-[40px] h-[30px] flex items-center justify-center rounded-lg">
-            <p className="text-white text-[16px] font-[400] font-[genos]">
+            <p className="text-white text-[25px] font-[400] font-[genos]">
               {ageLimit}
             </p>
           </span>
           <span className="bg-[rgba(255,255,255,0.25)] w-[50px] h-[30px] flex items-center justify-center rounded-lg">
-            <p className="text-white text-[16px] font-[400] font-[genos]">
+            <p className="text-white text-[25px] font-[400] font-[genos]">
               {videoQuality}
             </p>
           </span>
@@ -264,21 +264,21 @@ function VideoScreen({
 
         <div className="gap-2 my-5 flex flex-row items-center justify-center">
           <span className="bg-[rgba(255,255,255,0.25)] w-[5px] h-[5px] rounded-full"></span>
-          <p className="text-white text-[16px] font-[400] font-[genos]">
+          <p className="text-white text-[20px] font-[400] font-[genos]">
             {yearPublished}
           </p>
           <span className="bg-[rgba(255,255,255,0.25)] w-[5px] h-[5px] rounded-full"></span>
           {videoType !== "series" ? (
-            <p className="text-white text-[16px] font-[400] font-[genos]">
+            <p className="text-white text-[20px] font-[400] font-[genos]">
               {formatVideoDuration(videoDuration)}
             </p>
           ) : (
             <>
-              <p className="text-white text-[16px] font-[400] font-[genos]">
+              <p className="text-white text-[20px] font-[400] font-[genos]">
                 {numberOfSeasons} {numberOfSeasons > 1 ? "Seasons" : "Season"}
               </p>
               <span className="bg-[rgba(255,255,255,0.25)] w-[5px] h-[5px] rounded-full"></span>
-              <p className="text-white text-[16px] font-[400] font-[genos]">
+              <p className="text-white text-[20px] font-[400] font-[genos]">
                 {numberOfEpisodes}{" "}
                 {numberOfEpisodes > 1 ? "Episodes" : "Episode"}
               </p>
@@ -289,13 +289,13 @@ function VideoScreen({
         {videoType !== "series" && (
           <div className="flex flex-col gap-2 w-full items-start">
             <div className="flex flex-row gap-2 w-full items-center">
-              <div className="w-[60%] h-[6px] bg-gray-200/50 z-30 rounded-full">
+              <div className="w-[90%] h-[6px] bg-gray-200/50 z-30 rounded-full">
                 <div
                   className="h-full bg-red-500 transition-all duration-200"
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
-              <div className="text-white text-[16px] font-[400] font-[genos]">
+              <div className="text-white text-[20px] font-[400] font-[genos]">
                 {videoRef.current
                   ? formatVideoDuration(
                       parseInt(videoDuration) - videoRef.current.currentTime
