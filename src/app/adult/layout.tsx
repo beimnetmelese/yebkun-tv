@@ -1,3 +1,4 @@
+import Navigation from "@/components/ui/navigation";
 import { Viewport } from "next";
 
 export const viewport: Viewport = {
@@ -13,5 +14,9 @@ export default function AdultLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <main>{children}</main>
+    </>
+  );
 }
