@@ -92,14 +92,14 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
-        src="/images/adults/cooking.mp4"
+        src="/cooking.mp4"
         controls={false}
         muted
       />
       {hasStarted && (
         <>
-          <div className="absolute top-4 left-4 bg-black/70 px-3 py-1 rounded-full text-xl z-30">
-            The Smurfs
+          <div className="absolute top-4 right-4 bg-black/70 px-3 py-1 rounded-full text-sm z-30">
+            👁️ 159K
           </div>
 
           {controlsVisible && (
@@ -115,6 +115,13 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
                   />
                 </div>
                 <span className="w-12 text-right">{formatTime(duration)}</span>
+              </div>
+
+              <div className="mt-3 flex justify-between items-center text-sm">
+                <span className="text-white/70">Live</span>
+                <span className="font-semibold text-center w-full -ml-16">
+                  Streaming Title
+                </span>
               </div>
             </div>
           )}
