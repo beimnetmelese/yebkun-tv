@@ -1,6 +1,10 @@
+"use client";
+
 import Navigation from "@/components/ui/navigation";
+import { useRouter } from "next/navigation";
 
 export default function AdultPage() {
+  const router = useRouter();
   return (
     <>
       <Navigation active="archive" />
@@ -24,6 +28,7 @@ export default function AdultPage() {
                   "/images/adults/podcast.jpg",
                 ].map((label, i) => (
                   <div
+                    onClick={() => router.push("/adult/video/clip")}
                     key={i}
                     className=" w-full relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
@@ -92,6 +97,7 @@ export default function AdultPage() {
                   "/images/adults/podcast.jpg",
                 ].map((label, i) => (
                   <div
+                    onClick={() => router.push("/adult/video/reel")}
                     key={i}
                     className="relative w-full aspect-[9/16] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
@@ -162,6 +168,7 @@ export default function AdultPage() {
                   "/images/adults/podcast.jpg",
                 ].map((label, i) => (
                   <div
+                    onClick={() => router.push("/adult/stream/livestreams")}
                     key={i}
                     className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
@@ -231,6 +238,7 @@ export default function AdultPage() {
                   "/images/adults/podcast.jpg",
                 ].map((label, i) => (
                   <div
+                    onClick={() => router.push("/adult/music/diloke")}
                     key={i}
                     className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group transform transition duration-300 hover:scale-105 hover:brightness-110"
                   >

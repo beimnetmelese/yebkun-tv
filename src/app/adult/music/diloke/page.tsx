@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Play, SkipBack, SkipForward } from "lucide-react";
 import Navigation from "@/components/ui/navigation";
+import { useRouter } from "next/navigation";
 
 const playlists = [
   { name: "Diloke Nû", image: "/images/adults/streams.jpg" },
@@ -25,21 +26,26 @@ export default function MusicPlayerUI() {
   const playSong = (index: number) => {
     setCurrentlyPlaying(index);
   };
-
+  const router = useRouter();
   return (
     <>
       <Navigation active="music" />
-      <div className="h-screen pt-[150px]  flex bg-black text-white bg-[url('/images/adults/music.jpg')] overflow-hidden">
+      <div className="h-screen pt-[150px] flex bg-black text-white bg-[url('/images/adults/music.jpg')] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
         {/* Left Sidebar */}
         <aside className="w-64 m-6 flex flex-col gap-6">
           {[
-            ["Stream Destpek", "/images/adults/streams.jpg"],
-            ["TV Channels", "/images/adults/tv.jpg"],
-            ["Live Streams", "/images/adults/mic.jpg"],
-            ["Live Streams", "/images/adults/mic.jpg"],
+            ["Stream Destpek", "/images/adults/streams.jpg", "/adult/music"],
+            ["TV Channels", "/images/adults/tv.jpg", "/adult/music/diloke"],
+            [
+              "Live Streams",
+              "/images/adults/mic.jpg",
+              "/adult/music/hunermend",
+            ],
+            ["Live Streams", "/images/adults/mic.jpg", "/adult/music/dilkomin"],
           ].map((label, i) => (
             <div
+              onClick={() => router.push(label[2])}
               key={i}
               className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
             >

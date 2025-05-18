@@ -14,12 +14,21 @@ export default function Home() {
           {/* Sidebar */}
           <aside className="w-64 flex flex-col gap-6">
             {[
-              ["Stream Destpek", "/images/adults/streams.jpg"],
-              ["TV Channels", "/images/adults/tv.jpg"],
-              ["Live Streams", "/images/adults/mic.jpg"],
-              ["Live Streams", "/images/adults/mic.jpg"],
+              ["Stream Destpek", "/images/adults/streams.jpg", "/adult/music"],
+              ["TV Channels", "/images/adults/tv.jpg", "/adult/music/diloke"],
+              [
+                "Live Streams",
+                "/images/adults/mic.jpg",
+                "/adult/music/hunermend",
+              ],
+              [
+                "Live Streams",
+                "/images/adults/mic.jpg",
+                "/adult/music/dilkomin",
+              ],
             ].map((label, i) => (
               <div
+                onClick={() => router.push(label[2])}
                 key={i}
                 className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
               >
@@ -71,6 +80,7 @@ export default function Home() {
                   "/images/adults/live.jpg",
                 ].map((label, i) => (
                   <div
+                    onClick={() => router.push("/adult/music/diloke")}
                     key={i}
                     className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group transform transition duration-300 hover:scale-105 hover:brightness-110"
                   >
@@ -132,6 +142,9 @@ export default function Home() {
                   "/images/adults/live.jpg",
                 ].map((label, i) => (
                   <div
+                    onClick={() =>
+                      router.push("/adult/music/hunermend/playing")
+                    }
                     key={i}
                     className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >

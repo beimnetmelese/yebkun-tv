@@ -14,12 +14,21 @@ export default function Home() {
           {/* Sidebar */}
           <aside className="w-64 flex flex-col gap-6">
             {[
-              ["Stream Destpek", "/images/adults/streams.jpg"],
-              ["TV Channels", "/images/adults/tv.jpg"],
-              ["Live Streams", "/images/adults/mic.jpg"],
-              ["Live Streams", "/images/adults/mic.jpg"],
+              ["Stream Destpek", "/images/adults/streams.jpg", "/adult/music"],
+              ["TV Channels", "/images/adults/tv.jpg", "/adult/music/diloke"],
+              [
+                "Live Streams",
+                "/images/adults/mic.jpg",
+                "/adult/music/hunermend",
+              ],
+              [
+                "Live Streams",
+                "/images/adults/mic.jpg",
+                "/adult/music/dilkomin",
+              ],
             ].map((label, i) => (
               <div
+                onClick={() => router.push(label[2])}
                 key={i}
                 className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
               >
@@ -64,14 +73,12 @@ export default function Home() {
               >
                 Latest Artist
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                 {[
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
                   "/images/adults/live.jpg",
                   "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
                 ].map((label, i) => (
                   <div
                     key={i}
@@ -109,14 +116,12 @@ export default function Home() {
               >
                 Latest Artist
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                 {[
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
                   "/images/adults/live.jpg",
                   "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
                 ].map((label, i) => (
                   <div
                     key={i}

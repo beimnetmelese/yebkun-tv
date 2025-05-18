@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import VideoStream, { VideoStreamHandle } from "../cinema/videoStream";
 import Navigation from "@/components/ui/navigation";
+import { useRouter } from "next/navigation";
 
 export default function ChefChannel() {
   const [showPlayer2, setShowPlayer2] = useState(false);
@@ -19,6 +20,7 @@ export default function ChefChannel() {
     return () =>
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
   }, []);
+  const router = useRouter();
   return (
     <>
       <Navigation active="stream" />
@@ -31,12 +33,20 @@ export default function ChefChannel() {
           {/* Sidebar */}
           <aside className="w-full lg:w-64 flex flex-col gap-6">
             {[
-              ["Stream Destpek", "/images/adults/streams.jpg"],
-              ["TV Channels", "/images/adults/tv.jpg"],
-              ["Live Streams", "/images/adults/mic.jpg"],
-              ["Video Reels", "/images/adults/click.jpg"],
+              ["Stream Destpek", "/images/adults/streams.jpg", "/adult/stream"],
+              [
+                "TV Channels",
+                "/images/adults/tv.jpg",
+                "/adult/stream/tvchannel",
+              ],
+              [
+                "Live Streams",
+                "/images/adults/mic.jpg",
+                "/adult/stream/livestreams",
+              ],
             ].map((label, i) => (
               <div
+                onClick={() => router.push(label[2])}
                 key={i}
                 className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
               >

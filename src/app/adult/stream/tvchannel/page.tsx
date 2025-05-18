@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { Play, SkipBack, SkipForward } from "lucide-react";
 import Navigation from "@/components/ui/navigation";
+import { useRouter } from "next/navigation";
 
 const playlists = [
   { name: "Diloke Nû", image: "/images/adults/streams.jpg" },
@@ -22,6 +23,7 @@ const songs = Array(11).fill({
 
 export default function MusicPlayerUI() {
   const [currentlyPlaying, setCurrentlyPlaying] = useState(0);
+  const router = useRouter();
 
   const playSong = (index: number) => {
     setCurrentlyPlaying(index);
@@ -37,12 +39,20 @@ export default function MusicPlayerUI() {
           {/* Left Sidebar */}
           <aside className="w-64 m-6 flex flex-col gap-6">
             {[
-              ["Stream Destpek", "/images/adults/streams.jpg"],
-              ["TV Channels", "/images/adults/tv.jpg"],
-              ["Live Streams", "/images/adults/mic.jpg"],
-              ["Live Streams", "/images/adults/mic.jpg"],
+              ["Stream Destpek", "/images/adults/streams.jpg", "/adult/stream"],
+              [
+                "TV Channels",
+                "/images/adults/tv.jpg",
+                "/adult/stream/tvchannel",
+              ],
+              [
+                "Live Streams",
+                "/images/adults/mic.jpg",
+                "/adult/stream/livestreams",
+              ],
             ].map((label, i) => (
               <div
+                onClick={() => router.push(label[2])}
                 key={i}
                 className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
               >
