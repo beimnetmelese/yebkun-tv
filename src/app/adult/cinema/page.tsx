@@ -2,13 +2,15 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import VideoStream, { VideoStreamHandle } from "../cinema/videoStream";
+import VideoStreamPlayer, {
+  VideoStreamPlayerHandle,
+} from "../cinema/videoStream";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 
 export default function ChefChannel() {
   const [showPlayer2, setShowPlayer2] = useState(false);
-  const playerRef2 = useRef<VideoStreamHandle>(null);
+  const playerRef2 = useRef<VideoStreamPlayerHandle>(null);
   const router = useRouter();
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -131,7 +133,7 @@ export default function ChefChannel() {
                   >
                     Restart
                   </button>
-                  {showPlayer2 && <VideoStream ref={playerRef2} />}
+                  {showPlayer2 && <VideoStreamPlayer ref={playerRef2} />}
                 </div>
               </div>
             </div>
@@ -147,6 +149,7 @@ export default function ChefChannel() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
           {[1, 2, 3, 4].map((_, i) => (
             <div
+              onClick={() => router.push("/adult/cinema")}
               key={i}
               className="relative rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
             >

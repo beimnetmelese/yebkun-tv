@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, {
   useEffect,
   useRef,
@@ -17,7 +18,7 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasStarted, setHasStarted] = useState(false);
-
+  const router = useRouter();
   useImperativeHandle(ref, () => ({
     startVideo: handleStart,
   }));
@@ -47,7 +48,7 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
         controls={false}
         muted
       />
-      <div className="px-6 pb-10">
+      <div className="absolute bottom-4 right-4 px-6 pb-10">
         <h2
           className="text-xl font-semibold mt-4 mb-2 p-2 rounded-md inline-block"
           style={{ backgroundColor: "#FFFFFF40" }}
@@ -57,6 +58,7 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
           {[1, 2, 3, 4].map((_, i) => (
             <div
+              onClick={() => router.push("/adult/stream/tvchannel")}
               key={i}
               className="relative rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
             >

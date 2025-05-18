@@ -1,6 +1,7 @@
 "use client";
 
 import Navigation from "@/components/ui/navigation";
+import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 
 const episodes = Array(10).fill({
@@ -16,6 +17,7 @@ export default function VideoPlayerSection() {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [showControls, setShowControls] = useState(true);
+  const router = useRouter();
 
   // Format time (seconds to MM:SS)
   const formatTime = (time: number) => {
@@ -247,6 +249,7 @@ export default function VideoPlayerSection() {
               "/images/adults/podcast.jpg",
             ].map((label, i) => (
               <div
+                onClick={() => router.push("/adult/video/clip")}
                 key={i}
                 className="w-full relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
               >

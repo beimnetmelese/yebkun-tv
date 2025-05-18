@@ -81,6 +81,9 @@ export default function Home() {
                   "/images/adults/podcast.jpg",
                 ].map((label, i) => (
                   <div
+                    onClick={() =>
+                      router.push("/adult/music/hunermend/playing")
+                    }
                     key={i}
                     className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
@@ -124,6 +127,9 @@ export default function Home() {
                   "/images/adults/podcast.jpg",
                 ].map((label, i) => (
                   <div
+                    onClick={() =>
+                      router.push("/adult/music/hunermend/playing")
+                    }
                     key={i}
                     className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >

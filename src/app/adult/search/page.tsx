@@ -1,4 +1,7 @@
+"use client";
+
 import Navigation from "@/components/ui/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const KeyboardKey = ({ label = " ", extraClasses = "" }) => (
@@ -10,6 +13,7 @@ const KeyboardKey = ({ label = " ", extraClasses = "" }) => (
 );
 
 const App = () => {
+  const router = useRouter();
   return (
     <>
       <Navigation active="gerandin" />
@@ -115,6 +119,7 @@ const App = () => {
                 "/images/adults/podcast.jpg",
               ].map((img, i) => (
                 <div
+                  onClick={() => router.push("/adult/music/diloke")}
                   key={i}
                   className="relative aspect-video rounded-xl overflow-hidden shadow-md group hover:scale-105 transition-transform bg-black"
                 >
@@ -154,6 +159,7 @@ const App = () => {
                 .fill("/images/adults/chef.png")
                 .map((img, i) => (
                   <div
+                    onClick={() => router.push("/adult/music/hunermend")}
                     key={i}
                     className="relative h-[400px] w-full rounded-xl overflow-hidden shadow-md group bg-black hover:scale-[1.015] transition-transform"
                   >

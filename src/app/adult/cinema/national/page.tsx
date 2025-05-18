@@ -1,26 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import VideoStream, { VideoStreamHandle } from "../videoStream";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 
 export default function ChefChannel() {
-  const [showPlayer2, setShowPlayer2] = useState(false);
-  const playerRef2 = useRef<VideoStreamHandle>(null);
   const router = useRouter();
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      if (!document.fullscreenElement) {
-        setShowPlayer2(false); // Hide player when exiting fullscreen
-      }
-    };
 
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-    return () =>
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-  }, []);
   return (
     <>
       <Navigation active="cinema" />
@@ -110,28 +96,17 @@ export default function ChefChannel() {
 
                 <div className="text-center flex gap-2 mt-3 flex-wrap">
                   <button
-                    onClick={() => {
-                      setShowPlayer2(true);
-                      setTimeout(() => {
-                        playerRef2.current?.startVideo(); // Then trigger fullscreen
-                      }, 0);
-                    }}
+                    onClick={() => router.push("/adult/cinema/series/playing")}
                     className="text-center mt-15 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-2xl shadow-md transition"
                   >
                     Continue
                   </button>
                   <button
-                    onClick={() => {
-                      setShowPlayer2(true);
-                      setTimeout(() => {
-                        playerRef2.current?.startVideo(); // Then trigger fullscreen
-                      }, 0);
-                    }}
+                    onClick={() => router.push("/adult/cinema/series/playing")}
                     className="text-center mt-15 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-2xl shadow-md transition"
                   >
                     Restart
                   </button>
-                  {showPlayer2 && <VideoStream ref={playerRef2} />}
                 </div>
               </div>
             </div>
@@ -147,6 +122,7 @@ export default function ChefChannel() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
           {[1, 2, 3, 4].map((_, i) => (
             <div
+              onClick={() => router.push("/adult/cinema/national")}
               key={i}
               className="relative rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
             >

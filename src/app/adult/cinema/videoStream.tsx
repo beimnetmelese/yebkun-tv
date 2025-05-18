@@ -8,16 +8,17 @@ import React, {
   useImperativeHandle,
 } from "react";
 
-export type VideoStreamHandle = {
+export type VideoStreamPlayerHandle = {
   startVideo: () => void;
 };
 
-const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
+const VideoStreamPlayer = forwardRef<VideoStreamPlayerHandle>((_, ref) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(1);
   const [controlsVisible, setControlsVisible] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
   useImperativeHandle(ref, () => ({
@@ -35,6 +36,24 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
       }
     }
     videoRef.current?.play();
+    setIsPlaying(true);
+  };
+
+  const togglePlayPause = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const skipTime = (seconds: number) => {
+    if (videoRef.current) {
+      videoRef.current.currentTime += seconds;
+    }
   };
 
   useEffect(() => {
@@ -98,12 +117,33 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
       />
       {hasStarted && (
         <>
-          <div className="absolute top-4 left-4 bg-black/70 px-3 py-1 rounded-full text-xl z-30">
+          <div className="absolute top-4 left-4 bg-black/70 px-3 py-1 rounded-md text-2xl z-30">
             The Smurfs
           </div>
 
           {controlsVisible && (
             <div className="absolute bottom-0 w-full px-6 pb-6 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-20">
+              <div className="flex justify-center items-center gap-4 mb-3">
+                <button
+                  onClick={() => skipTime(-15)}
+                  className="bg-white/20 hover:bg-white/40 px-4 py-2 rounded-full text-sm"
+                >
+                  ⏪ 15
+                </button>
+                <button
+                  onClick={togglePlayPause}
+                  className="bg-white text-black px-6 py-2 rounded-full font-bold"
+                >
+                  {isPlaying ? "⏸" : "▶"}
+                </button>
+                <button
+                  onClick={() => skipTime(15)}
+                  className="bg-white/20 hover:bg-white/40 px-4 py-2 rounded-full text-sm"
+                >
+                  15 ⏩
+                </button>
+              </div>
+
               <div className="flex items-center gap-3 text-sm">
                 <span className="w-12 text-left">
                   {formatTime(currentTime)}
@@ -124,5 +164,5 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
   );
 });
 
-VideoStream.displayName = "VideoStreamPlayer";
-export default VideoStream;
+VideoStreamPlayer.displayName = "VideoStreamPlayer";
+export default VideoStreamPlayer;

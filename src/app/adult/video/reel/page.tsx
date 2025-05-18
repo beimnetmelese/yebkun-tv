@@ -1,10 +1,12 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export default function VideoFeed() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const router = useRouter();
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -28,6 +30,7 @@ export default function VideoFeed() {
           "/images/adults/podcast.jpg",
         ].map((label, i) => (
           <div
+            onClick={() => router.push("/adult/video/reel")}
             key={i}
             className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
           >

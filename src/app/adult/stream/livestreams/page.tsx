@@ -79,7 +79,9 @@ export default function Home() {
                   "/images/adults/live.jpg",
                 ].map((label, i) => (
                   <div
-                    onClick={() => router.push("/plannedStream")}
+                    onClick={() =>
+                      router.push("/adult/stream/livestreams/plannedStreams")
+                    }
                     key={i}
                     className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group transform transition duration-300 hover:scale-105 hover:brightness-110"
                   >
@@ -137,7 +139,9 @@ export default function Home() {
                   "/images/adults/live.jpg",
                 ].map((label, i) => (
                   <div
-                    onClick={() => router.push("/liveStream")}
+                    onClick={() =>
+                      router.push("/adult/stream/livestreams/liveStreams")
+                    }
                     key={i}
                     className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >

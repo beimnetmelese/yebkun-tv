@@ -163,6 +163,7 @@ export default function MusicPlayerUI() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
             {[1, 2, 3, 4].map((_, i) => (
               <div
+                onClick={() => router.push("/adult/stream/tvchannel")}
                 key={i}
                 className="relative rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
               >

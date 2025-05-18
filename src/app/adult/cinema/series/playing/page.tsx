@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import VideoStream, { VideoStreamHandle } from "../../videoStream";
+import VideoStreamPlayer, { VideoStreamPlayerHandle } from "../../videoStream";
 import Navigation from "@/components/ui/navigation";
 
 const episodes = [
@@ -15,7 +15,7 @@ const episodes = [
 
 export default function ChefChannel() {
   const [showPlayer2, setShowPlayer2] = useState(false);
-  const playerRef2 = useRef<VideoStreamHandle>(null);
+  const playerRef2 = useRef<VideoStreamPlayerHandle>(null);
   const episodesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function ChefChannel() {
                   ))}
                 </div>
                 <h1 className="text-xl mb-6 font-bold">.2012.2hr 35min.</h1>
-                {showPlayer2 && <VideoStream ref={playerRef2} />}
+                {showPlayer2 && <VideoStreamPlayer ref={playerRef2} />}
               </div>
             </div>
           </section>

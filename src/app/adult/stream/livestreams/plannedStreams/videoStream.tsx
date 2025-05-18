@@ -111,7 +111,7 @@ const VideoStreamPlayer = forwardRef<VideoStreamPlayerHandle>((_, ref) => {
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
-        src="/cooking.mp4"
+        src="/images/adults/cooking.mp4"
         controls={false}
         muted
       />
