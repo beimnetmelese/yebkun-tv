@@ -3,7 +3,8 @@ import Navigation from "@/components/ui/navigation";
 export default function AdultPage() {
   return (
     <>
-      <div className="min-h-screen overflow-auto bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
+      <Navigation active="archive" />
+      <div className="min-h-screen pt-[150px] overflow-auto bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
         <div className="flex gap-8 mx-auto">
           {/* Main Content */}
           <main className="flex-1">

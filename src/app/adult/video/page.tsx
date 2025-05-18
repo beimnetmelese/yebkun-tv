@@ -3,7 +3,8 @@ import Navigation from "@/components/ui/navigation";
 export default function AdultPage() {
   return (
     <>
-      <div className="min-h-screen overflow-auto bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
+      <Navigation active="videos" />
+      <div className="min-h-screen pt-[150px] overflow-auto bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
         <div className="flex gap-8 mx-auto">
           {/* Main Content */}
           <main className="flex-1">
@@ -92,7 +93,7 @@ export default function AdultPage() {
                 ].map((label, i) => (
                   <div
                     key={i}
-                    className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                    className="relative w-full aspect-[2/3] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img

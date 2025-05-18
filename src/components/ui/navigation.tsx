@@ -12,6 +12,10 @@ interface NavigationItemProps {
   onClick?: () => void;
 }
 
+interface Props {
+  active: string;
+}
+
 const NavigationItem = ({
   href,
   label,
@@ -39,7 +43,9 @@ const NavigationItem = ({
           alt={label}
           width={33}
           height={33}
-          color={`${active ? "#FFFFFF" : ""}`}
+          style={{
+            filter: active ? "brightness(0) invert(1)" : "none",
+          }}
           loading="eager"
           quality={90}
           unoptimized
@@ -50,7 +56,7 @@ const NavigationItem = ({
   );
 };
 
-export default function Navigation() {
+export default function Navigation({ active }: Props) {
   const pathname = usePathname();
   const clickSoundRef = useRef<HTMLAudioElement>(null);
 
@@ -85,42 +91,43 @@ export default function Navigation() {
               href="/dashpak"
               label="Dashpak"
               icon="/images/navigation/destpek.svg"
-              active={pathname === "/adult"}
+              active={active === "dashpak" || pathname === "/dashpak"}
+              onClick={handleNavClick}
+            />
+            <NavigationItem
+              href="/dashpak"
+              label="music"
+              icon="/images/navigation/muzik.svg"
+              active={active === "music" || pathname === "/music"}
               onClick={handleNavClick}
             />
             <NavigationItem
               href="/cinema"
               label="Cinema"
-              icon="/images/navigation/muzik.svg"
-              active={pathname === "/cinema"}
+              icon="/images/navigation/sinema.svg"
+              active={active === "cinema" || pathname === "/cinema"}
               onClick={handleNavClick}
             />
             <NavigationItem
               href="/videos"
               label="Videos"
-              icon="/images/navigation/sinema.svg"
-              active={pathname === "/videos"}
-              onClick={handleNavClick}
-            />
-            <NavigationItem
-              href="/shwazi"
-              label="Shwazi"
               icon="/images/navigation/videos.svg"
-              active={pathname === "/shwazi"}
+              active={active === "videos" || pathname === "/videos"}
               onClick={handleNavClick}
             />
+
             <NavigationItem
               href="/stream"
               label="Stream"
               icon="/images/navigation/stream.svg"
-              active={pathname === "/stream"}
+              active={active === "stream" || pathname === "/stream"}
               onClick={handleNavClick}
             />
             <NavigationItem
               href="/gerandin"
               label="Gerandin"
               icon="images/navigation/gerandin.svg"
-              active={pathname === "/gerandin"}
+              active={active === "gerandin" || pathname === "/gerandin"}
               onClick={handleNavClick}
             />
           </div>
@@ -158,35 +165,35 @@ export default function Navigation() {
               href="/kulturtv"
               label="KulturTV"
               icon="/images/navigation/malbat.svg"
-              active={pathname === "/kulturtv"}
+              active={active === "kulturtv" || pathname === "/kulturtv"}
               onClick={handleNavClick}
             />
             <NavigationItem
               href="/zaroktv"
               label="ZarokTV"
               icon="/images/navigation/zarok_tv.svg"
-              active={pathname === "/zaroktv"}
+              active={active === "zaroktv" || pathname === "/zaroktv"}
               onClick={handleNavClick}
             />
             <NavigationItem
               href="/settings"
               label="Evin"
               icon="/images/navigation/eyar.svg"
-              active={pathname === "/settings"}
+              active={active === "settings" || pathname === "/settings"}
               onClick={handleNavClick}
             />
             <NavigationItem
               href="/archive"
               label="Archive"
               icon="/images/navigation/archive.svg"
-              active={pathname === "/archive"}
+              active={active === "archive" || pathname === "/archive"}
               onClick={handleNavClick}
             />
             <NavigationItem
               href="/user"
               label="User"
               icon="/images/navigation/user.png"
-              active={pathname === "/user"}
+              active={active === "user" || pathname === "/user"}
               onClick={handleNavClick}
             />
           </div>

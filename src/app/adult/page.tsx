@@ -1,16 +1,24 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import Navigation from "@/components/ui/navigation";
 
 export default function AdultPage() {
+  const router = useRouter();
   return (
     <>
-      <div className="min-h-screen overflow-auto bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
+      <Navigation active="dashpak" />
+      <div className="min-h-screen overflow-auto pt-[150px] bg-gradient-to-b from-[#0c0c0c] via-[#1a1a1a] to-[#2f2f2f] text-white px-6 font-sans">
         <div className="flex gap-8 mx-auto">
           {/* Main Content */}
           <main className="flex-1">
             {/* ON AIR Section */}
             <section>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-                <div className=" w-full relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]">
+                <div
+                  onClick={() => router.push("/adult/music")}
+                  className=" w-full relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                >
                   {/* BACKGROUND IMAGE */}
                   <img
                     src={"/images/adults/podcast.jpg"}
@@ -60,7 +68,10 @@ export default function AdultPage() {
                     </span>
                   </div>
                 </div>
-                <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]">
+                <div
+                  onClick={() => router.push("/adult/music")}
+                  className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                >
                   {/* BACKGROUND IMAGE */}
                   <img
                     src={"/images/adults/podcast.jpg"}
@@ -110,7 +121,10 @@ export default function AdultPage() {
                     </span>
                   </div>
                 </div>
-                <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]">
+                <div
+                  onClick={() => router.push("/adult/stream/livestreams")}
+                  className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                >
                   {/* BACKGROUND IMAGE */}
                   <img
                     src={"/images/adults/chef.png"}
@@ -162,7 +176,10 @@ export default function AdultPage() {
                     />
                   </div>
                 </div>
-                <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]">
+                <div
+                  onClick={() => router.push("/adult/stream/tvchannel")}
+                  className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                >
                   {/* BACKGROUND IMAGE */}
                   <img
                     src={"/images/adults/chef.png"}
@@ -212,21 +229,22 @@ export default function AdultPage() {
                   </div>
                 </div>
                 {[
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
+                  ["/images/adults/podcast.jpg", "/adult/cinema/filme"],
+                  ["/images/adults/chef.png", "/adult/cinema/series"],
+                  ["/images/adults/live.jpg", "/adult/cinema/national"],
+                  ["/images/adults/podcast.jpg", "/adult/video"],
                 ].map((label, i) => (
                   <div
+                    onClick={() => router.push(label[1])}
                     key={i}
-                    className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                    className="relative w-full aspect-[2/3] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
-                      src={label}
+                      src={label[0]}
                       alt="Chef"
                       className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
-                        label === "/chef.png"
+                        label[0] === "/chef.png"
                           ? "scale-x-[-1] hover:scale-[1.05] hover:scale-x-[-1]"
                           : "hover:scale-105"
                       }`}

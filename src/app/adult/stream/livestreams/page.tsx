@@ -1,5 +1,6 @@
 "use client";
 
+import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -7,7 +8,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
+      <Navigation active="stream" />
+      <div className="min-h-screen pt-[150px] bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
         <div className="flex gap-8 mx-auto">
           {/* Sidebar */}
           <aside className="w-64 flex flex-col gap-6">
