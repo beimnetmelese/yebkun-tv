@@ -88,28 +88,28 @@ export default function Navigation({ active }: Props) {
         <div className="flex items-center justify-between w-full h-full px-4">
           <div className="flex items-center space-x-6">
             <NavigationItem
-              href="/dashpak"
+              href="/adult"
               label="Dashpak"
               icon="/images/navigation/destpek.svg"
-              active={active === "dashpak" || pathname === "/dashpak"}
+              active={active === "dashpak" || pathname === "/adult"}
               onClick={handleNavClick}
             />
             <NavigationItem
-              href="/dashpak"
+              href="/adult/music"
               label="music"
               icon="/images/navigation/muzik.svg"
-              active={active === "music" || pathname === "/music"}
+              active={active === "music" || pathname === "/adult/music"}
               onClick={handleNavClick}
             />
             <NavigationItem
-              href="/cinema"
+              href="/adult/cinema"
               label="Cinema"
               icon="/images/navigation/sinema.svg"
               active={active === "cinema" || pathname === "/cinema"}
               onClick={handleNavClick}
             />
             <NavigationItem
-              href="/videos"
+              href="/adult/video"
               label="Videos"
               icon="/images/navigation/videos.svg"
               active={active === "videos" || pathname === "/videos"}
@@ -117,14 +117,14 @@ export default function Navigation({ active }: Props) {
             />
 
             <NavigationItem
-              href="/stream"
+              href="/adult/stream"
               label="Stream"
               icon="/images/navigation/stream.svg"
               active={active === "stream" || pathname === "/stream"}
               onClick={handleNavClick}
             />
             <NavigationItem
-              href="/gerandin"
+              href="/adult/search"
               label="Gerandin"
               icon="images/navigation/gerandin.svg"
               active={active === "gerandin" || pathname === "/gerandin"}
@@ -183,7 +183,7 @@ export default function Navigation({ active }: Props) {
               onClick={handleNavClick}
             />
             <NavigationItem
-              href="/archive"
+              href="/adult/archive"
               label="Archive"
               icon="/images/navigation/archive.svg"
               active={active === "archive" || pathname === "/archive"}
