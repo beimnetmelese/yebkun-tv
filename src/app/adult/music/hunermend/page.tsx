@@ -15,17 +15,9 @@ export default function Home() {
           <aside className="w-64 flex flex-col gap-6">
             {[
               ["Stream Destpek", "/images/adults/streams.jpg", "/adult/music"],
-              ["TV Channels", "/images/adults/tv.jpg", "/adult/music/diloke"],
-              [
-                "Live Streams",
-                "/images/adults/mic.jpg",
-                "/adult/music/hunermend",
-              ],
-              [
-                "Live Streams",
-                "/images/adults/mic.jpg",
-                "/adult/music/dilkomin",
-              ],
+              ["Dilko Raqse", "/images/adults/tv.jpg", "/adult/music/diloke"],
+              ["Hunermend", "/images/adults/mic.jpg", "/adult/music/hunermend"],
+              ["Dilokemin", "/images/adults/mic.jpg", "/adult/music/dilkomin"],
             ].map((label, i) => (
               <div
                 onClick={() => router.push(label[2])}
