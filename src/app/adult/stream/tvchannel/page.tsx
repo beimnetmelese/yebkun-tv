@@ -1,16 +1,8 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
-
-const playlists = [
-  { name: "Diloke Nû", image: "/images/adults/streams.jpg" },
-  { name: "Diloke Rojava", image: "/images/adults/tv.jpg" },
-  { name: "Diloke Bakûr", image: "/images/adults/mic.jpg" },
-  { name: "Diloke Rojhilat", image: "/images/adults/streams.jpg" },
-  { name: "Diloke Basur", image: "/images/adults/tv.jpg" },
-];
 
 const songs = Array(9).fill({
   title: "Playlist Title",
@@ -20,25 +12,8 @@ const songs = Array(9).fill({
 });
 
 export default function MusicPlayerUI() {
-  const [currentlyPlaying, setCurrentlyPlaying] = useState(0);
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const togglePlayPause = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const playSong = (index: number) => {
-    setCurrentlyPlaying(index);
-  };
 
   return (
     <>
@@ -101,7 +76,6 @@ export default function MusicPlayerUI() {
               {songs.map((song, i) => (
                 <div
                   key={i}
-                  onClick={() => playSong(i)}
                   className={`flex items-center justify-between p-2 bg-white/23 hover:bg-zinc-700 cursor-pointer
                   ${i !== songs.length - 1 ? "border-b border-gray-600" : ""}`}
                 >

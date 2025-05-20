@@ -2,12 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, {
-  useRef,
-  useState,
-  forwardRef,
-  useImperativeHandle,
-} from "react";
+import React, { useRef, forwardRef, useImperativeHandle } from "react";
 
 export type VideoStreamHandle = {
   startVideo: () => void;
