@@ -18,7 +18,7 @@ const VideoStreamPlayer = forwardRef<VideoStreamPlayerHandle>((_, ref) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(1);
   const [controlsVisible, setControlsVisible] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
+
   const [hasStarted, setHasStarted] = useState(false);
 
   useImperativeHandle(ref, () => ({
@@ -36,17 +36,14 @@ const VideoStreamPlayer = forwardRef<VideoStreamPlayerHandle>((_, ref) => {
       }
     }
     videoRef.current?.play();
-    setIsPlaying(true);
   };
 
   const togglePlayPause = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
       videoRef.current.play();
-      setIsPlaying(true);
     } else {
       videoRef.current.pause();
-      setIsPlaying(false);
     }
   };
 

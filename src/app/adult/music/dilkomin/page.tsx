@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Play, SkipBack, SkipForward } from "lucide-react";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 

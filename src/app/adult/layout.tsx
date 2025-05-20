@@ -1,4 +1,3 @@
-import Navigation from "@/components/ui/navigation";
 import { Viewport } from "next";
 
 export const viewport: Viewport = {

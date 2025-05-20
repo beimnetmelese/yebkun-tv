@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, {
-  useEffect,
   useRef,
   useState,
   forwardRef,
@@ -17,14 +16,13 @@ export type VideoStreamHandle = {
 const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [hasStarted, setHasStarted] = useState(false);
+
   const router = useRouter();
   useImperativeHandle(ref, () => ({
     startVideo: handleStart,
   }));
 
   const handleStart = async () => {
-    setHasStarted(true);
     const container = containerRef.current;
     if (container && container.requestFullscreen) {
       try {

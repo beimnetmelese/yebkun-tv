@@ -214,12 +214,13 @@ export default function AdultPage() {
                   "/images/adults/podcast.jpg",
                 ].map((label, i) => (
                   <div
+                    key={i}
                     onClick={() => router.push("/adult/stream/livestreams")}
                     className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
-                      src={"/images/adults/chef.png"}
+                      src={label}
                       alt="Chef"
                       className={
                         "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"

@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import VideoStreamPlayer, { VideoStreamPlayerHandle } from "./videoStream";
-import { FaBell, FaRegCalendarAlt } from "react-icons/fa";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 

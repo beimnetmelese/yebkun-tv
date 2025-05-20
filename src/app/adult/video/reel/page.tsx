@@ -4,7 +4,6 @@ import Image from "next/image";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export default function VideoFeed() {
   const videoRef = useRef<HTMLVideoElement>(null);

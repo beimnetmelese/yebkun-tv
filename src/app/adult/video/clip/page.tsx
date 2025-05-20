@@ -5,12 +5,6 @@ import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 
-const episodes = Array(10).fill({
-  title: "Sample Clip",
-  views: "159K",
-  img: "/images/sample.jpg",
-});
-
 export default function VideoPlayerSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
