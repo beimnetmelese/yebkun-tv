@@ -14,7 +14,7 @@ const playlists = [
   { name: "Diloke Basur", image: "/images/adults/tv.jpg" },
 ];
 
-const songs = Array(11).fill({
+const songs = Array(9).fill({
   title: "Playlist Title",
   subtitle: "Songs 120",
   duration: "3:52",
@@ -45,7 +45,7 @@ export default function MusicPlayerUI() {
   return (
     <>
       <Navigation active="stream" />
-      <div className="min-h-screen pt-[150px] flex flex-col bg-black text-white bg-[url('/images/adults/music.jpg')] overflow-hidden">
+      <div className="min-h-screen pt-[150px] flex flex-col text-white bg-gradient-to-b from-[#0c0c0c] via-[#1a1a1a] to-[#2f2f2f] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
 
         <div className="flex flex-1">
@@ -95,11 +95,11 @@ export default function MusicPlayerUI() {
 
           {/* Middle Section */}
           <main
-            className="flex-[1.6] flex gap-6 bg-white/25 rounded-xl m-6 mr-3 p-3"
+            className="flex-[1] flex bg-white/25 rounded-xl m-6 mr-3 p-3 max-h-[calc(100vh-180px)] overflow-y-auto"
             style={{ backgroundColor: "#67657157" }}
           >
             {/* Songs Column */}
-            <div className="w-1/2 flex flex-col">
+            <div className="w-full flex flex-col">
               {songs.map((song, i) => (
                 <div
                   key={i}
@@ -118,50 +118,37 @@ export default function MusicPlayerUI() {
                       <p className="text-xs text-gray-400">{song.subtitle}</p>
                     </div>
                   </div>
-                  {i === 0 ? (
-                    <button className="p-2 bg-white text-black rounded-full">
-                      <Play className="w-4 h-4" />
-                    </button>
-                  ) : (
-                    <p className="text-xs text-gray-300">{song.duration}</p>
-                  )}
+                  <svg
+                    width="25"
+                    height="25"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19.1709 17.4402C18.5346 17.5923 17.8704 17.6729 17.1875 17.6729C12.4931 17.6729 8.6875 13.8673 8.6875 9.17286C8.6875 8.68938 8.72786 8.21534 8.80541 7.75391C8.76922 7.78871 8.73182 7.82077 8.69244 7.85066C8.41183 8.06369 8.06235 8.14276 7.36339 8.30091L6.72704 8.44489C4.26736 9.00141 3.03752 9.27968 2.74492 10.2206C2.45232 11.1615 3.29075 12.1419 4.9676 14.1028L5.40142 14.6101C5.87792 15.1673 6.11618 15.4459 6.22336 15.7906C6.33055 16.1352 6.29453 16.507 6.22248 17.2504L6.1569 17.9273C5.90338 20.5435 5.77662 21.8516 6.54265 22.4331C7.30867 23.0146 8.46017 22.4844 10.7632 21.424L11.359 21.1497C12.0134 20.8484 12.3406 20.6977 12.6875 20.6977C13.0344 20.6977 13.3616 20.8484 14.016 21.1497L14.6118 21.424C16.9148 22.4844 18.0663 23.0146 18.8324 22.4331C19.5984 21.8516 19.4716 20.5435 19.2181 17.9273L19.1709 17.4402Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M9.84052 6.08025L9.51282 6.66811C9.15288 7.31381 8.97291 7.63666 8.6923 7.84968C8.73168 7.81979 8.76908 7.78774 8.80527 7.75293C8.72772 8.21436 8.68736 8.68841 8.68736 9.17188C8.68736 13.8663 12.4929 17.6719 17.1874 17.6719C17.8703 17.6719 18.5344 17.5913 19.1708 17.4392L19.1524 17.2494C19.0803 16.506 19.0443 16.1343 19.1515 15.7896C19.2587 15.4449 19.4969 15.1663 19.9734 14.6091L20.4073 14.1018C22.0841 12.1409 22.9225 11.1605 22.6299 10.2196C22.3373 9.27869 21.1075 9.00043 18.6478 8.4439L18.0115 8.29992C17.3125 8.14178 16.963 8.0627 16.6824 7.84968C16.4018 7.63666 16.2218 7.31381 15.8619 6.66811L15.5342 6.08025C14.2675 3.808 13.6342 2.67188 12.6874 2.67188C11.7405 2.67188 11.1072 3.808 9.84052 6.08025Z"
+                      fill="white"
+                    />
+                  </svg>
                 </div>
               ))}
             </div>
           </main>
 
           {/* Right Audio Player */}
-          <aside className="flex-[2] relative m-6 ml-3 p-6 rounded-xl overflow-hidden flex flex-col justify-between">
-            <div className="absolute inset-0 z-0">
-              <div
-                className="absolute inset-0 bg-white/25 backdrop-blur-sm"
-                style={{ backgroundColor: "#67657157" }}
-              />
-            </div>
-
-            <div className="relative z-10 flex-1 flex flex-col items-center justify-between">
-              <div className="flex-1" />
-              <div className="flex items-center justify-center gap-6 py-6">
-                <button className="p-2 rounded-full bg-white/10 hover:bg-white/20">
-                  <SkipBack className="w-6 h-6" />
-                </button>
-                <button className="p-3 rounded-full bg-white text-black hover:bg-gray-300">
-                  <Play className="w-6 h-6" />
-                </button>
-                <button className="p-2 rounded-full bg-white/10 hover:bg-white/20">
-                  <SkipForward className="w-6 h-6" />
-                </button>
-              </div>
-              <div className="w-full px-4 mb-6">
-                <div className="flex items-center justify-between text-xs text-gray-600">
-                  <span>02:37</span>
-                  <span>--:--</span>
-                </div>
-                <div className="w-full h-1 bg-gray-400 rounded-full mt-1">
-                  <div className="h-full w-1/3 bg-red-500 rounded-full" />
-                </div>
-              </div>
-            </div>
+          <aside className="flex-[2] relative m-6 ml-3 p-0 rounded-xl overflow-hidden max-h-[calc(100vh-180px)]">
+            <video
+              ref={videoRef}
+              src="/images/adults/cooking.mp4" // Replace with your actual video path
+              autoPlay
+              loop
+              muted
+              className="w-full h-full object-cover"
+            />
           </aside>
         </div>
 
