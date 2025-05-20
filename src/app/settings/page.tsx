@@ -70,7 +70,7 @@ const Settings = () => {
 
   return (
     <div className="flex flex-col h-[83vh] bg-[#FFFFFF]">
-      <Navigation />
+      <Navigation active="settings" />
 
       <div className="flex flex-row lg:flex-nowrap justify-start items-start gap-[6px] mt-[20vh] px-[8px] pb-[8px] w-full h-full">
         {/* Sidebar Navigation */}
