@@ -17,19 +17,49 @@ const App = () => {
   return (
     <>
       <Navigation active="gerandin" />
-      <div className="min-h-screen pt-[150px]   bg-white">
+      <div className="min-h-screen w-full h-full pt-[150px]">
         {/* Body */}
-        <div className="p-6 flex flex-wrap justify-between gap-6">
-          {/* Left - Recent Search */}
-          <div className="bg-gray-100 p-4 rounded-xl w-full md:w-[300px] shadow-sm">
-            <h2 className="font-semibold text-blue-900 mb-4 text-sm">
-              Recent Search
-            </h2>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between bg-white p-2 rounded-md">
-                <div className="flex items-center gap-2 text-sm text-blue-900">
-                  🕒 <span>Recent Search</span>
-                </div>
+        <div className="grid grid-cols-3 p-8 gap-4 w-full">
+          {/* Column 1 */}
+          <div className="flex flex-col bg-gray-100 p-4 rounded-md w-full h-full">
+            <h2 className="text-sm font-semibold mb-2">Recent Search</h2>
+            <div className="flex items-center rounded-md gap-2">
+              <div className="flex items-center gap-2 rounded-md bg-white p-2 text-sm text-blue-900 flex-1">
+                <svg
+                  width="36"
+                  height="35"
+                  viewBox="0 0 36 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3.77034 17.5013C3.77034 25.5555 10.2995 32.0846 18.3537 32.0846C26.4078 32.0846 32.937 25.5555 32.937 17.5013C32.937 9.44715 26.4078 2.91797 18.3537 2.91797"
+                    stroke="#1C274C"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    opacity="0.5"
+                    d="M18.3535 13.125V18.9583H24.1868"
+                    stroke="#1C274C"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    opacity="0.5"
+                    cx="18.3534"
+                    cy="17.5013"
+                    r="14.5833"
+                    stroke="#1C274C"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-dasharray="0.5 3.5"
+                  />
+                </svg>
+                <span className="text-sm">Recent Search</span>
+              </div>
+              <div className="p-1 bg-white rounded-md hover:bg-gray-300 cursor-pointer">
                 <svg
                   width="40"
                   height="40"
@@ -72,54 +102,85 @@ const App = () => {
                   />
                 </svg>
               </div>
-              <div className="flex items-center gap-2 text-sm bg-gray-100 p-2 rounded-md text-blue-900">
-                🕒 <span>Recent Search</span>
-              </div>
+            </div>
+            <div className="flex items-center rounded-md bg-white p-2 space-x-2 mt-3">
+              <svg
+                width="36"
+                height="35"
+                viewBox="0 0 36 35"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.77034 17.5013C3.77034 25.5555 10.2995 32.0846 18.3537 32.0846C26.4078 32.0846 32.937 25.5555 32.937 17.5013C32.937 9.44715 26.4078 2.91797 18.3537 2.91797"
+                  stroke="#1C274C"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  opacity="0.5"
+                  d="M18.3535 13.125V18.9583H24.1868"
+                  stroke="#1C274C"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle
+                  opacity="0.5"
+                  cx="18.3534"
+                  cy="17.5013"
+                  r="14.5833"
+                  stroke="#1C274C"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-dasharray="0.5 3.5"
+                />
+              </svg>
+              <span className="text-sm">Recent Search</span>
             </div>
           </div>
 
-          {/* Middle - Editable Recent */}
-          <div className="bg-gray-100  p-4 rounded-xl w-full md:w-[300px] shadow-sm">
-            <div className="space-y-3">
-              {[...Array(4)].map((_, i) => (
-                <div
-                  key={i}
-                  className="flex items-center bg-white gap-2 text-sm bg-gray-100 p-2 rounded-md text-blue-900"
+          {/* Column 2 */}
+          <div className="flex flex-col bg-gray-100 p-4 rounded-md w-full h-full space-y-3">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="flex items-center bg-white p-2 rounded-md space-x-2"
+              >
+                <svg
+                  width="35"
+                  height="35"
+                  viewBox="0 0 35 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <svg
-                    width="35"
-                    height="35"
-                    viewBox="0 0 35 35"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      opacity="0.5"
-                      d="M5.83301 32.082H29.1663"
-                      stroke="#1C274C"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      d="M21.3344 4.26171L20.2531 5.34307L10.3116 15.2845C9.63828 15.9579 9.3016 16.2946 9.01206 16.6658C8.6705 17.1037 8.37767 17.5775 8.13874 18.0788C7.9362 18.5038 7.78563 18.9555 7.4845 19.8589L6.20845 23.6871L5.89653 24.6228C5.74834 25.0674 5.86405 25.5575 6.19541 25.8889C6.52678 26.2203 7.01692 26.336 7.46149 26.1878L8.39725 25.8759L12.2254 24.5998C13.1288 24.2987 13.5805 24.1481 14.0055 23.9456C14.5068 23.7066 14.9806 23.4138 15.4185 23.0723C15.7898 22.7827 16.1264 22.446 16.7998 21.7727L26.7412 11.8312L27.8226 10.7499C29.6143 8.95821 29.6143 6.05336 27.8226 4.26171C26.0309 2.47006 23.1261 2.47006 21.3344 4.26171Z"
-                      stroke="#1C274C"
-                      stroke-width="1.5"
-                    />
-                    <path
-                      opacity="0.5"
-                      d="M20.2536 5.34375C20.2536 5.34375 20.3888 7.64164 22.4163 9.66919C24.4439 11.6967 26.7418 11.8319 26.7418 11.8319M8.39778 25.8765L6.20898 23.6877"
-                      stroke="#1C274C"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                  <span>Recent Search</span>
-                </div>
-              ))}
-            </div>
+                  <path
+                    opacity="0.5"
+                    d="M5.83301 32.082H29.1663"
+                    stroke="#1C274C"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M21.3344 4.26171L20.2531 5.34307L10.3116 15.2845C9.63828 15.9579 9.3016 16.2946 9.01206 16.6658C8.6705 17.1037 8.37767 17.5775 8.13874 18.0788C7.9362 18.5038 7.78563 18.9555 7.4845 19.8589L6.20845 23.6871L5.89653 24.6228C5.74834 25.0674 5.86405 25.5575 6.19541 25.8889C6.52678 26.2203 7.01692 26.336 7.46149 26.1878L8.39725 25.8759L12.2254 24.5998C13.1288 24.2987 13.5805 24.1481 14.0055 23.9456C14.5068 23.7066 14.9806 23.4138 15.4185 23.0723C15.7898 22.7827 16.1264 22.446 16.7998 21.7727L26.7412 11.8312L27.8226 10.7499C29.6143 8.95821 29.6143 6.05336 27.8226 4.26171C26.0309 2.47006 23.1261 2.47006 21.3344 4.26171Z"
+                    stroke="#1C274C"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    opacity="0.5"
+                    d="M20.2536 5.34375C20.2536 5.34375 20.3888 7.64164 22.4163 9.66919C24.4439 11.6967 26.7418 11.8319 26.7418 11.8319M8.39778 25.8765L6.20898 23.6877"
+                    stroke="#1C274C"
+                    stroke-width="1.5"
+                  />
+                </svg>
+                <span className="text-sm">Recent Search</span>
+              </div>
+            ))}
           </div>
 
-          {/* Right - Keyboard & Suggestions */}
-          <div className="bg-white p-4 rounded-xl w-full md:flex-1 shadow-sm">
+          {/* Column 3 - Keyboard */}
+          <div className="flex flex-col bg-gray-100 p-4 rounded-md w-full h-full">
+            {/* Your keyboard UI here */}
             <div className="flex justify-center">
               <div className="bg-gray-100 p-4 rounded-lg shadow-inner w-full max-w-md">
                 {/* Email Suggestions */}
@@ -176,7 +237,7 @@ const App = () => {
         {/* Main Content */}
         <main className="px-6 pb-12">
           {/* Latest Songs */}
-          <section className="mt-12">
+          <section className="mt-1">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
               {[
                 "/images/adults/podcast.jpg",
@@ -187,7 +248,7 @@ const App = () => {
                 <div
                   onClick={() => router.push("/adult/music/diloke")}
                   key={i}
-                  className="relative aspect-video rounded-xl overflow-hidden shadow-md group hover:scale-105 transition-transform bg-black"
+                  className="relative h-[230px] rounded-xl overflow-hidden shadow-md group hover:scale-105 transition-transform bg-black"
                 >
                   <img
                     src={img}
@@ -261,7 +322,7 @@ const App = () => {
           </section>
 
           {/* Latest Artists */}
-          <section className="mt-16">
+          <section className="mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
               {Array(5)
                 .fill("/images/adults/chef.png")
@@ -269,7 +330,7 @@ const App = () => {
                   <div
                     onClick={() => router.push("/adult/music/hunermend")}
                     key={i}
-                    className="relative h-[400px] w-full rounded-xl overflow-hidden shadow-md group bg-black hover:scale-[1.015] transition-transform"
+                    className="relative h-[300px] w-full rounded-xl overflow-hidden shadow-md group bg-black hover:scale-[1.015] transition-transform"
                   >
                     <img
                       src={img}
@@ -282,8 +343,8 @@ const App = () => {
                     />
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
                     <div className="absolute bottom-3 left-3 text-white space-y-1">
-                      <div className="text-sm font-semibold">Artist Name</div>
-                      <div className="text-sm font-semibold">Rojova</div>
+                      <div className="text-lg font-semibold">Artist Name</div>
+                      <div className="text-lg font-semibold">Rojova</div>
                     </div>
                   </div>
                 ))}

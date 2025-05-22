@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 
-const songs = Array(9).fill({
+const songs = Array(11).fill({
   title: "Playlist Title",
   subtitle: "Songs 120",
   duration: "3:52",
@@ -40,7 +40,11 @@ export default function MusicPlayerUI() {
               <div
                 onClick={() => router.push(label[2])}
                 key={i}
-                className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
+                className={`relative aspect-video tv-md:w-[250px] tv-md:h-[151px] rounded-2xl overflow-hidden shadow-2xl group ${
+                  i === 1
+                    ? "brightness-100"
+                    : "brightness-50 hover:brightness-100"
+                } transition-all duration-300`}
               >
                 <div className="absolute inset-0 scale-105 -translate-y-1 -translate-x-2 z-0 rounded-2xl overflow-hidden">
                   <img
@@ -57,7 +61,7 @@ export default function MusicPlayerUI() {
                   />
                   <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-4 z-20">
-                    <span className="text-white text-lg font-semibold drop-shadow-lg">
+                    <span className="text-white tv-md:text-[26px] text-lg font-semibold drop-shadow-lg">
                       {label[0]}
                     </span>
                   </div>
@@ -68,11 +72,11 @@ export default function MusicPlayerUI() {
 
           {/* Middle Section */}
           <main
-            className="flex-[1] flex bg-white/25 rounded-xl m-6 mr-3 p-3 max-h-[calc(100vh-180px)] overflow-y-auto"
+            className="flex flex-[1] tv-md:w-[300px] tv-md:flex-none tv-md:h-[667px] tv-md:flex-grow-0 bg-white/25 rounded-xl m-6 mr-3 p-3 max-h-[calc(100vh-180px)] overflow-y-auto"
             style={{ backgroundColor: "#67657157" }}
           >
             {/* Songs Column */}
-            <div className="w-full flex flex-col">
+            <div className="w-full tv-md:w-full flex flex-col">
               {songs.map((song, i) => (
                 <div
                   key={i}
@@ -112,7 +116,7 @@ export default function MusicPlayerUI() {
           </main>
 
           {/* Right Audio Player */}
-          <aside className="flex-[2] relative m-6 ml-3 p-0 rounded-xl overflow-hidden max-h-[calc(100vh-180px)]">
+          <aside className="flex-[3] tv-md:w-[1163px] tv-md:h-[667px] relative m-6 ml-3 p-0 rounded-xl overflow-hidden max-h-[667px]">
             <video
               ref={videoRef}
               src="/images/adults/cooking.mp4" // Replace with your actual video path
@@ -127,12 +131,12 @@ export default function MusicPlayerUI() {
         {/* Video Section */}
         <div className="px-6 pb-10">
           <h2
-            className="text-xl font-semibold mt-4 mb-2 p-2 rounded-md inline-block"
+            className="text-xl font-semibold mt-4 mb-2 p-2 z-10 rounded-md inline-block"
             style={{ backgroundColor: "#FFFFFF40" }}
           >
-            My Video
+            My Channels
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
+          <div className="flex gap-2 overflow-hidden">
             {[
               "/images/adults/podcast.jpg",
               "/images/adults/chef.png",
@@ -142,7 +146,7 @@ export default function MusicPlayerUI() {
               <div
                 key={i}
                 onClick={() => router.push("/adult/stream/tvchannel")}
-                className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                className="relative h-[245px] aspect-video tv-md:w-[450px] flex-shrink-0 tv-md:flex-none tv-md:h-[300px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
               >
                 {/* BACKGROUND IMAGE */}
                 <img
@@ -158,11 +162,11 @@ export default function MusicPlayerUI() {
 
                 {/* TOP-RIGHT CHANNEL INFO */}
                 <div className="absolute top-3 right-3 flex flex-col items-end text-white space-y-1">
-                  <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                  <span className="text-2xl font-semibold group-hover:text-red-400 transition-colors duration-300">
                     TV Channel
                   </span>
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                    <span className="text-2xl font-semibold group-hover:text-red-400 transition-colors duration-300">
                       Channel Name
                     </span>
                   </div>

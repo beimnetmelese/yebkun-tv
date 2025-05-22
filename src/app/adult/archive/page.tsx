@@ -9,20 +9,24 @@ export default function AdultPage() {
   return (
     <>
       <Navigation active="archive" />
-      <div className="min-h-screen pt-[150px] overflow-auto bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
+      <div className="min-h-screen pt-[150px] h-full w-full overflow-auto bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
         <div className="flex gap-8 mx-auto">
           {/* Main Content */}
           <main className="flex-1">
             {/* ON AIR Section */}
             <section>
               <h2
-                className="inline-block text-2xl font-semibold mb-6 p-2 rounded-md"
+                className="inline-block tv-md:h-[51px] text-2xl font-semibold mb-6 p-2 rounded-md"
                 style={{ backgroundColor: "#FFFFFF40" }}
               >
                 Videos History
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+              <div className="flex gap-4 overflow-hidden">
                 {[
+                  "/images/adults/podcast.jpg",
+                  "/images/adults/chef.png",
+                  "/images/adults/live.jpg",
+                  "/images/adults/podcast.jpg",
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
                   "/images/adults/live.jpg",
@@ -31,7 +35,7 @@ export default function AdultPage() {
                   <div
                     onClick={() => router.push("/adult/video/clip")}
                     key={i}
-                    className=" w-full relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                    className=" w-[300px] relative aspect-video tv-md:w-[230px] tv-md:h-[130px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
@@ -113,8 +117,17 @@ export default function AdultPage() {
               >
                 Latest Reels
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+              <div className="flex gap-4 overflow-hidden">
                 {[
+                  "/images/adults/podcast.jpg",
+                  "/images/adults/chef.png",
+                  "/images/adults/live.jpg",
+                  "/images/adults/podcast.jpg",
+                  "/images/adults/podcast.jpg",
+                  "/images/adults/chef.png",
+                  "/images/adults/live.jpg",
+                  "/images/adults/podcast.jpg",
+                  "/images/adults/podcast.jpg",
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
                   "/images/adults/live.jpg",
@@ -123,7 +136,7 @@ export default function AdultPage() {
                   <div
                     onClick={() => router.push("/adult/video/reel")}
                     key={i}
-                    className="relative w-full aspect-[2/3] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                    className="relative w-full aspect-[2/3] tv-md:w-[135px] tv-md:h-[170px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
@@ -142,10 +155,10 @@ export default function AdultPage() {
                     {/* TOP-RIGHT CHANNEL INFO */}
                     <div className="absolute bottom-3 right-3 flex flex-col items-end text-white space-y-1">
                       <div className="flex items-center space-x-2">
-                        <span className="flex items-center gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                        <span className="flex items-center tv-md:w-[62px] tv-md:h-[17px] gap-1 bg-white bg-opacity-60 text-sm px-2 py-0.5 rounded-md">
                           <svg
-                            width="12"
-                            height="13"
+                            width="6"
+                            height="8"
                             viewBox="0 0 12 13"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
@@ -177,8 +190,8 @@ export default function AdultPage() {
                       <Image
                         src={"/images/navigation/user.png"}
                         alt={label}
-                        width={33}
-                        height={33}
+                        width={20}
+                        height={20}
                         loading="eager"
                         quality={90}
                         unoptimized
@@ -188,8 +201,8 @@ export default function AdultPage() {
                       <Image
                         src={"/images/navigation/user.png"}
                         alt={label}
-                        width={33}
-                        height={33}
+                        width={20}
+                        height={20}
                         loading="eager"
                         quality={90}
                         unoptimized
@@ -206,8 +219,12 @@ export default function AdultPage() {
               >
                 Stream History
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+              <div className="flex gap-4 overflow-hidden">
                 {[
+                  "/images/adults/podcast.jpg",
+                  "/images/adults/chef.png",
+                  "/images/adults/live.jpg",
+                  "/images/adults/podcast.jpg",
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
                   "/images/adults/live.jpg",
@@ -216,7 +233,7 @@ export default function AdultPage() {
                   <div
                     key={i}
                     onClick={() => router.push("/adult/stream/livestreams")}
-                    className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                    className="relative w-[300px] aspect-video tv-md:w-[230px] tv-md:h-[130px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
@@ -245,8 +262,8 @@ export default function AdultPage() {
                     {/* BOTTOM-LEFT WATCH BUTTON */}
                     <div className="absolute bottom-3 left-3">
                       <svg
-                        width="132"
-                        height="35"
+                        width="100"
+                        height="25"
                         viewBox="0 0 132 35"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -266,8 +283,8 @@ export default function AdultPage() {
                     {/* BOTTOM-RIGHT LOGO */}
                     <div className="absolute bottom-3 right-3">
                       <svg
-                        width="35"
-                        height="35"
+                        width="25"
+                        height="25"
                         viewBox="0 0 35 35"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -308,8 +325,12 @@ export default function AdultPage() {
               >
                 Songs History
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+              <div className="flex gap-4 overflow-hidden">
                 {[
+                  "/images/adults/podcast.jpg",
+                  "/images/adults/chef.png",
+                  "/images/adults/live.jpg",
+                  "/images/adults/podcast.jpg",
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
                   "/images/adults/live.jpg",
@@ -318,7 +339,7 @@ export default function AdultPage() {
                   <div
                     onClick={() => router.push("/adult/music/diloke")}
                     key={i}
-                    className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group transform transition duration-300 hover:scale-105 hover:brightness-110"
+                    className="relative w-[300px]  aspect-video tv-md:w-[230px] tv-md:h-[130px] rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group transform transition duration-300 hover:scale-105 hover:brightness-110"
                   >
                     <img
                       src={label}

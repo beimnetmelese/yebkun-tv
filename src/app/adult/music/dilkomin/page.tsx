@@ -13,7 +13,7 @@ const playlists = [
 ];
 
 // Added mock audio files for demonstration
-const songs = Array(9).fill({
+const songs = Array(15).fill({
   title: "Playlist Title",
   subtitle: "Songs 120",
   duration: "3:52",
@@ -22,13 +22,24 @@ const songs = Array(9).fill({
 });
 
 export default function MusicPlayerUI() {
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<number | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const router = useRouter();
+
+  const togglePlayPause = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   // Initialize audio element
   useEffect(() => {
@@ -59,22 +70,36 @@ export default function MusicPlayerUI() {
 
   const playSong = (index: number) => {
     if (audioRef.current) {
-      setCurrentlyPlaying(index);
       audioRef.current.src = songs[index].audioSrc;
       audioRef.current.play();
       setIsPlaying(true);
     }
   };
 
-  const togglePlayPause = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
+  const updateProgress = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    setCurrentTime(audio.currentTime);
+    setProgress((audio.currentTime / audio.duration) * 100);
+  };
+  const setAudioDuration = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    setDuration(audio.duration);
+  };
+
+  const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const newTime = (clickX / rect.width) * audio.duration;
+
+    audio.currentTime = newTime;
+    setCurrentTime(newTime);
   };
 
   const formatTime = (timeInSeconds: number) => {
@@ -83,29 +108,24 @@ export default function MusicPlayerUI() {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (audioRef.current && duration) {
-      const progressBar = e.currentTarget;
-      const clickPosition =
-        e.clientX - progressBar.getBoundingClientRect().left;
-      const progressBarWidth = progressBar.clientWidth;
-      const percentageClicked = (clickPosition / progressBarWidth) * 100;
-      const newTime = (percentageClicked / 100) * duration;
+  const handlePrevious = () => {
+    // example: play previous song
+    console.log("Previous");
+  };
 
-      audioRef.current.currentTime = newTime;
-      setProgress(percentageClicked);
-      setCurrentTime(newTime);
-    }
+  const handleNext = () => {
+    // example: play next song
+    console.log("Next");
   };
 
   return (
     <>
       <Navigation active="music" />
-      <div className="h-screen pt-[150px] flex bg-black text-white bg-[url('/images/adults/music.jpg')] overflow-hidden">
+      <div className="h-screen pt-[150px] w-full h-full flex bg-black text-white bg-gradient-to-b from-[#0c0c0c] via-[#1a1a1a] to-[#2f2f2f] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
 
         {/* Left Sidebar */}
-        <aside className="w-64 m-6 flex flex-col gap-6">
+        <aside className="w-64 ml-6 mr-6 flex flex-col gap-6">
           {[
             ["Stream Destpek", "/images/adults/streams.jpg", "/adult/music"],
             ["Dilko Raqse", "/images/adults/tv.jpg", "/adult/music/diloke"],
@@ -115,7 +135,11 @@ export default function MusicPlayerUI() {
             <div
               onClick={() => router.push(label[2])}
               key={i}
-              className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
+              className={`relative aspect-video tv-md:w-[250px] tv-md:h-[151px] rounded-2xl overflow-hidden shadow-2xl group ${
+                i === 3
+                  ? "brightness-100"
+                  : "brightness-50 hover:brightness-100"
+              } transition-all duration-300`}
             >
               {/* BACKGROUND IMAGE: Scaled & Blurred */}
               <div className="absolute inset-0 scale-105 -translate-y-1 -translate-x-2 z-0 rounded-2xl overflow-hidden">
@@ -139,7 +163,7 @@ export default function MusicPlayerUI() {
 
                 {/* TEXT LABEL */}
                 <div className="absolute bottom-3 left-4 z-20">
-                  <span className="text-white text-lg font-semibold drop-shadow-lg">
+                  <span className="text-white tv-md:text-[26px] text-lg font-semibold drop-shadow-lg">
                     {label[0]}
                   </span>
                 </div>
@@ -150,15 +174,19 @@ export default function MusicPlayerUI() {
 
         {/* Middle Section */}
         <main
-          className="flex-[1.6] flex gap-6 bg-white/25 rounded-xl m-6 mr-3 p-3"
+          className="flex-[1.6] tv-md:w-[629px] tv-md:h-[908px] max-h-[908px] tv-md:flex-[1] flex gap-1 bg-white/25 rounded-xl mr-3 p-3"
           style={{ backgroundColor: "#67657157" }}
         >
           {/* Playlist Column */}
-          <div className="w-1/2 flex flex-col gap-4">
+          <div className="w-1/2 w-1/2 tv-md:w-[250px] flex flex-col gap-4">
             {playlists.map((playlist, index) => (
               <div
                 key={index}
-                className="relative rounded-md overflow-hidden shadow bg-zinc-900 h-32"
+                className={`relative tv-md:w-[250px] tv-md:h-[170px] rounded-md overflow-hidden shadow bg-zinc-900 h-32 ${
+                  index === 0
+                    ? "brightness-100"
+                    : "brightness-50 hover:brightness-100"
+                } transition-all duration-300`}
               >
                 <img
                   src={playlist.image}
@@ -223,18 +251,22 @@ export default function MusicPlayerUI() {
               <div
                 key={i}
                 onClick={() => playSong(i)}
-                className={`flex items-center justify-between p-2 bg-white/23 hover:bg-zinc-700 cursor-pointer
+                className={`flex items-center tv-md:w-[350px] tv-md:h-[60px] justify-between p-2 bg-white/23 hover:bg-zinc-700 cursor-pointer
                   ${i !== songs.length - 1 ? "border-b border-gray-600" : ""}`}
               >
                 <div className="flex items-center gap-3">
                   <img
                     src={song.image}
-                    className="w-10 h-10 rounded-md"
+                    className="w-10 h-10  tv-md:w-[60px] tv-md:h-[40px] rounded-md"
                     alt="cover"
                   />
                   <div>
-                    <p className="text-sm font-medium">{song.title}</p>
-                    <p className="text-xs text-gray-400">{song.subtitle}</p>
+                    <p className="text-sm tv-md:text-[16px] font-medium">
+                      {song.title}
+                    </p>
+                    <p className="text-xs tv-md:text-[16px] text-gray-400">
+                      {song.subtitle}
+                    </p>
                   </div>
                 </div>
                 {i === 0 ? (
@@ -266,16 +298,16 @@ export default function MusicPlayerUI() {
                     />
                   </svg>
                 ) : (
-                  <p className="text-xs text-gray-300">{song.duration}</p>
+                  <p className="text-xs tv-md:text-[16px] text-gray-300">
+                    {song.duration}
+                  </p>
                 )}
               </div>
             ))}
           </div>
         </main>
-
-        {/* Right Audio Player */}
-        <aside className="flex-[2] relative m-6 ml-3 p-6 rounded-xl overflow-hidden flex flex-col justify-between">
-          {/* Background image with overlay */}
+        <aside className="flex-[2] tv-md:w-[951px] tv-md:h-[908px] max-h-[908px] relative mr-3 ml-3 p-6 rounded-xl overflow-hidden flex flex-col justify-between shadow-[inset_0_-40px_40px_-10px_rgba(0,0,0,0.4)]">
+          {/* Background overlay */}
           <div className="absolute inset-0 z-0">
             <div
               className="absolute inset-0 bg-white/25 backdrop-blur-sm"
@@ -283,21 +315,22 @@ export default function MusicPlayerUI() {
             />
           </div>
 
-          {/* Controls & Visualization */}
+          {/* Audio element (hidden) */}
+          <audio
+            ref={audioRef}
+            onTimeUpdate={updateProgress}
+            onLoadedMetadata={setAudioDuration}
+            onEnded={handleNext}
+            className="hidden"
+          />
+
+          {/* Controls */}
           <div className="relative z-10 flex-1 flex flex-col items-center justify-between">
-            {/* Spacer */}
             <div className="flex-1" />
 
-            {/* Player Controls */}
+            {/* Control Buttons */}
             <div className="flex items-center justify-center gap-6 py-6">
-              {/* Previous Button */}
-              <button
-                onClick={() =>
-                  currentlyPlaying &&
-                  currentlyPlaying > 0 &&
-                  playSong(currentlyPlaying - 1)
-                }
-              >
+              <button onClick={handlePrevious}>
                 <svg
                   width="50"
                   height="50"
@@ -323,8 +356,6 @@ export default function MusicPlayerUI() {
                   />
                 </svg>
               </button>
-
-              {/* Play/Pause Button */}
               <button onClick={togglePlayPause}>
                 <svg
                   width="56"
@@ -346,15 +377,7 @@ export default function MusicPlayerUI() {
                   />
                 </svg>
               </button>
-
-              {/* Next Button */}
-              <button
-                onClick={() =>
-                  currentlyPlaying !== null &&
-                  currentlyPlaying < songs.length - 1 &&
-                  playSong(currentlyPlaying + 1)
-                }
-              >
+              <button onClick={handleNext}>
                 <svg
                   width="50"
                   height="50"
@@ -382,18 +405,22 @@ export default function MusicPlayerUI() {
               </button>
             </div>
 
-            {/* Progress Bar */}
-            <div className="w-full px-4 mb-6">
-              <div className="flex items-center justify-between text-xs text-gray-600">
-                <span>{formatTime(currentTime)}</span>
-                <span>{duration ? formatTime(duration) : "--:--"}</span>
+            {/* Time & Progress */}
+            <div className="w-full px-4 pb-8">
+              <div className="flex justify-between text-sm text-white/70 mb-1">
+                <span className="tv-md:text-[16px]">
+                  {formatTime(currentTime)}
+                </span>
+                <span className="tv-md:text-[16px]">
+                  {formatTime(duration)}
+                </span>
               </div>
               <div
-                className="w-full h-1 bg-gray-400 rounded-full mt-1 cursor-pointer"
+                className="w-full h-2 bg-white/30 rounded-full cursor-pointer"
                 onClick={handleProgressBarClick}
               >
                 <div
-                  className="h-full bg-red-500 rounded-full"
+                  className="h-full bg-red-500 rounded-full transition-all"
                   style={{ width: `${progress}%` }}
                 />
               </div>

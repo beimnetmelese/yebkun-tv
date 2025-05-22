@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Navigation active="music" />
-      <div className="min-h-screen pt-[150px]  bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
+      <div className="min-h-screen pt-[150px] w-full h-full bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
         <div className="flex gap-8 mx-auto">
           {/* Sidebar */}
           <aside className="w-64 flex flex-col gap-6">
@@ -22,10 +22,14 @@ export default function Home() {
               <div
                 onClick={() => router.push(label[2])}
                 key={i}
-                className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
+                className={`relative aspect-video tv-md:w-[250px] tv-md:h-[151px] rounded-2xl overflow-hidden shadow-2xl group ${
+                  i === 1
+                    ? "brightness-100"
+                    : "brightness-50 hover:brightness-100"
+                } transition-all duration-300`}
               >
                 {/* BACKGROUND IMAGE: Scaled & Blurred */}
-                <div className="absolute inset-0 scale-105 -translate-y-1 -translate-x-2 z-0 rounded-2xl overflow-hidden">
+                <div className="absolute inset-0  scale-105 -translate-y-1 -translate-x-2 z-0 rounded-2xl overflow-hidden">
                   <img
                     src="/images/adults/music.jpg"
                     alt="background"
@@ -46,7 +50,7 @@ export default function Home() {
 
                   {/* TEXT LABEL */}
                   <div className="absolute bottom-3 left-4 z-20">
-                    <span className="text-white text-lg font-semibold drop-shadow-lg">
+                    <span className="text-white tv-md:text-[26px] text-lg font-semibold drop-shadow-lg">
                       {label[0]}
                     </span>
                   </div>
@@ -60,24 +64,25 @@ export default function Home() {
             {/* Planned Streams */}
             <section>
               <h2
-                className="inline-block text-2xl font-semibold mb-6 p-2 rounded-md"
+                className="inline-block text-2xl tv-md:w-[219px] tv-md:h-[51px] tv-md:text-[34px] font-semibold mb-3 p-2 rounded-md"
                 style={{ backgroundColor: "#FFFFFF40" }}
               >
                 Latest Artist
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+              <div className="flex gap-4 overflow-hidden">
                 {[
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
                   "/images/adults/live.jpg",
                   "/images/adults/podcast.jpg",
+                  "/images/adults/chef.png",
                 ].map((label, i) => (
                   <div
                     onClick={() =>
                       router.push("/adult/music/hunermend/playing")
                     }
                     key={i}
-                    className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                    className="relative w-full h-[400px] tv-md:w-[350px] tv-md:h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
@@ -94,9 +99,13 @@ export default function Home() {
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
 
                     {/* BOTTOM-LEFT WATCH BUTTON */}
-                    <div className="absolute bottom-3 left-3 flex flex-col items-start text-white space-y-1">
-                      <span className="text-sm font-semibold">Artist Name</span>
-                      <span className="text-sm font-semibold">Rojova</span>
+                    <div className="p-3 absolute bottom-3 left-3 flex flex-col items-start text-white space-y-1">
+                      <span className="text-sm mb-3 tv-md:text-[34px] font-semibold">
+                        Artist Name
+                      </span>
+                      <span className="text-sm font-semibold tv-md:text-[34px]">
+                        Rojova
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -106,24 +115,25 @@ export default function Home() {
             {/* ON AIR Section */}
             <section>
               <h2
-                className="inline-block text-2xl font-semibold mb-6 p-2 rounded-md"
+                className="inline-block text-2xl tv-md:w-[219px] tv-md:h-[51px] tv-md:text-[34px] font-semibold mt-3 mb-3 p-2 rounded-md"
                 style={{ backgroundColor: "#FFFFFF40" }}
               >
                 Latest Artist
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+              <div className="flex gap-4 overflow-hidden">
                 {[
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
                   "/images/adults/live.jpg",
                   "/images/adults/podcast.jpg",
+                  "/images/adults/chef.png",
                 ].map((label, i) => (
                   <div
                     onClick={() =>
                       router.push("/adult/music/hunermend/playing")
                     }
                     key={i}
-                    className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                    className="relative w-full h-[400px] tv-md:w-[350px] tv-md:h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
@@ -140,9 +150,13 @@ export default function Home() {
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
 
                     {/* BOTTOM-LEFT WATCH BUTTON */}
-                    <div className="absolute bottom-3 left-3 flex flex-col items-start text-white space-y-1">
-                      <span className="text-sm font-semibold">Artist Name</span>
-                      <span className="text-sm font-semibold">Rojova</span>
+                    <div className="p-3 absolute bottom-3 left-3 flex flex-col items-start text-white space-y-1">
+                      <span className="text-sm mb-3 tv-md:text-[34px] font-semibold">
+                        Artist Name
+                      </span>
+                      <span className="text-sm tv-md:text-[34px] font-semibold">
+                        Rojova
+                      </span>
                     </div>
                   </div>
                 ))}

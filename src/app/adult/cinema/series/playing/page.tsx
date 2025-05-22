@@ -10,9 +10,23 @@ const episodes = [
   { title: "EP 03", time: "03:00", active: true },
   { title: "EP 04", time: "03:00" },
   { title: "EP 05", time: "03:00", progress: "50%" },
+  { title: "EP 06", time: "03:00", progress: "50%" },
+  { title: "EP 07", time: "03:00", progress: "50%" },
 ];
 
 export default function ChefChannel() {
+  const scrollByAmount = 300; // change as needed
+
+  const scrollLeft = () => {
+    episodesRef.current?.scrollBy({
+      left: -scrollByAmount,
+      behavior: "smooth",
+    });
+  };
+
+  const scrollRight = () => {
+    episodesRef.current?.scrollBy({ left: scrollByAmount, behavior: "smooth" });
+  };
   const [showPlayer2, setShowPlayer2] = useState(false);
   const playerRef2 = useRef<VideoStreamPlayerHandle>(null);
   const episodesRef = useRef<HTMLDivElement>(null);
@@ -43,12 +57,14 @@ export default function ChefChannel() {
           <section className="flex-1">
             <div className="flex items-start gap-6">
               <div>
-                <h1 className="text-5xl mb-6 font-bold">The Smurfs</h1>
+                <h1 className="text-5xl tv-md:text-[90px] mb-10 font-bold">
+                  The Smurfs
+                </h1>
                 <div className="flex gap-2 mt-3 mb-6 flex-wrap">
-                  <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                  <span className="flex items-center mr-3  h-[46px] text-[34px] gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                     <svg
-                      width="13"
-                      height="13"
+                      width="35"
+                      height="35"
                       viewBox="0 0 13 13"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -72,14 +88,16 @@ export default function ChefChannel() {
                     </svg>
                     158K
                   </span>
-                  <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                  <span className="flex mr-3  h-[46px] text-[34px] items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                     12+
                   </span>
-                  <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                  <span className="flex mr-3  h-[46px] text-[34px] items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                     4K
                   </span>
                 </div>
-                <h1 className="text-5xl mb-6 font-bold">2012. 2hr. 35min</h1>
+                <h1 className="text-[32px] mt-6 mb-10 font-bold">
+                  2012. 2hr. 35min
+                </h1>
 
                 {showPlayer2 && <VideoStreamPlayer ref={playerRef2} />}
               </div>
@@ -87,11 +105,11 @@ export default function ChefChannel() {
           </section>
         </main>
 
-        <div className="fixed bottom-4 left-0 right-0 z-10 px-6 xl:px-12">
+        <div className="fixed w-full bottom-4 left-0 right-0 z-10 px-6 xl:px-12">
           {" "}
           {/* Added bottom-4 for small margin */}
           <div
-            className="bg-black/80 backdrop-blur-sm rounded-xl p-4 w-full max-w-screen-2xl mx-auto"
+            className="bg-black/80 backdrop-blur-sm p-4 w-full"
             style={{ background: "#67657157" }}
           >
             {" "}
@@ -108,16 +126,24 @@ export default function ChefChannel() {
             {/* Episodes carousel - centered */}
             <div className="relative w-full">
               <div className="flex items-center justify-center gap-2">
-                <button
-                  className="text-white text-2xl px-2 hover:bg-white/20 rounded-full h-10 w-10 flex items-center justify-center transition-colors shrink-0"
-                  aria-label="Previous episodes"
-                >
-                  &#8249;
+                <button onClick={scrollLeft} aria-label="Previous episodes">
+                  <svg
+                    width="20"
+                    height="33"
+                    viewBox="0 0 20 33"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.3531 1.0736C18.6235 1.34344 18.838 1.66394 18.9844 2.01678C19.1307 2.36962 19.2061 2.74786 19.2061 3.12985C19.2061 3.51184 19.1307 3.89009 18.9844 4.24292C18.838 4.59576 18.6235 4.91627 18.3531 5.1861L7.03643 16.5028L18.3531 27.8194C18.8984 28.3648 19.2048 29.1044 19.2048 29.8757C19.2048 30.6469 18.8984 31.3866 18.3531 31.9319C17.8077 32.4773 17.0681 32.7837 16.2968 32.7837C15.5256 32.7837 14.7859 32.4773 14.2406 31.9319L0.853094 18.5444C0.582708 18.2746 0.368195 17.9541 0.221832 17.6013C0.07547 17.2484 0.000133514 16.8702 0.000133514 16.4882C0.000133514 16.1062 0.07547 15.728 0.221832 15.3751C0.368195 15.0223 0.582708 14.7018 0.853094 14.4319L14.2406 1.04444C15.3489 -0.0638971 17.2156 -0.0638964 18.3531 1.0736Z"
+                      fill="white"
+                    />
+                  </svg>
                 </button>
 
                 <div
                   ref={episodesRef}
-                  className="flex overflow-x-auto scrollbar-hide gap-4 py-2 w-[calc(100%-80px)]"
+                  className="flex w-full overflow-x-auto scrollbar-hide gap-4 py-2"
                 >
                   {episodes.map((ep, i) => (
                     <div
@@ -128,7 +154,7 @@ export default function ChefChannel() {
                         }, 0);
                       }}
                       key={i}
-                      className={`relative rounded-xl overflow-hidden w-[220px] h-44 flex-shrink-0 group border-2 shadow-[0_12px_20px_rgba(0,0,0,0.5)] cursor-pointer
+                      className={`relative  tv-md:w-[330px] tv-md:h-[235px] rounded-xl overflow-hidden w-[220px] h-44 flex-shrink-0 group border-2 shadow-[0_12px_20px_rgba(0,0,0,0.5)] cursor-pointer
                 ${
                   ep.active
                     ? "border-red-500 scale-105 h-48 z-10"
@@ -161,11 +187,19 @@ export default function ChefChannel() {
                   ))}
                 </div>
 
-                <button
-                  className="text-white text-2xl px-2 hover:bg-white/20 rounded-full h-10 w-10 flex items-center justify-center transition-colors shrink-0"
-                  aria-label="Next episodes"
-                >
-                  &#8250;
+                <button onClick={scrollRight} aria-label="Next episodes">
+                  <svg
+                    width="20"
+                    height="33"
+                    viewBox="0 0 20 33"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1.29437 1.0736C1.02398 1.34344 0.809469 1.66394 0.663107 2.01678C0.516744 2.36962 0.441406 2.74786 0.441406 3.12985C0.441406 3.51184 0.516744 3.89009 0.663107 4.24292C0.809469 4.59576 1.02398 4.91627 1.29437 5.1861L12.611 16.5028L1.29437 27.8194C0.749017 28.3648 0.442641 29.1044 0.442641 29.8757C0.442641 30.6469 0.749017 31.3866 1.29437 31.9319C1.83972 32.4773 2.57937 32.7837 3.35062 32.7837C4.12186 32.7837 4.86152 32.4773 5.40687 31.9319L18.7944 18.5444C19.0648 18.2746 19.2793 17.9541 19.4256 17.6013C19.572 17.2484 19.6473 16.8702 19.6473 16.4882C19.6473 16.1062 19.572 15.728 19.4256 15.3751C19.2793 15.0223 19.0648 14.7018 18.7944 14.4319L5.40687 1.04444C4.29853 -0.0638971 2.43187 -0.0638964 1.29437 1.0736Z"
+                      fill="white"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>

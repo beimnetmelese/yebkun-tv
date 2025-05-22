@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Navigation active="music" />
-      <div className="min-h-screen pt-[150px] bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
+      <div className="min-h-screen w-full h-full pt-[150px] bg-[#0c0c0c] text-white pt-10 px-6 font-sans">
         <div className="flex gap-8 mx-auto">
           {/* Sidebar */}
           <aside className="w-64 flex flex-col gap-6">
@@ -22,7 +22,11 @@ export default function Home() {
               <div
                 onClick={() => router.push(label[2])}
                 key={i}
-                className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
+                className={`relative aspect-video tv-md:w-[250px] tv-md:h-[151px] rounded-2xl overflow-hidden shadow-2xl group ${
+                  i === 0
+                    ? "brightness-100"
+                    : "brightness-50 hover:brightness-100"
+                } transition-all duration-300`}
               >
                 {/* BACKGROUND IMAGE: Scaled & Blurred */}
                 <div className="absolute inset-0 scale-105 -translate-y-1 -translate-x-2 z-0 rounded-2xl overflow-hidden">
@@ -46,7 +50,7 @@ export default function Home() {
 
                   {/* TEXT LABEL */}
                   <div className="absolute bottom-3 left-4 z-20">
-                    <span className="text-white text-lg font-semibold drop-shadow-lg">
+                    <span className="text-white tv-md:text-[26px]  text-lg font-semibold drop-shadow-lg">
                       {label[0]}
                     </span>
                   </div>
@@ -60,21 +64,22 @@ export default function Home() {
             {/* Planned Streams */}
             <section className="mb-12">
               <h2
-                className="inline-block text-2xl font-semibold mb-6 p-2 rounded-md"
+                className="inline-block tv-md:w-[219px] tv-md:h-[51px] tv-md:text-[34px] text-2xl font-semibold mb-6 p-2 rounded-md"
                 style={{ backgroundColor: "#FFFFFF40" }}
               >
                 Latest Songs
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              <div className="flex gap-4 overflow-hidden">
                 {[
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
+                  "/images/adults/live.jpg",
                   "/images/adults/live.jpg",
                 ].map((label, i) => (
                   <div
                     onClick={() => router.push("/adult/music/diloke")}
                     key={i}
-                    className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group transform transition duration-300 hover:scale-105 hover:brightness-110"
+                    className="relative w-full aspect-video tv-md:w-[450px] tv-md:h-[260px] rounded-xl overflow-hidden shadow-lg bg-black cursor-pointer group transform transition duration-300 hover:scale-105 hover:brightness-110"
                   >
                     <img
                       src={label}
@@ -89,7 +94,7 @@ export default function Home() {
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
                     <div className="absolute top-3 right-3 flex flex-col items-end text-white space-y-1">
                       <div className="flex items-center space-x-2">
-                        <span className="flex items-center gap-1 bg-black/25 text-xs px-2 py-0.5 rounded-md">
+                        <span className="flex items-center tv-md:w-[75px] tv-md:h-[25px] gap-1 bg-black/25 text-xs px-2 py-0.5 rounded-md">
                           <svg
                             width="13"
                             height="13"
@@ -142,12 +147,12 @@ export default function Home() {
                     </div>
 
                     <div className="absolute bottom-3 right-3">
-                      <span className="text-xs text-white px-3 py-1 rounded-full font-medium">
+                      <span className="text-xs tv-md:text-[16px] text-white px-3 py-1 rounded-full font-medium">
                         18:00
                       </span>
                     </div>
                     <div className="absolute bottom-3 left-3">
-                      <span className="text-xl text-white px-3 py-1 rounded-full font-medium">
+                      <span className="text-xl tv-md:text-[24px] text-white px-3 py-1 rounded-full font-medium">
                         Song Title
                       </span>
                     </div>
@@ -159,18 +164,17 @@ export default function Home() {
             {/* ON AIR Section */}
             <section>
               <h2
-                className="inline-block text-2xl font-semibold mb-6 p-2 rounded-md"
+                className="inline-block text-2xl tv-md:w-[219px] tv-md:h-[51px] tv-md:text-[34px] font-semibold mb-6 p-2 rounded-md"
                 style={{ backgroundColor: "#FFFFFF40" }}
               >
                 Latest Artist
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              <div className="flex gap-4 overflow-hidden">
                 {[
                   "/images/adults/podcast.jpg",
                   "/images/adults/chef.png",
                   "/images/adults/live.jpg",
                   "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
                   "/images/adults/live.jpg",
                 ].map((label, i) => (
                   <div
@@ -178,7 +182,7 @@ export default function Home() {
                       router.push("/adult/music/hunermend/playing")
                     }
                     key={i}
-                    className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                    className="relative w-full h-[400px] tv-md:w-[350px] tv-md:h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
@@ -195,9 +199,13 @@ export default function Home() {
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
 
                     {/* BOTTOM-LEFT WATCH BUTTON */}
-                    <div className="absolute bottom-3 left-3 flex flex-col items-start text-white space-y-1">
-                      <span className="text-sm font-semibold">Artist Name</span>
-                      <span className="text-sm font-semibold">Rojova</span>
+                    <div className="absolute p-5 bottom-3 left-3 flex flex-col items-start text-white space-y-1">
+                      <span className="text-sm mb-3 tv-md:text-[34px] font-semibold">
+                        Artist Name
+                      </span>
+                      <span className="text-sm text-white-400 mt-6 tv-md:text-[34px] font-semibold">
+                        Rojova
+                      </span>
                     </div>
                   </div>
                 ))}

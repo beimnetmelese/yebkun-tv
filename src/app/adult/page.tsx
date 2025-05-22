@@ -8,16 +8,16 @@ export default function AdultPage() {
   return (
     <>
       <Navigation active="dashpak" />
-      <div className="min-h-screen overflow-auto pt-[150px] bg-gradient-to-b from-[#0c0c0c] via-[#1a1a1a] to-[#2f2f2f] text-white px-6 font-sans">
+      <div className="min-h-screen w-full h-full overflow-auto pt-[150px] bg-gradient-to-b from-[#0c0c0c] via-[#1a1a1a] to-[#2f2f2f] text-white px-6 font-sans">
         <div className="flex gap-8 mx-auto">
           {/* Main Content */}
           <main className="flex-1">
             {/* ON AIR Section */}
             <section>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+              <div className="grid grid-cols-4 gap-8">
                 <div
                   onClick={() => router.push("/adult/music")}
-                  className=" w-full relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                  className="w-full tv-md:w-[430px] tv-md:h-[300px] relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
@@ -33,11 +33,11 @@ export default function AdultPage() {
 
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-3 right-3 flex flex-col items-end text-white space-y-1">
-                    <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                    <span className="text-sm tv-md:text-[25px]  mb-6 mt-3 font-semibold group-hover:text-red-400 transition-colors duration-300">
                       Clip Name
                     </span>
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                      <span className="text-sm tv-md:text-[25px]  font-semibold group-hover:text-red-400 transition-colors duration-300">
                         Artist Name
                       </span>
                     </div>
@@ -66,7 +66,7 @@ export default function AdultPage() {
 
                   {/* BOTTOM-RIGHT LOGO */}
                   <div className="absolute bottom-5 right-1 grid grid-cols-2 gap-1">
-                    <span className="flex items-center gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                    <span className="flex flex-row flex-nowrap items-center tv-md:w-[80px] tv-md:text-[16px] tv-md:h-[19px] gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                       <svg
                         width="15"
                         height="15"
@@ -101,14 +101,14 @@ export default function AdultPage() {
                       nu ye
                     </span>
 
-                    <span className="flex items-center text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
-                      clip
+                    <span className="flex items-center tv-md:w-[46px] tv-md:text-[16px] tv-md:h-[19px] text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      Clip
                     </span>
                   </div>
                 </div>
                 <div
                   onClick={() => router.push("/adult/music")}
-                  className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                  className="relative tv-md:w-[430px] tv-md:h-[300px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
@@ -124,11 +124,11 @@ export default function AdultPage() {
 
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-3 right-3 flex flex-col items-end text-white space-y-1">
-                    <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                    <span className="text-sm tv-md:text-[25px]  mb-6 mt-3 font-semibold group-hover:text-red-400 transition-colors duration-300">
                       Artist Name
                     </span>
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                      <span className="text-sm tv-md:text-[25px]  mb-6 font-semibold group-hover:text-red-400 transition-colors duration-300">
                         Rojova
                       </span>
                     </div>
@@ -157,7 +157,7 @@ export default function AdultPage() {
 
                   {/* BOTTOM-RIGHT LOGO */}
                   <div className="absolute bottom-5 right-1 grid grid-cols-2 gap-1">
-                    <span className="flex items-center gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                    <span className="flex items-center tv-md:w-[80px] tv-md:text-[16px] tv-md:h-[19px]  gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                       <svg
                         width="15"
                         height="15"
@@ -192,14 +192,14 @@ export default function AdultPage() {
                       nu ye
                     </span>
 
-                    <span className="flex items-center text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                    <span className="flex items-center tv-md:w-[46px] tv-md:text-[16px] tv-md:h-[19px]  text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                       clip
                     </span>
                   </div>
                 </div>
                 <div
                   onClick={() => router.push("/adult/stream/livestreams")}
-                  className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                  className="relative tv-md:w-[430px] tv-md:h-[300px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
@@ -215,11 +215,11 @@ export default function AdultPage() {
 
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-3 right-3 flex flex-col items-end text-white space-y-1">
-                    <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                    <span className="text-sm tv-md:text-[25px]  mb-6 mt-3 font-semibold group-hover:text-red-400 transition-colors duration-300">
                       Channel Name
                     </span>
                     <div className="flex items-center space-x-2">
-                      <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[80px] tv-md:text-[16px] tv-md:h-[24px]  gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                         <svg
                           width="18"
                           height="19"
@@ -242,7 +242,7 @@ export default function AdultPage() {
                         158K
                       </span>
 
-                      <span className="flex items-center text-center mr-3 gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[46px] tv-md:text-[16px] tv-md:h-[24px]  text-center mr-3 gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                         clip
                       </span>
                     </div>
@@ -306,7 +306,7 @@ export default function AdultPage() {
                 </div>
                 <div
                   onClick={() => router.push("/adult/stream/tvchannel")}
-                  className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                  className="relative tv-md:w-[430px] tv-md:h-[300px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
@@ -322,11 +322,11 @@ export default function AdultPage() {
 
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-3 right-3 flex flex-col items-end text-white space-y-1">
-                    <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                    <span className="text-sm font-semibold tv-md:text-[25px] mb-6 mt-3 group-hover:text-red-400 transition-colors duration-300">
                       TV Channel
                     </span>
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                      <span className="text-sm tv-md:text-[25px] mb-6 font-semibold group-hover:text-red-400 transition-colors duration-300">
                         Channel Name
                       </span>
                     </div>
@@ -390,7 +390,7 @@ export default function AdultPage() {
                 </div>
                 <div
                   onClick={() => router.push("/adult/cinema/national")}
-                  className="relative w-full aspect-[2/3] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                  className="relative w-full aspect-[2/3] tv-md:w-[430px] tv-md:h-[575px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
@@ -407,7 +407,7 @@ export default function AdultPage() {
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-6 left-3 flex flex-col items-end text-white space-y-1">
                     <div className="flex items-center space-x-2">
-                      <span className="flex items-center gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[80px] tv-md:text-[16px] tv-md:h-[19px]  gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                         <svg
                           width="15"
                           height="15"
@@ -442,7 +442,7 @@ export default function AdultPage() {
                         nu ye
                       </span>
 
-                      <span className="flex items-center text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[46px] tv-md:text-[16px] tv-md:h-[19px] text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                         clip
                       </span>
                     </div>
@@ -479,7 +479,7 @@ export default function AdultPage() {
                 </div>
                 <div
                   onClick={() => router.push("/adult/cinema/filme")}
-                  className="relative w-full aspect-[2/3] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                  className="relative w-full aspect-[2/3] tv-md:w-[430px] tv-md:h-[575px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
@@ -496,7 +496,7 @@ export default function AdultPage() {
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-6 left-3 flex flex-col items-end text-white space-y-1">
                     <div className="flex items-center space-x-2">
-                      <span className="flex items-center gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[80px] tv-md:text-[16px] tv-md:h-[19px]  gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                         <svg
                           width="15"
                           height="15"
@@ -531,7 +531,7 @@ export default function AdultPage() {
                         nu ye
                       </span>
 
-                      <span className="flex items-center text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[46px] tv-md:text-[16px] tv-md:h-[19px]  text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                         clip
                       </span>
                     </div>
@@ -556,7 +556,7 @@ export default function AdultPage() {
                 </div>
                 <div
                   onClick={() => router.push("/adult/cinema/series")}
-                  className="relative w-full aspect-[2/3] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                  className="relative w-full aspect-[2/3] tv-md:w-[430px] tv-md:h-[575px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
@@ -573,7 +573,7 @@ export default function AdultPage() {
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-6 left-3 flex flex-col items-end text-white space-y-1">
                     <div className="flex items-center space-x-2">
-                      <span className="flex items-center gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[80px] tv-md:text-[16px] tv-md:h-[19px] gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                         <svg
                           width="15"
                           height="15"
@@ -608,7 +608,7 @@ export default function AdultPage() {
                         nu ye
                       </span>
 
-                      <span className="flex items-center text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[46px] tv-md:text-[16px] tv-md:h-[19px] text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                         clip
                       </span>
                     </div>
@@ -634,7 +634,7 @@ export default function AdultPage() {
 
                 <div
                   onClick={() => router.push("/adult/video")}
-                  className="relative w-full aspect-[2/3] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                  className="relative w-full aspect-[2/3] tv-md:w-[430px] tv-md:h-[575px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
@@ -651,7 +651,7 @@ export default function AdultPage() {
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-6 left-3 flex flex-col items-end text-white space-y-1">
                     <div className="flex items-center space-x-2">
-                      <span className="flex items-center gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[80px] tv-md:text-[16px] tv-md:h-[19px] gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                         <svg
                           width="12"
                           height="13"
@@ -679,7 +679,7 @@ export default function AdultPage() {
                         159k
                       </span>
 
-                      <span className="flex items-center text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      <span className="flex items-center tv-md:w-[46px] tv-md:h-[19px] text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                         clip
                       </span>
                     </div>

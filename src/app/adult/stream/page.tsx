@@ -43,11 +43,16 @@ export default function ChefChannel() {
                 "/images/adults/mic.jpg",
                 "/adult/stream/livestreams",
               ],
+              ["Stream Destpek", "/images/adults/streams.jpg", "/adult/stream"],
             ].map((label, i) => (
               <div
                 onClick={() => router.push(label[2])}
                 key={i}
-                className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
+                className={`relative aspect-video tv-md:w-[250px] tv-md:h-[151px] rounded-2xl overflow-hidden shadow-2xl group ${
+                  i === 0
+                    ? "brightness-100"
+                    : "brightness-50 hover:brightness-100"
+                } transition-all duration-300`}
               >
                 {/* BACKGROUND IMAGE: Scaled & Blurred */}
                 <div className="absolute inset-0 scale-105 -translate-y-1 -translate-x-2 z-0 rounded-2xl overflow-hidden">
@@ -71,7 +76,7 @@ export default function ChefChannel() {
 
                   {/* TEXT LABEL */}
                   <div className="absolute bottom-3 left-4 z-20">
-                    <span className="text-white text-lg font-semibold drop-shadow-lg">
+                    <span className="text-white tv-md:text-[22px] text-lg font-semibold drop-shadow-lg">
                       {label[0]}
                     </span>
                   </div>
@@ -85,13 +90,17 @@ export default function ChefChannel() {
             {/* Channel Info */}
             <div className="flex items-start gap-6">
               <div>
-                <h1 className="text-5xl mb-3 font-bold">The Smurfs</h1>
-                <h1 className="text-xl mb-3 font-bold">.2012.2hr 35min.</h1>
-                <div className="flex gap-2 mt-3 mb-3 flex-wrap">
-                  <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                <h1 className="text-5xl mb-3 font-bold mb-10  tv-md:text-[90px]">
+                  The Smurfs
+                </h1>
+                <h1 className="text-xl mb-3 font-bold mb-15 text-[45px]">
+                  .2012.2hr 35min.
+                </h1>
+                <div className="flex mt-10 mb-6 gap-2 mt-3 mb-3 flex-wrap">
+                  <span className="flex h-[46px] text-[34px] items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                     <svg
-                      width="13"
-                      height="13"
+                      width="35"
+                      height="35"
                       viewBox="0 0 13 13"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -115,15 +124,15 @@ export default function ChefChannel() {
                     </svg>
                     158K
                   </span>
-                  <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                  <span className="flex h-[46px] text-[34px] items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                     12+
                   </span>
-                  <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                  <span className="flex h-[46px] text-[34px] items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                     4K
                   </span>
                 </div>
 
-                <div className="text-center flex gap-2 mt-3 flex-wrap">
+                <div className="text-center flex gap-2 mt-10 flex-wrap">
                   <button
                     onClick={() => {
                       setShowPlayer2(true);
@@ -165,17 +174,19 @@ export default function ChefChannel() {
           My Video
         </h2>
         {/* Video Thumbnails */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
+        <div className="flex gap-2 overflow-hidden">
           {[
             "/images/adults/podcast.jpg",
             "/images/adults/chef.png",
+            "/images/adults/live.jpg",
+            "/images/adults/podcast.jpg",
             "/images/adults/live.jpg",
             "/images/adults/podcast.jpg",
           ].map((label, i) => (
             <div
               key={i}
               onClick={() => router.push("/adult/stream")}
-              className="relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+              className="relative h-[245px] aspect-video flex-shrink-0 tv-md:w-[450px] tv-md:h-[300px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
             >
               {/* BACKGROUND IMAGE */}
               <img
@@ -191,11 +202,11 @@ export default function ChefChannel() {
 
               {/* TOP-RIGHT CHANNEL INFO */}
               <div className="absolute top-3 right-3 flex flex-col items-end text-white space-y-1">
-                <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                <span className="text-2xl font-semibold group-hover:text-red-400 transition-colors duration-300">
                   TV Channel
                 </span>
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
+                  <span className="text-2xl font-semibold group-hover:text-red-400 transition-colors duration-300">
                     Channel Name
                   </span>
                 </div>

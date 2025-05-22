@@ -43,11 +43,16 @@ export default function ChefChannel() {
                 "/images/adults/mic.jpg",
                 "/adult/stream/livestreams",
               ],
+              ["Stream Destpek", "/images/adults/streams.jpg", "/adult/stream"],
             ].map((label, i) => (
               <div
                 onClick={() => router.push(label[2])}
                 key={i}
-                className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
+                className={`relative aspect-video tv-md:w-[250px] tv-md:h-[140px] rounded-2xl overflow-hidden shadow-2xl group ${
+                  i === 2
+                    ? "brightness-100"
+                    : "brightness-50 hover:brightness-100"
+                } transition-all duration-300`}
               >
                 {/* BACKGROUND IMAGE: Scaled & Blurred */}
                 <div className="absolute inset-0 scale-105 -translate-y-1 -translate-x-2 z-0 rounded-2xl overflow-hidden">
@@ -71,7 +76,7 @@ export default function ChefChannel() {
 
                   {/* TEXT LABEL */}
                   <div className="absolute bottom-3 left-4 z-20">
-                    <span className="text-white text-lg font-semibold drop-shadow-lg">
+                    <span className="text-white tv-md:text-[22px] text-lg font-semibold drop-shadow-lg">
                       {label[0]}
                     </span>
                   </div>
@@ -85,40 +90,37 @@ export default function ChefChannel() {
             {/* Channel Info */}
             <div className="flex items-start gap-6">
               <div>
-                <h1 className="text-5xl font-bold">Channel Name</h1>
-                <p className="mt-3 text-3xl ">Owner Name</p>
-                <div className="flex  gap-2 mt-3 flex-wrap">
-                  <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                <h1 className="text-5xl mb-4 tv-md:text-[90px] font-bold">
+                  Channel Name
+                </h1>
+                <p className="mt-3 text-3xl tv-md:text-[45px] ">Owner Name</p>
+                <div className="flex  gap-2 mt-6 mb-8  flex-wrap">
+                  <span className="flex items-center gap-1 mr-3  h-[46px] text-[34px] bg-white/25 text-xs px-2 py-0.5 rounded-md">
                     <svg
-                      width="13"
-                      height="13"
-                      viewBox="0 0 13 13"
+                      width="36"
+                      height="36"
+                      viewBox="0 0 36 36"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g clip-path="url(#clip0_3514_4222)">
-                        <path
-                          d="M2.88427 2.73163C2.71327 2.73163 2.54727 2.64413 2.45377 2.48663L2.15727 1.98663C2.01677 1.74913 2.09477 1.44263 2.33277 1.30163C2.56977 1.16113 2.87677 1.23913 3.01777 1.47713L3.31427 1.97713C3.45477 2.21463 3.37677 2.52113 3.13877 2.66213C3.05877 2.70963 2.97127 2.73163 2.88427 2.73163ZM6.16377 5.45313C5.61227 5.45313 5.16377 5.90163 5.16377 6.45313C5.16377 7.00463 5.61227 7.45313 6.16377 7.45313C6.71527 7.45313 7.16377 7.00463 7.16377 6.45313C7.16377 5.90163 6.71527 5.45313 6.16377 5.45313ZM10.7588 7.59013C10.3358 8.14413 8.75377 9.95313 6.16377 9.95313C3.57377 9.95313 2.08627 8.32363 1.56127 7.62263C1.05027 6.94063 1.05127 5.99463 1.56377 5.32213C1.98727 4.76663 3.57127 2.95313 6.16377 2.95313C8.72177 2.95313 10.2308 4.58613 10.7608 5.28813C11.2748 5.96913 11.2738 6.91563 10.7588 7.59013ZM8.16377 6.45313C8.16377 5.35013 7.26677 4.45313 6.16377 4.45313C5.06077 4.45313 4.16377 5.35013 4.16377 6.45313C4.16377 7.55613 5.06077 8.45313 6.16377 8.45313C7.26677 8.45313 8.16377 7.55613 8.16377 6.45313ZM6.66377 1.45313V0.953125C6.66377 0.677125 6.43977 0.453125 6.16377 0.453125C5.88777 0.453125 5.66377 0.677125 5.66377 0.953125V1.45313C5.66377 1.72913 5.88777 1.95313 6.16377 1.95313C6.43977 1.95313 6.66377 1.72913 6.66377 1.45313ZM9.87377 2.48613L10.1703 1.98613C10.3108 1.74863 10.2328 1.44213 9.99477 1.30113C9.75777 1.16063 9.45077 1.23863 9.30977 1.47663L9.01327 1.97663C8.87277 2.21413 8.95077 2.52063 9.18877 2.66163C9.42227 2.80113 9.73228 2.72613 9.87377 2.48613ZM9.99477 11.6046C10.2323 11.4636 10.3108 11.1571 10.1703 10.9196L9.87377 10.4196C9.73277 10.1816 9.42627 10.1036 9.18877 10.2441C8.95127 10.3846 8.87277 10.6916 9.01327 10.9291L9.30977 11.4291C9.45127 11.6686 9.76127 11.7436 9.99477 11.6046ZM6.66377 11.9526V11.4526C6.66377 11.1766 6.43977 10.9526 6.16377 10.9526C5.88777 10.9526 5.66377 11.1766 5.66377 11.4526V11.9526C5.66377 12.2286 5.88777 12.4526 6.16377 12.4526C6.43977 12.4526 6.66377 12.2286 6.66377 11.9526ZM3.01777 11.4291L3.31427 10.9291C3.45477 10.6916 3.37677 10.3851 3.13877 10.2441C2.90077 10.1031 2.59477 10.1816 2.45377 10.4196L2.15727 10.9196C2.01677 11.1571 2.09477 11.4636 2.33277 11.6046C2.56627 11.7441 2.87627 11.6691 3.01777 11.4291Z"
-                          fill="white"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_3514_4222">
-                          <rect
-                            width="12"
-                            height="12"
-                            fill="white"
-                            transform="translate(0.163086 0.453125)"
-                          />
-                        </clipPath>
-                      </defs>
+                      <path
+                        d="M29.5745 24.3021L30.6034 18.3524C30.8604 16.8664 29.7176 15.5072 28.2112 15.5072H20.6554C19.9065 15.5072 19.3363 14.8351 19.4575 14.0952L20.4239 8.19693C20.5809 7.2387 20.5361 6.25819 20.2923 5.31833C20.0903 4.53975 19.4896 3.91458 18.6996 3.66079L18.4882 3.59287C18.0107 3.43949 17.4896 3.47519 17.0395 3.6921C16.544 3.93085 16.1815 4.36634 16.0472 4.88428L15.3534 7.55865C15.1327 8.40957 14.8112 9.23093 14.3966 10.007C13.7909 11.1409 12.8544 12.0485 11.8809 12.8873L9.78273 14.6954C9.19114 15.2051 8.88046 15.9686 8.94778 16.7471L10.1322 30.4448C10.2408 31.7012 11.2913 32.6657 12.5509 32.6657H19.3302C24.4071 32.6657 28.7398 29.1283 29.5745 24.3021Z"
+                        fill="white"
+                      />
+                      <path
+                        opacity="0.5"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M4.34249 14.4141C4.92767 14.3889 5.42887 14.8291 5.47933 15.4126L6.89625 31.7992C6.98726 32.8518 6.15814 33.7591 5.09943 33.7591C4.1022 33.7591 3.2959 32.9501 3.2959 31.9547V15.5069C3.2959 14.9211 3.75732 14.4394 4.34249 14.4141Z"
+                        fill="white"
+                      />
                     </svg>
                     158K
                   </span>
-                  <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                  <span className="flex items-center mr-3  h-[46px] text-[34px] gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                     12+
                   </span>
-                  <span className="flex items-center gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
+                  <span className="flex items-center mr-3  h-[46px] text-[34px] gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
                     4K
                   </span>
                 </div>
@@ -126,8 +128,8 @@ export default function ChefChannel() {
             </div>
             {showPlayer && <VideoStreamPlayer ref={playerRef} />}
             {/* Next Streaming Info */}
-            <div className="bg-white/25 text-center rounded-lg p-4 mt-6 max-w-xs text-white backdrop-blur-sm">
-              <div>
+            <div className="bg-white/25 text-center tv-md:w-[390px] tv-md:h-[267px] rounded-lg p-4 mt-6 max-w-xs text-white backdrop-blur-sm">
+              <div className="flex justify-center">
                 <svg
                   width="56"
                   height="55"
@@ -154,12 +156,12 @@ export default function ChefChannel() {
                   />
                 </svg>
               </div>
-              <h2 className="mt-2 text-lg font-semibold">
+              <h2 className="mt-1 text-lg font-semibold">
                 Next Streaming Title
               </h2>
-              <p className="mt-2">Tomorrow</p>
-              <p className="mt-2">18:00</p>
-              <div>
+              <p className="mt-1 text-sm">Tomorrow</p>
+              <p className="mt-1 text-sm">18:00</p>
+              <div className="flex justify-center">
                 <svg
                   width="46"
                   height="45"
@@ -178,9 +180,38 @@ export default function ChefChannel() {
                   />
                 </svg>
               </div>
-              <p className="mt-2">Remind me</p>
+              <p className="mt-1 text-sm">Remind me</p>
             </div>
-            <p className="max-w-xs text-center mt-4 text-sm">👥 30+ Waiting</p>
+            <div className="flex mt-6 ml-8">
+              <div className="flex items-center space-x-[-10px]">
+                <img
+                  src="/images/adults/streams.jpg"
+                  alt="avatar"
+                  className="w-[35px] h-[35px] rounded-full border-2 border-white"
+                />
+                <img
+                  src="/images/adults/streams.jpg"
+                  alt="avatar"
+                  className="w-[35px] h-[35px] rounded-full border-2 border-white"
+                />
+                <img
+                  src="/images/adults/streams.jpg"
+                  alt="avatar"
+                  className="w-[35px] h-[35px] rounded-full border-2 border-white"
+                />
+                <img
+                  src="/images/adults/streams.jpg"
+                  alt="avatar"
+                  className="w-[35px] h-[35px] rounded-full border-2 border-white"
+                />
+                <img
+                  src="/images/adults/streams.jpg"
+                  alt="avatar"
+                  className="w-[35px] h-[35px] rounded-full border-2 border-white"
+                />
+              </div>
+              <span className="ml-3 text-white text-lg p-2">90+ Waiting</span>
+            </div>
           </section>
         </main>
         <h2
@@ -190,7 +221,7 @@ export default function ChefChannel() {
           My Video
         </h2>
         {/* Video Thumbnails */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-2">
+        <div className="flex gap-4 overflow-hidden">
           {[1, 2, 3, 4].map((_, i) => (
             <div
               onClick={() => {
@@ -200,12 +231,11 @@ export default function ChefChannel() {
                 }, 0);
               }}
               key={i}
-              className="relative rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+              className="relative w-[440px] flex-shrink-0 tv-md:w-[440px] tv-md:h-[300px] h-[245px] rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
             >
               <Image
                 src="/images/adults/chef.png"
-                width={400}
-                height={250}
+                fill
                 alt="Video Thumbnail"
                 className="w-full h-auto object-cover scale-x-[-1] transition duration-300"
               />

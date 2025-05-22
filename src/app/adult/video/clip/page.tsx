@@ -111,14 +111,37 @@ export default function VideoPlayerSection() {
       <Navigation active="videos" />
       <div className="bg-[#1c1b1d] pt-[150px] min-h-screen text-white p-4 space-y-6">
         {/* Video Player */}
-        <div className="rounded-xl overflow-hidden bg-black shadow-lg max-w-4xl mx-auto relative group">
+        <div className="rounded-xl aspect-video max-w-5xl overflow-hidden tv-md:w-[1200px] tv-md:max-w-[1200px] tv-md:h-[675px] bg-black shadow-lg mx-auto relative group">
+          <div className="absolute top-4 left-4 text-white z-10">
+            <div
+              className={
+                "flex items-center  justify-between p-2 bg-black/25 hover:bg-zinc-700 cursor-pointer rounded-3xl"
+              }
+            >
+              <div className="flex  p-2 items-center gap-3">
+                <img
+                  src={"/images/adults/chef.png"}
+                  className="w-10 h-10  tv-md:w-[40px] tv-md:h-[40px] rounded-full"
+                  alt="cover"
+                />
+                <div>
+                  <p className="text-sm tv-md:text-[18px] font-medium">
+                    One Direction
+                  </p>
+                  <p className="text-xs tv-md:text-[18px] text-gray-200">
+                    Last First Kiss
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
           <video
             ref={videoRef}
             className="w-full cursor-pointer"
             onClick={togglePlay}
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
-            poster="/images/adults/chef.jpg"
+            poster="/images/adults/chef.png"
           >
             <source src="/images/adults/cooking.mp4" type="video/mp4" />
             Your browser does not support the video tag.
@@ -236,8 +259,16 @@ export default function VideoPlayerSection() {
           >
             Music Clip
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+          <div className="flex gap-4 overflow-hidden">
             {[
+              "/images/adults/podcast.jpg",
+              "/images/adults/chef.png",
+              "/images/adults/live.jpg",
+              "/images/adults/podcast.jpg",
+              "/images/adults/podcast.jpg",
+              "/images/adults/chef.png",
+              "/images/adults/live.jpg",
+              "/images/adults/podcast.jpg",
               "/images/adults/podcast.jpg",
               "/images/adults/chef.png",
               "/images/adults/live.jpg",
@@ -246,7 +277,7 @@ export default function VideoPlayerSection() {
               <div
                 onClick={() => router.push("/adult/video/clip")}
                 key={i}
-                className=" w-full relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                className="w-[300px] relative tv-md:w-[340px] flex-shrink-0 tv-md:h-[210px] aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
               >
                 {/* BACKGROUND IMAGE */}
                 <img

@@ -29,7 +29,11 @@ export default function Home() {
               <div
                 onClick={() => router.push(label[2])}
                 key={i}
-                className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group"
+                className={`relative aspect-video tv-md:w-[250px] tv-md:h-[140px] rounded-2xl overflow-hidden shadow-2xl group ${
+                  i === 2
+                    ? "brightness-100"
+                    : "brightness-50 hover:brightness-100"
+                } transition-all duration-300`}
               >
                 {/* BACKGROUND IMAGE: Scaled & Blurred */}
                 <div className="absolute inset-0 scale-105 -translate-y-1 -translate-x-2 z-0 rounded-2xl overflow-hidden">
