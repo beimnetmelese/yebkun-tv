@@ -136,7 +136,7 @@ export default function MusicPlayerUI() {
               onClick={() => router.push(label[2])}
               key={i}
               className={`relative aspect-video tv-md:w-[250px] tv-md:h-[151px] rounded-2xl overflow-hidden shadow-2xl group ${
-                i === 1
+                i === 2
                   ? "brightness-100"
                   : "brightness-50 hover:brightness-100"
               } transition-all duration-300`}
