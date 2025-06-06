@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Navigation from "@/components/ui/navigation";
-import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function VideoFeed() {
@@ -21,7 +20,7 @@ export default function VideoFeed() {
         });
     }
   }, []);
-  const router = useRouter();
+
   const videos = [
     "/adults/Reels/Clip 1.mp4",
     "/adults/Reels/Clip 2.mp4",

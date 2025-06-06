@@ -126,7 +126,7 @@ export default function MusicPlayerUI() {
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [selectedPlaylistIndex, setSelectedPlaylistIndex] = useState(0);
+  const [selectedPlaylistIndex] = useState(0);
   const selectedPlaylist = playlists[selectedPlaylistIndex];
   const songs = selectedPlaylist.songs;
   const videos = songs.map((s) => s.videoUrl);
