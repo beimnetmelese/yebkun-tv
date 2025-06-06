@@ -68,7 +68,7 @@ export default function VideoFeed() {
             "/images/adults/podcast.jpg",
           ].map((label, i) => (
             <div
-              onClick={() => router.push("/adult/video/reel")}
+              onClick={() => setCurrentIndex(i % 3)}
               key={i}
               className="relative w-full aspect-[2/3] tv-md:w-[150px] tv-md:h-[250px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
             >
