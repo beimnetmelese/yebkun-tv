@@ -102,7 +102,7 @@ export default function Navigation({ active }: Props) {
               onClick={handleNavClick}
             />
             <NavigationItem
-              href="/adult/cinema"
+              href="/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4"
               label="Cinema"
               icon="/images/navigation/sinema.svg"
               active={active === "cinema" || pathname === "/cinema"}

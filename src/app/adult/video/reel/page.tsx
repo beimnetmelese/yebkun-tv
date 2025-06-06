@@ -3,12 +3,38 @@
 import Image from "next/image";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function VideoFeed() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.warn("Auto-play failed:", error);
+        });
+    }
+  }, []);
   const router = useRouter();
+  const videos = [
+    "/adults/Reels/Clip 1.mp4",
+    "/adults/Reels/Clip 2.mp4",
+    "/adults/Reels/Clip 3.mp4",
+  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % videos.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
+  };
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -279,7 +305,7 @@ export default function VideoFeed() {
           </div>
 
           {/* Left Arrow */}
-          <button className="absolute left-2 z-10">
+          <button className="absolute left-2 z-10" onClick={handlePrev}>
             <svg
               width="74"
               height="74"
@@ -359,9 +385,11 @@ export default function VideoFeed() {
             onClick={togglePlay}
           >
             <video
+              key={videos[currentIndex]}
               ref={videoRef}
               className="w-full h-full object-cover"
-              src="/images/adults/cooking.mp4"
+              src={videos[currentIndex]}
+              autoPlay
               loop
             />
           </div>
@@ -387,7 +415,7 @@ export default function VideoFeed() {
           </div>
 
           {/* Right Arrow */}
-          <button className="absolute right-2 z-10">
+          <button className="absolute right-2 z-10" onClick={handleNext}>
             <svg
               width="74"
               height="74"

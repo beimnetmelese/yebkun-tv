@@ -5,21 +5,117 @@ import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 
 const playlists = [
-  { name: "Diloke Nû", image: "/images/adults/streams.jpg" },
-  { name: "Diloke Rojava", image: "/images/adults/tv.jpg" },
-  { name: "Diloke Bakûr", image: "/images/adults/mic.jpg" },
-  { name: "Diloke Rojhilat", image: "/images/adults/streams.jpg" },
-  { name: "Diloke Basur", image: "/images/adults/tv.jpg" },
+  {
+    name: "Diloke Nû",
+    image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+    songs: Array(8)
+      .fill([
+        {
+          title: "Ciwan Haco - Dîlok",
+          subtitle: "Dîlok Album",
+          duration: "3:52",
+          image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+          videoUrl: "/adults/Music section/Ciwan Haco/Yari serin.mp4",
+        },
+        {
+          title: "Ciwan Haco - Hewal",
+          subtitle: "Live",
+          duration: "4:21",
+          image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+          videoUrl: "/adults/Music section/Ciwan Haco/Macek.mp4",
+        },
+      ])
+      .flat(),
+  },
+  {
+    name: "Diloke Rojava",
+    image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+    songs: Array(8)
+      .fill([
+        {
+          title: "Şivan Perwer - Ey Ferat",
+          subtitle: "Best of Şivan",
+          duration: "5:00",
+          image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+          videoUrl: "/adults/Music section/sivan Perwer/Dur Dur.mp4",
+        },
+        {
+          title: "Şivan Perwer - Daye",
+          subtitle: "Classic",
+          duration: "4:35",
+          image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+          videoUrl: "/adults/Music section/sivan Perwer/Nemire Lawik.mp4",
+        },
+      ])
+      .flat(),
+  },
+  {
+    name: "Diloke Bakûr",
+    image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+    songs: Array(8)
+      .fill([
+        {
+          title: "Diyar Dersim - Roj baş",
+          subtitle: "Live in Amed",
+          duration: "3:40",
+          image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+          videoUrl: "/adults/Music section/Diyar dersim/Emrem Buri.mp4",
+        },
+        {
+          title: "Diyar Dersim - Roj baş",
+          subtitle: "Live in Amed",
+          duration: "3:40",
+          image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+          videoUrl: "/adults/Music section/Diyar dersim/TE DIGO NA.mp4",
+        },
+      ])
+      .flat(),
+  },
+  {
+    name: "Diloke Rojhilat",
+    image: "/adults/Music section/seyda Rojava/seyda.jpg",
+    songs: Array(8)
+      .fill([
+        {
+          title: "Seyda Rojava - Helebçe",
+          subtitle: "Memories",
+          duration: "4:11",
+          image: "/adults/Music section/seyda Rojava/seyda.jpg",
+          videoUrl: "/adults/Music section/seyda Rojava/Gula Male.mp4",
+        },
+        {
+          title: "Seyda Rojava - Helebçe",
+          subtitle: "Memories",
+          duration: "4:11",
+          image: "/adults/Music section/seyda Rojava/seyda.jpg",
+          videoUrl: "/adults/Music section/seyda Rojava/Tene Dilem.mp4",
+        },
+      ])
+      .flat(),
+  },
+  {
+    name: "Diloke Nû",
+    image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+    songs: Array(8)
+      .fill([
+        {
+          title: "Ciwan Haco - Dîlok",
+          subtitle: "Dîlok Album",
+          duration: "3:52",
+          image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+          videoUrl: "/adults/Music section/Ciwan Haco/Yari serin.mp4",
+        },
+        {
+          title: "Ciwan Haco - Hewal",
+          subtitle: "Live",
+          duration: "4:21",
+          image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+          videoUrl: "/adults/Music section/Ciwan Haco/Macek.mp4",
+        },
+      ])
+      .flat(),
+  },
 ];
-
-// Added mock audio files for demonstration
-const songs = Array(15).fill({
-  title: "Playlist Title",
-  subtitle: "Songs 120",
-  duration: "3:52",
-  image: "/images/adults/streams.jpg",
-  audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // Mock audio URL
-});
 
 export default function MusicPlayerUI() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -28,94 +124,81 @@ export default function MusicPlayerUI() {
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const router = useRouter();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const togglePlayPause = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
+  const [selectedPlaylistIndex, setSelectedPlaylistIndex] = useState(0);
+  const selectedPlaylist = playlists[selectedPlaylistIndex];
+  const songs = selectedPlaylist.songs;
+  const videos = songs.map((s) => s.videoUrl);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-  // Initialize audio element
   useEffect(() => {
-    audioRef.current = new Audio();
+    const video = videoRef.current;
+    if (!video) return;
 
-    const audio = audioRef.current;
+    video.src = videos[currentIndex];
+    video.load();
+    if (isPlaying) video.play();
 
-    audio.addEventListener("timeupdate", () => {
-      setCurrentTime(audio.currentTime);
-      setProgress((audio.currentTime / duration) * 100);
-    });
+    const updateTime = () => {
+      setCurrentTime(video.currentTime);
+      setProgress((video.currentTime / video.duration) * 100 || 0);
+    };
 
-    audio.addEventListener("loadedmetadata", () => {
-      setDuration(audio.duration);
-    });
+    const setDur = () => setDuration(video.duration);
 
-    audio.addEventListener("ended", () => {
-      setIsPlaying(false);
-      setProgress(0);
-    });
+    video.addEventListener("timeupdate", updateTime);
+    video.addEventListener("loadedmetadata", setDur);
 
     return () => {
-      audio.removeEventListener("timeupdate", () => {});
-      audio.removeEventListener("loadedmetadata", () => {});
-      audio.removeEventListener("ended", () => {});
+      video.removeEventListener("timeupdate", updateTime);
+      video.removeEventListener("loadedmetadata", setDur);
     };
-  }, [duration]);
+  }, [currentIndex]);
+
+  const togglePlayPause = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isPlaying) {
+      video.pause();
+    } else {
+      video.play();
+    }
+    setIsPlaying((prev) => !prev);
+  };
 
   const playSong = (index: number) => {
     if (audioRef.current) {
-      audioRef.current.src = songs[index].audioSrc;
+      audioRef.current.src = songs[index].videoUrl;
       audioRef.current.play();
       setIsPlaying(true);
     }
   };
 
-  const updateProgress = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    setCurrentTime(audio.currentTime);
-    setProgress((audio.currentTime / audio.duration) * 100);
-  };
-  const setAudioDuration = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    setDuration(audio.duration);
-  };
-
   const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    const video = videoRef.current;
+    if (!video) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
-    const newTime = (clickX / rect.width) * audio.duration;
-
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
+    const newTime = (clickX / rect.width) * duration;
+    video.currentTime = newTime;
   };
 
-  const formatTime = (timeInSeconds: number) => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = Math.floor(timeInSeconds % 60);
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
   const handlePrevious = () => {
-    // example: play previous song
-    console.log("Previous");
+    setCurrentIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    // example: play next song
-    console.log("Next");
+    setCurrentIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -181,9 +264,15 @@ export default function MusicPlayerUI() {
           <div className="w-1/2 w-1/2 tv-md:w-[250px] flex flex-col gap-4">
             {playlists.map((playlist, index) => (
               <div
+                onClick={() => {
+                  setSelectedPlaylistIndex(index);
+                  setCurrentIndex(0);
+                  setIndex(0);
+                  playSong(0); // optional
+                }}
                 key={index}
                 className={`relative tv-md:w-[250px] tv-md:h-[170px] rounded-md overflow-hidden shadow bg-zinc-900 h-32 ${
-                  index === 0
+                  index === selectedPlaylistIndex
                     ? "brightness-100"
                     : "brightness-50 hover:brightness-100"
                 } transition-all duration-300`}
@@ -212,8 +301,12 @@ export default function MusicPlayerUI() {
             {songs.map((song, i) => (
               <div
                 key={i}
-                onClick={() => playSong(i)}
-                className={`flex items-center tv-md:w-[350px] tv-md:h-[60px] justify-between p-2 bg-white/23 hover:bg-zinc-700 cursor-pointer
+                onClick={() => {
+                  playSong(i);
+                  setCurrentIndex(i % videos.length);
+                  setIndex(i);
+                }}
+                className={`flex items-center tv-md:w-[350px] tv-md:h-[60px] justify-between p-2 bg-white/23 hover:bg-zinc-700 z-50 cursor-pointer
                   ${i !== songs.length - 1 ? "border-b border-gray-600" : ""}`}
               >
                 <div className="flex items-center gap-3">
@@ -231,7 +324,7 @@ export default function MusicPlayerUI() {
                     </p>
                   </div>
                 </div>
-                {i === 0 ? (
+                {i === index ? (
                   <svg
                     width="44"
                     height="22"
@@ -277,22 +370,22 @@ export default function MusicPlayerUI() {
             />
           </div>
 
-          {/* Audio element (hidden) */}
-          <audio
-            ref={audioRef}
-            onTimeUpdate={updateProgress}
-            onLoadedMetadata={setAudioDuration}
-            onEnded={handleNext}
-            className="hidden"
+          {/* Video Element */}
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            className="absolute inset-0 w-full h-full object-cover z-0"
           />
 
           {/* Controls */}
-          <div className="relative z-10 flex-1 flex flex-col items-center justify-between">
+          <div className="relative z-10 flex flex-col flex-1 items-center justify-between">
             <div className="flex-1" />
 
-            {/* Control Buttons */}
+            {/* Buttons */}
             <div className="flex items-center justify-center gap-6 py-6">
-              <button onClick={handlePrevious}>
+              <button onClick={handlePrevious} className="z-20">
                 <svg
                   width="50"
                   height="50"
@@ -318,7 +411,7 @@ export default function MusicPlayerUI() {
                   />
                 </svg>
               </button>
-              <button onClick={togglePlayPause}>
+              <button onClick={togglePlayPause} className="z-20">
                 <svg
                   width="56"
                   height="56"
@@ -339,7 +432,7 @@ export default function MusicPlayerUI() {
                   />
                 </svg>
               </button>
-              <button onClick={handleNext}>
+              <button onClick={handleNext} className="z-20">
                 <svg
                   width="50"
                   height="50"
@@ -367,7 +460,7 @@ export default function MusicPlayerUI() {
               </button>
             </div>
 
-            {/* Time & Progress */}
+            {/* Progress */}
             <div className="w-full px-4 pb-8">
               <div className="flex justify-between text-sm text-white/70 mb-1">
                 <span className="tv-md:text-[16px]">

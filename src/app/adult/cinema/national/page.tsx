@@ -1,11 +1,15 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 
 export default function ChefChannel() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const title = searchParams.get("title") || "Default Title";
+  const videoUrl = searchParams.get("videoUrl") || "/default.mp4";
 
   return (
     <>
@@ -19,21 +23,25 @@ export default function ChefChannel() {
           {/* Sidebar */}
           <aside className="w-full lg:w-64 flex flex-col gap-3">
             {[
-              ["Stream Destpek", "/images/adults/streams.jpg", "/adult/cinema"],
+              [
+                "Stream Destpek",
+                "/images/adults/streams.jpg",
+                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4",
+              ],
               [
                 "Cinema destpek",
                 "/images/adults/tv.jpg",
-                "/adult/cinema/filme",
+                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4",
               ],
               [
                 "Cinema destpek",
                 "/images/adults/mic.jpg",
-                "/adult/cinema/series",
+                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4",
               ],
               [
                 "Cinema destpek",
                 "/images/adults/mic.jpg",
-                "/adult/cinema/national",
+                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4",
               ],
             ].map((label, i) => (
               <div
@@ -82,7 +90,7 @@ export default function ChefChannel() {
             <div className="flex items-start gap-6">
               <div>
                 <h1 className="text-5xl tv-md:text-[90px] mb-10 font-bold">
-                  The Smurfs
+                  {title}
                 </h1>
 
                 <div className="flex gap-2 mt-6 mb-6 flex-wrap">
@@ -149,7 +157,11 @@ export default function ChefChannel() {
 
                 <div className="text-center flex gap-2 mt-20 flex-wrap">
                   <button
-                    onClick={() => router.push("/adult/cinema/series/playing")}
+                    onClick={() =>
+                      router.push(
+                        `/adult/cinema/series/playing?title=${title}&videoUrl=${videoUrl}`
+                      )
+                    }
                     className="text-center mt-15"
                   >
                     <svg
@@ -171,7 +183,11 @@ export default function ChefChannel() {
                     </svg>
                   </button>
                   <button
-                    onClick={() => router.push("/adult/cinema/series/playing")}
+                    onClick={() =>
+                      router.push(
+                        `/adult/cinema/series/playing?title=${title}&videoUrl=${videoUrl}`
+                      )
+                    }
                     className="text-center mt-15"
                   >
                     <svg
@@ -214,14 +230,32 @@ export default function ChefChannel() {
           className="relative inline-block z-10 tv-md:w-[233px] tv-md:h-[51px] text-1xl font-semibold mt-4 mb-2 pl-2 rounded-md"
           style={{ backgroundColor: "#FFFFFF40" }}
         >
-          Latest Upload
+          Latest Series
         </h2>
         <div className="flex gap-4 overflow-hidden">
-          {[1, 2, 3, 4].map((_, i) => (
+          {[
+            [
+              "South Africa Documentary",
+              "/adults/Documentary/South Africa Documentary.mp4",
+            ],
+            ["Wild South", "/adults/Documentary/Wild South.mp4"],
+            [
+              "National Geographic",
+              "/adults/Documentary/National Geographic.mp4",
+            ],
+            [
+              "Alle unter einem Dach",
+              "/adults/Documentary/South Africa Documentary.mp4",
+            ],
+          ].map((items, i) => (
             <div
-              onClick={() => router.push("/adult/cinema/national")}
+              onClick={() =>
+                router.push(
+                  `/adult/cinema/national?title=${items[0]}&videoUrl=${items[1]}`
+                )
+              }
               key={i}
-              className="relative rounded-xl w-[440px] flex-shrink-0 tv-md:w-[440px] tv-md:h-[245px] h-[245px]  overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+              className="relative w-[440px] flex-shrink-0 rounded-xl tv-md:w-[440px] tv-md:h-[245px] h-[245px]  overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
             >
               <Image
                 src="/images/adults/chef.png"
@@ -267,7 +301,7 @@ export default function ChefChannel() {
               </div>
               <div className="absolute bottom-2 left-2 text-right">
                 <p className="bg-opacity-60 px-2 py-1 text-sm font-semibold rounded">
-                  Video Title
+                  {items[0]}
                 </p>
               </div>
             </div>

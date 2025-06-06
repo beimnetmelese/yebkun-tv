@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navigation from "@/components/ui/navigation";
 import { useRouter } from "next/navigation";
 
@@ -14,6 +14,22 @@ const songs = Array(11).fill({
 export default function MusicPlayerUI() {
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videos = [
+    "/adults/Live Channel coming soon/coming soon.mp4",
+    "/adults/Live Channel coming soon/coming.mp4",
+  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.pause(); // Just in case
+      video.src = videos[currentIndex]; // Directly set src
+      video.load(); // Reload the new source
+      video.play().catch((err) => {
+        console.warn("Autoplay failed:", err);
+      });
+    }
+  }, [currentIndex]);
 
   return (
     <>
@@ -80,10 +96,20 @@ export default function MusicPlayerUI() {
               {songs.map((song, i) => (
                 <div
                   key={i}
-                  className={`flex items-center justify-between p-2 bg-white/23 hover:bg-zinc-700 cursor-pointer
+                  onClick={() => {
+                    setCurrentIndex(i % videos.length);
+                    console.log("changed !!");
+                  }}
+                  className={`flex items-center justify-between p-2 bg-white/23 hover:bg-zinc-700 cursor-pointer z-50
                   ${i !== songs.length - 1 ? "border-b border-gray-600" : ""}`}
                 >
-                  <div className="flex items-center gap-3">
+                  <div
+                    onClick={() => {
+                      setCurrentIndex(i % videos.length);
+                      console.log("changed !!");
+                    }}
+                    className="flex items-center gap-3"
+                  >
                     <img
                       src={song.image}
                       className="w-10 h-10 rounded-md"
@@ -119,7 +145,6 @@ export default function MusicPlayerUI() {
           <aside className="flex-[3] tv-md:w-[1163px] tv-md:h-[667px] relative m-6 ml-3 p-0 rounded-xl overflow-hidden max-h-[667px]">
             <video
               ref={videoRef}
-              src="/images/adults/cooking.mp4" // Replace with your actual video path
               autoPlay
               loop
               muted

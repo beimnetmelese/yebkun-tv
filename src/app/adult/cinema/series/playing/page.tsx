@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import VideoStreamPlayer, { VideoStreamPlayerHandle } from "../../videoStream";
 import Navigation from "@/components/ui/navigation";
@@ -27,6 +28,9 @@ export default function ChefChannel() {
   const scrollRight = () => {
     episodesRef.current?.scrollBy({ left: scrollByAmount, behavior: "smooth" });
   };
+  const searchParams = useSearchParams();
+  const title = searchParams.get("title") || "Default Title";
+  const videoUrl = searchParams.get("videoUrl") || "/default.mp4";
   const [showPlayer2, setShowPlayer2] = useState(false);
   const playerRef2 = useRef<VideoStreamPlayerHandle>(null);
   const episodesRef = useRef<HTMLDivElement>(null);
@@ -58,7 +62,7 @@ export default function ChefChannel() {
             <div className="flex items-start gap-6">
               <div>
                 <h1 className="text-5xl tv-md:text-[90px] mb-10 font-bold">
-                  The Smurfs
+                  {title}
                 </h1>
                 <div className="flex gap-2 mt-3 mb-6 flex-wrap">
                   <span className="flex items-center mr-3  h-[46px] text-[34px] gap-1 bg-white/25 text-xs px-2 py-0.5 rounded-md">
@@ -99,7 +103,9 @@ export default function ChefChannel() {
                   2012. 2hr. 35min
                 </h1>
 
-                {showPlayer2 && <VideoStreamPlayer ref={playerRef2} />}
+                {showPlayer2 && (
+                  <VideoStreamPlayer ref={playerRef2} videoUrl={videoUrl} />
+                )}
               </div>
             </div>
           </section>
