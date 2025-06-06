@@ -147,7 +147,6 @@ export default function MusicPlayerUI() {
               ref={videoRef}
               autoPlay
               loop
-              muted
               className="w-full h-full object-cover"
             />
           </aside>

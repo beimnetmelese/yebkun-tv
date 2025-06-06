@@ -64,7 +64,6 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
         className="absolute inset-0 w-full h-full object-cover"
         src="/images/adults/cooking.mp4"
         controls={false}
-        muted
       />
 
       {/* Bottom overlay */}
