@@ -15,6 +15,7 @@ export default function ChefChannel() {
   const searchParams = useSearchParams();
   const title = searchParams.get("title") || "Default Title";
   const videoUrl = searchParams.get("videoUrl") || "/default.mp4";
+  const photoUrl = searchParams.get("photoUrl") || "/images/adults/movie2.png";
 
   const router = useRouter();
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function ChefChannel() {
       <Navigation active="cinema" />
       <div
         className="relative pt-[150px] w-full h-full pt-10 px-6 xl:px-12 min-h-screen text-white font-sans bg-cover bg-center bg-no-repeat "
-        style={{ backgroundImage: "url('/images/adults/movie.png')" }}
+        style={{ backgroundImage: `url(${photoUrl})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/75 to-transparent z-0 pointer-events-none" />
         <main className=" relative z-10 flex flex-col lg:flex-row gap-8 w-full z-1">
@@ -43,22 +44,22 @@ export default function ChefChannel() {
               [
                 "Stream Destpek",
                 "/images/adults/streams.jpg",
-                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4",
+                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie2.png",
               ],
               [
                 "Cinema destpek",
-                "/images/adults/tv.jpg",
-                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4",
+                "/images/adults/cinema.jpg",
+                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie3.png",
               ],
               [
                 "Cinema destpek",
-                "/images/adults/mic.jpg",
-                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4",
+                "/images/adults/cinema2.jpg",
+                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/series2.png",
               ],
               [
                 "Cinema destpek",
-                "/images/adults/mic.jpg",
-                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4",
+                "/images/adults/cinema3.jpg",
+                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/documentary.jpg",
               ],
             ].map((label, i) => (
               <div
@@ -240,7 +241,11 @@ export default function ChefChannel() {
                     </svg>
                   </button>
                   {showPlayer2 && (
-                    <VideoStreamPlayer ref={playerRef2} videoUrl={videoUrl} />
+                    <VideoStreamPlayer
+                      ref={playerRef2}
+                      videoUrl={videoUrl}
+                      title={title}
+                    />
                   )}
                 </div>
               </div>
@@ -256,31 +261,45 @@ export default function ChefChannel() {
         </h2>
         <div className="flex gap-4 overflow-hidden">
           {[
-            ["Brave Heart", "/adults/Movies section/Braveheart.mp4"],
+            [
+              "Brave Heart",
+              "/adults/Movies section/Braveheart.mp4",
+              "/images/adults/movie2.png",
+              "/filme",
+            ],
             [
               "Kingdom of Heaven",
               "/adults/Movies section/Kingdom of Heaven.mp4",
+              "/images/adults/movie3.png",
+              "/filme",
             ],
-            ["NOAH", "/adults/Movies section/NOAH.mp4"],
+            [
+              "NOAH",
+              "/adults/Movies section/NOAH.mp4",
+              "/images/adults/series2.png",
+              "/series/playing",
+            ],
             [
               "The Passion of The Christ",
               "/adults/Movies section/The Passion of The Christ.mp4",
+              "/images/adults/documentary.jpg",
+              "/series/playing",
             ],
           ].map((items, i) => (
             <div
               onClick={() =>
                 router.push(
-                  `/adult/cinema?title=${items[0]}&videoUrl=${items[1]}`
+                  `/adult/cinema${items[3]}?title=${items[0]}&videoUrl=${items[1]}&photoUrl=${items[2]}`
                 )
               }
               key={i}
               className="relative flex-shrink-0 w-[440px] rounded-xl tv-md:w-[440px] tv-md:h-[245px] h-[245px] overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
             >
               <Image
-                src="/images/adults/chef.png"
+                src={items[2]}
                 fill
                 alt="Video Thumbnail"
-                className="w-full h-auto object-cover scale-x-[-1] transition duration-300"
+                className="w-full h-auto object-cover transition duration-300"
               />
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
               <div className="absolute top-2 left-2 text-right grid grid-cols-3 gap-2">

@@ -117,7 +117,7 @@ export default function Navigation({ active }: Props) {
             />
 
             <NavigationItem
-              href="/adult/stream"
+              href="/adult/search"
               label="Stream"
               icon="/images/navigation/stream.svg"
               active={active === "stream" || pathname === "/stream"}

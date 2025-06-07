@@ -31,6 +31,7 @@ export default function ChefChannel() {
   const searchParams = useSearchParams();
   const title = searchParams.get("title") || "Default Title";
   const videoUrl = searchParams.get("videoUrl") || "/default.mp4";
+  const photoUrl = searchParams.get("photoUrl") || "/images/adults/movie2.png";
   const [showPlayer2, setShowPlayer2] = useState(false);
   const playerRef2 = useRef<VideoStreamPlayerHandle>(null);
   const episodesRef = useRef<HTMLDivElement>(null);
@@ -51,7 +52,7 @@ export default function ChefChannel() {
       <Navigation active="cinema" />
       <div
         className="relative pt-[150px]  pt-10 px-6 xl:px-12 min-h-screen text-white font-sans bg-cover bg-center bg-no-repeat flex flex-col justify-between"
-        style={{ backgroundImage: "url('/images/adults/chef.png')" }}
+        style={{ backgroundImage: `url(${photoUrl})` }}
       >
         {/* BACKGROUND OVERLAY */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/75 to-transparent z-0 pointer-events-none" />
@@ -104,7 +105,11 @@ export default function ChefChannel() {
                 </h1>
 
                 {showPlayer2 && (
-                  <VideoStreamPlayer ref={playerRef2} videoUrl={videoUrl} />
+                  <VideoStreamPlayer
+                    ref={playerRef2}
+                    videoUrl={videoUrl}
+                    title={title}
+                  />
                 )}
               </div>
             </div>
@@ -169,7 +174,7 @@ export default function ChefChannel() {
                 transition-all duration-300`}
                     >
                       <img
-                        src="/images/adults/chef.png"
+                        src="/images/adults/episode.png"
                         alt={ep.title}
                         className="w-full h-full object-cover group-hover:brightness-110 transition-all"
                       />

@@ -80,10 +80,10 @@ const VideoStream = forwardRef<VideoStreamHandle>((_, ref) => {
         </h2>
         <div className="flex justify-start gap-2 overflow-hidden">
           {[
-            "/images/adults/podcast.jpg",
-            "/images/adults/chef.png",
-            "/images/adults/live.jpg",
-            "/images/adults/podcast.jpg",
+            "/images/adults/tv.png",
+            "/images/adults/tv.png",
+            "/images/adults/tv.png",
+            "/images/adults/tv.png",
           ].map((label, i) => (
             <div
               key={i}

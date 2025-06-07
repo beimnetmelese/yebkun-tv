@@ -9,8 +9,8 @@ export default function VideoPlayerSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(1);
   const [showControls, setShowControls] = useState(true);
   const router = useRouter();
 
@@ -19,6 +19,15 @@ export default function VideoPlayerSection() {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+  const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const newTime = (clickX / rect.width) * duration;
+    video.currentTime = newTime;
   };
 
   // Toggle play/pause
@@ -44,6 +53,9 @@ export default function VideoPlayerSection() {
   const handleTimeUpdate = () => {
     if (videoRef.current) {
       setCurrentTime(videoRef.current.currentTime);
+      setProgress(
+        (videoRef.current.currentTime / videoRef.current.duration) * 100 || 0
+      );
     }
   };
 
@@ -54,47 +66,16 @@ export default function VideoPlayerSection() {
     }
   };
 
-  // Handle seek
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (videoRef.current) {
-      const newTime = parseFloat(e.target.value);
-      videoRef.current.currentTime = newTime;
-      setCurrentTime(newTime);
-    }
-  };
-
-  // Handle volume change
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-    if (videoRef.current) {
-      videoRef.current.volume = newVolume;
-    }
-  };
-
-  // Toggle fullscreen
-  const toggleFullscreen = () => {
-    if (videoRef.current) {
-      if (!document.fullscreenElement) {
-        videoRef.current.requestFullscreen().catch((err) => {
-          console.error(
-            `Error attempting to enable fullscreen: ${err.message}`
-          );
-        });
-      } else {
-        document.exitFullscreen();
-      }
-    }
-  };
-
-  // Hide controls after 3 seconds of inactivity
   useEffect(() => {
     let timeout: NodeJS.Timeout;
+    if (videoRef.current) {
+      setDuration(videoRef.current.duration);
+    }
 
     const resetTimeout = () => {
       clearTimeout(timeout);
       setShowControls(true);
-      timeout = setTimeout(() => setShowControls(false), 3000);
+      timeout = setTimeout(() => setShowControls(false), 1000);
     };
 
     resetTimeout();
@@ -149,106 +130,219 @@ export default function VideoPlayerSection() {
 
           {/* Controls Overlay */}
           {showControls && (
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-          )}
-
-          {/* Controls */}
-          <div
-            className={`absolute bottom-0 left-0 right-0 p-4 transition-opacity duration-300 ${
-              showControls ? "opacity-100" : "opacity-0"
-            } group-hover:opacity-100`}
-          >
-            {/* Progress Bar */}
-            <div className="mb-2">
-              <input
-                type="range"
-                min="0"
-                max={duration || 100}
-                value={currentTime}
-                onChange={handleSeek}
-                className="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer"
-                style={{
-                  background: `linear-gradient(to right, #ff0000 ${
-                    (currentTime / (duration || 1)) * 100
-                  }%, #4b5563 ${(currentTime / (duration || 1)) * 100}%)`,
-                }}
-              />
-              <div className="flex justify-between text-xs mt-1">
-                <span>{formatTime(currentTime)}</span>
-                <span>{formatTime(duration)}</span>
-              </div>
-            </div>
-
-            {/* Bottom Controls */}
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <button onClick={togglePlay} className="text-white">
-                  {isPlaying ? (
-                    <svg
-                      className="w-6 h-6"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                    </svg>
-                  ) : (
-                    <svg
-                      className="w-6 h-6"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  )}
-                </button>
-                <button onClick={() => skip(-10)} className="text-white">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z" />
-                  </svg>
-                </button>
-                <button onClick={() => skip(10)} className="text-white">
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z" />
-                  </svg>
-                </button>
-                <div className="flex items-center space-x-2">
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-                  </svg>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value={volume}
-                    onChange={handleVolumeChange}
-                    className="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer"
-                  />
+            <>
+              {/* Controls */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex items-center space-x-4 p-3 rounded-full pointer-events-auto">
+                  <div className="flex items-center space-x-4">
+                    <button onClick={() => skip(-10)} className="text-white">
+                      <svg
+                        width="50"
+                        height="50"
+                        viewBox="0 0 50 50"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          width="50"
+                          height="50"
+                          rx="25"
+                          transform="matrix(-1 0 0 1 50 0)"
+                          fill="black"
+                          fill-opacity="0.4"
+                        />
+                        <path
+                          d="M21.1635 27.7798C19.3551 26.5682 19.3551 23.4318 21.1635 22.2202L32.0825 14.9047C33.8401 13.7272 36 15.2599 36 17.6845V32.3155C36 34.7401 33.8401 36.2728 32.0825 35.0953L21.1635 27.7798Z"
+                          fill="white"
+                        />
+                        <path
+                          d="M15 17.65C15 17.2151 15.3398 16.8625 15.759 16.8625C16.1782 16.8625 16.5181 17.2151 16.5181 17.65V32.35C16.5181 32.7849 16.1782 33.1375 15.759 33.1375C15.3398 33.1375 15 32.7849 15 32.35V17.65Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </button>
+                    <button onClick={togglePlay} className="text-white">
+                      {isPlaying ? (
+                        <div className="w-16 h-16 rounded-full bg-black/30  shadow-lg flex items-center justify-center">
+                          <svg
+                            width="29"
+                            height="50"
+                            viewBox="0 0 29 60"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g filter="url(#filter0_d_4089_2522)">
+                              <path
+                                d="M5.3125 6.41935C5.3125 5.08318 6.65565 4 8.3125 4C9.96935 4 11.3125 5.08318 11.3125 6.41935V51.5806C11.3125 52.9168 9.96935 54 8.3125 54C6.65565 54 5.3125 52.9168 5.3125 51.5806V6.41935Z"
+                                fill="white"
+                              />
+                            </g>
+                            <g filter="url(#filter1_d_4089_2522)">
+                              <path
+                                d="M17.3125 6.41935C17.3125 5.08318 18.6556 4 20.3125 4C21.9694 4 23.3125 5.08318 23.3125 6.41935V51.5806C23.3125 52.9168 21.9694 54 20.3125 54C18.6556 54 17.3125 52.9168 17.3125 51.5806V6.41935Z"
+                                fill="white"
+                              />
+                            </g>
+                            <defs>
+                              <filter
+                                id="filter0_d_4089_2522"
+                                x="0.3125"
+                                y="0"
+                                width="16"
+                                height="60"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                />
+                                <feColorMatrix
+                                  in="SourceAlpha"
+                                  type="matrix"
+                                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                  result="hardAlpha"
+                                />
+                                <feOffset dy="1" />
+                                <feGaussianBlur stdDeviation="2.5" />
+                                <feComposite in2="hardAlpha" operator="out" />
+                                <feColorMatrix
+                                  type="matrix"
+                                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.75 0"
+                                />
+                                <feBlend
+                                  mode="normal"
+                                  in2="BackgroundImageFix"
+                                  result="effect1_dropShadow_4089_2522"
+                                />
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="effect1_dropShadow_4089_2522"
+                                  result="shape"
+                                />
+                              </filter>
+                              <filter
+                                id="filter1_d_4089_2522"
+                                x="12.3125"
+                                y="0"
+                                width="16"
+                                height="60"
+                                filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB"
+                              >
+                                <feFlood
+                                  flood-opacity="0"
+                                  result="BackgroundImageFix"
+                                />
+                                <feColorMatrix
+                                  in="SourceAlpha"
+                                  type="matrix"
+                                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                  result="hardAlpha"
+                                />
+                                <feOffset dy="1" />
+                                <feGaussianBlur stdDeviation="2.5" />
+                                <feComposite in2="hardAlpha" operator="out" />
+                                <feColorMatrix
+                                  type="matrix"
+                                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.75 0"
+                                />
+                                <feBlend
+                                  mode="normal"
+                                  in2="BackgroundImageFix"
+                                  result="effect1_dropShadow_4089_2522"
+                                />
+                                <feBlend
+                                  mode="normal"
+                                  in="SourceGraphic"
+                                  in2="effect1_dropShadow_4089_2522"
+                                  result="shape"
+                                />
+                              </filter>
+                            </defs>
+                          </svg>
+                        </div>
+                      ) : (
+                        <svg
+                          width="56"
+                          height="56"
+                          viewBox="0 0 56 56"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <rect
+                            width="56"
+                            height="56"
+                            rx="28"
+                            fill="black"
+                            fill-opacity="0.4"
+                          />
+                          <path
+                            d="M42.4872 23.6044C45.8376 25.5825 45.8376 30.7032 42.4872 32.6813L22.2578 44.6249C19.0016 46.5474 15 44.0451 15 40.0865L15 16.1992C15 12.2406 19.0016 9.73833 22.2578 11.6608L42.4872 23.6044Z"
+                            fill="white"
+                          />
+                        </svg>
+                      )}
+                    </button>
+                    <button onClick={() => skip(10)} className="text-white">
+                      <svg
+                        width="50"
+                        height="50"
+                        viewBox="0 0 50 50"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          width="50"
+                          height="50"
+                          rx="25"
+                          transform="matrix(-1 0 0 1 50 0)"
+                          fill="black"
+                          fill-opacity="0.4"
+                        />
+                        <path
+                          d="M31.8365 27.7798C33.6449 26.5682 33.6449 23.4318 31.8365 22.2202L20.9175 14.9047C19.1599 13.7272 17 15.2599 17 17.6845V32.3155C17 34.7401 19.1599 36.2728 20.9175 35.0953L31.8365 27.7798Z"
+                          fill="white"
+                        />
+                        <path
+                          d="M38 17.65C38 17.2151 37.6602 16.8625 37.241 16.8625C36.8218 16.8625 36.4819 17.2151 36.4819 17.65V32.35C36.4819 32.7849 36.8218 33.1375 37.241 33.1375C37.6602 33.1375 38 32.7849 38 32.35V17.65Z"
+                          fill="white"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-              <button onClick={toggleFullscreen} className="text-white">
-                <svg
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
-                </svg>
-              </button>
-            </div>
-          </div>
+
+              <div
+                className={`absolute bottom-0 left-0 right-0 p-4 transition-opacity duration-300 ${
+                  showControls ? "opacity-100" : "opacity-0"
+                } group-hover:opacity-100`}
+              >
+                {/* Progress Bar */}
+                <div className="w-full px-4 pb-2">
+                  <div
+                    className="w-full h-2 bg-white/30 rounded-full cursor-pointer"
+                    onClick={handleProgressBarClick}
+                  >
+                    <div
+                      className="h-full bg-red-500 rounded-full transition-all"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                  <div className="flex justify-between text-2xl text-white">
+                    <span className="tv-md:text-[16px]">
+                      {formatTime(currentTime)}
+                    </span>
+                    <span className="tv-md:text-[16px]">
+                      {formatTime(duration)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Scrollable Thumbnail List */}
@@ -261,18 +355,18 @@ export default function VideoPlayerSection() {
           </h2>
           <div className="flex gap-4 overflow-hidden">
             {[
-              "/images/adults/podcast.jpg",
-              "/images/adults/chef.png",
-              "/images/adults/live.jpg",
-              "/images/adults/podcast.jpg",
-              "/images/adults/podcast.jpg",
-              "/images/adults/chef.png",
-              "/images/adults/live.jpg",
-              "/images/adults/podcast.jpg",
-              "/images/adults/podcast.jpg",
-              "/images/adults/chef.png",
-              "/images/adults/live.jpg",
-              "/images/adults/podcast.jpg",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
+              "/images/adults/clip.png",
             ].map((label, i) => (
               <div
                 onClick={() => router.push("/adult/video/clip")}

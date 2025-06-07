@@ -25,7 +25,7 @@ export default function ChefChannel() {
       <Navigation active="stream" />
       <div
         className="relative pt-[150px] px-6 xl:px-12 min-h-screen text-white font-sans bg-cover bg-center bg-no-repeat "
-        style={{ backgroundImage: "url('/images/adults/chef.png')" }}
+        style={{ backgroundImage: "url('/images/adults/tv.png')" }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/75 to-transparent z-0 pointer-events-none" />
         <main className=" relative z-10 flex flex-col lg:flex-row gap-8 w-full z-1">

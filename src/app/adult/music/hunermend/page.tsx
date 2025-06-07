@@ -15,15 +15,27 @@ export default function Home() {
           <aside className="w-64 flex flex-col gap-6">
             {[
               ["Stream Destpek", "/images/adults/streams.jpg", "/adult/music"],
-              ["Dilko Raqse", "/images/adults/tv.jpg", "/adult/music/diloke"],
-              ["Hunermend", "/images/adults/mic.jpg", "/adult/music/hunermend"],
-              ["Dilokemin", "/images/adults/mic.jpg", "/adult/music/dilkomin"],
+              [
+                "Dilko Raqse",
+                "/images/adults/music7.jpg",
+                "/adult/music/diloke",
+              ],
+              [
+                "Hunermend",
+                "/images/adults/music4.png",
+                "/adult/music/hunermend",
+              ],
+              [
+                "Dilokemin",
+                "/images/adults/music8.png",
+                "/adult/music/dilkomin",
+              ],
             ].map((label, i) => (
               <div
                 onClick={() => router.push(label[2])}
                 key={i}
                 className={`relative aspect-video tv-md:w-[250px] tv-md:h-[151px] rounded-2xl overflow-hidden shadow-2xl group ${
-                  i === 1
+                  i === 2
                     ? "brightness-100"
                     : "brightness-50 hover:brightness-100"
                 } transition-all duration-300`}
@@ -71,28 +83,39 @@ export default function Home() {
               </h2>
               <div className="flex gap-4 overflow-hidden">
                 {[
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
+                  [
+                    "/adult/music/hunermend/playing?playlist=0",
+                    "/images/adults/music1.png",
+                  ],
+                  [
+                    "/adult/music/hunermend/playing?playlist=1",
+                    "/images/adults/music2.png",
+                  ],
+                  [
+                    "/adult/music/hunermend/playing?playlist=2",
+                    "/images/adults/music3.png",
+                  ],
+                  [
+                    "/adult/music/hunermend/playing?playlist=3",
+                    "/images/adults/music4.png",
+                  ],
+                  [
+                    "/adult/music/hunermend/playing?playlist=4",
+                    "/images/adults/music5.png",
+                  ],
                 ].map((label, i) => (
                   <div
-                    onClick={() =>
-                      router.push("/adult/music/hunermend/playing")
-                    }
+                    onClick={() => router.push(label[0])}
                     key={i}
                     className="relative w-full h-[400px] tv-md:w-[350px] tv-md:h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
-                      src={label}
+                      src={label[1]}
                       alt="Chef"
-                      className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
-                        label === "/images/adults/chef.png"
-                          ? "scale-x-[-1] hover:scale-[1.05] hover:scale-x-[-1]"
-                          : "hover:scale-105"
-                      }`}
+                      className={
+                        "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      }
                     />
 
                     {/* DARK GRADIENT OVERLAY */}
@@ -122,28 +145,39 @@ export default function Home() {
               </h2>
               <div className="flex gap-4 overflow-hidden">
                 {[
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
+                  [
+                    "/adult/music/hunermend/playing?playlist=0",
+                    "/images/adults/music1.png",
+                  ],
+                  [
+                    "/adult/music/hunermend/playing?playlist=1",
+                    "/images/adults/music2.png",
+                  ],
+                  [
+                    "/adult/music/hunermend/playing?playlist=2",
+                    "/images/adults/music3.png",
+                  ],
+                  [
+                    "/adult/music/hunermend/playing?playlist=3",
+                    "/images/adults/music4.png",
+                  ],
+                  [
+                    "/adult/music/hunermend/playing?playlist=4",
+                    "/images/adults/music5.png",
+                  ],
                 ].map((label, i) => (
                   <div
-                    onClick={() =>
-                      router.push("/adult/music/hunermend/playing")
-                    }
+                    onClick={() => router.push(label[0])}
                     key={i}
                     className="relative w-full h-[400px] tv-md:w-[350px] tv-md:h-[400px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
-                      src={label}
+                      src={label[1]}
                       alt="Chef"
-                      className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
-                        label === "/images/adults/chef.png"
-                          ? "scale-x-[-1] hover:scale-[1.05] hover:scale-x-[-1]"
-                          : "hover:scale-105"
-                      }`}
+                      className={
+                        "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      }
                     />
 
                     {/* DARK GRADIENT OVERLAY */}

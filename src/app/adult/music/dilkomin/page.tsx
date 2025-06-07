@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const playlists = [
   {
     name: "Diloke Nû",
-    image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+    image: "/images/adults/musics.jpg",
     songs: Array(8)
       .fill([
         {
@@ -29,7 +29,7 @@ const playlists = [
   },
   {
     name: "Diloke Rojava",
-    image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+    image: "/images/adults/music8.png",
     songs: Array(8)
       .fill([
         {
@@ -51,7 +51,7 @@ const playlists = [
   },
   {
     name: "Diloke Bakûr",
-    image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+    image: "/images/adults/music8.png",
     songs: Array(8)
       .fill([
         {
@@ -73,7 +73,7 @@ const playlists = [
   },
   {
     name: "Diloke Rojhilat",
-    image: "/adults/Music section/seyda Rojava/seyda.jpg",
+    image: "/images/adults/music8.png",
     songs: Array(8)
       .fill([
         {
@@ -95,7 +95,7 @@ const playlists = [
   },
   {
     name: "Diloke Nû",
-    image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+    image: "/images/adults/music8.png",
     songs: Array(8)
       .fill([
         {
@@ -118,7 +118,7 @@ const playlists = [
 ];
 
 export default function MusicPlayerUI() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -211,9 +211,13 @@ export default function MusicPlayerUI() {
         <aside className="w-64 ml-6 mr-6 flex flex-col gap-6">
           {[
             ["Stream Destpek", "/images/adults/streams.jpg", "/adult/music"],
-            ["Dilko Raqse", "/images/adults/tv.jpg", "/adult/music/diloke"],
-            ["Hunermend", "/images/adults/mic.jpg", "/adult/music/hunermend"],
-            ["Dilokemin", "/images/adults/mic.jpg", "/adult/music/dilkomin"],
+            ["Dilko Raqse", "/images/adults/music7.jpg", "/adult/music/diloke"],
+            [
+              "Hunermend",
+              "/images/adults/music4.png",
+              "/adult/music/hunermend",
+            ],
+            ["Dilokemin", "/images/adults/music8.png", "/adult/music/dilkomin"],
           ].map((label, i) => (
             <div
               onClick={() => router.push(label[2])}
@@ -448,25 +452,128 @@ export default function MusicPlayerUI() {
                 </svg>
               </button>
               <button onClick={togglePlayPause} className="z-20">
-                <svg
-                  width="56"
-                  height="56"
-                  viewBox="0 0 56 56"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
+                {isPlaying ? (
+                  <div className="w-16 h-16 rounded-full bg-black/30  shadow-lg flex items-center justify-center">
+                    <svg
+                      width="29"
+                      height="50"
+                      viewBox="0 0 29 60"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g filter="url(#filter0_d_4089_2522)">
+                        <path
+                          d="M5.3125 6.41935C5.3125 5.08318 6.65565 4 8.3125 4C9.96935 4 11.3125 5.08318 11.3125 6.41935V51.5806C11.3125 52.9168 9.96935 54 8.3125 54C6.65565 54 5.3125 52.9168 5.3125 51.5806V6.41935Z"
+                          fill="white"
+                        />
+                      </g>
+                      <g filter="url(#filter1_d_4089_2522)">
+                        <path
+                          d="M17.3125 6.41935C17.3125 5.08318 18.6556 4 20.3125 4C21.9694 4 23.3125 5.08318 23.3125 6.41935V51.5806C23.3125 52.9168 21.9694 54 20.3125 54C18.6556 54 17.3125 52.9168 17.3125 51.5806V6.41935Z"
+                          fill="white"
+                        />
+                      </g>
+                      <defs>
+                        <filter
+                          id="filter0_d_4089_2522"
+                          x="0.3125"
+                          y="0"
+                          width="16"
+                          height="60"
+                          filterUnits="userSpaceOnUse"
+                          color-interpolation-filters="sRGB"
+                        >
+                          <feFlood
+                            flood-opacity="0"
+                            result="BackgroundImageFix"
+                          />
+                          <feColorMatrix
+                            in="SourceAlpha"
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha"
+                          />
+                          <feOffset dy="1" />
+                          <feGaussianBlur stdDeviation="2.5" />
+                          <feComposite in2="hardAlpha" operator="out" />
+                          <feColorMatrix
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.75 0"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in2="BackgroundImageFix"
+                            result="effect1_dropShadow_4089_2522"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="effect1_dropShadow_4089_2522"
+                            result="shape"
+                          />
+                        </filter>
+                        <filter
+                          id="filter1_d_4089_2522"
+                          x="12.3125"
+                          y="0"
+                          width="16"
+                          height="60"
+                          filterUnits="userSpaceOnUse"
+                          color-interpolation-filters="sRGB"
+                        >
+                          <feFlood
+                            flood-opacity="0"
+                            result="BackgroundImageFix"
+                          />
+                          <feColorMatrix
+                            in="SourceAlpha"
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha"
+                          />
+                          <feOffset dy="1" />
+                          <feGaussianBlur stdDeviation="2.5" />
+                          <feComposite in2="hardAlpha" operator="out" />
+                          <feColorMatrix
+                            type="matrix"
+                            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.75 0"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in2="BackgroundImageFix"
+                            result="effect1_dropShadow_4089_2522"
+                          />
+                          <feBlend
+                            mode="normal"
+                            in="SourceGraphic"
+                            in2="effect1_dropShadow_4089_2522"
+                            result="shape"
+                          />
+                        </filter>
+                      </defs>
+                    </svg>
+                  </div>
+                ) : (
+                  <svg
                     width="56"
                     height="56"
-                    rx="28"
-                    fill="black"
-                    fillOpacity="0.4"
-                  />
-                  <path
-                    d="M42.4872 23.6044C45.8376 25.5825 45.8376 30.7032 42.4872 32.6813L22.2578 44.6249C19.0016 46.5474 15 44.0451 15 40.0865L15 16.1992C15 12.2406 19.0016 9.73833 22.2578 11.6608L42.4872 23.6044Z"
-                    fill="white"
-                  />
-                </svg>
+                    viewBox="0 0 56 56"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      width="56"
+                      height="56"
+                      rx="28"
+                      fill="black"
+                      fillOpacity="0.4"
+                    />
+                    <path
+                      d="M42.4872 23.6044C45.8376 25.5825 45.8376 30.7032 42.4872 32.6813L22.2578 44.6249C19.0016 46.5474 15 44.0451 15 40.0865L15 16.1992C15 12.2406 19.0016 9.73833 22.2578 11.6608L42.4872 23.6044Z"
+                      fill="white"
+                    />
+                  </svg>
+                )}
               </button>
               <button onClick={handleNext} className="z-20">
                 <svg

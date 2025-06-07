@@ -10,13 +10,14 @@ export default function ChefChannel() {
   const searchParams = useSearchParams();
   const title = searchParams.get("title") || "Default Title";
   const videoUrl = searchParams.get("videoUrl") || "/default.mp4";
+  const photoUrl = searchParams.get("photoUrl") || "/images/adults/movie2.png";
 
   return (
     <>
       <Navigation active="cinema" />
       <div
         className="relative pt-[150px] w-full h-full pt-10 px-6 xl:px-12 min-h-screen text-white font-sans bg-cover bg-center bg-no-repeat "
-        style={{ backgroundImage: "url('/images/adults/movie.png')" }}
+        style={{ backgroundImage: `url(${photoUrl})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/75 to-transparent z-0 pointer-events-none" />
         <main className=" relative z-10 flex flex-col lg:flex-row gap-8 w-full z-1">
@@ -26,22 +27,22 @@ export default function ChefChannel() {
               [
                 "Stream Destpek",
                 "/images/adults/streams.jpg",
-                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4",
+                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie2.png",
               ],
               [
                 "Cinema destpek",
-                "/images/adults/tv.jpg",
-                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4",
+                "/images/adults/cinema.jpg",
+                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie3.png",
               ],
               [
                 "Cinema destpek",
-                "/images/adults/mic.jpg",
-                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4",
+                "/images/adults/cinema2.jpg",
+                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/series2.png",
               ],
               [
                 "Cinema destpek",
-                "/images/adults/mic.jpg",
-                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4",
+                "/images/adults/cinema3.jpg",
+                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/documentary.jpg",
               ],
             ].map((label, i) => (
               <div
@@ -159,7 +160,7 @@ export default function ChefChannel() {
                   <button
                     onClick={() =>
                       router.push(
-                        `/adult/cinema/series/playing?title=${title}&videoUrl=${videoUrl}`
+                        `/adult/cinema/series/playing?title=${title}&videoUrl=${videoUrl}&photoUrl=${photoUrl}`
                       )
                     }
                     className="text-center mt-15"
@@ -185,7 +186,7 @@ export default function ChefChannel() {
                   <button
                     onClick={() =>
                       router.push(
-                        `/adult/cinema/series/playing?title=${title}&videoUrl=${videoUrl}`
+                        `/adult/cinema/series/playing?title=${title}&videoUrl=${videoUrl}&photoUrl=${photoUrl}`
                       )
                     }
                     className="text-center mt-15"
@@ -237,28 +238,38 @@ export default function ChefChannel() {
             [
               "Alle unter einem Dach",
               "/adults/Series section/Alle unter einem Dach.mp4",
+              "/images/adults/series2.png",
             ],
-            ["Narcos", "/adults/Series section/Narcos.mp4"],
-            ["Tulsa King", "/adults/Series section/Tulsa King.mp4"],
+            [
+              "Narcos",
+              "/adults/Series section/Narcos.mp4",
+              "/images/adults/series4.png",
+            ],
+            [
+              "Tulsa King",
+              "/adults/Series section/Tulsa King.mp4",
+              "/images/adults/series6.png",
+            ],
             [
               "Alle unter einem Dach",
               "/adults/Series section/Alle unter einem Dach.mp4",
+              "/images/adults/series5.png",
             ],
           ].map((items, i) => (
             <div
               onClick={() =>
                 router.push(
-                  `/adult/cinema/series?title=${items[0]}&videoUrl=${items[1]}`
+                  `/adult/cinema/series?title=${items[0]}&videoUrl=${items[1]}&photoUrl=${items[2]}`
                 )
               }
               key={i}
               className="relative w-[440px] flex-shrink-0 rounded-xl tv-md:w-[440px] tv-md:h-[245px] h-[245px]  overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
             >
               <Image
-                src="/images/adults/chef.png"
+                src={items[2]}
                 fill
                 alt="Video Thumbnail"
-                className="w-full h-auto object-cover scale-x-[-1] transition duration-300"
+                className="w-full h-auto object-cover transition duration-300"
               />
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
               <div className="absolute top-2 left-2 text-right grid grid-cols-3 gap-2">

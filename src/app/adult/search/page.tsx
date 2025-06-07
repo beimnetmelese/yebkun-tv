@@ -240,10 +240,10 @@ const App = () => {
           <section className="mt-1">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
               {[
-                "/images/adults/podcast.jpg",
-                "/images/adults/chef.png",
-                "/images/adults/live.jpg",
-                "/images/adults/podcast.jpg",
+                "/images/adults/musics.jpg",
+                "/images/adults/musics.jpg",
+                "/images/adults/musics.jpg",
+                "/images/adults/musics.jpg",
               ].map((img, i) => (
                 <div
                   onClick={() => router.push("/adult/music/diloke")}
@@ -324,30 +324,34 @@ const App = () => {
           {/* Latest Artists */}
           <section className="mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
-              {Array(5)
-                .fill("/images/adults/chef.png")
-                .map((img, i) => (
-                  <div
-                    onClick={() => router.push("/adult/music/hunermend")}
-                    key={i}
-                    className="relative h-[300px] w-full rounded-xl overflow-hidden shadow-md group bg-black hover:scale-[1.015] transition-transform"
-                  >
-                    <img
-                      src={img}
-                      alt="Artist"
-                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-300 ${
-                        img.includes("chef")
-                          ? "scale-x-[-1] group-hover:scale-x-[-1]"
-                          : "group-hover:scale-105"
-                      }`}
-                    />
-                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
-                    <div className="absolute bottom-3 left-3 text-white space-y-1">
-                      <div className="text-lg font-semibold">Artist Name</div>
-                      <div className="text-lg font-semibold">Rojova</div>
-                    </div>
+              {[
+                "/images/adults/music1.png",
+                "/images/adults/music2.png",
+                "/images/adults/music3.png",
+                "/images/adults/music4.png",
+                "/images/adults/music5.png",
+              ].map((img, i) => (
+                <div
+                  onClick={() => router.push("/adult/music/hunermend")}
+                  key={i}
+                  className="relative h-[300px] w-full rounded-xl overflow-hidden shadow-md group bg-black hover:scale-[1.015] transition-transform"
+                >
+                  <img
+                    src={img}
+                    alt="Artist"
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-300 ${
+                      img.includes("chef")
+                        ? "scale-x-[-1] group-hover:scale-x-[-1]"
+                        : "group-hover:scale-105"
+                    }`}
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                  <div className="absolute bottom-3 left-3 text-white space-y-1">
+                    <div className="text-lg font-semibold">Artist Name</div>
+                    <div className="text-lg font-semibold">Rojova</div>
                   </div>
-                ))}
+                </div>
+              ))}
             </div>
           </section>
         </main>

@@ -23,14 +23,14 @@ export default function AdultPage() {
               </h2>
               <div className="flex gap-4 overflow-hidden">
                 {[
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
                 ].map((label, i) => (
                   <div
                     onClick={() => router.push("/adult/video/clip")}
@@ -119,17 +119,17 @@ export default function AdultPage() {
               </h2>
               <div className="flex gap-4 overflow-hidden">
                 {[
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
+                  "/images/adults/reel.png",
                 ].map((label, i) => (
                   <div
                     onClick={() => router.push("/adult/video/reel")}
@@ -219,14 +219,14 @@ export default function AdultPage() {
               </h2>
               <div className="flex gap-4 overflow-hidden">
                 {[
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/podcast.jpg",
-                  "/images/adults/chef.png",
-                  "/images/adults/live.jpg",
-                  "/images/adults/podcast.jpg",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
+                  "/images/adults/clip.png",
                 ].map((label, i) => (
                   <div
                     onClick={() => router.push("/adult/video/clip")}

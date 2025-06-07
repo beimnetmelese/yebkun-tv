@@ -53,18 +53,17 @@ export default function VideoFeed() {
         {/* Top Thumbnails */}
         <div className="flex gap-4 p-6  overflow-hidden">
           {[
-            "/images/adults/podcast.jpg",
-            "/images/adults/chef.png",
-            "/images/adults/live.jpg",
-            "/images/adults/podcast.jpg",
-            "/images/adults/podcast.jpg",
-            "/images/adults/chef.png",
-            "/images/adults/live.jpg",
-            "/images/adults/podcast.jpg",
-            "/images/adults/podcast.jpg",
-            "/images/adults/chef.png",
-            "/images/adults/live.jpg",
-            "/images/adults/podcast.jpg",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
+            "/images/adults/reel.png",
           ].map((label, i) => (
             <div
               onClick={() => setCurrentIndex(i % 3)}
