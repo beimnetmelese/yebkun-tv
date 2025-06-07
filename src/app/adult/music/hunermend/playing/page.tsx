@@ -120,6 +120,7 @@ const playlists = [
 export default function MusicPlayerUI() {
   const searchParams = useSearchParams();
   const playlist = searchParams.get("playlist") || 0;
+  const photo = searchParams.get("image") || "/images/adults/song.png";
   const playlistIndex = parseInt((playlist as string) || "0");
   const reorderedPlaylists = [
     playlists[playlistIndex],
@@ -127,6 +128,7 @@ export default function MusicPlayerUI() {
   ];
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [image, setImage] = useState(photo);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -211,7 +213,10 @@ export default function MusicPlayerUI() {
   return (
     <>
       <Navigation active="music" />
-      <div className="h-screen pt-[150px] w-full h-full bg-no-repeat bg-cover flex bg-black text-white bg-[url('/images/adults/song.png')] overflow-hidden">
+      <div
+        className={`h-screen pt-[150px] w-full h-full bg-no-repeat bg-cover flex bg-black text-white overflow-hidden`}
+        style={{ backgroundImage: `url(${image})` }}
+      >
         <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
 
         {/* Left Sidebar */}
@@ -268,7 +273,7 @@ export default function MusicPlayerUI() {
 
         {/* Middle Section */}
         <main
-          className="flex-[1.6] tv-md:w-[629px] tv-md:h-[908px] max-h-[908px]  tv-md:flex-[1] flex gap-1 bg-white/25 rounded-xl mr-3 p-3"
+          className="flex-[1.6] tv-md:w-[629px] tv-md:h-[908px] max-h-[908px]  tv-md:flex-[1] flex gap-1 bg-white/35 rounded-xl mr-3 p-3"
           style={{ backgroundColor: "#67657157" }}
         >
           {/* Playlist Column */}
@@ -278,6 +283,7 @@ export default function MusicPlayerUI() {
                 onClick={() => {
                   setSelectedPlaylistIndex(index);
                   setCurrentIndex(0);
+                  setImage(reorderedPlaylists[index].image);
                   setIndex(0);
                   playSong(0); // optional
                 }}

@@ -84,23 +84,23 @@ export default function Home() {
               <div className="flex gap-4 overflow-hidden">
                 {[
                   [
-                    "/adult/music/hunermend/playing?playlist=0",
+                    "/adult/music/hunermend/playing?playlist=0&image=/images/adults/music1.png",
                     "/images/adults/music1.png",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=1",
+                    "/adult/music/hunermend/playing?playlist=1&image=/images/adults/music2.png",
                     "/images/adults/music2.png",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=2",
+                    "/adult/music/hunermend/playing?playlist=2&image=/images/adults/music3.png",
                     "/images/adults/music3.png",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=3",
+                    "/adult/music/hunermend/playing?playlist=3&image=/images/adults/music4.png",
                     "/images/adults/music4.png",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=4",
+                    "/adult/music/hunermend/playing?playlist=4&image=/images/adults/music5.png",
                     "/images/adults/music5.png",
                   ],
                 ].map((label, i) => (
@@ -146,23 +146,23 @@ export default function Home() {
               <div className="flex gap-4 overflow-hidden">
                 {[
                   [
-                    "/adult/music/hunermend/playing?playlist=0",
+                    "/adult/music/hunermend/playing?playlist=0&image=/images/adults/music1.png",
                     "/images/adults/music1.png",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=1",
+                    "/adult/music/hunermend/playing?playlist=1&image=/images/adults/music2.png",
                     "/images/adults/music2.png",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=2",
+                    "/adult/music/hunermend/playing?playlist=2&image=/images/adults/music3.png",
                     "/images/adults/music3.png",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=3",
+                    "/adult/music/hunermend/playing?playlist=3&image=/images/adults/music4.png",
                     "/images/adults/music4.png",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=4",
+                    "/adult/music/hunermend/playing?playlist=4&image=/images/adults/music5.png",
                     "/images/adults/music5.png",
                   ],
                 ].map((label, i) => (

@@ -352,7 +352,7 @@ function LoginModal({
                     />
                   </div>
                   <button
-                    onClick={() => router.push("/adult")}
+                    onClick={() => router.push("/adult/search")}
                     className="w-[295px] h-[50px] border-none px-[24px] py-[12px] bg-[#22C55E] font-[genos] text-[#FFFFFF] text-[28px] font-[500] rounded-[30px] hover:bg-[#16A34A] transition-colors flex items-center justify-center cursor-pointer"
                   >
                     Start Now
