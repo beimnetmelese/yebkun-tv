@@ -3,10 +3,33 @@
 import Image from "next/image";
 import Navigation from "@/components/ui/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function VideoFeed() {
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [reorderedPlaylists, setReorderedPlaylists] = useState<string[]>([]);
+  const searchParams = useSearchParams();
+  const playlist = searchParams.get("playlist") || "0";
+  const playlistIndex = parseInt(playlist);
+
+  const videos = [
+    "/adults/Reels/Clip 1.mp4",
+    "/adults/Reels/Clip 2.mp4",
+    "/adults/Reels/Clip 3.mp4",
+  ];
+
+  // 🔁 Update reordered playlist and index whenever the `playlist` query changes
+  useEffect(() => {
+    const reordered = [
+      videos[playlistIndex],
+      ...videos.filter((_, i) => i !== playlistIndex),
+    ];
+    setReorderedPlaylists(reordered);
+    setCurrentIndex(0); // reset index since it's a new playlist base
+  }, [playlist]); // runs when URL param changes
 
   useEffect(() => {
     if (videoRef.current) {
@@ -19,20 +42,16 @@ export default function VideoFeed() {
           console.warn("Auto-play failed:", error);
         });
     }
-  }, []);
+  }, [reorderedPlaylists, currentIndex]); // re-play when new video loads
 
-  const videos = [
-    "/adults/Reels/Clip 1.mp4",
-    "/adults/Reels/Clip 2.mp4",
-    "/adults/Reels/Clip 3.mp4",
-  ];
-  const [currentIndex, setCurrentIndex] = useState(0);
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % videos.length);
+    setCurrentIndex((prev) => (prev + 1) % reorderedPlaylists.length);
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
+    setCurrentIndex((prev) =>
+      prev === 0 ? reorderedPlaylists.length - 1 : prev - 1
+    );
   };
 
   const togglePlay = () => {
@@ -53,32 +72,30 @@ export default function VideoFeed() {
         {/* Top Thumbnails */}
         <div className="flex gap-4 p-6  overflow-hidden">
           {[
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
-            "/images/adults/reel.png",
+            ["/images/adults/reel1.jpg", "/adult/video/reel?playlist=0"],
+            ["/images/adults/reel2.jpg", "/adult/video/reel?playlist=1"],
+            ["/images/adults/reel3.jpg", "/adult/video/reel?playlist=2"],
+            ["/images/adults/reel1.jpg", "/adult/video/reel?playlist=0"],
+            ["/images/adults/reel2.jpg", "/adult/video/reel?playlist=1"],
+            ["/images/adults/reel3.jpg", "/adult/video/reel?playlist=2"],
+            ["/images/adults/reel1.jpg", "/adult/video/reel?playlist=0"],
+            ["/images/adults/reel2.jpg", "/adult/video/reel?playlist=1"],
+            ["/images/adults/reel3.jpg", "/adult/video/reel?playlist=2"],
+            ["/images/adults/reel1.jpg", "/adult/video/reel?playlist=0"],
+            ["/images/adults/reel2.jpg", "/adult/video/reel?playlist=1"],
           ].map((label, i) => (
             <div
-              onClick={() => setCurrentIndex(i % 3)}
+              onClick={() => router.push(label[1])}
               key={i}
               className="relative w-full aspect-[2/3] tv-md:w-[150px] tv-md:h-[250px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
             >
               {/* BACKGROUND IMAGE */}
               <img
-                src={label}
+                src={label[0]}
                 alt="Chef"
-                className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
-                  label === "/chef.png"
-                    ? "scale-x-[-1] hover:scale-[1.05] hover:scale-x-[-1]"
-                    : "hover:scale-105"
-                }`}
+                className={
+                  "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                }
               />
 
               {/* DARK GRADIENT OVERLAY */}
@@ -121,7 +138,7 @@ export default function VideoFeed() {
               <div className="absolute top-3 right-3">
                 <Image
                   src={"/images/navigation/user.png"}
-                  alt={label}
+                  alt={label[0]}
                   width={33}
                   height={33}
                   loading="eager"
@@ -132,7 +149,7 @@ export default function VideoFeed() {
               <div className="absolute bottom-3 left-3">
                 <Image
                   src={"/images/navigation/user.png"}
-                  alt={label}
+                  alt={label[0]}
                   width={33}
                   height={33}
                   loading="eager"
@@ -383,10 +400,10 @@ export default function VideoFeed() {
             onClick={togglePlay}
           >
             <video
-              key={videos[currentIndex]}
+              key={reorderedPlaylists[currentIndex]}
               ref={videoRef}
               className="w-full h-full object-cover"
-              src={videos[currentIndex]}
+              src={reorderedPlaylists[currentIndex]}
               autoPlay
               loop
             />
@@ -401,11 +418,9 @@ export default function VideoFeed() {
                   alt="cover"
                 />
                 <div>
-                  <p className="text-sm tv-md:text-[18px] font-medium">
-                    One Direction
-                  </p>
+                  <p className="text-sm tv-md:text-[18px] font-medium">Clip</p>
                   <p className="text-xs tv-md:text-[18px] text-gray-200">
-                    Last First Kiss
+                    voice
                   </p>
                 </div>
               </div>

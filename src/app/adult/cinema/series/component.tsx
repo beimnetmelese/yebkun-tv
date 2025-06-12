@@ -27,22 +27,22 @@ export default function ChefChannel() {
               [
                 "Stream Destpek",
                 "/images/adults/streams.jpg",
-                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie2.png",
+                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/christ1.jpg",
               ],
               [
                 "Cinema destpek",
-                "/images/adults/cinema.jpg",
-                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie3.png",
+                "/images/adults/christ1.jpg",
+                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/christ1.jpg",
               ],
               [
                 "Cinema destpek",
-                "/images/adults/cinema2.jpg",
-                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/series2.png",
+                "/images/adults/king.webp",
+                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/king.webp",
               ],
               [
                 "Cinema destpek",
-                "/images/adults/cinema3.jpg",
-                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/documentary.jpg",
+                "/images/adults/national.jpg",
+                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/national.jpg",
               ],
             ].map((label, i) => (
               <div
@@ -238,22 +238,22 @@ export default function ChefChannel() {
             [
               "Alle unter einem Dach",
               "/adults/Series section/Alle unter einem Dach.mp4",
-              "/images/adults/series2.png",
+              "/images/adults/alle.jpg",
             ],
             [
               "Narcos",
               "/adults/Series section/Narcos.mp4",
-              "/images/adults/series4.png",
+              "/images/adults/narcos.jpg",
             ],
             [
               "Tulsa King",
               "/adults/Series section/Tulsa King.mp4",
-              "/images/adults/series6.png",
+              "/images/adults/king.webp",
             ],
             [
               "Alle unter einem Dach",
               "/adults/Series section/Alle unter einem Dach.mp4",
-              "/images/adults/series5.png",
+              "/images/adults/alle.jpg",
             ],
           ].map((items, i) => (
             <div

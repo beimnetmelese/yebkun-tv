@@ -84,24 +84,34 @@ export default function Home() {
               <div className="flex gap-4 overflow-hidden">
                 {[
                   [
-                    "/adult/music/hunermend/playing?playlist=0&image=/images/adults/music1.png",
-                    "/images/adults/music1.png",
+                    "/adult/music/hunermend/playing?playlist=0&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "Ciwan Haco",
+                    "Dîlok",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=1&image=/images/adults/music2.png",
-                    "/images/adults/music2.png",
+                    "/adult/music/hunermend/playing?playlist=1&image=/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                    "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                    "Şivan Perwer",
+                    "Ey Ferat",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=2&image=/images/adults/music3.png",
-                    "/images/adults/music3.png",
+                    "/adult/music/hunermend/playing?playlist=2&image=/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                    "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                    "Diyar Dersim",
+                    "Roj baş",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=3&image=/images/adults/music4.png",
-                    "/images/adults/music4.png",
+                    "/adult/music/hunermend/playing?playlist=3&image=/adults/Music section/seyda Rojava/seyda.jpg",
+                    "/adults/Music section/seyda Rojava/seyda.jpg",
+                    "Seyda Rojava",
+                    "Helebçe",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=4&image=/images/adults/music5.png",
-                    "/images/adults/music5.png",
+                    "/adult/music/hunermend/playing?playlist=4&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "Ciwan Haco",
+                    "Dîlok",
                   ],
                 ].map((label, i) => (
                   <div
@@ -124,10 +134,10 @@ export default function Home() {
                     {/* BOTTOM-LEFT WATCH BUTTON */}
                     <div className="p-3 absolute bottom-3 left-3 flex flex-col items-start text-white space-y-1">
                       <span className="text-sm mb-3 tv-md:text-[34px] font-semibold">
-                        Artist Name
+                        {label[2]}
                       </span>
                       <span className="text-sm font-semibold tv-md:text-[34px]">
-                        Rojova
+                        {label[3]}
                       </span>
                     </div>
                   </div>
@@ -146,24 +156,34 @@ export default function Home() {
               <div className="flex gap-4 overflow-hidden">
                 {[
                   [
-                    "/adult/music/hunermend/playing?playlist=0&image=/images/adults/music1.png",
-                    "/images/adults/music1.png",
+                    "/adult/music/hunermend/playing?playlist=0&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "Ciwan Haco",
+                    "Dîlok",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=1&image=/images/adults/music2.png",
-                    "/images/adults/music2.png",
+                    "/adult/music/hunermend/playing?playlist=1&image=/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                    "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                    "Şivan Perwer",
+                    "Ey Ferat",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=2&image=/images/adults/music3.png",
-                    "/images/adults/music3.png",
+                    "/adult/music/hunermend/playing?playlist=2&image=/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                    "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                    "Diyar Dersim",
+                    "Roj baş",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=3&image=/images/adults/music4.png",
-                    "/images/adults/music4.png",
+                    "/adult/music/hunermend/playing?playlist=3&image=/adults/Music section/seyda Rojava/seyda.jpg",
+                    "/adults/Music section/seyda Rojava/seyda.jpg",
+                    "Seyda Rojava",
+                    "Helebçe",
                   ],
                   [
-                    "/adult/music/hunermend/playing?playlist=4&image=/images/adults/music5.png",
-                    "/images/adults/music5.png",
+                    "/adult/music/hunermend/playing?playlist=4&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "Ciwan Haco",
+                    "Dîlok",
                   ],
                 ].map((label, i) => (
                   <div
@@ -186,10 +206,10 @@ export default function Home() {
                     {/* BOTTOM-LEFT WATCH BUTTON */}
                     <div className="p-3 absolute bottom-3 left-3 flex flex-col items-start text-white space-y-1">
                       <span className="text-sm mb-3 tv-md:text-[34px] font-semibold">
-                        Artist Name
+                        {label[2]}
                       </span>
                       <span className="text-sm tv-md:text-[34px] font-semibold">
-                        Rojova
+                        {label[3]}
                       </span>
                     </div>
                   </div>

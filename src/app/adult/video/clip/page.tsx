@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Navigation from "@/components/ui/navigation";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 
 export default function VideoPlayerSection() {
@@ -13,6 +13,11 @@ export default function VideoPlayerSection() {
   const [duration, setDuration] = useState(0);
   const [showControls, setShowControls] = useState(true);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const title = searchParams.get("title") || "Default Title";
+  const artist = searchParams.get("artist") || "One Direction";
+  const videoUrl = searchParams.get("videoUrl") || "/default.mp4";
+  const photoUrl = searchParams.get("image") || "/images/adults/movie2.png";
 
   // Format time (seconds to MM:SS)
   const formatTime = (time: number) => {
@@ -101,16 +106,16 @@ export default function VideoPlayerSection() {
             >
               <div className="flex  p-2 items-center gap-3">
                 <img
-                  src={"/images/adults/chef.png"}
+                  src={photoUrl}
                   className="w-10 h-10  tv-md:w-[40px] tv-md:h-[40px] rounded-full"
                   alt="cover"
                 />
                 <div>
                   <p className="text-sm tv-md:text-[18px] font-medium">
-                    One Direction
+                    {artist}
                   </p>
                   <p className="text-xs tv-md:text-[18px] text-gray-200">
-                    Last First Kiss
+                    {title}
                   </p>
                 </div>
               </div>
@@ -122,9 +127,9 @@ export default function VideoPlayerSection() {
             onClick={togglePlay}
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
-            poster="/images/adults/chef.png"
+            poster={photoUrl}
           >
-            <source src="/images/adults/cooking.mp4" type="video/mp4" />
+            <source src={videoUrl} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
 
@@ -355,27 +360,81 @@ export default function VideoPlayerSection() {
           </h2>
           <div className="flex gap-4 overflow-hidden">
             {[
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
-              "/images/adults/clip.png",
+              [
+                "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                "Ciwan Haco",
+                "Dîlok",
+                "/adult/video/clip?videoUrl=/adults/Music section/Ciwan Haco/Yari serin.mp4&title=Dîlok&artist=Ciwan Haco&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+              ],
+              [
+                "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                "Şivan Perwer",
+                "Ey Ferat",
+                "/adult/video/clip?videoUrl=/adults/Music section/sivan Perwer/Dur Dur.mp4&title=Ey Ferat&artist=Şivan Perwer&image=/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+              ],
+              [
+                "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                "Diyar Dersim",
+                "Roj baş",
+                "/adult/video/clip?videoUrl=/adults/Music section/Diyar dersim/Emrem Buri.mp4&title=Roj baş&artist=Diyar Dersim&image=/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+              ],
+              [
+                "/adults/Music section/seyda Rojava/seyda.jpg",
+                "Seyda Rojava",
+                "Helebçe",
+                "/adult/video/clip?videoUrl=/adults/Music section/seyda Rojava/Gula Male.mp4&title=Dîlok&artist=Seyda Rojava&image=/adults/Music section/seyda Rojava/seyda.jpg",
+              ],
+              [
+                "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                "Ciwan Haco",
+                "Dîlok",
+                "/adult/video/clip?videoUrl=/adults/Music section/Ciwan Haco/Yari serin.mp4&title=Dîlok&artist=Ciwan Haco&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+              ],
+              [
+                "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                "Şivan Perwer",
+                "Ey Ferat",
+                "/adult/video/clip?videoUrl=/adults/Music section/sivan Perwer/Dur Dur.mp4&title=Ey Ferat&artist=Şivan Perwer&image=/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+              ],
+              [
+                "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                "Diyar Dersim",
+                "Roj baş",
+                "/adult/video/clip?videoUrl=/adults/Music section/Diyar dersim/Emrem Buri.mp4&title=Roj baş&artist=Diyar Dersim&image=/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+              ],
+              [
+                "/adults/Music section/seyda Rojava/seyda.jpg",
+                "Seyda Rojava",
+                "Helebçe",
+                "/adult/video/clip?videoUrl=/adults/Music section/seyda Rojava/Gula Male.mp4&title=Dîlok&artist=Seyda Rojava&image=/adults/Music section/seyda Rojava/seyda.jpg",
+              ],
+              [
+                "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                "Ciwan Haco",
+                "Dîlok",
+                "/adult/video/clip?videoUrl=/adults/Music section/Ciwan Haco/Yari serin.mp4&title=Dîlok&artist=Ciwan Haco&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+              ],
+              [
+                "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                "Şivan Perwer",
+                "Ey Ferat",
+                "/adult/video/clip?videoUrl=/adults/Music section/sivan Perwer/Dur Dur.mp4&title=Ey Ferat&artist=Şivan Perwer&image=/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+              ],
+              [
+                "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                "Diyar Dersim",
+                "Roj baş",
+                "/adult/video/clip?videoUrl=/adults/Music section/Diyar dersim/Emrem Buri.mp4&title=Roj baş&artist=Diyar Dersim&image=/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+              ],
             ].map((label, i) => (
               <div
-                onClick={() => router.push("/adult/video/clip")}
+                onClick={() => router.push(label[3])}
                 key={i}
                 className="w-[300px] relative tv-md:w-[340px] flex-shrink-0 tv-md:h-[210px] aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
               >
                 {/* BACKGROUND IMAGE */}
                 <img
-                  src={label}
+                  src={label[0]}
                   alt="Chef"
                   className={
                     "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -420,7 +479,7 @@ export default function VideoPlayerSection() {
                 <div className="absolute top-3 left-3">
                   <Image
                     src={"/images/navigation/user.png"}
-                    alt={label}
+                    alt={label[0]}
                     width={33}
                     height={33}
                     loading="eager"
@@ -431,14 +490,14 @@ export default function VideoPlayerSection() {
 
                 <div className="absolute bottom-3 left-3">
                   <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
-                    Clip Name
+                    {label[1]}
                   </span>
                 </div>
 
                 {/* BOTTOM-RIGHT LOGO */}
                 <div className="absolute bottom-3 right-3">
                   <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
-                    Clip Name
+                    {label[2]}
                   </span>
                 </div>
               </div>

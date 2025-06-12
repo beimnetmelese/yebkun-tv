@@ -271,6 +271,7 @@ export default function MusicPlayerUI() {
                 onClick={() => {
                   setSelectedPlaylistIndex(index);
                   setCurrentIndex(0);
+                  setIsPlaying(true);
                   setIndex(0);
                   playSong(0); // optional
                 }}
@@ -309,6 +310,7 @@ export default function MusicPlayerUI() {
                   playSong(i);
                   setCurrentIndex(i % videos.length);
                   setIndex(i);
+                  setIsPlaying(true);
                 }}
                 className={`flex items-center tv-md:w-[350px] tv-md:h-[60px] justify-between p-2 bg-white/23 hover:bg-zinc-700 z-50 cursor-pointer
                   ${i !== songs.length - 1 ? "border-b border-gray-600" : ""}`}

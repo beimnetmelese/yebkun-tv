@@ -23,23 +23,63 @@ export default function AdultPage() {
               </h2>
               <div className="flex gap-4 overflow-hidden">
                 {[
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
+                  [
+                    "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "Ciwan Haco",
+                    "Dîlok",
+                    "/adult/video/clip?videoUrl=/adults/Music section/Ciwan Haco/Yari serin.mp4&title=Dîlok&artist=Ciwan Haco&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                  ],
+                  [
+                    "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                    "Şivan Perwer",
+                    "Ey Ferat",
+                    "/adult/video/clip?videoUrl=/adults/Music section/sivan Perwer/Dur Dur.mp4&title=Ey Ferat&artist=Şivan Perwer&image=/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                  ],
+                  [
+                    "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                    "Diyar Dersim",
+                    "Roj baş",
+                    "/adult/video/clip?videoUrl=/adults/Music section/Diyar dersim/Emrem Buri.mp4&title=Roj baş&artist=Diyar Dersim&image=/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                  ],
+                  [
+                    "/adults/Music section/seyda Rojava/seyda.jpg",
+                    "Seyda Rojava",
+                    "Helebçe",
+                    "/adult/video/clip?videoUrl=/adults/Music section/seyda Rojava/Gula Male.mp4&title=Dîlok&artist=Seyda Rojava&image=/adults/Music section/seyda Rojava/seyda.jpg",
+                  ],
+                  [
+                    "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "Ciwan Haco",
+                    "Dîlok",
+                    "/adult/video/clip?videoUrl=/adults/Music section/Ciwan Haco/Yari serin.mp4&title=Dîlok&artist=Ciwan Haco&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                  ],
+                  [
+                    "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                    "Şivan Perwer",
+                    "Ey Ferat",
+                    "/adult/video/clip?videoUrl=/adults/Music section/sivan Perwer/Dur Dur.mp4&title=Ey Ferat&artist=Şivan Perwer&image=/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                  ],
+                  [
+                    "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                    "Diyar Dersim",
+                    "Roj baş",
+                    "/adult/video/clip?videoUrl=/adults/Music section/Diyar dersim/Emrem Buri.mp4&title=Roj baş&artist=Diyar Dersim&image=/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                  ],
+                  [
+                    "/adults/Music section/seyda Rojava/seyda.jpg",
+                    "Seyda Rojava",
+                    "Helebçe",
+                    "/adult/video/clip?videoUrl=/adults/Music section/seyda Rojava/Gula Male.mp4&title=Dîlok&artist=Seyda Rojava&image=/adults/Music section/seyda Rojava/seyda.jpg",
+                  ],
                 ].map((label, i) => (
                   <div
-                    onClick={() => router.push("/adult/video/clip")}
+                    onClick={() => router.push(label[3])}
                     key={i}
                     className="w-[300px] relative tv-md:w-[270px] tv-md:h-[160px] aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
-                      src={label}
+                      src={label[0]}
                       alt="Chef"
                       className={
                         "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -84,7 +124,7 @@ export default function AdultPage() {
                     <div className="absolute top-3 left-3">
                       <Image
                         src={"/images/navigation/user.png"}
-                        alt={label}
+                        alt={label[0]}
                         width={33}
                         height={33}
                         loading="eager"
@@ -95,14 +135,14 @@ export default function AdultPage() {
 
                     <div className="absolute bottom-3 left-3">
                       <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
-                        Clip Name
+                        {label[1]}
                       </span>
                     </div>
 
                     {/* BOTTOM-RIGHT LOGO */}
                     <div className="absolute bottom-3 right-3">
                       <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
-                        Clip Name
+                        {label[2]}
                       </span>
                     </div>
                   </div>
@@ -119,32 +159,30 @@ export default function AdultPage() {
               </h2>
               <div className="flex gap-4 overflow-hidden">
                 {[
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
-                  "/images/adults/reel.png",
+                  ["/images/adults/reel1.jpg", "/adult/video/reel?playlist=0"],
+                  ["/images/adults/reel2.jpg", "/adult/video/reel?playlist=1"],
+                  ["/images/adults/reel3.jpg", "/adult/video/reel?playlist=2"],
+                  ["/images/adults/reel1.jpg", "/adult/video/reel?playlist=0"],
+                  ["/images/adults/reel2.jpg", "/adult/video/reel?playlist=1"],
+                  ["/images/adults/reel3.jpg", "/adult/video/reel?playlist=2"],
+                  ["/images/adults/reel1.jpg", "/adult/video/reel?playlist=0"],
+                  ["/images/adults/reel2.jpg", "/adult/video/reel?playlist=1"],
+                  ["/images/adults/reel3.jpg", "/adult/video/reel?playlist=2"],
+                  ["/images/adults/reel1.jpg", "/adult/video/reel?playlist=0"],
+                  ["/images/adults/reel2.jpg", "/adult/video/reel?playlist=1"],
                 ].map((label, i) => (
                   <div
-                    onClick={() => router.push("/adult/video/reel")}
+                    onClick={() => router.push(label[1])}
                     key={i}
                     className="relative w-[300px] tv-md:w-[200px] tv-md:h-[325px] aspect-[2/3] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
-                      src={label}
+                      src={label[0]}
                       alt="Chef"
-                      className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
-                        label === "/chef.png"
-                          ? "scale-x-[-1] hover:scale-[1.05] hover:scale-x-[-1]"
-                          : "hover:scale-105"
-                      }`}
+                      className={
+                        "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      }
                     />
 
                     {/* DARK GRADIENT OVERLAY */}
@@ -187,7 +225,7 @@ export default function AdultPage() {
                     <div className="absolute top-3 right-3">
                       <Image
                         src={"/images/navigation/user.png"}
-                        alt={label}
+                        alt={label[0]}
                         width={33}
                         height={33}
                         loading="eager"
@@ -198,7 +236,7 @@ export default function AdultPage() {
                     <div className="absolute bottom-3 left-3">
                       <Image
                         src={"/images/navigation/user.png"}
-                        alt={label}
+                        alt={label[0]}
                         width={33}
                         height={33}
                         loading="eager"
@@ -219,23 +257,63 @@ export default function AdultPage() {
               </h2>
               <div className="flex gap-4 overflow-hidden">
                 {[
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
-                  "/images/adults/clip.png",
+                  [
+                    "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "Ciwan Haco",
+                    "Dîlok",
+                    "/adult/video/clip?videoUrl=/adults/Music section/Ciwan Haco/Yari serin.mp4&title=Dîlok&artist=Ciwan Haco&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                  ],
+                  [
+                    "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                    "Şivan Perwer",
+                    "Ey Ferat",
+                    "/adult/video/clip?videoUrl=/adults/Music section/sivan Perwer/Dur Dur.mp4&title=Ey Ferat&artist=Şivan Perwer&image=/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                  ],
+                  [
+                    "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                    "Diyar Dersim",
+                    "Roj baş",
+                    "/adult/video/clip?videoUrl=/adults/Music section/Diyar dersim/Emrem Buri.mp4&title=Roj baş&artist=Diyar Dersim&image=/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                  ],
+                  [
+                    "/adults/Music section/seyda Rojava/seyda.jpg",
+                    "Seyda Rojava",
+                    "Helebçe",
+                    "/adult/video/clip?videoUrl=/adults/Music section/seyda Rojava/Gula Male.mp4&title=Dîlok&artist=Seyda Rojava&image=/adults/Music section/seyda Rojava/seyda.jpg",
+                  ],
+                  [
+                    "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                    "Ciwan Haco",
+                    "Dîlok",
+                    "/adult/video/clip?videoUrl=/adults/Music section/Ciwan Haco/Yari serin.mp4&title=Dîlok&artist=Ciwan Haco&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+                  ],
+                  [
+                    "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                    "Şivan Perwer",
+                    "Ey Ferat",
+                    "/adult/video/clip?videoUrl=/adults/Music section/sivan Perwer/Dur Dur.mp4&title=Ey Ferat&artist=Şivan Perwer&image=/adults/Music section/sivan Perwer/sivan Perwer.jpg",
+                  ],
+                  [
+                    "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                    "Diyar Dersim",
+                    "Roj baş",
+                    "/adult/video/clip?videoUrl=/adults/Music section/Diyar dersim/Emrem Buri.mp4&title=Roj baş&artist=Diyar Dersim&image=/adults/Music section/Diyar dersim/Diyar dersim.jpg",
+                  ],
+                  [
+                    "/adults/Music section/seyda Rojava/seyda.jpg",
+                    "Seyda Rojava",
+                    "Helebçe",
+                    "/adult/video/clip?videoUrl=/adults/Music section/seyda Rojava/Gula Male.mp4&title=Dîlok&artist=Seyda Rojava&image=/adults/Music section/seyda Rojava/seyda.jpg",
+                  ],
                 ].map((label, i) => (
                   <div
-                    onClick={() => router.push("/adult/video/clip")}
+                    onClick={() => router.push(label[3])}
                     key={i}
-                    className="w-[300px] relative aspect-video tv-md:w-[270px] tv-md:h-[160px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                    className="w-[300px] relative tv-md:w-[270px] tv-md:h-[160px] aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                   >
                     {/* BACKGROUND IMAGE */}
                     <img
-                      src={label}
+                      src={label[0]}
                       alt="Chef"
                       className={
                         "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -280,7 +358,7 @@ export default function AdultPage() {
                     <div className="absolute top-3 left-3">
                       <Image
                         src={"/images/navigation/user.png"}
-                        alt={label}
+                        alt={label[0]}
                         width={33}
                         height={33}
                         loading="eager"
@@ -291,14 +369,14 @@ export default function AdultPage() {
 
                     <div className="absolute bottom-3 left-3">
                       <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
-                        Clip Name
+                        {label[1]}
                       </span>
                     </div>
 
                     {/* BOTTOM-RIGHT LOGO */}
                     <div className="absolute bottom-3 right-3">
                       <span className="text-sm font-semibold group-hover:text-red-400 transition-colors duration-300">
-                        Clip Name
+                        {label[2]}
                       </span>
                     </div>
                   </div>

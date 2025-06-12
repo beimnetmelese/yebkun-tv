@@ -174,7 +174,7 @@ export default function ChefChannel() {
                 transition-all duration-300`}
                     >
                       <img
-                        src="/images/adults/episode.png"
+                        src={photoUrl}
                         alt={ep.title}
                         className="w-full h-full object-cover group-hover:brightness-110 transition-all"
                       />

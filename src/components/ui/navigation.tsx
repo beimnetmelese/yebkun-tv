@@ -14,6 +14,9 @@ interface NavigationItemProps {
 
 interface Props {
   active: string;
+  searchValue?: string;
+  setSearchValue?: (value: string) => void;
+  handleSearch?: (value: string) => void;
 }
 
 const NavigationItem = ({
@@ -56,7 +59,12 @@ const NavigationItem = ({
   );
 };
 
-export default function Navigation({ active }: Props) {
+export default function Navigation({
+  active,
+  searchValue = "",
+  setSearchValue,
+  handleSearch,
+}: Props) {
   const pathname = usePathname();
   const clickSoundRef = useRef<HTMLAudioElement>(null);
 
@@ -126,7 +134,7 @@ export default function Navigation({ active }: Props) {
             <NavigationItem
               href="/adult/search"
               label="Gerandin"
-              icon="images/navigation/gerandin.svg"
+              icon="/images/navigation/gerandin.svg"
               active={active === "gerandin" || pathname === "/gerandin"}
               onClick={handleNavClick}
             />
@@ -135,6 +143,13 @@ export default function Navigation({ active }: Props) {
           {/* Search Bar with Mic Icon */}
           <div className="flex items-center space-x-3 bg-white bg-opacity-95 rounded-full px-[10px] py-[10px] w-[30vw] gap-[20px]">
             <input
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && searchValue?.trim() !== "") {
+                  handleSearch?.(searchValue);
+                }
+              }}
+              value={searchValue}
+              onChange={(e) => setSearchValue?.(e.target.value)}
               type="text"
               placeholder="Search"
               className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-[genos] font-normal text-[36px] focus:outline-none text-[#000000]/90 px-[25px] py-[10px] border-none"

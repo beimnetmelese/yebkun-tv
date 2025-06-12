@@ -15,7 +15,7 @@ export default function ChefChannel() {
   const searchParams = useSearchParams();
   const title = searchParams.get("title") || "Default Title";
   const videoUrl = searchParams.get("videoUrl") || "/default.mp4";
-  const photoUrl = searchParams.get("photoUrl") || "/images/adults/movie2.png";
+  const photoUrl = searchParams.get("photoUrl") || "/images/adults/christ1.jpg";
 
   const router = useRouter();
   useEffect(() => {
@@ -44,22 +44,22 @@ export default function ChefChannel() {
               [
                 "Stream Destpek",
                 "/images/adults/streams.jpg",
-                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie2.png",
+                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/christ1.jpg",
               ],
               [
-                "Cinema destpek",
-                "/images/adults/cinema.jpg",
-                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie3.png",
+                "Movie",
+                "/images/adults/christ1.jpg",
+                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/christ1.jpg",
               ],
               [
-                "Cinema destpek",
-                "/images/adults/cinema2.jpg",
-                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/series2.png",
+                "Series",
+                "/images/adults/king.webp",
+                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/king.webp",
               ],
               [
-                "Cinema destpek",
-                "/images/adults/cinema3.jpg",
-                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/documentary.jpg",
+                "Documentary",
+                "/images/adults/national.jpg",
+                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/national.jpg",
               ],
             ].map((label, i) => (
               <div
@@ -264,25 +264,25 @@ export default function ChefChannel() {
             [
               "Brave Heart",
               "/adults/Movies section/Braveheart.mp4",
-              "/images/adults/movie2.png",
+              "/images/adults/Brave.jpg",
               "/filme",
             ],
             [
               "Kingdom of Heaven",
               "/adults/Movies section/Kingdom of Heaven.mp4",
-              "/images/adults/movie3.png",
+              "/images/adults/kingdom.webp",
               "/filme",
             ],
             [
-              "NOAH",
-              "/adults/Movies section/NOAH.mp4",
-              "/images/adults/series2.png",
+              "Alle unter einem Dach",
+              "/adults/Series section/Alle unter einem Dach.mp4",
+              "/images/adults/alle.jpg",
               "/series/playing",
             ],
             [
-              "The Passion of The Christ",
-              "/adults/Movies section/The Passion of The Christ.mp4",
-              "/images/adults/documentary.jpg",
+              "National Geographic",
+              "/adults/Documentary/National Geographic.mp4",
+              "/images/adults/national.jpg",
               "/series/playing",
             ],
           ].map((items, i) => (

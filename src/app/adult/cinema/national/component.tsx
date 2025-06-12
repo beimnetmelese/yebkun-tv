@@ -27,22 +27,22 @@ export default function ChefChannel() {
               [
                 "Stream Destpek",
                 "/images/adults/streams.jpg",
-                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie2.png",
+                "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/christ1.jpg",
               ],
               [
-                "Cinema destpek",
-                "/images/adults/cinema.jpg",
-                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/movie3.png",
+                "Movie",
+                "/images/adults/christ1.jpg",
+                "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/christ1.jpg",
               ],
               [
-                "Cinema destpek",
-                "/images/adults/cinema2.jpg",
-                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/series2.png",
+                "Series",
+                "/images/adults/king.webp",
+                "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/king.webp",
               ],
               [
-                "Cinema destpek",
-                "/images/adults/cinema3.jpg",
-                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/documentary.jpg",
+                "Documentary",
+                "/images/adults/national.jpg",
+                "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/national.jpg",
               ],
             ].map((label, i) => (
               <div
@@ -238,22 +238,22 @@ export default function ChefChannel() {
             [
               "South Africa Documentary",
               "/adults/Documentary/South Africa Documentary.mp4",
-              "/images/adults/documentary.jpg",
+              "/images/adults/south.jpg",
             ],
             [
               "Wild South",
               "/adults/Documentary/Wild South.mp4",
-              "/images/adults/doc2.jpg",
+              "/images/adults/wild.jpg",
             ],
             [
               "National Geographic",
               "/adults/Documentary/National Geographic.mp4",
-              "/images/adults/doc3.jpg",
+              "/images/adults/national.jpg",
             ],
             [
-              "Alle unter einem Dach",
+              "South Africa Documentary",
               "/adults/Documentary/South Africa Documentary.mp4",
-              "/images/adults/doc4.jpg",
+              "/images/adults/south.jpg",
             ],
           ].map((items, i) => (
             <div

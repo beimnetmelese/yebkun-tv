@@ -390,12 +390,16 @@ export default function AdultPage() {
                 </div>
 
                 <div
-                  onClick={() => router.push("/adult/cinema/filme")}
+                  onClick={() =>
+                    router.push(
+                      "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/christ1.jpg"
+                    )
+                  }
                   className="relative w-full aspect-[2/3] tv-md:w-[430px] tv-md:h-[575px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
-                    src={"/images/adults/movie.png"}
+                    src={"/images/adults/christ1.jpg"}
                     alt="Chef"
                     className={
                       "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -467,15 +471,19 @@ export default function AdultPage() {
                   </div>
                 </div>
                 <div
-                  onClick={() => router.push("/adult/cinema/series")}
+                  onClick={() =>
+                    router.push(
+                      "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/king.webp"
+                    )
+                  }
                   className="relative w-full aspect-[2/3] tv-md:w-[430px] tv-md:h-[575px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
-                    src={"/images/adults/series.png"}
+                    src={"/images/adults/king.webp"}
                     alt="Chef"
                     className={
-                      "absolute inset-0 w-full h-full object-cover transition-transform duration-300 scale-x-[-1] hover:scale-[1.05] hover:scale-x-[-1]"
+                      "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-[1.05] hover:scale-x-[-1]"
                     }
                   />
 
@@ -545,12 +553,16 @@ export default function AdultPage() {
                 </div>
 
                 <div
-                  onClick={() => router.push("/adult/cinema/national")}
+                  onClick={() =>
+                    router.push(
+                      "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/national.jpg"
+                    )
+                  }
                   className="relative w-full aspect-[2/3] tv-md:w-[430px] tv-md:h-[575px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
-                    src={"/images/adults/documentary.png"}
+                    src={"/images/adults/national.jpg"}
                     alt="Chef"
                     className={
                       "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -635,12 +647,12 @@ export default function AdultPage() {
                 </div>
 
                 <div
-                  onClick={() => router.push("/adult/video")}
+                  onClick={() => router.push("/adult/video/reel?playlist=0")}
                   className="relative w-full aspect-[2/3] tv-md:w-[430px] tv-md:h-[575px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
-                    src={"/images/adults/reel.png"}
+                    src={"/images/adults/reel1.jpg"}
                     alt="Chef"
                     className={
                       "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"

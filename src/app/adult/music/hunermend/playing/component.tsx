@@ -6,8 +6,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 const playlists = [
   {
-    name: "Diloke Nû",
-    image: "/images/adults/music1.png",
+    name: "Ciwan Haco",
+    image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
     songs: Array(8)
       .fill([
         {
@@ -28,8 +28,8 @@ const playlists = [
       .flat(),
   },
   {
-    name: "Diloke Rojava",
-    image: "/images/adults/music2.png",
+    name: "Şivan Perwer",
+    image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
     songs: Array(8)
       .fill([
         {
@@ -50,8 +50,8 @@ const playlists = [
       .flat(),
   },
   {
-    name: "Diloke Bakûr",
-    image: "/images/adults/music3.png",
+    name: "Diyar Dersim",
+    image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
     songs: Array(8)
       .fill([
         {
@@ -72,8 +72,8 @@ const playlists = [
       .flat(),
   },
   {
-    name: "Diloke Rojhilat",
-    image: "/images/adults/music4.png",
+    name: "Seyda Rojava",
+    image: "/adults/Music section/seyda Rojava/seyda.jpg",
     songs: Array(8)
       .fill([
         {
@@ -94,8 +94,8 @@ const playlists = [
       .flat(),
   },
   {
-    name: "Diloke Nû",
-    image: "/images/adults/music5.png",
+    name: "Ciwan Haco",
+    image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
     songs: Array(8)
       .fill([
         {
@@ -136,7 +136,7 @@ export default function MusicPlayerUI() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [selectedPlaylistIndex, setSelectedPlaylistIndex] = useState(0);
-  const selectedPlaylist = playlists[selectedPlaylistIndex];
+  const selectedPlaylist = reorderedPlaylists[selectedPlaylistIndex];
   const songs = selectedPlaylist.songs;
   const videos = songs.map((s) => s.videoUrl);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -214,8 +214,8 @@ export default function MusicPlayerUI() {
     <>
       <Navigation active="music" />
       <div
-        className={`h-screen pt-[150px] w-full h-full bg-no-repeat bg-cover flex bg-black text-white overflow-hidden`}
-        style={{ backgroundImage: `url(${image})` }}
+        className={`h-screen pt-[150px] w-full h-full bg-no-repeat bg-cover flex text-white overflow-hidden`}
+        style={{ backgroundImage: `url("${image}")` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
 
@@ -285,6 +285,7 @@ export default function MusicPlayerUI() {
                   setCurrentIndex(0);
                   setImage(reorderedPlaylists[index].image);
                   setIndex(0);
+                  setIsPlaying(true);
                   playSong(0); // optional
                 }}
                 key={index}
@@ -322,6 +323,7 @@ export default function MusicPlayerUI() {
                   playSong(i);
                   setCurrentIndex(i % videos.length);
                   setIndex(i);
+                  setIsPlaying(true);
                 }}
                 className={`flex items-center tv-md:w-[350px] tv-md:h-[60px] justify-between p-2 bg-white/23 hover:bg-zinc-700 z-50 cursor-pointer
                   ${i !== songs.length - 1 ? "border-b border-gray-600" : ""}`}
