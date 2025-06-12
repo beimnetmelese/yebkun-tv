@@ -371,7 +371,7 @@ const App = () => {
             <section className="mt-8">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-bold">
-                  Search Results for "{searchValue}"
+                  Search Results for &quot;{searchValue}&quot;
                 </h2>
                 {filteredItems.length > 4 && (
                   <div className="flex space-x-2">

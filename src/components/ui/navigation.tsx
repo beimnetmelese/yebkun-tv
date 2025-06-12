@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
 
 interface NavigationItemProps {
@@ -77,6 +77,12 @@ export default function Navigation({
         .catch((err) => console.error("Error playing click sound:", err));
     }
   };
+  const router = useRouter();
+  const isSearchPage = active === "gerandin";
+
+  const handleClick = () => {
+    if (!isSearchPage) router.push("/adult/search");
+  };
 
   return (
     <header className="fixed top-[0px] left-[0px] right-[0px] w-full h-[150px] z-50">
@@ -151,6 +157,8 @@ export default function Navigation({
               value={searchValue}
               onChange={(e) => setSearchValue?.(e.target.value)}
               type="text"
+              readOnly={!isSearchPage}
+              onClick={handleClick}
               placeholder="Search"
               className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-[genos] font-normal text-[36px] focus:outline-none text-[#000000]/90 px-[25px] py-[10px] border-none"
             />
