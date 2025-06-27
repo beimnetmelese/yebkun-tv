@@ -30,18 +30,18 @@ export default function ChefChannel() {
                 "/adult/cinema?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/christ1.jpg",
               ],
               [
-                "Movie",
-                "/images/adults/christ1.jpg",
+                "Cinema Destpek",
+                "/images/adults/cinema.jpg",
                 "/adult/cinema/filme?title=The Passion of The Christ&videoUrl=/adults/Movies section/The Passion of The Christ.mp4&photoUrl=/images/adults/christ1.jpg",
               ],
               [
-                "Series",
-                "/images/adults/king.webp",
+                "Cinema Destpek",
+                "/images/adults/cinema2.jpg",
                 "/adult/cinema/series?title=Tulsa King&videoUrl=/adults/Series section/Tulsa King.mp4&photoUrl=/images/adults/king.webp",
               ],
               [
-                "Documentary",
-                "/images/adults/national.jpg",
+                "Cinema Destpek",
+                "/images/adults/cinema3.jpg",
                 "/adult/cinema/national?title=National Geographic&videoUrl=/adults/Documentary/National Geographic.mp4&photoUrl=/images/adults/national.jpg",
               ],
             ].map((label, i) => (

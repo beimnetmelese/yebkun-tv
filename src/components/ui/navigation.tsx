@@ -9,6 +9,7 @@ interface NavigationItemProps {
   label: string;
   icon: string;
   active?: boolean;
+  search?: boolean;
   onClick?: () => void;
 }
 
@@ -24,6 +25,7 @@ const NavigationItem = ({
   label,
   icon,
   active = false,
+  search = false,
   onClick,
 }: NavigationItemProps) => {
   return (
@@ -54,7 +56,13 @@ const NavigationItem = ({
           unoptimized
         />
       </div>
-      <span className="text-[22px] text-white font-bold-500">{label}</span>
+      <span
+        className={`text-[22px] font-bold-500 ${
+          search ? "text-black" : "text-white"
+        }`}
+      >
+        {label}
+      </span>
     </Link>
   );
 };
@@ -82,6 +90,7 @@ export default function Navigation({
 
   const handleClick = () => {
     if (!isSearchPage) router.push("/adult/search");
+    active = "gerandin";
   };
 
   return (
@@ -93,10 +102,13 @@ export default function Navigation({
         className="hidden"
       />
       <div
-        className="w-full h-full bg-[#000000]"
+        className={`w-full h-full ${
+          isSearchPage ? "text-black" : "text-white"
+        }`}
         style={{
-          background:
-            "linear-gradient(to bottom, #000000, rgba(59, 59, 59, 0))",
+          background: isSearchPage
+            ? "transparent"
+            : "linear-gradient(to bottom, #000000, rgba(59, 59, 59, 0))",
         }}
       >
         <div className="flex items-center justify-between w-full h-full px-4">
@@ -106,6 +118,7 @@ export default function Navigation({
               label="Dashpak"
               icon="/images/navigation/destpek.svg"
               active={active === "dashpak" || pathname === "/adult"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
             <NavigationItem
@@ -113,6 +126,7 @@ export default function Navigation({
               label="music"
               icon="/images/navigation/muzik.svg"
               active={active === "music" || pathname === "/adult/music"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
             <NavigationItem
@@ -120,6 +134,7 @@ export default function Navigation({
               label="Cinema"
               icon="/images/navigation/sinema.svg"
               active={active === "cinema" || pathname === "/cinema"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
             <NavigationItem
@@ -127,27 +142,26 @@ export default function Navigation({
               label="Videos"
               icon="/images/navigation/videos.svg"
               active={active === "videos" || pathname === "/videos"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
 
             <NavigationItem
-              href="/adult/search"
+              href="/adult/stream"
               label="Stream"
               icon="/images/navigation/stream.svg"
               active={active === "stream" || pathname === "/stream"}
-              onClick={handleNavClick}
-            />
-            <NavigationItem
-              href="/adult/search"
-              label="Gerandin"
-              icon="/images/navigation/gerandin.svg"
-              active={active === "gerandin" || pathname === "/gerandin"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
           </div>
 
           {/* Search Bar with Mic Icon */}
-          <div className="flex items-center space-x-3 bg-white bg-opacity-95 rounded-full px-[10px] py-[10px] w-[30vw] gap-[20px]">
+          <div
+            className={`flex items-center space-x-3 rounded-full px-[20px] py-[10px] w-[30vw] gap-[20px] ${
+              isSearchPage ? "bg-[#F2F2F2] text-black" : "bg-white text-black"
+            }`}
+          >
             <input
               onKeyDown={(e) => {
                 if (e.key === "Enter" && searchValue?.trim() !== "") {
@@ -160,7 +174,9 @@ export default function Navigation({
               readOnly={!isSearchPage}
               onClick={handleClick}
               placeholder="Search"
-              className="w-full h-[30px] bg-[#FFFFFF] rounded-[52px] font-[genos] font-normal text-[36px] focus:outline-none text-[#000000]/90 px-[25px] py-[10px] border-none"
+              className={`w-full h-[30px] rounded-[52px] font-[genos] font-normal text-[36px] px-[10px] focus:outline-none text-[#000000]/90 border-none ${
+                isSearchPage ? "bg-[#F2F2F2] text-black" : "bg-white text-black"
+              }`}
             />
             <div
               className={`w-55 h-55 rounded-full flex items-center justify-center text-black p-[7px] `}
@@ -189,6 +205,7 @@ export default function Navigation({
               label="KulturTV"
               icon="/images/navigation/malbat.svg"
               active={active === "kulturtv" || pathname === "/kulturtv"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
             <NavigationItem
@@ -196,6 +213,7 @@ export default function Navigation({
               label="ZarokTV"
               icon="/images/navigation/zarok_tv.svg"
               active={active === "zaroktv" || pathname === "/zaroktv"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
             <NavigationItem
@@ -203,6 +221,7 @@ export default function Navigation({
               label="Evin"
               icon="/images/navigation/eyar.svg"
               active={active === "settings" || pathname === "/settings"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
             <NavigationItem
@@ -210,6 +229,7 @@ export default function Navigation({
               label="Archive"
               icon="/images/navigation/archive.svg"
               active={active === "archive" || pathname === "/archive"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
             <NavigationItem
@@ -217,6 +237,7 @@ export default function Navigation({
               label="User"
               icon="/images/navigation/user.png"
               active={active === "user" || pathname === "/user"}
+              search={isSearchPage}
               onClick={handleNavClick}
             />
           </div>

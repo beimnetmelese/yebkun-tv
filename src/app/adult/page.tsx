@@ -16,12 +16,16 @@ export default function AdultPage() {
             <section>
               <div className="grid grid-cols-4 gap-8">
                 <div
-                  onClick={() => router.push("/adult/music")}
+                  onClick={() =>
+                    router.push(
+                      "/adult/video/clip?videoUrl=/adults/Music section/Ciwan Haco/Yari serin.mp4&title=Dîlok&artist=Ciwan Haco&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg"
+                    )
+                  }
                   className="w-full tv-md:w-[430px] tv-md:h-[300px] relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
-                    src={"/images/adults/music6.png"}
+                    src={"/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg"}
                     alt="Chef"
                     className={
                       "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -34,11 +38,11 @@ export default function AdultPage() {
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-3 right-3 flex flex-col items-end text-white space-y-1">
                     <span className="text-sm tv-md:text-[25px]  mb-6 mt-3 font-semibold group-hover:text-red-400 transition-colors duration-300">
-                      Clip Name
+                      Ciwan Haco
                     </span>
                     <div className="flex items-center space-x-2">
                       <span className="text-sm tv-md:text-[25px]  font-semibold group-hover:text-red-400 transition-colors duration-300">
-                        Artist Name
+                        Dîlok
                       </span>
                     </div>
                   </div>
@@ -107,12 +111,16 @@ export default function AdultPage() {
                   </div>
                 </div>
                 <div
-                  onClick={() => router.push("/adult/music")}
-                  className="relative tv-md:w-[430px] tv-md:h-[300px] rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
+                  onClick={() =>
+                    router.push(
+                      "/adult/video/clip?videoUrl=/adults/Music section/Ciwan Haco/Yari serin.mp4&title=Dîlok&artist=Ciwan Haco&image=/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg"
+                    )
+                  }
+                  className="w-full tv-md:w-[430px] tv-md:h-[300px] relative aspect-video rounded-xl overflow-hidden shadow-lg bg-black group cursor-pointer transition-all duration-300 hover:scale-[1.015]"
                 >
                   {/* BACKGROUND IMAGE */}
                   <img
-                    src={"/images/adults/music5.png"}
+                    src={"/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg"}
                     alt="Chef"
                     className={
                       "absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
@@ -125,11 +133,11 @@ export default function AdultPage() {
                   {/* TOP-RIGHT CHANNEL INFO */}
                   <div className="absolute top-3 right-3 flex flex-col items-end text-white space-y-1">
                     <span className="text-sm tv-md:text-[25px]  mb-6 mt-3 font-semibold group-hover:text-red-400 transition-colors duration-300">
-                      Artist Name
+                      Ciwan Haco
                     </span>
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm tv-md:text-[25px]  mb-6 font-semibold group-hover:text-red-400 transition-colors duration-300">
-                        Rojova
+                      <span className="text-sm tv-md:text-[25px]  font-semibold group-hover:text-red-400 transition-colors duration-300">
+                        Dîlok
                       </span>
                     </div>
                   </div>
@@ -157,7 +165,7 @@ export default function AdultPage() {
 
                   {/* BOTTOM-RIGHT LOGO */}
                   <div className="absolute bottom-5 right-1 grid grid-cols-2 gap-1">
-                    <span className="flex items-center tv-md:w-[80px] tv-md:text-[16px] tv-md:h-[19px]  gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                    <span className="flex flex-row flex-nowrap items-center tv-md:w-[80px] tv-md:text-[16px] tv-md:h-[19px] gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
                       <svg
                         width="15"
                         height="15"
@@ -192,8 +200,8 @@ export default function AdultPage() {
                       nu ye
                     </span>
 
-                    <span className="flex items-center tv-md:w-[46px] tv-md:text-[16px] tv-md:h-[19px]  text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
-                      clip
+                    <span className="flex items-center tv-md:w-[46px] tv-md:text-[16px] tv-md:h-[19px] text-center mr-3 gap-1 bg-white bg-opacity-60 text-xs px-2 py-0.5 rounded-md">
+                      Clip
                     </span>
                   </div>
                 </div>

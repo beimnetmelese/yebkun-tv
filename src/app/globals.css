@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Genos&display=swap');
+
+body {
+  @apply font-sans;
+}
+
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 @theme inline {

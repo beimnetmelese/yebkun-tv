@@ -10,13 +10,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // TV-specific breakpoints
-      screens: {
-        "tv-sm": "1280px", // 720p
-        "tv-md": "1920px", // 1080p
-        "tv-lg": "3840px", // 4K
+      fontFamily: {
+        sans: ['Genos', 'sans-serif'],
       },
-      // TV-specific spacing
+      screens: {
+        "tv-sm": "1280px",
+        "tv-md": "1920px",
+        "tv-lg": "3840px",
+      },
       spacing: {
         "tv-1": "clamp(4px, 0.5vw, 8px)",
         "tv-2": "clamp(8px, 1vw, 16px)",
@@ -29,7 +30,6 @@ const config: Config = {
         "tv-12": "clamp(48px, 6vw, 96px)",
         "tv-16": "clamp(64px, 8vw, 128px)",
       },
-      // TV-specific font sizes
       fontSize: {
         "tv-xs": "clamp(12px, 1vw, 18px)",
         "tv-sm": "clamp(16px, 1.5vw, 24px)",
@@ -40,7 +40,6 @@ const config: Config = {
         "tv-3xl": "clamp(36px, 4vw, 64px)",
         "tv-4xl": "clamp(48px, 5vw, 80px)",
       },
-      // TV-specific border radius
       borderRadius: {
         "tv-sm": "clamp(4px, 0.5vw, 8px)",
         "tv-md": "clamp(8px, 1vw, 16px)",

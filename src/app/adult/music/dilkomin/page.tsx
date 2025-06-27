@@ -2,12 +2,13 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Navigation from "@/components/ui/navigation";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import AudioVisualizer from "../component/visualizer";
 
 const playlists = [
   {
-    name: "Diloke Nû",
-    image: "/images/adults/musics.jpg",
+    name: "Ciwan Haco",
+    image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
     songs: Array(8)
       .fill([
         {
@@ -15,6 +16,7 @@ const playlists = [
           subtitle: "Dîlok Album",
           duration: "3:52",
           image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+          audioUrl: "/adults/Music section/Ciwan Haco/Giwan Haco 1.mp3",
           videoUrl: "/adults/Music section/Ciwan Haco/Yari serin.mp4",
         },
         {
@@ -22,14 +24,15 @@ const playlists = [
           subtitle: "Live",
           duration: "4:21",
           image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+          audioUrl: "/adults/Music section/Ciwan Haco/Giwan Haco 2.mp3",
           videoUrl: "/adults/Music section/Ciwan Haco/Macek.mp4",
         },
       ])
       .flat(),
   },
   {
-    name: "Diloke Rojava",
-    image: "/images/adults/music8.png",
+    name: "Şivan Perwer",
+    image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
     songs: Array(8)
       .fill([
         {
@@ -38,6 +41,7 @@ const playlists = [
           duration: "5:00",
           image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
           videoUrl: "/adults/Music section/sivan Perwer/Dur Dur.mp4",
+          audioUrl: "/adults/Music section/sivan Perwer/Bero Bass.wav",
         },
         {
           title: "Şivan Perwer - Daye",
@@ -45,13 +49,14 @@ const playlists = [
           duration: "4:35",
           image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
           videoUrl: "/adults/Music section/sivan Perwer/Nemire Lawik.mp4",
+          audioUrl: "/adults/Music section/sivan Perwer/Bero Bass.wav",
         },
       ])
       .flat(),
   },
   {
-    name: "Diloke Bakûr",
-    image: "/images/adults/music8.png",
+    name: "Diyar Dersim",
+    image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
     songs: Array(8)
       .fill([
         {
@@ -60,6 +65,7 @@ const playlists = [
           duration: "3:40",
           image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
           videoUrl: "/adults/Music section/Diyar dersim/Emrem Buri.mp4",
+          audioUrl: "/adults/Music section/Diyar dersim/Song 1.mp3",
         },
         {
           title: "Diyar Dersim - Roj baş",
@@ -67,13 +73,14 @@ const playlists = [
           duration: "3:40",
           image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
           videoUrl: "/adults/Music section/Diyar dersim/TE DIGO NA.mp4",
+          audioUrl: "/adults/Music section/Diyar dersim/Song 2.mp3",
         },
       ])
       .flat(),
   },
   {
-    name: "Diloke Rojhilat",
-    image: "/images/adults/music8.png",
+    name: "Seyda Rojava",
+    image: "/adults/Music section/seyda Rojava/seyda.jpg",
     songs: Array(8)
       .fill([
         {
@@ -82,6 +89,7 @@ const playlists = [
           duration: "4:11",
           image: "/adults/Music section/seyda Rojava/seyda.jpg",
           videoUrl: "/adults/Music section/seyda Rojava/Gula Male.mp4",
+          audioUrl: "/adults/Music section/seyda Rojava/seyda Mirovati.mp3",
         },
         {
           title: "Seyda Rojava - Helebçe",
@@ -89,13 +97,14 @@ const playlists = [
           duration: "4:11",
           image: "/adults/Music section/seyda Rojava/seyda.jpg",
           videoUrl: "/adults/Music section/seyda Rojava/Tene Dilem.mp4",
+          audioUrl: "/adults/Music section/seyda Rojava/seyda Tu Nizani.mp3",
         },
       ])
       .flat(),
   },
   {
-    name: "Diloke Nû",
-    image: "/images/adults/music8.png",
+    name: "Ciwan Haco",
+    image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
     songs: Array(8)
       .fill([
         {
@@ -118,73 +127,164 @@ const playlists = [
 ];
 
 export default function MusicPlayerUI() {
+  const searchParams = useSearchParams();
+  const playlist = searchParams.get("playlist") || 0;
+
+  const playlistIndex = parseInt((playlist as string) || "0");
+  const reorderedPlaylists = [
+    playlists[playlistIndex],
+    ...playlists.filter((_, i) => i !== playlistIndex),
+  ];
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
+
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const router = useRouter();
-  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const [selectedPlaylistIndex] = useState(0);
-  const selectedPlaylist = playlists[selectedPlaylistIndex];
+  const router = useRouter();
+
+  const [selectedPlaylistIndex, setSelectedPlaylistIndex] = useState(0);
+  const selectedPlaylist = reorderedPlaylists[selectedPlaylistIndex];
   const songs = selectedPlaylist.songs;
   const videos = songs.map((s) => s.videoUrl);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [index, setIndex] = useState(0);
 
+  const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
+  const [dataArray, setDataArray] = useState<Uint8Array | null>(null);
+
+  const [audioData, setAudioData] = useState<Uint8Array | null>(null);
+
+  const [audioEl, setAudioEl] = useState<HTMLAudioElement | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+
+  const pathname = usePathname();
+
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    return () => {
+      // Clean up when route changes
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+        audioContextRef.current = null;
+      }
+      analyserRef.current = null;
+      sourceRef.current = null;
+    };
+  }, [pathname]);
 
-    video.src = videos[currentIndex];
-    video.load();
-    if (isPlaying) video.play();
+  useEffect(() => {
+    const audio = new Audio(songs[currentIndex].audioUrl);
+    audio.crossOrigin = "anonymous";
 
-    const updateTime = () => {
-      setCurrentTime(video.currentTime);
-      setProgress((video.currentTime / video.duration) * 100 || 0);
+    setAudioEl(audio);
+
+    const ctx = new (window.AudioContext ||
+      (window as any).webkitAudioContext)();
+    const analyserNode = ctx.createAnalyser();
+    analyserNode.fftSize = 256;
+
+    const source = ctx.createMediaElementSource(audio);
+    source.connect(analyserNode);
+    analyserNode.connect(ctx.destination);
+
+    audioContextRef.current = ctx;
+    analyserRef.current = analyserNode;
+    sourceRef.current = source;
+
+    setAnalyser(analyserNode);
+    setDataArray(new Uint8Array(analyserNode.frequencyBinCount));
+
+    // Play if needed
+    if (isPlaying) {
+      audio.play().catch(console.warn);
+    }
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(audio.currentTime);
+      setProgress(Math.min((audio.currentTime / audio.duration) * 100, 100));
+    };
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration);
     };
 
-    const setDur = () => setDuration(video.duration);
-
-    video.addEventListener("timeupdate", updateTime);
-    video.addEventListener("loadedmetadata", setDur);
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
 
     return () => {
-      video.removeEventListener("timeupdate", updateTime);
-      video.removeEventListener("loadedmetadata", setDur);
+      audio.pause();
+      audio.src = "";
+      audio.load();
+      audio.remove();
+
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+
+      if (audioContextRef.current) audioContextRef.current.close();
+
+      sourceRef.current = null;
+      analyserRef.current = null;
+      audioContextRef.current = null;
     };
   }, [currentIndex]);
 
-  const togglePlayPause = () => {
-    const video = videoRef.current;
-    if (!video) return;
+  useEffect(() => {
+    const updateVisualizer = () => {
+      if (analyser && dataArray) {
+        analyser.getByteFrequencyData(dataArray);
+        setAudioData(new Uint8Array(dataArray));
+      }
+    };
+
+    let animationId: number;
+
+    const animate = () => {
+      updateVisualizer();
+      animationId = requestAnimationFrame(animate);
+    };
 
     if (isPlaying) {
-      video.pause();
+      animationId = requestAnimationFrame(animate);
     } else {
-      video.play();
+      // When paused, keep the last audio data
+      updateVisualizer();
+    }
+
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, [isPlaying, analyser, dataArray]);
+
+  const togglePlayPause = () => {
+    if (!audioEl) return;
+    if (isPlaying) {
+      audioEl.pause();
+    } else {
+      audioEl.play().catch(console.warn);
     }
     setIsPlaying((prev) => !prev);
   };
 
-  const playSong = (index: number) => {
-    if (audioRef.current) {
-      audioRef.current.src = songs[index].videoUrl;
-      audioRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
   const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const video = videoRef.current;
-    if (!video) return;
+    if (!audioEl) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const newTime = (clickX / rect.width) * duration;
-    video.currentTime = newTime;
+    audioEl.currentTime = newTime;
+  };
+
+  const playSong = (index: number) => {
+    const audio = audioEl;
+    if (!audio) return;
+
+    audio.pause();
+    audio.src = songs[index].audioUrl; // or videoUrl if that's your audio
+    audio.load();
+    audio.play().catch(console.warn);
+    setIsPlaying(true);
+    setCurrentIndex(index);
   };
 
   const formatTime = (time: number) => {
@@ -311,7 +411,7 @@ export default function MusicPlayerUI() {
                         rx="10"
                         fill="white"
                       />
-                      <g clip-path="url(#clip0_3514_6497)">
+                      <g clipPath="url(#clip0_3514_6497)">
                         <path
                           d="M36.6668 19.042V16.6686C36.6668 13.5744 35.4377 10.607 33.2497 8.41904C31.0618 6.23112 28.0944 5.00195 25.0002 5.00195C21.906 5.00195 18.9385 6.23112 16.7506 8.41904C14.5627 10.607 13.3335 13.5744 13.3335 16.6686V19.042C11.8491 19.6898 10.5857 20.7562 9.69766 22.1106C8.80967 23.4651 8.33563 25.049 8.3335 26.6686V36.6686C8.33614 38.8779 9.21497 40.996 10.7772 42.5583C12.3394 44.1205 14.4575 44.9993 16.6668 45.002H33.3335C35.5428 44.9993 37.6609 44.1205 39.2231 42.5583C40.7854 40.996 41.6642 38.8779 41.6668 36.6686V26.6686C41.6647 25.049 41.1907 23.4651 40.3027 22.1106C39.4147 20.7562 38.1512 19.6898 36.6668 19.042ZM16.6668 16.6686C16.6668 14.4585 17.5448 12.3389 19.1076 10.7761C20.6704 9.21326 22.79 8.33529 25.0002 8.33529C27.2103 8.33529 29.3299 9.21326 30.8927 10.7761C32.4555 12.3389 33.3335 14.4585 33.3335 16.6686V18.3353H16.6668V16.6686ZM38.3335 36.6686C38.3335 37.9947 37.8067 39.2665 36.869 40.2042C35.9314 41.1418 34.6596 41.6686 33.3335 41.6686H16.6668C15.3407 41.6686 14.069 41.1418 13.1313 40.2042C12.1936 39.2665 11.6668 37.9947 11.6668 36.6686V26.6686C11.6668 25.3425 12.1936 24.0708 13.1313 23.1331C14.069 22.1954 15.3407 21.6686 16.6668 21.6686H33.3335C34.6596 21.6686 35.9314 22.1954 36.869 23.1331C37.8067 24.0708 38.3335 25.3425 38.3335 26.6686V36.6686Z"
                           fill="black"
@@ -414,12 +514,9 @@ export default function MusicPlayerUI() {
           </div>
 
           {/* Video Element */}
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          />
+          <div className="absolute inset-0 w-full h-full z-0 flex items-center justify-center">
+            <AudioVisualizer audioData={audioData} isPlaying={isPlaying} />
+          </div>
 
           {/* Controls */}
           <div className="relative z-10 flex flex-col flex-1 items-center justify-between">

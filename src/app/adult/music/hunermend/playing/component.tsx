@@ -2,7 +2,8 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Navigation from "@/components/ui/navigation";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import AudioVisualizer from "../../component/visualizer";
 
 const playlists = [
   {
@@ -15,6 +16,7 @@ const playlists = [
           subtitle: "Dîlok Album",
           duration: "3:52",
           image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+          audioUrl: "/adults/Music section/Ciwan Haco/Giwan Haco 1.mp3",
           videoUrl: "/adults/Music section/Ciwan Haco/Yari serin.mp4",
         },
         {
@@ -22,6 +24,7 @@ const playlists = [
           subtitle: "Live",
           duration: "4:21",
           image: "/adults/Music section/Ciwan Haco/Ciwan Haco.jpeg",
+          audioUrl: "/adults/Music section/Ciwan Haco/Giwan Haco 2.mp3",
           videoUrl: "/adults/Music section/Ciwan Haco/Macek.mp4",
         },
       ])
@@ -38,6 +41,7 @@ const playlists = [
           duration: "5:00",
           image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
           videoUrl: "/adults/Music section/sivan Perwer/Dur Dur.mp4",
+          audioUrl: "/adults/Music section/sivan Perwer/Bero Bass.wav",
         },
         {
           title: "Şivan Perwer - Daye",
@@ -45,6 +49,7 @@ const playlists = [
           duration: "4:35",
           image: "/adults/Music section/sivan Perwer/sivan Perwer.jpg",
           videoUrl: "/adults/Music section/sivan Perwer/Nemire Lawik.mp4",
+          audioUrl: "/adults/Music section/sivan Perwer/Bero Bass.wav",
         },
       ])
       .flat(),
@@ -60,6 +65,7 @@ const playlists = [
           duration: "3:40",
           image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
           videoUrl: "/adults/Music section/Diyar dersim/Emrem Buri.mp4",
+          audioUrl: "/adults/Music section/Diyar dersim/Song 1.mp3",
         },
         {
           title: "Diyar Dersim - Roj baş",
@@ -67,6 +73,7 @@ const playlists = [
           duration: "3:40",
           image: "/adults/Music section/Diyar dersim/Diyar dersim.jpg",
           videoUrl: "/adults/Music section/Diyar dersim/TE DIGO NA.mp4",
+          audioUrl: "/adults/Music section/Diyar dersim/Song 2.mp3",
         },
       ])
       .flat(),
@@ -82,6 +89,7 @@ const playlists = [
           duration: "4:11",
           image: "/adults/Music section/seyda Rojava/seyda.jpg",
           videoUrl: "/adults/Music section/seyda Rojava/Gula Male.mp4",
+          audioUrl: "/adults/Music section/seyda Rojava/seyda Mirovati.mp3",
         },
         {
           title: "Seyda Rojava - Helebçe",
@@ -89,6 +97,7 @@ const playlists = [
           duration: "4:11",
           image: "/adults/Music section/seyda Rojava/seyda.jpg",
           videoUrl: "/adults/Music section/seyda Rojava/Tene Dilem.mp4",
+          audioUrl: "/adults/Music section/seyda Rojava/seyda Tu Nizani.mp3",
         },
       ])
       .flat(),
@@ -131,9 +140,8 @@ export default function MusicPlayerUI() {
   const [image, setImage] = useState(photo);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+
   const router = useRouter();
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const [selectedPlaylistIndex, setSelectedPlaylistIndex] = useState(0);
   const selectedPlaylist = reorderedPlaylists[selectedPlaylistIndex];
@@ -142,58 +150,141 @@ export default function MusicPlayerUI() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [index, setIndex] = useState(0);
 
+  const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
+  const [dataArray, setDataArray] = useState<Uint8Array | null>(null);
+
+  const [audioData, setAudioData] = useState<Uint8Array | null>(null);
+
+  const [audioEl, setAudioEl] = useState<HTMLAudioElement | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+
+  const pathname = usePathname();
+
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    return () => {
+      // Clean up when route changes
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+        audioContextRef.current = null;
+      }
+      analyserRef.current = null;
+      sourceRef.current = null;
+    };
+  }, [pathname]);
 
-    video.src = videos[currentIndex];
-    video.load();
-    if (isPlaying) video.play();
+  useEffect(() => {
+    const audio = new Audio(songs[currentIndex].audioUrl);
+    audio.crossOrigin = "anonymous";
 
-    const updateTime = () => {
-      setCurrentTime(video.currentTime);
-      setProgress((video.currentTime / video.duration) * 100 || 0);
+    setAudioEl(audio);
+
+    const ctx = new (window.AudioContext ||
+      (window as any).webkitAudioContext)();
+    const analyserNode = ctx.createAnalyser();
+    analyserNode.fftSize = 256;
+
+    const source = ctx.createMediaElementSource(audio);
+    source.connect(analyserNode);
+    analyserNode.connect(ctx.destination);
+
+    audioContextRef.current = ctx;
+    analyserRef.current = analyserNode;
+    sourceRef.current = source;
+
+    setAnalyser(analyserNode);
+    setDataArray(new Uint8Array(analyserNode.frequencyBinCount));
+
+    // Play if needed
+    if (isPlaying) {
+      audio.play().catch(console.warn);
+    }
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(audio.currentTime);
+      setProgress(Math.min((audio.currentTime / audio.duration) * 100, 100));
+    };
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration);
     };
 
-    const setDur = () => setDuration(video.duration);
-
-    video.addEventListener("timeupdate", updateTime);
-    video.addEventListener("loadedmetadata", setDur);
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
 
     return () => {
-      video.removeEventListener("timeupdate", updateTime);
-      video.removeEventListener("loadedmetadata", setDur);
+      audio.pause();
+      audio.src = "";
+      audio.load();
+      audio.remove();
+
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+
+      if (audioContextRef.current) audioContextRef.current.close();
+
+      sourceRef.current = null;
+      analyserRef.current = null;
+      audioContextRef.current = null;
     };
   }, [currentIndex]);
 
-  const togglePlayPause = () => {
-    const video = videoRef.current;
-    if (!video) return;
+  useEffect(() => {
+    const updateVisualizer = () => {
+      if (analyser && dataArray) {
+        analyser.getByteFrequencyData(dataArray);
+        setAudioData(new Uint8Array(dataArray));
+      }
+    };
+
+    let animationId: number;
+
+    const animate = () => {
+      updateVisualizer();
+      animationId = requestAnimationFrame(animate);
+    };
 
     if (isPlaying) {
-      video.pause();
+      animationId = requestAnimationFrame(animate);
     } else {
-      video.play();
+      // When paused, keep the last audio data
+      updateVisualizer();
+    }
+
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, [isPlaying, analyser, dataArray]);
+
+  const togglePlayPause = () => {
+    if (!audioEl) return;
+    if (isPlaying) {
+      audioEl.pause();
+    } else {
+      audioEl.play().catch(console.warn);
     }
     setIsPlaying((prev) => !prev);
   };
 
-  const playSong = (index: number) => {
-    if (audioRef.current) {
-      audioRef.current.src = songs[index].videoUrl;
-      audioRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
   const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const video = videoRef.current;
-    if (!video) return;
+    if (!audioEl) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const newTime = (clickX / rect.width) * duration;
-    video.currentTime = newTime;
+    audioEl.currentTime = newTime;
+  };
+
+  const playSong = (index: number) => {
+    const audio = audioEl;
+    if (!audio) return;
+
+    audio.pause();
+    audio.src = songs[index].audioUrl; // or videoUrl if that's your audio
+    audio.load();
+    audio.play().catch(console.warn);
+    setIsPlaying(true);
+    setCurrentIndex(index);
   };
 
   const formatTime = (time: number) => {
@@ -390,12 +481,9 @@ export default function MusicPlayerUI() {
           </div>
 
           {/* Video Element */}
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          />
+          <div className="absolute inset-0 w-full h-full z-0 flex items-center justify-center">
+            <AudioVisualizer audioData={audioData} isPlaying={isPlaying} />
+          </div>
 
           {/* Controls */}
           <div className="relative z-10 flex flex-col flex-1 items-center justify-between">
