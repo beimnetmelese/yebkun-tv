@@ -180,8 +180,10 @@ export default function MusicPlayerUI() {
 
     setAudioEl(audio);
 
-    const ctx = new (window.AudioContext ||
-      (window as any).webkitAudioContext)();
+    const ctx = new (window.AudioContext ??
+      (window as typeof window & { webkitAudioContext: typeof AudioContext })
+        .webkitAudioContext)();
+
     const analyserNode = ctx.createAnalyser();
     analyserNode.fftSize = 256;
 
@@ -370,6 +372,7 @@ export default function MusicPlayerUI() {
               <div
                 onClick={() => {
                   setCurrentIndex(0);
+                  setSelectedPlaylistIndex(0);
                   setIndex(0);
                   setIsPlaying(true);
                   playSong(0); // optional
