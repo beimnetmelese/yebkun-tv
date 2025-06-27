@@ -180,9 +180,8 @@ export default function MusicPlayerUI() {
 
     setAudioEl(audio);
 
-    const ctx = new (window.AudioContext ??
-      (window as typeof window & { webkitAudioContext: typeof AudioContext })
-        .webkitAudioContext)();
+    const ctx = new (window.AudioContext ||
+      (window as any).webkitAudioContext)();
     const analyserNode = ctx.createAnalyser();
     analyserNode.fftSize = 256;
 
@@ -324,7 +323,10 @@ export default function MusicPlayerUI() {
             ["Dilokemin", "/images/adults/music8.png", "/adult/music/dilkomin"],
           ].map((label, i) => (
             <div
-              onClick={() => router.push(label[2])}
+              onClick={() => {
+                togglePlayPause();
+                router.push(label[2]);
+              }}
               key={i}
               className={`relative aspect-video tv-md:w-[250px] tv-md:h-[151px] rounded-2xl overflow-hidden shadow-2xl group ${
                 i === 2
